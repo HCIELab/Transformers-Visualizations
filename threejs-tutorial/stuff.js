@@ -27,19 +27,40 @@ function main() {
     
     const [boxWidth, boxHeight, boxDepth] = [1, 1, 1];
     const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
-    const material = new THREE.MeshPhongMaterial({color: 0x44aa88});
+    // const material = new THREE.MeshPhongMaterial({color: 0x44aa88});
     
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    // const cube = new THREE.Mesh(geometry, material);
+    // scene.add(cube);
+    function makeInstance(geometry, color, x) {
+        const material = new THREE.MeshPhongMaterial({color});
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        cube.position.x = x;
+        return cube;
+    }
+    const cubes = [
+        makeInstance(geometry, 0x44aa88, 0),
+        makeInstance(geometry, 0x8844aa, -2),
+        makeInstance(geometry, 0xaa8844, 2),
+    ]
+
+
     
     function render(time) {
         time *= 0.001 //convert time into seconds
-        cube.rotation.x = time;
-        cube.rotation.y = time;
+        cubes.forEach((cube, ndx) => {
+            const speed = 1 + ndx * .1;
+            const rot = time * speed;
+            cube.rotation.x = rot;
+            cube.rotation.y = rot;
+        });
         renderer.render(scene, camera);
         requestAnimationFrame(render);
     }
     requestAnimationFrame(render);
+
+
+
 
 }
 
