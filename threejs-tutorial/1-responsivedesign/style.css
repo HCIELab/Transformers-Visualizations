@@ -1,0 +1,34 @@
+body {
+    background-color: rgb(214, 255, 255);
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+#c {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#text {
+    border: 1px solid gray;
+}
+
+.split {
+    display: flex;
+    flex-direction: row;
+}
+
+.gutter {
+    background-color: #eee;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.gutter.gutter-horizontal {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+    cursor: col-resize;
+}
