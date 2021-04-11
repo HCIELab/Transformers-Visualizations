@@ -1,4 +1,5 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
 
 function main() {
     const canvas = document.querySelector('#c');
@@ -11,6 +12,10 @@ function main() {
     const far = 5;
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     camera.position.z = 4;
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.update();
+
     
     // Scene
     const scene = new THREE.Scene();
@@ -65,9 +70,10 @@ function main() {
             const canvas = renderer.domElement;
             camera.aspect = canvas.clientWidth / canvas.clientHeight;
             camera.updateProjectionMatrix();
+            controls.update();
         }
 
-        addRevolveAnimation(cube, time*0.001);
+        // addRevolveAnimation(cube, time*0.001);
 
         renderer.render(scene, camera);
         requestAnimationFrame(render);
