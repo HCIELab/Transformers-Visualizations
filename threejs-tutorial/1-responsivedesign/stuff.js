@@ -49,10 +49,12 @@ function main() {
     function render(time) {
         time *= 0.001 //convert time into seconds
 
-        // To fix objects appearing 'stretched out' when window is resized
-        const canvas = renderer.domElement;
-        camera.aspect = canvas.clientWidth / canvas.clientHeight;
-        camera.updateProjectionMatrix();
+        if (resizeRendererToDisplaySize(renderer)) {
+            // To fix the issue of objects appearing 'stretched out' when window is resized
+            const canvas = renderer.domElement;
+            camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            camera.updateProjectionMatrix();
+        }
 
         cubes.forEach((cube, ndx) => {
             const speed = 1 + ndx * .1;
@@ -65,12 +67,23 @@ function main() {
     }
     requestAnimationFrame(render);
 
-
+    // To fix the issue of objects being low resolution and looking pixelated
+    function resizeRendererToDisplaySize(renderer) {
+        const canvas = renderer.domElement;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        const needResize = canvas.width !== width || canvas.height !== height;
+        if (needResize) {
+            renderer.setSize(width, height, false);
+        }
+        return needResize;
+    }
 
 
 }
 
 main();
+
 
 
 
