@@ -1,7 +1,5 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 
-
-
 function main() {
     const canvas = document.querySelector('#c');
     const renderer = new THREE.WebGLRenderer({canvas});
@@ -15,6 +13,7 @@ function main() {
     camera.position.z = 2;
     
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xAAAAAA);
 
     // Light
     {
@@ -27,10 +26,7 @@ function main() {
     
     const [boxWidth, boxHeight, boxDepth] = [1, 1, 1];
     const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
-    // const material = new THREE.MeshPhongMaterial({color: 0x44aa88});
     
-    // const cube = new THREE.Mesh(geometry, material);
-    // scene.add(cube);
     function makeInstance(geometry, color, x) {
         const material = new THREE.MeshPhongMaterial({color});
         const cube = new THREE.Mesh(geometry, material);
@@ -38,34 +34,7 @@ function main() {
         cube.position.x = x;
         return cube;
     }
-    const cubes = [
-        makeInstance(geometry, 0x44aa88, 0),
-        makeInstance(geometry, 0x8844aa, -2),
-        makeInstance(geometry, 0xaa8844, 2),
-    ]
-
-
-    
-    function render(time) {
-        time *= 0.001 //convert time into seconds
-
-        if (resizeRendererToDisplaySize(renderer)) {
-            // To fix the issue of objects appearing 'stretched out' when window is resized
-            const canvas = renderer.domElement;
-            camera.aspect = canvas.clientWidth / canvas.clientHeight;
-            camera.updateProjectionMatrix();
-        }
-
-        cubes.forEach((cube, ndx) => {
-            const speed = 1 + ndx * .1;
-            const rot = time * speed;
-            cube.rotation.x = rot;
-            cube.rotation.y = rot;
-        });
-        renderer.render(scene, camera);
-        requestAnimationFrame(render);
-    }
-    requestAnimationFrame(render);
+    const cube = makeInstance(geometry, 0x44aa88, 0);
 
     // To fix the issue of objects being low resolution and looking pixelated
     function resizeRendererToDisplaySize(renderer) {
@@ -79,7 +48,25 @@ function main() {
         return needResize;
     }
 
+    function render(time) {
+        const timeSeconds = time*0.001 //convert time into seconds
 
+        if (resizeRendererToDisplaySize(renderer)) {
+            // To fix the issue of objects appearing 'stretched out' when window is resized
+            const canvas = renderer.domElement;
+            camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            camera.updateProjectionMatrix();
+        }
+
+        const speed = 1;
+        const rot = timeSeconds * speed;
+        cube.rotation.x = rot;
+        cube.rotation.y = rot;
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
 }
 
 main();
