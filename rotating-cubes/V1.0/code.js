@@ -4,14 +4,15 @@ function main() {
     const canvas = document.querySelector('#c');
     const renderer = new THREE.WebGLRenderer({canvas});
     
+    // Camera
     const fov = 75;
-    const aspect = 2;
+    const aspect = window.innerWidth / window.innerHeight;
     const near = 0.1;
     const far = 5;
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    
     camera.position.z = 4;
     
+    // Scene
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xAAAAAA);
 
@@ -24,6 +25,7 @@ function main() {
         scene.add(light);
     }
     
+    // Geometry, Material, Mesh
     const [boxWidth, boxHeight, boxDepth] = [1, 1, 1];
     const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
     
@@ -35,6 +37,14 @@ function main() {
         return cube;
     }
     const cube = makeInstance(geometry, 0x44aa88, 0);
+
+    // Add a revolving animation
+    function addRevolveAnimation(mesh, timeSeconds) {
+        const speed = 1;
+        const rot = timeSeconds * speed;
+        mesh.rotation.x = rot;
+        mesh.rotation.y = rot;
+    }
 
     // To fix the issue of objects being low resolution and looking pixelated
     function resizeRendererToDisplaySize(renderer) {
@@ -48,9 +58,8 @@ function main() {
         return needResize;
     }
 
+    // Render
     function render(time) {
-        const timeSeconds = time*0.001 //convert time into seconds
-
         if (resizeRendererToDisplaySize(renderer)) {
             // To fix the issue of objects appearing 'stretched out' when window is resized
             const canvas = renderer.domElement;
@@ -58,11 +67,7 @@ function main() {
             camera.updateProjectionMatrix();
         }
 
-        // Add a revolving animation
-        const speed = 1;
-        const rot = timeSeconds * speed;
-        cube.rotation.x = rot;
-        cube.rotation.y = rot;
+        addRevolveAnimation(cube, time*0.001);
 
         renderer.render(scene, camera);
         requestAnimationFrame(render);
