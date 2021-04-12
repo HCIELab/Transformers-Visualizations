@@ -22,26 +22,35 @@ function main() {
     scene.background = new THREE.Color(0xAAAAAA);
 
     // Light
-    {
+    function addLight(x, y, z) {
         const color = 0xFFFFFF;
         const intensity = 1;
         const light = new THREE.DirectionalLight(color, intensity);
-        light.position.set(-1, 2, 4);
+        light.position.set(x, y, z);
         scene.add(light);
     }
+    addLight(-1, 2, 4);
+    addLight(1, -1, -1);
     
     // Geometry, Material, Mesh
     const [boxWidth, boxHeight, boxDepth] = [1, 1, 1];
     const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
     
     function makeInstance(geometry, color, x) {
-        const material = new THREE.MeshPhongMaterial({color});
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
-        cube.position.x = x;
-        return cube;
+        [THREE.BackSide, THREE.FrontSide].forEach((side) => {
+            const material = new THREE.MeshPhongMaterial({
+                color,
+                opacity: 0.5,
+                transparent: true,
+                side,
+            });
+            const cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+            cube.position.x = x;
+        });
     }
-    const cube = makeInstance(geometry, 0x44aa88, 0);
+    makeInstance(geometry, 0x44aa88, 0);
+    makeInstance(geometry, 0xcc0000, 1.1);
 
     // Add a revolving animation
     function addRevolveAnimation(mesh, timeSeconds) {
