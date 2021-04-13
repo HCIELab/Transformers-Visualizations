@@ -94,6 +94,20 @@ class CubeInstance {
   getMeshes() {
     return this.meshes;
   }
+
+  // Add a revolving animation
+  addRevolveAnimation(time) {
+    const timeSeconds = time*0.001;
+    const speed = 1;
+    const rot = timeSeconds * speed;
+    this.meshes.forEach((mesh) => {
+      if (rot <= Math.PI * 1) {
+        // mesh.rotation.x = rot;
+        mesh.rotation.y = rot;
+      }
+    })
+  }
+
 }
 
 
@@ -121,26 +135,11 @@ function main() {
       new CubeInstance(scene, 0xcc0000, 0),
     ];
 
-
-    // Add a revolving animation
-    function addRevolveAnimation(mesh, timeSeconds) {
-        const speed = 1;
-        const rot = timeSeconds * speed;
-        // mesh.rotation.x = rot;
-        mesh.rotation.y = rot;
-    }
-
-
     // Render
     function render(time) {
       handleRenderResizing(renderer, camera, controls);
 
-      // cubes.map((c) => {
-      //   addRevolveAnimation(c, time*0.001);
-      // })
-      cubeList[1].getMeshes().forEach((cube) => {
-        addRevolveAnimation(cube, time*0.001);
-      })
+      cubeList[1].addRevolveAnimation(time);
 
       renderer.render(scene, camera);
       requestAnimationFrame(render);
