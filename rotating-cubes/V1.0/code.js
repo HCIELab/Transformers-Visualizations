@@ -1,6 +1,7 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
 
+/* ~~~~~~~~~~~~~~~~~~~~~ SETTINGS FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~ */
 function cameraSettings() {
   const fov = 75;
   const aspect = window.innerWidth / window.innerHeight;
@@ -51,7 +52,45 @@ function handleRenderResizing(renderer, camera, controls) {
   }
 }
 
+/* ~~~~~~~~~~~~~~~~~~~~~ CLASSES ~~~~~~~~~~~~~~~~~~~~~ */
+class CubeInstance {
+  constructor(scene, color, x) {
+    this.scene = scene;
+    this.color = color;
+    this.x = x;
+    this.meshes = [];
 
+
+    const [boxWidth, boxHeight, boxDepth] = [1, 1, 1];
+    const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
+    geometry.translate( -boxWidth/ 2, boxHeight / 2, -boxDepth / 2 ); 
+    this.meshes = this.makeInstance(geometry, this.color, this.x);
+  }
+
+  makeInstance(geo, color, x) {
+    const result = [];
+    [THREE.BackSide, THREE.FrontSide].forEach((side) => {
+        const material = new THREE.MeshPhongMaterial({
+            color,
+            opacity: 0.5,
+            transparent: true,
+            side,
+        });
+        const cube = new THREE.Mesh(geo, material);
+        this.scene.add(cube);
+        cube.position.x = x;
+        result.push(cube);
+    });
+    return result;
+  }
+
+  getMeshes() {
+    return this.meshes;
+  }
+}
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~ MAIN ~~~~~~~~~~~~~~~~~~~~~ */
 function main() {
     const canvas = document.querySelector('#c');
     const renderer = new THREE.WebGLRenderer({canvas});
@@ -70,27 +109,33 @@ function main() {
     lightSettings(scene);
 
     // Geometry, Material, Mesh
-    const [boxWidth, boxHeight, boxDepth] = [1, 1, 1];
-    const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
-    geometry.translate( -boxWidth/ 2, boxHeight / 2, -boxDepth / 2 ); 
-    
-    const cubes = [];
-    function makeInstance(geo, color, x) {
-      [THREE.BackSide, THREE.FrontSide].forEach((side) => {
-          const material = new THREE.MeshPhongMaterial({
-              color,
-              opacity: 0.5,
-              transparent: true,
-              side,
-          });
-          const cube = new THREE.Mesh(geo, material);
-          scene.add(cube);
-          cube.position.x = x;
-          cubes.push(cube);
-      });
-    }
-    makeInstance(geometry, 0x44aa88, 1);
-    makeInstance(geometry, 0xcc0000, 0);
+    const cubeList = [
+      new CubeInstance(scene, 0x44aa88, 1),
+      new CubeInstance(scene, 0xcc0000, 0),
+    ];
+    const cubes = [...cubeList[0].getMeshes(), ...cubeList[1].getMeshes()];
+    console.log(cubeList);
+    console.log(cubes);
+    // const [boxWidth, boxHeight, boxDepth] = [1, 1, 1];
+    // const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
+    // geometry.translate( -boxWidth/ 2, boxHeight / 2, -boxDepth / 2 );     
+
+    // function makeInstance(geo, color, x) {
+    //   [THREE.BackSide, THREE.FrontSide].forEach((side) => {
+    //       const material = new THREE.MeshPhongMaterial({
+    //           color,
+    //           opacity: 0.5,
+    //           transparent: true,
+    //           side,
+    //       });
+    //       const cube = new THREE.Mesh(geo, material);
+    //       scene.add(cube);
+    //       cube.position.x = x;
+    //       cubes.push(cube);
+    //   });
+    // }
+    // makeInstance(geometry, 0x44aa88, 1);
+    // makeInstance(geometry, 0xcc0000, 0);
     // console.log(cubes);
 
 
@@ -119,7 +164,6 @@ function main() {
     
     requestAnimationFrame(render);
 }
-
 
 main();
 
