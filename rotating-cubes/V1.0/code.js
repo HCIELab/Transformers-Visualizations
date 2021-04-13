@@ -29,6 +29,29 @@ function lightSettings(scene) {
   addLight(1, -1, -1);
 }
 
+function handleRenderResizing(renderer, camera, controls) {
+  // To fix the issue of objects being low resolution and looking pixelated
+  function resizeRendererToDisplaySize() {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+        renderer.setSize(width, height, false);
+    }
+    return needResize;
+  }
+
+  if (resizeRendererToDisplaySize()) {
+    // To fix the issue of objects appearing 'stretched out' when window is resized
+    const canvas = renderer.domElement;
+    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.updateProjectionMatrix();
+    controls.update();
+  }
+}
+
+
 function main() {
     const canvas = document.querySelector('#c');
     const renderer = new THREE.WebGLRenderer({canvas});
@@ -79,37 +102,22 @@ function main() {
         mesh.rotation.y = rot;
     }
 
-    // To fix the issue of objects being low resolution and looking pixelated
-    function resizeRendererToDisplaySize(renderer) {
-        const canvas = renderer.domElement;
-        const width = canvas.clientWidth;
-        const height = canvas.clientHeight;
-        const needResize = canvas.width !== width || canvas.height !== height;
-        if (needResize) {
-            renderer.setSize(width, height, false);
-        }
-        return needResize;
-    }
 
     // Render
     function render(time) {
-        if (resizeRendererToDisplaySize(renderer)) {
-            // To fix the issue of objects appearing 'stretched out' when window is resized
-            const canvas = renderer.domElement;
-            camera.aspect = canvas.clientWidth / canvas.clientHeight;
-            camera.updateProjectionMatrix();
-            controls.update();
-        }
+      handleRenderResizing(renderer, camera, controls);
 
-        cubes.map((c) => {
-          addRevolveAnimation(c, time*0.001);
-        })
+      cubes.map((c) => {
+        addRevolveAnimation(c, time*0.001);
+      })
 
-        renderer.render(scene, camera);
-        requestAnimationFrame(render);
+      renderer.render(scene, camera);
+      requestAnimationFrame(render);
     }
+    
     requestAnimationFrame(render);
 }
+
 
 main();
 
