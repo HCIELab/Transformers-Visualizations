@@ -58,30 +58,37 @@ class CubeInstance {
     this.scene = scene;
     this.color = color;
     this.x = x;
-    this.meshes = [];
 
+    this.meshes = this.makeMeshes();
+    this.meshes.forEach((m) => {
+      m.position.x = this.x;
+      this.scene.add(m);
+    })
+  }
 
+  makeGeometry() {
     const [boxWidth, boxHeight, boxDepth] = [1, 1, 1];
     const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
     geometry.translate( -boxWidth/ 2, boxHeight / 2, -boxDepth / 2 ); 
-    this.meshes = this.makeInstance(geometry, this.color, this.x);
+    return geometry;
   }
 
-  makeInstance(geo, color, x) {
-    const result = [];
-    [THREE.BackSide, THREE.FrontSide].forEach((side) => {
-        const material = new THREE.MeshPhongMaterial({
-            color,
-            opacity: 0.5,
-            transparent: true,
-            side,
-        });
-        const cube = new THREE.Mesh(geo, material);
-        this.scene.add(cube);
-        cube.position.x = x;
-        result.push(cube);
+  makeMaterial(side) {
+    return new THREE.MeshPhongMaterial({
+      color: this.color,
+      opacity: 0.5,
+      transparent: true,
+      side,
+    });  
+  }
+
+  makeMeshes() {
+    return [THREE.BackSide, THREE.FrontSide].map((side) => {
+      const mesh = new THREE.Mesh(
+        this.makeGeometry(),
+        this.makeMaterial(side));
+      return mesh;
     });
-    return result;
   }
 
   getMeshes() {
@@ -113,30 +120,6 @@ function main() {
       new CubeInstance(scene, 0x44aa88, 1),
       new CubeInstance(scene, 0xcc0000, 0),
     ];
-    const cubes = [...cubeList[0].getMeshes(), ...cubeList[1].getMeshes()];
-    console.log(cubeList);
-    console.log(cubes);
-    // const [boxWidth, boxHeight, boxDepth] = [1, 1, 1];
-    // const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
-    // geometry.translate( -boxWidth/ 2, boxHeight / 2, -boxDepth / 2 );     
-
-    // function makeInstance(geo, color, x) {
-    //   [THREE.BackSide, THREE.FrontSide].forEach((side) => {
-    //       const material = new THREE.MeshPhongMaterial({
-    //           color,
-    //           opacity: 0.5,
-    //           transparent: true,
-    //           side,
-    //       });
-    //       const cube = new THREE.Mesh(geo, material);
-    //       scene.add(cube);
-    //       cube.position.x = x;
-    //       cubes.push(cube);
-    //   });
-    // }
-    // makeInstance(geometry, 0x44aa88, 1);
-    // makeInstance(geometry, 0xcc0000, 0);
-    // console.log(cubes);
 
 
     // Add a revolving animation
@@ -155,8 +138,9 @@ function main() {
       // cubes.map((c) => {
       //   addRevolveAnimation(c, time*0.001);
       // })
-      addRevolveAnimation(cubes[2], time*0.001);
-      addRevolveAnimation(cubes[3], time*0.001);
+      cubeList[1].getMeshes().forEach((cube) => {
+        addRevolveAnimation(cube, time*0.001);
+      })
 
       renderer.render(scene, camera);
       requestAnimationFrame(render);
