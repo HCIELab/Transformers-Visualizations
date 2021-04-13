@@ -72,10 +72,10 @@ function main() {
     // Geometry, Material, Mesh
     const [boxWidth, boxHeight, boxDepth] = [1, 1, 1];
     const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
-    geometry.translate( boxWidth/ 2, boxHeight / 2, boxDepth / 2 ); 
+    geometry.translate( -boxWidth/ 2, boxHeight / 2, -boxDepth / 2 ); 
     
     const cubes = [];
-    function makeInstance(geometry, color, x) {
+    function makeInstance(geo, color, x) {
       [THREE.BackSide, THREE.FrontSide].forEach((side) => {
           const material = new THREE.MeshPhongMaterial({
               color,
@@ -83,14 +83,14 @@ function main() {
               transparent: true,
               side,
           });
-          const cube = new THREE.Mesh(geometry, material);
+          const cube = new THREE.Mesh(geo, material);
           scene.add(cube);
           cube.position.x = x;
           cubes.push(cube);
       });
     }
-    makeInstance(geometry, 0x44aa88, 0);
-    makeInstance(geometry, 0xcc0000, 1.1);
+    makeInstance(geometry, 0x44aa88, 1);
+    makeInstance(geometry, 0xcc0000, 0);
     // console.log(cubes);
 
 
@@ -107,9 +107,11 @@ function main() {
     function render(time) {
       handleRenderResizing(renderer, camera, controls);
 
-      cubes.map((c) => {
-        addRevolveAnimation(c, time*0.001);
-      })
+      // cubes.map((c) => {
+      //   addRevolveAnimation(c, time*0.001);
+      // })
+      addRevolveAnimation(cubes[2], time*0.001);
+      addRevolveAnimation(cubes[3], time*0.001);
 
       renderer.render(scene, camera);
       requestAnimationFrame(render);
