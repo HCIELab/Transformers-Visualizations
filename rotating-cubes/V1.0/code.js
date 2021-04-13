@@ -97,13 +97,10 @@ class CubeInstance {
 
   // Add a revolving animation
   addRevolveAnimation(time) {
-    const timeSeconds = time*0.001;
-    const speed = 1;
-    const rot = timeSeconds * speed;
+    const increment = 0.11;
     this.meshes.forEach((mesh) => {
-      if (rot <= Math.PI * 1) {
-        // mesh.rotation.x = rot;
-        mesh.rotation.y = rot;
+      if (mesh.rotation.y <= Math.PI * 1) {
+        mesh.rotation.y += increment;
       }
     })
   }
@@ -113,39 +110,48 @@ class CubeInstance {
 
 /* ~~~~~~~~~~~~~~~~~~~~~ MAIN ~~~~~~~~~~~~~~~~~~~~~ */
 function main() {
-    const canvas = document.querySelector('#c');
-    const renderer = new THREE.WebGLRenderer({canvas});
-    
-    // Camera
-    const {camera}  = cameraSettings();
+  const canvas = document.querySelector('#c');
+  const renderer = new THREE.WebGLRenderer({canvas});
+  
+  // Camera
+  const {camera}  = cameraSettings();
 
-    // Orbit Controls
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.update();
-    
-    // Scene
-    const {scene} = sceneSettings();
+  // Orbit Controls
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.update();
+  
+  // Scene
+  const {scene} = sceneSettings();
 
-    // Light
-    lightSettings(scene);
+  // Light
+  lightSettings(scene);
 
-    // Geometry, Material, Mesh
-    const cubeList = [
-      new CubeInstance(scene, 0x44aa88, 1),
-      new CubeInstance(scene, 0xcc0000, 0),
-    ];
+  // Geometry, Material, Mesh
+  const cubeList = [
+    new CubeInstance(scene, 0x44aa88, 1),
+    new CubeInstance(scene, 0xcc0000, 0),
+  ];
 
-    // Render
-    function render(time) {
-      handleRenderResizing(renderer, camera, controls);
+  // Animation Queue
+  const animationQueue = [];
+  document.addEventListener("click", () => {
+    animationQueue.push((time) => cubeList[1].addRevolveAnimation(time));
+  })
 
-      cubeList[1].addRevolveAnimation(time);
 
-      renderer.render(scene, camera);
-      requestAnimationFrame(render);
-    }
-    
+  // Render
+  function render(time) {
+    handleRenderResizing(renderer, camera, controls);
+
+    animationQueue.forEach((animFunction) => {
+      animFunction(time);
+    })
+
+    renderer.render(scene, camera);
     requestAnimationFrame(render);
+  }
+  
+  requestAnimationFrame(render);
 }
 
 main();
