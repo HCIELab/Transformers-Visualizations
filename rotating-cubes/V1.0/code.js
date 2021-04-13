@@ -1,37 +1,51 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
 
+function cameraSettings() {
+  const fov = 75;
+  const aspect = window.innerWidth / window.innerHeight;
+  const near = 0.1;
+  const far = 50;
+  const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+  camera.position.z = 4;
+  return {camera};
+}
+
+function sceneSettings() {
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xAAAAAA);
+  return {scene}
+}
+
+function lightSettings(scene) {
+  function addLight(x, y, z) {
+    const color = 0xFFFFFF;
+    const intensity = 1;
+    const light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(x, y, z);
+    scene.add(light);
+  }
+  addLight(-1, 2, 4);
+  addLight(1, -1, -1);
+}
+
 function main() {
     const canvas = document.querySelector('#c');
     const renderer = new THREE.WebGLRenderer({canvas});
     
     // Camera
-    const fov = 75;
-    const aspect = window.innerWidth / window.innerHeight;
-    const near = 0.1;
-    const far = 50;
-    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.z = 4;
+    const {camera}  = cameraSettings();
 
+    // Orbit Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.update();
-
     
     // Scene
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xAAAAAA);
+    const {scene} = sceneSettings();
 
     // Light
-    function addLight(x, y, z) {
-        const color = 0xFFFFFF;
-        const intensity = 1;
-        const light = new THREE.DirectionalLight(color, intensity);
-        light.position.set(x, y, z);
-        scene.add(light);
-    }
-    addLight(-1, 2, 4);
-    addLight(1, -1, -1);
-    
+    lightSettings(scene);
+
     // Geometry, Material, Mesh
     const [boxWidth, boxHeight, boxDepth] = [1, 1, 1];
     const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
