@@ -96,16 +96,20 @@ class CubeInstance {
   }
 
   // Add a revolving animation
-  addRevolveAnimation(time, endAngle, axisToRotate) {
-    const increment = 0.01;
+  addRevolveAnimation(time, incrementValue, endAngle, axisToRotate) {
+    const mod = (a, b) => ((a%b)+b)%b;
+    const delta = 0.01;
+
     this.meshes.forEach((mesh) => {
-      if (mesh.rotation[axisToRotate] <= endAngle) {
-        mesh.rotation[axisToRotate] += increment;
+      const difference = Math.abs(mod(mesh.rotation[axisToRotate], 2*Math.PI) - endAngle);
+      console.log("difference: ", difference);
+      if (difference > delta) {
+        mesh.rotation[axisToRotate] += incrementValue;
       }
     })
   }
   addRevolveAnimation_1(time) {
-      this.addRevolveAnimation(time, Math.PI * 1, "y");
+      this.addRevolveAnimation(time, -0.01, Math.PI * 1, "z");
   }
 
 }
