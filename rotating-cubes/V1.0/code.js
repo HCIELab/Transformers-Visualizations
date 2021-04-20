@@ -96,13 +96,16 @@ class CubeInstance {
   }
 
   // Add a revolving animation
-  addRevolveAnimation(time) {
-    const increment = 0.11;
+  addRevolveAnimation(time, endAngle, axisToRotate) {
+    const increment = 0.01;
     this.meshes.forEach((mesh) => {
-      if (mesh.rotation.y <= Math.PI * 1) {
-        mesh.rotation.y += increment;
+      if (mesh.rotation[axisToRotate] <= endAngle) {
+        mesh.rotation[axisToRotate] += increment;
       }
     })
+  }
+  addRevolveAnimation_1(time) {
+      this.addRevolveAnimation(time, Math.PI * 1, "y");
   }
 
 }
@@ -135,7 +138,7 @@ function main() {
   // Animation Queue
   const animationQueue = [];
   document.addEventListener("click", () => {
-    animationQueue.push((time) => cubeList[1].addRevolveAnimation(time));
+    animationQueue.push((time) => cubeList[1].addRevolveAnimation_1(time));
   })
 
 
