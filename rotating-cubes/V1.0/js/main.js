@@ -2,9 +2,10 @@ import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 
 import basicSettings from "./basicSettings.js";
 import moreSettings from "./moreSettings.js";
-import CubeInstance from "./CubeInstance.js";
+import rotations from "./rotations.js";
 
 const {moreSettingsSetup, moreSettingsLoop} = moreSettings();
+const {rotationsSetup, rotationsLoop} = rotations();
 
 /* ~~~~~~~~~~~~~~~~~~~~~ MAIN ~~~~~~~~~~~~~~~~~~~~~ */
 function main() {
@@ -13,28 +14,13 @@ function main() {
 
   const {camera, scene} = basicSettings();
   const {controls} = moreSettingsSetup(renderer, camera);
-
-
-  // Geometry, Material, Mesh
-  const cubeList = [
-    new CubeInstance(scene, 0x44aa88, 1),
-    new CubeInstance(scene, 0xcc0000, 0),
-  ];
-
-  // Animation Queue
-  const animationQueue = [];
-  document.addEventListener("click", () => {
-    animationQueue.push((time) => cubeList[1].addRevolveAnimation_1(time));
-  })
+  const {cubeList, animationQueue} = rotationsSetup(scene);
 
 
   // Render
   function render(time) {
     moreSettingsLoop(renderer, camera, controls);
-
-    animationQueue.forEach((animFunction) => {
-      animFunction(time);
-    })
+    rotationsLoop(animationQueue, time);
 
     renderer.render(scene, camera);
     requestAnimationFrame(render);
