@@ -32,14 +32,10 @@ export default function() {
         
         // Add button triggers
         document.querySelector('#buttonOne').addEventListener("click", () => {
-            animQueue.add(
-                (time) => cubeList[0].addRevolveAnimation(time, -0.01, Math.PI * 1, "x")
-            );
+            cubeList[0].addRevolveAnimation(-0.01, Math.PI * 1, "x")
         })
         document.querySelector('#buttonTwo').addEventListener("click", () => {
-            animQueue.add(
-                (time) => cubeList[1].addRevolveAnimation(time, -0.01, Math.PI * 1, "x")
-            );
+            cubeList[1].addRevolveAnimation(-0.01, Math.PI * 1, "x")
         })
 
         return {cubeList, animQueue};
@@ -48,7 +44,7 @@ export default function() {
 
     const rotationsLoop = (animQueue, time) => {
         animQueue.getList().forEach((animFunction) => {
-            animFunction(time);
+            animFunction();
         })
     }
 
