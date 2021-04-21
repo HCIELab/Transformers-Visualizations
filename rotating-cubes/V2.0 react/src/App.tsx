@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import Demo from "./Demo";
 
 const AppContainer = styled.div`
 	padding: 50px;
 	background-color: gray;
 `;
 
-function App() {
+const App = () => {
 	return (
 		<AppContainer>
-			Hello there     
+			Hello there   
+			<Demo/>
 		</AppContainer>
 	);
 }
