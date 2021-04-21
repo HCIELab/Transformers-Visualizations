@@ -10,24 +10,26 @@ const Cube = (props: {
     const [hovered, setHover] = useState(false);
 
     // This reference will give us direct access to the mesh
-	const mesh = useRef<THREE.Mesh>(null!)
+	const group = useRef<THREE.Group>(null!);
 
-	// Rotate mesh every frame, this is outside of React without overhead
+	// Rotate every frame, this is outside of React without overhead
 	useFrame(() => {
-        mesh.current.rotation.x += 0.01
+        group.current.rotation.x += 0.01;
     })
 	
 	return (
-		<mesh
-			position={props.position}
-			ref={mesh}
+		<group
+			ref={group}	
 			// onClick={(event) => console.log("click registered!")}
 			onPointerOver={(event) => setHover(true)}
 			onPointerOut={(event) => setHover(false)}
+			position={props.position}
 		>
-			<boxGeometry args={[1, 1, 1]} />
-			<meshPhongMaterial color={props.color} opacity={hovered ? 0.5 : 1} transparent={true} side={DoubleSide}/>
-		</mesh>
+			<mesh>
+				<boxGeometry args={[1, 1, 1]} />
+				<meshPhongMaterial color={props.color} opacity={hovered ? 0.5 : 1} transparent={true} side={DoubleSide}/>
+			</mesh>
+		</group>
 	)
 }
 
