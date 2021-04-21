@@ -111,6 +111,7 @@ class CubeInstance {
   addRevolveAnimation_1(time) {
       this.addRevolveAnimation(time, -0.01, Math.PI * 1, "z");
   }
+  // TODO: once the rotation is complete, how do you remove it from the AnimationQueue
 
 }
 
