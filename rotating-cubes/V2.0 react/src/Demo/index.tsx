@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Canvas } from '@react-three/fiber';
 
-import Box from "../Box";
+import Cube from "../Cube";
 import Controls from "../Controls";
 
 const Demo = () => {
@@ -12,8 +12,8 @@ const Demo = () => {
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
             <Controls/>
-            <Box position={[0, 0, 0]} />
-            <Box position={[1, 0, 0]} />
+            <Cube position={[0, 0, 0]} color={"blue"}/>
+            <Cube position={[1, 0, 0]} color={"red"}/>
         </Canvas>
     )
 }
