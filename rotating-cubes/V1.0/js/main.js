@@ -14,7 +14,9 @@ function main() {
 
   const {camera, scene} = basicSettings();
   const {controls} = moreSettingsSetup(renderer, camera);
-  const {cubeList, animQueue} = rotationsSetup(scene);
+
+  let rotationAxis = "x";
+  const {cubeList, animQueue} = rotationsSetup(scene, rotationAxis);
 
 
   // Render

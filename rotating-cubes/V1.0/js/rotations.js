@@ -1,6 +1,7 @@
 import CubeInstance from "./CubeInstance.js";
 
 // Tested to work with parallel rotations (more than one happening at the same time)
+// Does not work if you give two commands to the same cube without letting the first command animation complete first
 class AnimationQueue {
     constructor() {
         this.queue = [];
@@ -21,7 +22,7 @@ class AnimationQueue {
 
 
 export default function() {
-    const rotationsSetup = (scene) => {
+    const rotationsSetup = (scene, rotationAxis) => {
         const animQueue = new AnimationQueue();
 
         // Geometry, Material, Mesh
@@ -31,11 +32,20 @@ export default function() {
         ];
         
         // Add button triggers
+        document.querySelector('#buttonX').addEventListener("click", () => {
+            rotationAxis = "x";
+        })
+        document.querySelector('#buttonY').addEventListener("click", () => {
+            rotationAxis = "y";
+        })
+        document.querySelector('#buttonZ').addEventListener("click", () => {
+            rotationAxis = "z";
+        })
         document.querySelector('#buttonOne').addEventListener("click", () => {
-            cubeList[0].addRevolveAnimation(-0.01, -Math.PI * 1, "x")
+            cubeList[0].addRevolveAnimation(-0.01, -Math.PI * 1, rotationAxis)
         })
         document.querySelector('#buttonTwo').addEventListener("click", () => {
-            cubeList[1].addRevolveAnimation(-0.01, -Math.PI * 1, "x")
+            cubeList[1].addRevolveAnimation(-0.01, -Math.PI * 1, rotationAxis)
         })
 
         return {cubeList, animQueue};
