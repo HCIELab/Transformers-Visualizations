@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
 
 import { MeshProps, useFrame } from "@react-three/fiber";
+import { DoubleSide } from 'three';
 
 const Box = (props: MeshProps) => {
-    const [hovered, setHover] = useState(false)
-	const [active, setActive] = useState(false)
+    const [hovered, setHover] = useState(false);
 
     // This reference will give us direct access to the mesh
 	const mesh = useRef<THREE.Mesh>(null!)
@@ -18,13 +18,12 @@ const Box = (props: MeshProps) => {
 		<mesh
 			{...props}
 			ref={mesh}
-			scale={active ? 1.5 : 1}
-			onClick={(event) => setActive(!active)}
+			// onClick={(event) => console.log("click registered!")}
 			onPointerOver={(event) => setHover(true)}
 			onPointerOut={(event) => setHover(false)}
 		>
 			<boxGeometry args={[1, 1, 1]} />
-			<meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+			<meshPhongMaterial color={'blue'} opacity={hovered ? 0.5 : 1} transparent={true} side={DoubleSide}/>
 		</mesh>
 	)
 }
