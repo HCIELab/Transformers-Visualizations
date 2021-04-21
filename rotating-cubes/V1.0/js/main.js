@@ -14,13 +14,13 @@ function main() {
 
   const {camera, scene} = basicSettings();
   const {controls} = moreSettingsSetup(renderer, camera);
-  const {cubeList, animationQueue} = rotationsSetup(scene);
+  const {cubeList, animQueue} = rotationsSetup(scene);
 
 
   // Render
   function render(time) {
     moreSettingsLoop(renderer, camera, controls);
-    rotationsLoop(animationQueue, time);
+    rotationsLoop(animQueue, time);
 
     renderer.render(scene, camera);
     requestAnimationFrame(render);

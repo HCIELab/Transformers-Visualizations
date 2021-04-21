@@ -2,10 +2,11 @@ import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 
 
 export default class CubeInstance {
-    constructor(scene, color, x) {
+    constructor(scene, color, x, animQueue) {
       this.scene = scene;
       this.color = color;
       this.x = x;
+      this.animQueue = animQueue;
   
       this.meshes = this.makeMeshes();
       this.meshes.forEach((m) => {
@@ -52,14 +53,13 @@ export default class CubeInstance {
         const difference = Math.abs(mod(mesh.rotation[axisToRotate], 2*Math.PI) - endAngle);
         console.log("difference: ", difference);
         if (difference > delta) {
-          mesh.rotation[axisToRotate] += incrementValue;
+            mesh.rotation[axisToRotate] += incrementValue;
+        }
+        else {
+            // remove the animation from the queue
+            this.animQueue.remove();
         }
       })
-    }
-    addRevolveAnimation_1(time) {
-        this.addRevolveAnimation(time, -0.01, Math.PI * 1, "z");
-    }
-    // TODO: once the rotation is complete, how do you remove it from the AnimationQueue
-  
+    }  
 }
   
