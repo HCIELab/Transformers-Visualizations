@@ -10,7 +10,7 @@ export default function() {
         
         // Animation Queue
         const animationQueue = [];
-        document.addEventListener("click", () => {
+        document.querySelector('#buttonOne').addEventListener("click", () => {
             animationQueue.push((time) => cubeList[1].addRevolveAnimation_1(time));
         })
 
