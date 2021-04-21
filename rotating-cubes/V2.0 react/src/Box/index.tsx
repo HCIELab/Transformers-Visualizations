@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import { MeshProps, useFrame } from "@react-three/fiber";
 
-export default (props: MeshProps) => {
+const Box = (props: MeshProps) => {
     const [hovered, setHover] = useState(false)
 	const [active, setActive] = useState(false)
 
@@ -23,8 +23,10 @@ export default (props: MeshProps) => {
 			onPointerOver={(event) => setHover(true)}
 			onPointerOut={(event) => setHover(false)}
 		>
-			<boxGeometry args={[1, 2, 3]} />
+			<boxGeometry args={[1, 1, 1]} />
 			<meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
 		</mesh>
 	)
 }
+
+export default Box;
