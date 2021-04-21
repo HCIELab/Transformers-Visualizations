@@ -1,17 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { useThree, extend, ReactThreeFiber } from '@react-three/fiber';
+import { useThree, extend } from '@react-three/fiber';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 extend({OrbitControls})
-declare global {
-    namespace JSX {
-      interface IntrinsicElements {
-        'orbitControls': ReactThreeFiber.Object3DNode<OrbitControls, typeof OrbitControls>;
-      }
-    }
-}
-
 
 const Controls = () => {
     const {
@@ -19,9 +11,15 @@ const Controls = () => {
         gl: { domElement }
     } = useThree();
 
-    return (
-        <orbitControls args={[camera, domElement]}/>
-    )
+	useEffect(() => {
+		console.log("...orbit controls added");
+		const oc = new OrbitControls(camera, domElement);
+		oc.addEventListener("change", () => console.log("should be rerendering the text now"))
+
+		return () => oc.dispose();
+	}, [camera, domElement])
+
+	return null;
 }
 
 export default Controls;
