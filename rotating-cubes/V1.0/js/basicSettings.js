@@ -1,6 +1,6 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 
-export default function setupSettings() {
+export default function() {
     // Camera
     const fov = 75;
     const aspect = window.innerWidth / window.innerHeight;
@@ -23,6 +23,6 @@ export default function setupSettings() {
     }
     addLight(-1, 2, 4);
     addLight(1, -1, -1);
-  
+
     return {camera, scene};
 }

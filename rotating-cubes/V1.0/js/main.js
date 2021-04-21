@@ -1,43 +1,18 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
-import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
 
-
-import setupSettings from "./settings.js";
+import basicSettings from "./basicSettings.js";
+import moreSettings from "./moreSettings.js";
 import CubeInstance from "./CubeInstance.js";
 
-
-function handleRenderResizing(renderer, camera, controls) {
-  // To fix the issue of objects being low resolution and looking pixelated
-  function resizeRendererToDisplaySize() {
-    const canvas = renderer.domElement;
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
-    const needResize = canvas.width !== width || canvas.height !== height;
-    if (needResize) {
-        renderer.setSize(width, height, false);
-    }
-    return needResize;
-  }
-
-  if (resizeRendererToDisplaySize()) {
-    // To fix the issue of objects appearing 'stretched out' when window is resized
-    const canvas = renderer.domElement;
-    camera.aspect = canvas.clientWidth / canvas.clientHeight;
-    camera.updateProjectionMatrix();
-    controls.update();
-  }
-}
+const {moreSettingsSetup, moreSettingsLoop} = moreSettings();
 
 /* ~~~~~~~~~~~~~~~~~~~~~ MAIN ~~~~~~~~~~~~~~~~~~~~~ */
 function main() {
   const canvas = document.querySelector('#c');
   const renderer = new THREE.WebGLRenderer({canvas});
 
-  const {camera, scene} = setupSettings();
-
-  // Orbit Controls
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.update();
+  const {camera, scene} = basicSettings();
+  const {controls} = moreSettingsSetup(renderer, camera);
 
 
   // Geometry, Material, Mesh
@@ -55,7 +30,7 @@ function main() {
 
   // Render
   function render(time) {
-    handleRenderResizing(renderer, camera, controls);
+    moreSettingsLoop(renderer, camera, controls);
 
     animationQueue.forEach((animFunction) => {
       animFunction(time);
