@@ -32,10 +32,10 @@ export default function() {
         
         // Add button triggers
         document.querySelector('#buttonOne').addEventListener("click", () => {
-            cubeList[0].addRevolveAnimation(-0.01, Math.PI * 1, "x")
+            cubeList[0].addRevolveAnimation(-0.01, -Math.PI * 1, "x")
         })
         document.querySelector('#buttonTwo').addEventListener("click", () => {
-            cubeList[1].addRevolveAnimation(-0.01, Math.PI * 1, "x")
+            cubeList[1].addRevolveAnimation(-0.01, -Math.PI * 1, "x")
         })
 
         return {cubeList, animQueue};

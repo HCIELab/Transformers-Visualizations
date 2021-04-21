@@ -49,12 +49,13 @@ export default class CubeInstance {
     }
   
     // Add a revolving animation
-    addRevolveAnimation(incrementValue, endAngle, axisToRotate) {
-        const mod = (a, b) => ((a%b)+b)%b;
+    addRevolveAnimation(incrementValue, arcDisplacement, axisToRotate) {
+        // const mod = (a, b) => ((a%b)+b)%b;
         const delta = 0.01;
+        const endAngle = this.group.rotation[axisToRotate] + arcDisplacement;
     
         this.animQueue.add(() => {
-            const difference = Math.abs(mod(this.group.rotation[axisToRotate], 2*Math.PI) - endAngle);
+            const difference = Math.abs(this.group.rotation[axisToRotate] - endAngle);
             // console.log("difference: ", difference);
             if (difference > delta) {
                 this.group.rotation[axisToRotate] += incrementValue;
