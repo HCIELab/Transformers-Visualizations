@@ -2,7 +2,7 @@ import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 
 
 export default class CubeInstance {
-    constructor(scene, color, x, animQueue) {
+    constructor(scene, animQueue, color, x, y, z) {
         this.scene = scene;
         this.color = color;
 
@@ -10,6 +10,8 @@ export default class CubeInstance {
     
         this.group = this.makeGroup();
         this.group.position.x = x;
+        this.group.position.y = y;
+        this.group.position.z = z;
         this.scene.add(this.group);
     }
   

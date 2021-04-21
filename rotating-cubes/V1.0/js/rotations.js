@@ -26,19 +26,19 @@ export default function() {
 
         // Geometry, Material, Mesh
         const cubeList = [
-            new CubeInstance(scene, 0x44aa88, 1, animQueue),
-            new CubeInstance(scene, 0xcc0000, 0, animQueue),
+            new CubeInstance(scene, animQueue, 0xcc0000, 0, 0, 0),
+            new CubeInstance(scene, animQueue, 0x44aa88, 1, 0, 0),
         ];
         
         // Add button triggers
         document.querySelector('#buttonOne').addEventListener("click", () => {
             animQueue.add(
-                (time) => cubeList[0].addRevolveAnimation(time, -0.01, Math.PI * 1, "z")
+                (time) => cubeList[0].addRevolveAnimation(time, -0.01, Math.PI * 1, "x")
             );
         })
         document.querySelector('#buttonTwo').addEventListener("click", () => {
             animQueue.add(
-                (time) => cubeList[1].addRevolveAnimation(time, -0.01, Math.PI * 1, "z")
+                (time) => cubeList[1].addRevolveAnimation(time, -0.01, Math.PI * 1, "x")
             );
         })
 
