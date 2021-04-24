@@ -50,13 +50,15 @@ const Demo = () => {
                         id={1} 
                         position={[0, 0, 0]} 
                         color={"#000000"} 
-                        rotateDisplacement={-Math.PI/2}
+                        rDisplacement={-Math.PI/2}
+                        rAxis={"z"}
                     />
                     <Cube 
                         id={2} 
                         position={[1, 0, 0]} 
                         color={"#000000"} 
-                        rotateDisplacement={-Math.PI/2}
+                        rDisplacement={-Math.PI/2}
+                        rAxis={"z"}
                     />
                 </Canvas>
             </div>

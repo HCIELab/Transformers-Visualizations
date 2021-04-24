@@ -8,7 +8,8 @@ const Cube = (props: {
 	id: number,
 	position: Vector3,
 	color: Color,
-	rotateDisplacement: number,
+	rDisplacement: number,
+	rAxis: "x" | "y" | "z",
 }) => {
     const [hovered, setHover] = useState(false);
 	
@@ -20,9 +21,9 @@ const Cube = (props: {
 	const [finalPosition, setFinalPosition] = useState(0);
 	useFrame(() => {
 		if (isRotating) {
-	        group.current.rotation.x += props.rotateDisplacement > 0 ? 0.01 : -0.01;
+	        group.current.rotation[props.rAxis] += props.rDisplacement > 0 ? 0.01 : -0.01;
 			const delta = 0.02; //Threshold to consider for equality
-			if (Math.abs(group.current.rotation.x - finalPosition) < delta) {
+			if (Math.abs(group.current.rotation[props.rAxis] - finalPosition) < delta) {
 				setIsRotating(false);
 			}
 		}
@@ -31,7 +32,7 @@ const Cube = (props: {
 	const handleClick = () => {
 		if (!isRotating) {
 			setIsRotating(true);
-			setFinalPosition(group.current.rotation.x + props.rotateDisplacement );
+			setFinalPosition(group.current.rotation[props.rAxis] + props.rDisplacement );
 		}
 		else {
 			alert("Before clicking again, wait until the current rotation has finished for this cube!");
