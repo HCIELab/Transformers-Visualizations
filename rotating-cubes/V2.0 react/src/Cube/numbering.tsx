@@ -14,7 +14,7 @@ const Numbering = (props: {
 	const textOptions = {
 		font,
 		size: 0.1,
-		height: 0.02,
+		height: 0.01,
 	};
 
 	const letterOffset = props.letterOffset;
@@ -36,6 +36,41 @@ const Numbering = (props: {
 			<textGeometry args={["4", textOptions]} />
             <meshPhongMaterial/>
 		</mesh>,
+
+		<mesh position={[0, half - letterOffset, half]}>
+			<textGeometry args={["5", textOptions]} />
+            <meshPhongMaterial/>
+		</mesh>,
+		<mesh position={[0, -half, half]}>
+			<textGeometry args={["6", textOptions]} />
+            <meshPhongMaterial/>
+		</mesh>,
+		<mesh position={[0, -half, -half]}>
+			<textGeometry args={["7", textOptions]} />
+            <meshPhongMaterial/>
+		</mesh>,
+		<mesh position={[0, half-letterOffset, -half]}>
+			<textGeometry args={["8", textOptions]} />
+            <meshPhongMaterial/>
+		</mesh>,
+
+		<mesh position={[half-letterOffset, 0, -half]}>
+			<textGeometry args={["9", textOptions]} />
+            <meshPhongMaterial/>
+		</mesh>,
+		<mesh position={[half-2*letterOffset, 0, half]}>
+			<textGeometry args={["10", textOptions]} />
+            <meshPhongMaterial/>
+		</mesh>,
+		<mesh position={[-half, 0, half]}>
+			<textGeometry args={["11", textOptions]} />
+            <meshPhongMaterial/>
+		</mesh>,
+		<mesh position={[-half, 0, -half]}>
+			<textGeometry args={["12", textOptions]} />
+            <meshPhongMaterial/>
+		</mesh>,
+
 	]
 	
 	return (
