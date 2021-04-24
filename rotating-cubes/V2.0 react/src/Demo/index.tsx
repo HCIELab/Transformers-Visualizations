@@ -12,8 +12,8 @@ const Demo = () => {
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
             <Controls/>
-            <Cube position={[0, 0, 0]} color={"blue"}/>
-            <Cube position={[1, 0, 0]} color={"red"}/>
+            <Cube position={[0, 0, 0]} color={"#000000"}/>
+            <Cube position={[1, 0, 0]} color={"#000000"}/>
         </Canvas>
     )
 }
