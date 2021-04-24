@@ -29,7 +29,7 @@ const Cube = (props: {
 		>
 			<mesh>
 				<boxGeometry args={[side, side, side]}/>
-				<meshPhongMaterial color={props.color} opacity={hovered ? 0.5 : 1} transparent={true} side={DoubleSide}/>
+				<meshPhongMaterial color={props.color} opacity={hovered ? 0.2 : 0.5} transparent={true} side={DoubleSide}/>
 			</mesh>
 			<Numbering
 				letterOffset={0.1}
