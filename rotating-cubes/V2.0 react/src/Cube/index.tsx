@@ -32,6 +32,7 @@ const Cube = (props: {
 				<meshPhongMaterial color={props.color} opacity={hovered ? 0.5 : 1} transparent={true} side={DoubleSide}/>
 			</mesh>
 			<Numbering
+				letterOffset={0.1}
 				side={side}
 			/>
 		</group>
