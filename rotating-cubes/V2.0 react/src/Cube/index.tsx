@@ -5,24 +5,38 @@ import { DoubleSide } from 'three';
 import Numbering from "./numbering";
 
 const Cube = (props: {
+	id: number,
 	position: Vector3,
 	color: Color,
 }) => {
     const [hovered, setHover] = useState(false);
-
+	
     // This reference will give us direct access to the mesh
 	const group = useRef<THREE.Group>(null!);
 	const side = 1;
-
-	// Rotate every frame, this is outside of React without overhead
+	
+	const [isRotating, setIsRotating] = useState(false);
+	const [finalPosition, setFinalPosition] = useState(0);
 	useFrame(() => {
-        // group.current.rotation.x += 0.01;
+		if (isRotating) {
+	        group.current.rotation.x += 0.01;
+			const delta = 0.02; //Threshold to consider for equality
+			if (Math.abs(group.current.rotation.x - finalPosition) < delta) {
+				setIsRotating(false);
+			}
+		}
     })
+
+	const handleClick = () => {
+		console.log("click registered!");
+		setIsRotating(true);
+		setFinalPosition(group.current.rotation.x + Math.PI/2 );
+	}
 
 	return (
 		<group
 			ref={group}	
-			// onClick={(event) => console.log("click registered!")}
+			onClick={handleClick}
 			onPointerOver={(event) => setHover(true)}
 			onPointerOut={(event) => setHover(false)}
 			position={props.position}

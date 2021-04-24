@@ -18,6 +18,7 @@ const DemoContainer = styled.div`
         height: 20%;
         width: 100%;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
@@ -36,14 +37,17 @@ const Demo = () => {
         <DemoContainer>
             <div className="TopSection">
                 (add stuff here...)
+                <button onClick={() => console.log("click registered")}>x</button>
+                <button onClick={() => console.log("click registered")}>y</button>
+                <button onClick={() => console.log("click registered")}>z</button>
             </div>
             <div className="CanvasContainer">
                 <Canvas>
                     <ambientLight />
                     <pointLight position={[10, 10, 10]} />
                     <Controls/>
-                    <Cube position={[0, 0, 0]} color={"#000000"}/>
-                    <Cube position={[1, 0, 0]} color={"#000000"}/>
+                    <Cube id={1} position={[0, 0, 0]} color={"#000000"}/>
+                    <Cube id={2} position={[1, 0, 0]} color={"#000000"}/>
                 </Canvas>
             </div>
         </DemoContainer>
