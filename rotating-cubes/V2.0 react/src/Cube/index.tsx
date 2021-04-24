@@ -12,32 +12,38 @@ const Cube = (props: {
 
     // This reference will give us direct access to the mesh
 	const group = useRef<THREE.Group>(null!);
-	const edgeMarkerOne = useRef<THREE.Mesh>(null!);
-	const edgeMarkerTwo = useRef<THREE.Mesh>(null!);
-
-	useEffect(() => {
-		edgeMarkerOne.current.position.set(.5, .5, 0);
-		edgeMarkerTwo.current.position.set(.5, -.5, 0);
-	}, [edgeMarkerOne, edgeMarkerTwo])
 
 
 	// Rotate every frame, this is outside of React without overhead
 	useFrame(() => {
-        group.current.rotation.x += 0.01;
+        // group.current.rotation.x += 0.01;
     })
 
 
+	// Deal with the edge Numbering (using fonts)
 	const font = new FontLoader().parse(Roboto);
 	const textOptions = {
 		font,
-		size: 0.2,
+		size: 0.1,
 		height: 0.02,
 	};
-	const textMesh = (
-		<mesh>
-			<textGeometry args={["sometext", textOptions]} />
-		</mesh>
-	)
+	const letterOffset = 0.1;
+	const side = 1;
+	const half = side/2;
+	const textMeshes = [
+		<mesh position={[half-letterOffset, 0, half]}>
+			<textGeometry args={["1", textOptions]} />
+		</mesh>,
+		<mesh position={[0, -half, half]}>
+			<textGeometry args={["2", textOptions]} />
+		</mesh>,
+		<mesh position={[-half, 0, half]}>
+			<textGeometry args={["3", textOptions]} />
+		</mesh>,
+		<mesh position={[0, half - letterOffset, half]}>
+			<textGeometry args={["4", textOptions]} />
+		</mesh>,
+	]
 	
 	return (
 		<group
@@ -48,18 +54,10 @@ const Cube = (props: {
 			position={props.position}
 		>
 			<mesh>
-				<boxGeometry args={[1, 1, 1]}/>
+				<boxGeometry args={[side, side, side]}/>
 				<meshPhongMaterial color={props.color} opacity={hovered ? 0.5 : 1} transparent={true} side={DoubleSide}/>
 			</mesh>
-			<mesh ref={edgeMarkerOne}>
-				<boxGeometry  args={[0.2, 0.2, 0.2]}/>
-				<meshPhongMaterial color={props.color} />
-			</mesh>
-			<mesh ref={edgeMarkerTwo}>
-				<boxGeometry  args={[0.2, 0.2, 0.2]}/>
-				<meshPhongMaterial color={props.color} />
-			</mesh>
-			{textMesh}
+			{textMeshes}
 		</group>
 	)
 }
