@@ -46,8 +46,18 @@ const Demo = () => {
                     <ambientLight />
                     <pointLight position={[10, 10, 10]} />
                     <Controls/>
-                    <Cube id={1} position={[0, 0, 0]} color={"#000000"}/>
-                    <Cube id={2} position={[1, 0, 0]} color={"#000000"}/>
+                    <Cube 
+                        id={1} 
+                        position={[0, 0, 0]} 
+                        color={"#000000"} 
+                        rotateDisplacement={-Math.PI/2}
+                    />
+                    <Cube 
+                        id={2} 
+                        position={[1, 0, 0]} 
+                        color={"#000000"} 
+                        rotateDisplacement={-Math.PI/2}
+                    />
                 </Canvas>
             </div>
         </DemoContainer>
