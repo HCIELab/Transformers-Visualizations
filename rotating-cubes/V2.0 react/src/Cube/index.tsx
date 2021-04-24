@@ -29,8 +29,13 @@ const Cube = (props: {
     })
 
 	const handleClick = () => {
-		setIsRotating(true);
-		setFinalPosition(group.current.rotation.x + props.rotateDisplacement );
+		if (!isRotating) {
+			setIsRotating(true);
+			setFinalPosition(group.current.rotation.x + props.rotateDisplacement );
+		}
+		else {
+			alert("Before clicking again, wait until the current rotation has finished for this cube!");
+		}
 	}
 
 	return (
