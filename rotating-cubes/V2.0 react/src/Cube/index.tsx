@@ -12,13 +12,13 @@ const Cube = (props: {
 
     // This reference will give us direct access to the mesh
 	const group = useRef<THREE.Group>(null!);
-	const edgeMarkerOne = useRef<THREE.BoxGeometry>(null!);
-	const edgeMarkerTwo = useRef<THREE.BoxGeometry>(null!);
+	const edgeMarkerOne = useRef<THREE.Mesh>(null!);
+	const edgeMarkerTwo = useRef<THREE.Mesh>(null!);
 
 	useEffect(() => {
-		edgeMarkerOne.current.translate(.5, .5, 0);
-		edgeMarkerTwo.current.translate(.5, -.5, 0);
-	}, [])
+		edgeMarkerOne.current.position.set(.5, .5, 0);
+		edgeMarkerTwo.current.position.set(.5, -.5, 0);
+	}, [edgeMarkerOne, edgeMarkerTwo])
 
 
 	// Rotate every frame, this is outside of React without overhead
@@ -48,15 +48,15 @@ const Cube = (props: {
 			position={props.position}
 		>
 			<mesh>
-				<boxGeometry args={[1, 1, 1]} />
+				<boxGeometry args={[1, 1, 1]}/>
 				<meshPhongMaterial color={props.color} opacity={hovered ? 0.5 : 1} transparent={true} side={DoubleSide}/>
 			</mesh>
-			<mesh>
-				<boxGeometry ref={edgeMarkerOne} args={[0.2, 0.2, 0.2]}/>
+			<mesh ref={edgeMarkerOne}>
+				<boxGeometry  args={[0.2, 0.2, 0.2]}/>
 				<meshPhongMaterial color={props.color} />
 			</mesh>
-			<mesh>
-				<boxGeometry ref={edgeMarkerTwo} args={[0.2, 0.2, 0.2]}/>
+			<mesh ref={edgeMarkerTwo}>
+				<boxGeometry  args={[0.2, 0.2, 0.2]}/>
 				<meshPhongMaterial color={props.color} />
 			</mesh>
 			{textMesh}
