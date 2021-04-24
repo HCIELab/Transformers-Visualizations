@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Color, useFrame, Vector3 } from "@react-three/fiber";
-import { DoubleSide } from 'three';
+import { DoubleSide, FontLoader } from 'three';
+import Roboto from "./Roboto_Regular.json";
 
 const Cube = (props: {
 	position: Vector3,
@@ -12,9 +13,11 @@ const Cube = (props: {
     // This reference will give us direct access to the mesh
 	const group = useRef<THREE.Group>(null!);
 	const edgeMarkerOne = useRef<THREE.BoxGeometry>(null!);
+	const edgeMarkerTwo = useRef<THREE.BoxGeometry>(null!);
 
 	useEffect(() => {
 		edgeMarkerOne.current.translate(.5, .5, 0);
+		edgeMarkerTwo.current.translate(.5, -.5, 0);
 	}, [])
 
 
@@ -22,6 +25,19 @@ const Cube = (props: {
 	useFrame(() => {
         group.current.rotation.x += 0.01;
     })
+
+
+	const font = new FontLoader().parse(Roboto);
+	const textOptions = {
+		font,
+		size: 0.2,
+		height: 0.02,
+	};
+	const textMesh = (
+		<mesh>
+			<textGeometry args={["sometext", textOptions]} />
+		</mesh>
+	)
 	
 	return (
 		<group
@@ -37,7 +53,13 @@ const Cube = (props: {
 			</mesh>
 			<mesh>
 				<boxGeometry ref={edgeMarkerOne} args={[0.2, 0.2, 0.2]}/>
+				<meshPhongMaterial color={props.color} />
 			</mesh>
+			<mesh>
+				<boxGeometry ref={edgeMarkerTwo} args={[0.2, 0.2, 0.2]}/>
+				<meshPhongMaterial color={props.color} />
+			</mesh>
+			{textMesh}
 		</group>
 	)
 }
