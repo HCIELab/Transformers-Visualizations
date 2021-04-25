@@ -22,7 +22,7 @@ const Cube = (props: {
 	useFrame(() => {
 		if (isRotating) {
 	        group.current.rotation[props.rAxis] += props.rDisplacement > 0 ? 0.01 : -0.01;
-			const delta = 0.02; //Threshold to consider for equality
+			const delta = 0.01; //Threshold to consider for equality
 			if (Math.abs(group.current.rotation[props.rAxis] - finalPosition) < delta) {
 				setIsRotating(false);
 			}
@@ -30,11 +30,12 @@ const Cube = (props: {
     })
 
 	const handleClick = () => {
-		console.log(group.current.rotation[props.rAxis] / Math.PI * 2);
-		// TODO: use this result above (ninetyDegreeRotationTotal) to round to the nearest nice rotation
+		const ninetyDegreeRotationCount = Math.round(group.current.rotation[props.rAxis] / Math.PI * 2);
+		// console.log(ninetyDegreeRotationCount);
+		const initialPosition = ninetyDegreeRotationCount * Math.PI / 2;
 		if (!isRotating) {
 			setIsRotating(true);
-			setFinalPosition(group.current.rotation[props.rAxis] + props.rDisplacement );
+			setFinalPosition(initialPosition + props.rDisplacement );
 		}
 		else {
 			alert("Before clicking again, wait until the current rotation has finished for this cube!");
