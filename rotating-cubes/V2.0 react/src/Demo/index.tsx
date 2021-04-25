@@ -37,6 +37,9 @@ const DemoContainer = styled.div`
 
 const Demo = () => {
     
+
+    const pi = Math.PI;
+    const [rDisplacement, setRDisplacement] = useState(pi/2);
     const [rAxis, setRAxis] = useState<"x" | "y" | "z">("z");
 
 
@@ -50,10 +53,14 @@ const Demo = () => {
                     <button onClick={() => setRAxis("z")}>z</button>
                 </div>
                 <div>
-                    <button>-pi</button>
-                    <button>-pi/2</button>
-                    <button>pi/2</button>
-                    <button>pi</button>
+                    <button onClick={() => setRDisplacement(-pi)}>-pi</button>
+                    <button onClick={() => setRDisplacement(-pi/2)}>-pi/2</button>
+                    <button onClick={() => setRDisplacement(pi/2)}>pi/2</button>
+                    <button onClick={() => setRDisplacement(pi)}>pi</button>
+                </div>
+                <div>
+                    <p>Current rAxis: {rAxis}</p>
+                    <p>Current rDisplacement: {rDisplacement}</p>
                 </div>
             </div>
             <div className="CanvasContainer">
@@ -65,14 +72,14 @@ const Demo = () => {
                         id={1} 
                         position={[0, 0, 0]} 
                         color={"#000000"} 
-                        rDisplacement={-Math.PI/2}
+                        rDisplacement={rDisplacement}
                         rAxis={rAxis}
                     />
                     <Cube 
                         id={2} 
                         position={[1, 0, 0]} 
                         color={"#000000"} 
-                        rDisplacement={-Math.PI/2}
+                        rDisplacement={rDisplacement}
                         rAxis={rAxis}
                     />
                 </Canvas>
