@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 import { Canvas } from '@react-three/fiber';
@@ -21,6 +21,10 @@ const DemoContainer = styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        button {
+            margin: 4px 5px;
+        }
     }
 
     .CanvasContainer {
@@ -32,14 +36,25 @@ const DemoContainer = styled.div`
 `;
 
 const Demo = () => {
+    
+    const [rAxis, setRAxis] = useState<"x" | "y" | "z">("z");
+
 
     return (
         <DemoContainer>
             <div className="TopSection">
-                (add stuff here...)
-                <button onClick={() => console.log("click registered")}>x</button>
-                <button onClick={() => console.log("click registered")}>y</button>
-                <button onClick={() => console.log("click registered")}>z</button>
+                Buttons (only change these if cubes are not currently rotating)
+                <div>
+                    <button onClick={() => setRAxis("x")}>x</button>
+                    <button onClick={() => setRAxis("y")}>y</button>
+                    <button onClick={() => setRAxis("z")}>z</button>
+                </div>
+                <div>
+                    <button>-pi</button>
+                    <button>-pi/2</button>
+                    <button>pi/2</button>
+                    <button>pi</button>
+                </div>
             </div>
             <div className="CanvasContainer">
                 <Canvas>
@@ -51,14 +66,14 @@ const Demo = () => {
                         position={[0, 0, 0]} 
                         color={"#000000"} 
                         rDisplacement={-Math.PI/2}
-                        rAxis={"z"}
+                        rAxis={rAxis}
                     />
                     <Cube 
                         id={2} 
                         position={[1, 0, 0]} 
                         color={"#000000"} 
                         rDisplacement={-Math.PI/2}
-                        rAxis={"z"}
+                        rAxis={rAxis}
                     />
                 </Canvas>
             </div>

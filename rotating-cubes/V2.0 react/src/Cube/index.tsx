@@ -30,6 +30,8 @@ const Cube = (props: {
     })
 
 	const handleClick = () => {
+		console.log(group.current.rotation[props.rAxis] / Math.PI * 2);
+		// TODO: use this result above (ninetyDegreeRotationTotal) to round to the nearest nice rotation
 		if (!isRotating) {
 			setIsRotating(true);
 			setFinalPosition(group.current.rotation[props.rAxis] + props.rDisplacement );
