@@ -31,6 +31,8 @@ const Demo = () => {
     const [rDisplacement, setRDisplacement] = useState(Math.PI/2);
     const [rAxis, setRAxis] = useState<"x" | "y" | "z">("z");
 
+    
+
     return (
         <DemoContainer>
             <div className="TopSection">
@@ -54,13 +56,13 @@ const Demo = () => {
                         rDisplacement={rDisplacement}
                         rAxis={rAxis}
                     />
-                    <Cube 
+                    {/* <Cube 
                         id={2} 
                         position={[1, 0, 0]} 
                         color={"#000000"} 
                         rDisplacement={rDisplacement}
                         rAxis={rAxis}
-                    />
+                    /> */}
                 </Canvas>
             </div>
         </DemoContainer>

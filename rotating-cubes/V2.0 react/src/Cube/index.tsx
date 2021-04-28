@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Color, useFrame, Vector3 } from "@react-three/fiber";
 import { DoubleSide } from 'three';
@@ -42,6 +42,11 @@ const Cube = (props: {
 		}
 	}
 
+	const box = useRef<THREE.BoxGeometry>(null!);
+	useEffect(() => {
+		box.current.translate(0.5, 0.5, 0);
+	}, [])
+
 	return (
 		<group
 			ref={group}	
@@ -51,7 +56,7 @@ const Cube = (props: {
 			position={props.position}
 		>
 			<mesh>
-				<boxGeometry args={[side, side, side]}/>
+				<boxGeometry ref={box} args={[side, side, side]}/>
 				<meshPhongMaterial color={props.color} opacity={hovered ? 0.2 : 0.6} transparent={true} side={DoubleSide}/>
 			</mesh>
 			<Numbering
