@@ -56,7 +56,7 @@ const Demo = () => {
                     <Controls/>
                     <Cube 
                         id={1} 
-                        position={new Vector3(0, 1, 0)} 
+                        initialPosition={new Vector3(0, 1, 0)} 
                         color={"#000000"} 
                         rDisplacement={rDisplacement}
                         rAxis={rAxis}
@@ -64,7 +64,7 @@ const Demo = () => {
                     />
                     <Cube 
                         id={2} 
-                        position={new Vector3(0, 0, 0)} 
+                        initialPosition={new Vector3(0, 0, 0)} 
                         color={"#000000"} 
                         rDisplacement={rDisplacement}
                         rAxis={rAxis}

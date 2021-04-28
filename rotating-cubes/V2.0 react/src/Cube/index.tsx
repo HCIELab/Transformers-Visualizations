@@ -8,49 +8,55 @@ import { group } from 'node:console';
 
 const Cube = (props: {
 	id: number,
-	position: Vector3,
+	initialPosition: Vector3,
 	color: Color,
 	rDisplacement: number,
 	rAxis: axisType,
 	corner: cornerType,
 }) => {
     const [hovered, setHover] = useState(false);
-	
-    // This reference will give us direct access to the mesh
 	const everything = useRef<THREE.Group>(null!);
-	const side = 1;
-	
+
+
+	const [globalPosition, setGlobalPosition] = useState(props.initialPosition);
 	const [isRotating, setIsRotating] = useState(false);
-	const [finalPosition, setFinalPosition] = useState(0);
+	const [finalAngle, setFinalAngle] = useState(0);
 	useFrame(() => {
 		if (isRotating) {
-	        everything.current.rotation[props.rAxis] += props.rDisplacement > 0 ? 0.01 : -0.01;
-			const delta = 0.01; //Threshold to consider for equality
-			if (Math.abs(everything.current.rotation[props.rAxis] - finalPosition) < delta) {
+			// -- While Rotating --
+			everything.current.rotation[props.rAxis] += props.rDisplacement > 0 ? 0.01 : -0.01;
+			// -- Done Rotating --
+			const delta = 0.01; // threshold to consider for equality
+			if (Math.abs(everything.current.rotation[props.rAxis] - finalAngle) < delta) {
 				setIsRotating(false);
+				setGlobalPosition(new Vector3(globalPosition.x+1, globalPosition.y, globalPosition.z));
 			}
 		}
     })
-
+	
 	const handleClick = () => {
 		const ninetyDegreeRotationCount = Math.round(everything.current.rotation[props.rAxis] / Math.PI * 2);
 		// console.log(ninetyDegreeRotationCount);
-		const initialPosition = ninetyDegreeRotationCount * Math.PI / 2;
+		const initialAngle = ninetyDegreeRotationCount * Math.PI / 2;
 		if (!isRotating) {
 			setIsRotating(true);
-			setFinalPosition(initialPosition + props.rDisplacement );
+			setFinalAngle(initialAngle + props.rDisplacement );
 		}
 		else {
 			alert("Before clicking again, wait until the current rotation has finished for this cube!");
 		}
 	}
-
+	
+	const side = 1;
 	const forPivot = useRef<THREE.Group>(null!);
 	useEffect(() => {
 		forPivot.current.position.x = 0;
 		forPivot.current.position.y = 0;
 		forPivot.current.position.z = 0;
-		// forPivot.current.rotateOnAxis(new Vector3(0,1,0), Math.PI);
+		// TODO: change position after it rotates
+		everything.current.position.x = globalPosition.x;
+		everything.current.position.y = globalPosition.y;
+		everything.current.position.z = globalPosition.z;
 		switch(props.corner) {
 			case "NorthEast":
 				forPivot.current.translateX(-side/2);
@@ -82,7 +88,7 @@ const Cube = (props: {
 				everything.current.translateX(side/2);
 				everything.current.translateY(side/2);
 		}
-	}, [props.corner]) // TODO vary this based on the pivot point
+	}, [props.corner, globalPosition]) // TODO vary this based on the pivot point
 
 	return (
 		<group
@@ -90,7 +96,7 @@ const Cube = (props: {
 			onClick={handleClick}
 			onPointerOver={(event) => setHover(true)}
 			onPointerOut={(event) => setHover(false)}
-			position={props.position}
+			// position={props.initialPosition}
 		>
 			<group ref={forPivot}>
 				<mesh>
