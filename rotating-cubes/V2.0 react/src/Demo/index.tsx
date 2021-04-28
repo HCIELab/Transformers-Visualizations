@@ -5,7 +5,7 @@ import { Canvas } from '@react-three/fiber';
 
 import Cube from "../Cube";
 import Controls from "../Controls";
-
+import Panel from "../Panel";
 
 const DemoContainer = styled.div`
     width: 100%;
@@ -37,32 +37,18 @@ const DemoContainer = styled.div`
 
 const Demo = () => {
     
-
-    const pi = Math.PI;
-    const [rDisplacement, setRDisplacement] = useState(pi/2);
+    const [rDisplacement, setRDisplacement] = useState(Math.PI/2);
     const [rAxis, setRAxis] = useState<"x" | "y" | "z">("z");
-
 
     return (
         <DemoContainer>
-            <div className="TopSection">
-                Buttons (only change these if cubes are not currently rotating)
-                <div>
-                    <button onClick={() => setRAxis("x")}>x</button>
-                    <button onClick={() => setRAxis("y")}>y</button>
-                    <button onClick={() => setRAxis("z")}>z</button>
-                </div>
-                <div>
-                    <button onClick={() => setRDisplacement(-pi)}>-pi</button>
-                    <button onClick={() => setRDisplacement(-pi/2)}>-pi/2</button>
-                    <button onClick={() => setRDisplacement(pi/2)}>pi/2</button>
-                    <button onClick={() => setRDisplacement(pi)}>pi</button>
-                </div>
-                <div>
-                    <p>Current rAxis: {rAxis}</p>
-                    <p>Current rDisplacement: {rDisplacement}</p>
-                </div>
-            </div>
+            <Panel
+                rAxis={rAxis}
+                rDisplacement={rDisplacement}
+                setRAxis={setRAxis}
+                setRDisplacement={setRDisplacement}
+            />
+
             <div className="CanvasContainer">
                 <Canvas>
                     <ambientLight />
