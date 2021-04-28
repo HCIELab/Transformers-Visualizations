@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
+import {cornerType} from "../Types/types";
+
 const PivotChooserContainer = styled.div<{corner: cornerType}>`
     display: flex;
     flex-direction: column;
@@ -49,7 +51,6 @@ const PivotChooserContainer = styled.div<{corner: cornerType}>`
     }
 `;
 
-type cornerType = "NorthEast" | "SouthEast" | "SouthWest" | "NorthWest";
 
 const PivotChooser = (props: {
 }) => {

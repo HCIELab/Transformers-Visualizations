@@ -1,0 +1,1 @@
+export type cornerType = "NorthEast" | "SouthEast" | "SouthWest" | "NorthWest";
