@@ -2,10 +2,12 @@ import React from 'react';
 
 import styled from 'styled-components';
 
+import Pivot from "./pivot";
+
 const PanelContainer = styled.div`
-    margin: 0;
-    height: 20%;
     width: 100%;
+    height: 100%;
+    margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,6 +29,9 @@ const Panel = (props: {
 
     return (
         <PanelContainer>
+            
+            <Pivot/>
+
             Buttons (only change these if cubes are not currently rotating)
             <div>
                 <button onClick={() => props.setRAxis("x")}>x</button>

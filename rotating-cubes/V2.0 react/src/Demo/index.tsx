@@ -15,21 +15,12 @@ const DemoContainer = styled.div`
 
     .TopSection {
         margin: 0;
-        height: 20%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        button {
-            margin: 4px 5px;
-        }
+        height: 30%;
     }
 
     .CanvasContainer {
         margin: 0;
-        height: 80%;
+        height: 70%;
         width: 100%;
         background-color: gray;
     }
@@ -42,12 +33,14 @@ const Demo = () => {
 
     return (
         <DemoContainer>
-            <Panel
-                rAxis={rAxis}
-                rDisplacement={rDisplacement}
-                setRAxis={setRAxis}
-                setRDisplacement={setRDisplacement}
-            />
+            <div className="TopSection">
+                <Panel
+                    rAxis={rAxis}
+                    rDisplacement={rDisplacement}
+                    setRAxis={setRAxis}
+                    setRDisplacement={setRDisplacement}
+                />
+            </div>
 
             <div className="CanvasContainer">
                 <Canvas>
