@@ -53,24 +53,21 @@ const PivotChooserContainer = styled.div<{corner: cornerType}>`
 
 
 const PivotChooser = (props: {
+    corner: cornerType,
+    setCorner: Function,
 }) => {
-
-    const [corner, setCorner] = useState<cornerType>("NorthEast");
-    const cornerClick = (corner: cornerType) => {
-        setCorner(corner);
-    }
     
     return (
-        <PivotChooserContainer corner={corner}>
+        <PivotChooserContainer corner={props.corner}>
             <p>
                 Choose your pivot point here:
             </p>
 
             <div className="MannequinSquare">
-                <CornerElement corner={"NorthEast"} handleClick={cornerClick}/>
-                <CornerElement corner={"SouthEast"} handleClick={cornerClick}/>
-                <CornerElement corner={"SouthWest"} handleClick={cornerClick}/>
-                <CornerElement corner={"NorthWest"} handleClick={cornerClick}/>
+                <CornerElement corner={"NorthEast"} handleClick={props.setCorner}/>
+                <CornerElement corner={"SouthEast"} handleClick={props.setCorner}/>
+                <CornerElement corner={"SouthWest"} handleClick={props.setCorner}/>
+                <CornerElement corner={"NorthWest"} handleClick={props.setCorner}/>
             </div>
 
         </PivotChooserContainer>

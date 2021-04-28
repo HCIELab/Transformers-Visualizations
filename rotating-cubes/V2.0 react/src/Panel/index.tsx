@@ -1,6 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
+import { axisType, cornerType } from '../Types/types';
 
 import PivotChooser from "./pivotchooser";
 
@@ -19,10 +20,12 @@ const PanelContainer = styled.div`
 `;
 
 const Panel = (props: {
-    rAxis: "x" | "y" | "z",
-    rDisplacement: number,
+    rAxis: axisType,
     setRAxis: Function,
+    rDisplacement: number,
     setRDisplacement: Function,
+    corner: cornerType,
+    setCorner: Function,
 }) => {
     
     const pi = Math.PI;
@@ -30,7 +33,10 @@ const Panel = (props: {
     return (
         <PanelContainer>
             
-            <PivotChooser/>
+            <PivotChooser
+                corner={props.corner}
+                setCorner={props.setCorner}
+            />
 
             Buttons (only change these if cubes are not currently rotating)
             <div>

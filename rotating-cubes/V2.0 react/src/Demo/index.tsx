@@ -6,6 +6,7 @@ import { Canvas } from '@react-three/fiber';
 import Cube from "../Cube";
 import Controls from "../Controls";
 import Panel from "../Panel";
+import { axisType, cornerType } from '../Types/types';
 
 const DemoContainer = styled.div`
     width: 100%;
@@ -29,18 +30,21 @@ const DemoContainer = styled.div`
 const Demo = () => {
     
     const [rDisplacement, setRDisplacement] = useState(Math.PI/2);
-    const [rAxis, setRAxis] = useState<"x" | "y" | "z">("z");
+    const [rAxis, setRAxis] = useState<axisType>("z");
 
-    
+    const [corner, setCorner] = useState<cornerType>("NorthEast");
+
 
     return (
         <DemoContainer>
             <div className="TopSection">
                 <Panel
                     rAxis={rAxis}
-                    rDisplacement={rDisplacement}
                     setRAxis={setRAxis}
+                    rDisplacement={rDisplacement}
                     setRDisplacement={setRDisplacement}
+                    corner={corner}
+                    setCorner={setCorner}
                 />
             </div>
 
