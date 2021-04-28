@@ -7,6 +7,7 @@ import Cube from "../Cube";
 import Controls from "../Controls";
 import Panel from "../Panel";
 import { axisType, cornerType } from '../Types/types';
+import { Vector3 } from 'three';
 
 const DemoContainer = styled.div`
     width: 100%;
@@ -55,17 +56,19 @@ const Demo = () => {
                     <Controls/>
                     <Cube 
                         id={1} 
-                        position={[-1, 0, 0]} 
+                        position={new Vector3(0, 1, 0)} 
                         color={"#000000"} 
                         rDisplacement={rDisplacement}
                         rAxis={rAxis}
+                        corner={corner}
                     />
                     <Cube 
                         id={2} 
-                        position={[0, 0, 0]} 
+                        position={new Vector3(0, 0, 0)} 
                         color={"#000000"} 
                         rDisplacement={rDisplacement}
                         rAxis={rAxis}
+                        corner={corner}
                     />
                 </Canvas>
             </div>
