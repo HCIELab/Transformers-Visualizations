@@ -42,9 +42,10 @@ const Cube = (props: {
 		}
 	}
 
-	const box = useRef<THREE.BoxGeometry>(null!);
+	const forPivot = useRef<THREE.Group>(null!);
 	useEffect(() => {
-		box.current.translate(0.5, 0.5, 0);
+		forPivot.current.translateX(side/2);
+		forPivot.current.translateY(-side/2);
 	}, [])
 
 	return (
@@ -55,14 +56,16 @@ const Cube = (props: {
 			onPointerOut={(event) => setHover(false)}
 			position={props.position}
 		>
-			<mesh>
-				<boxGeometry ref={box} args={[side, side, side]}/>
-				<meshPhongMaterial color={props.color} opacity={hovered ? 0.2 : 0.6} transparent={true} side={DoubleSide}/>
-			</mesh>
-			<Numbering
-				letterOffset={0.1}
-				side={side}
-			/>
+			<group ref={forPivot}>
+				<mesh>
+					<boxGeometry args={[side, side, side]} />
+					<meshPhongMaterial color={props.color} opacity={hovered ? 0.2 : 0.6} transparent={true} side={DoubleSide}/>
+				</mesh>
+				<Numbering
+					letterOffset={0.1}
+					side={side}
+				/>
+			</group>
 		</group>
 	)
 }

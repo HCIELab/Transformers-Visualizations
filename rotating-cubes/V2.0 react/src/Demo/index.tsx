@@ -51,18 +51,18 @@ const Demo = () => {
                     <Controls/>
                     <Cube 
                         id={1} 
+                        position={[-1, 0, 0]} 
+                        color={"#000000"} 
+                        rDisplacement={rDisplacement}
+                        rAxis={rAxis}
+                    />
+                    <Cube 
+                        id={2} 
                         position={[0, 0, 0]} 
                         color={"#000000"} 
                         rDisplacement={rDisplacement}
                         rAxis={rAxis}
                     />
-                    {/* <Cube 
-                        id={2} 
-                        position={[1, 0, 0]} 
-                        color={"#000000"} 
-                        rDisplacement={rDisplacement}
-                        rAxis={rAxis}
-                    /> */}
                 </Canvas>
             </div>
         </DemoContainer>
