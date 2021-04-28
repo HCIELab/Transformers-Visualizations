@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import Pivot from "./pivot";
+import PivotChooser from "./pivotchooser";
 
 const PanelContainer = styled.div`
     width: 100%;
@@ -30,7 +30,7 @@ const Panel = (props: {
     return (
         <PanelContainer>
             
-            <Pivot/>
+            <PivotChooser/>
 
             Buttons (only change these if cubes are not currently rotating)
             <div>

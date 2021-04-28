@@ -46,7 +46,7 @@ const Cube = (props: {
 	useEffect(() => {
 		forPivot.current.translateX(side/2);
 		forPivot.current.translateY(-side/2);
-	}, [])
+	}, []) // TODO vary this based on the pivot point
 
 	return (
 		<group

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
-const PivotContainer = styled.div<{corner: cornerType}>`
+const PivotChooserContainer = styled.div<{corner: cornerType}>`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,7 +51,7 @@ const PivotContainer = styled.div<{corner: cornerType}>`
 
 type cornerType = "NorthEast" | "SouthEast" | "SouthWest" | "NorthWest";
 
-const Pivot = (props: {
+const PivotChooser = (props: {
 }) => {
 
     const [corner, setCorner] = useState<cornerType>("NorthEast");
@@ -60,7 +60,7 @@ const Pivot = (props: {
     }
     
     return (
-        <PivotContainer corner={corner}>
+        <PivotChooserContainer corner={corner}>
             <p>
                 Choose your pivot point here:
             </p>
@@ -72,7 +72,7 @@ const Pivot = (props: {
                 <CornerElement corner={"NorthWest"} handleClick={cornerClick}/>
             </div>
 
-        </PivotContainer>
+        </PivotChooserContainer>
     )
 }
 
@@ -89,4 +89,4 @@ const CornerElement = (props: {
     )
 } 
 
-export default Pivot;
+export default PivotChooser;
