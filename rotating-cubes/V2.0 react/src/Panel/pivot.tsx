@@ -11,8 +11,8 @@ const PivotContainer = styled.div<{corner: cornerType}>`
 
     .MannequinSquare {
         position: relative;
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
         background-color: #eeeeee;
         border: 3px solid black;
 
@@ -55,7 +55,6 @@ const Pivot = (props: {
 }) => {
 
     const [corner, setCorner] = useState<cornerType>("NorthEast");
-
     const cornerClick = (corner: cornerType) => {
         setCorner(corner);
     }
@@ -67,15 +66,27 @@ const Pivot = (props: {
             </p>
 
             <div className="MannequinSquare">
-                <div className="NorthEast Corner" onClick={() => cornerClick("NorthEast")}></div>
-                <div className="SouthEast Corner" onClick={() => cornerClick("SouthEast")}></div>
-                <div className="SouthWest Corner" onClick={() => cornerClick("SouthWest")}></div>
-                <div className="NorthWest Corner" onClick={() => cornerClick("NorthWest")}></div>
+                <CornerElement corner={"NorthEast"} handleClick={cornerClick}/>
+                <CornerElement corner={"SouthEast"} handleClick={cornerClick}/>
+                <CornerElement corner={"SouthWest"} handleClick={cornerClick}/>
+                <CornerElement corner={"NorthWest"} handleClick={cornerClick}/>
             </div>
 
         </PivotContainer>
     )
 }
 
+
+const CornerElement = (props: {
+    corner: cornerType,
+    handleClick: Function,
+}) => {
+    return (
+        <div 
+            className={`${props.corner} Corner`}
+            onClick={() => props.handleClick(props.corner)}
+        />
+    )
+} 
 
 export default Pivot;
