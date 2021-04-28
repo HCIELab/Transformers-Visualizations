@@ -50,6 +50,7 @@ const Cube = (props: {
 		forPivot.current.position.x = 0;
 		forPivot.current.position.y = 0;
 		forPivot.current.position.z = 0;
+		// forPivot.current.rotateOnAxis(new Vector3(0,1,0), Math.PI);
 		switch(props.corner) {
 			case "NorthEast":
 				forPivot.current.translateX(-side/2);
@@ -60,18 +61,26 @@ const Cube = (props: {
 			case "SouthEast":
 				forPivot.current.translateX(side/2);
 				forPivot.current.translateY(-side/2);
+				everything.current.translateX(-side/2);
+				everything.current.translateY(side/2);
 				break;
 			case "SouthWest":
 				forPivot.current.translateX(side/2);
 				forPivot.current.translateY(side/2);
+				everything.current.translateX(-side/2);
+				everything.current.translateY(-side/2);
 				break;
 			case "NorthWest":
 				forPivot.current.translateX(side/2);
 				forPivot.current.translateY(-side/2);
+				everything.current.translateX(-side/2);
+				everything.current.translateY(side/2);
 				break;
 			default:
-				forPivot.current.translateX(side/2);
+				forPivot.current.translateX(-side/2);
 				forPivot.current.translateY(-side/2);
+				everything.current.translateX(side/2);
+				everything.current.translateY(side/2);
 		}
 	}, [props.corner]) // TODO vary this based on the pivot point
 
