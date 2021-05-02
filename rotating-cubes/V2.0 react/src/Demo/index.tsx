@@ -30,7 +30,7 @@ const DemoContainer = styled.div`
 
 const Demo = () => {
     
-    const [rDisplacement, setRDisplacement] = useState(Math.PI/2);
+    const [rDisplacement, setRDisplacement] = useState(Math.PI);
     const [rAxis, setRAxis] = useState<axisType>("z");
 
     const [corner, setCorner] = useState<cornerType>("NorthEast");

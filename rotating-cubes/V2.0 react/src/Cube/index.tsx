@@ -4,8 +4,11 @@ import { Color, useFrame } from "@react-three/fiber";
 import { DoubleSide, Vector3 } from 'three';
 import Numbering from "./numbering";
 import { axisType, cornerType } from '../Types/types';
-import { group } from 'node:console';
 
+/**
+ * For how to have persistent rotations in ThreeJS, credit to:
+ * https://stackoverflow.com/questions/44287255/whats-the-right-way-to-rotate-an-object-around-a-point-in-three-js/44288885#:~:text=js%20suggest%20the%20way%20to,child%20rotates%20around%20the%20point.
+ */
 const Cube = (props: {
 	id: number,
 	initialPosition: Vector3,
@@ -29,7 +32,7 @@ const Cube = (props: {
 			const delta = 0.01; // threshold to consider for equality
 			if (Math.abs(everything.current.rotation[props.rAxis] - finalAngle) < delta) {
 				setIsRotating(false);
-				setGlobalPosition(new Vector3(globalPosition.x+1, globalPosition.y, globalPosition.z));
+				setGlobalPosition(new Vector3(globalPosition.x+1, globalPosition.y+1, globalPosition.z));
 			}
 		}
     })
@@ -50,45 +53,57 @@ const Cube = (props: {
 	const side = 1;
 	const forPivot = useRef<THREE.Group>(null!);
 	useEffect(() => {
-		forPivot.current.position.x = 0;
-		forPivot.current.position.y = 0;
-		forPivot.current.position.z = 0;
-		// TODO: change position after it rotates
+		// After a rotation finishes, set the new permanent location of the cube	
+		// 3. Add the pivot point back to the object's position
 		everything.current.position.x = globalPosition.x;
 		everything.current.position.y = globalPosition.y;
 		everything.current.position.z = globalPosition.z;
+
+		// 3.1 Move the object back by the pivot 
+		forPivot.current.position.x = 0;
+		forPivot.current.position.y = 0;
+		forPivot.current.position.z = 0;
+		
+		// 1. Move object to the pivot point
+		// 1.1 Local - Subtract the pivot point from the object's original position
 		switch(props.corner) {
-			case "NorthEast":
-				forPivot.current.translateX(-side/2);
-				forPivot.current.translateY(-side/2);
+			case "NorthEast": //(x+1, y+1)
 				everything.current.translateX(side/2);
 				everything.current.translateY(side/2);
-				break;
-			case "SouthEast":
-				forPivot.current.translateX(side/2);
+				forPivot.current.translateX(-side/2);
 				forPivot.current.translateY(-side/2);
-				everything.current.translateX(-side/2);
-				everything.current.translateY(side/2);
 				break;
-			case "SouthWest":
-				forPivot.current.translateX(side/2);
-				forPivot.current.translateY(side/2);
+			case "SouthEast": //(x+1, y-1)
+				everything.current.translateX(side/2);
+				everything.current.translateY(-side/2);
+				forPivot.current.translateX(-side/2);
+				forPivot.current.translateY(+side/2);
+				break;
+			case "SouthWest": //(x-1, y-1)
 				everything.current.translateX(-side/2);
 				everything.current.translateY(-side/2);
-				break;
-			case "NorthWest":
 				forPivot.current.translateX(side/2);
-				forPivot.current.translateY(-side/2);
+				forPivot.current.translateY(side/2);
+				break;
+			case "NorthWest": //(x-1, y+1)
 				everything.current.translateX(-side/2);
 				everything.current.translateY(side/2);
+				forPivot.current.translateX(side/2);
+				forPivot.current.translateY(-side/2);
 				break;
 			default:
-				forPivot.current.translateX(-side/2);
-				forPivot.current.translateY(-side/2);
 				everything.current.translateX(side/2);
 				everything.current.translateY(side/2);
+				forPivot.current.translateX(-side/2);
+				forPivot.current.translateY(-side/2);
 		}
-	}, [props.corner, globalPosition]) // TODO vary this based on the pivot point
+		// 2. Apply the rotation (handled by useFrame)
+
+
+		return () => {
+			console.log("cleanup is called...")
+		}
+	}, [isRotating]) // Trigger this when a rotation starts
 
 	return (
 		<group
