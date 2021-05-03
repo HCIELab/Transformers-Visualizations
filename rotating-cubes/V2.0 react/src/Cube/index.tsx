@@ -23,7 +23,8 @@ const Cube = (props: {
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
 	const [finalAngle, setFinalAngle] = useState(0);
-	// const [finalAxis, setFinalAxis] = useState<axisType>("x"); //TODO: implement this
+	const [finalAxis, setFinalAxis] = useState<axisType>("x"); //TODO: implement this
+	const [finalCorner, setFinalCorner] = useState<cornerType>("NorthEast") //TODO: implement this
 
 	// Debug
 	useEffect(() => {
@@ -38,20 +39,23 @@ const Cube = (props: {
 		forPivot.current.position.x = 0;
 		forPivot.current.position.y = 0;
 		forPivot.current.position.z = 0;
-		console.log("CUBE POSITIONS WERE SET TO INITIAL")
+		console.log("CUBE POSITIONS WERE SET TO INITIAL");
 	}, [props.initialPosition])
 
 	// 0. Click to start the rotation
 	const handleClick = () => {
-		const ninetyDegreeRotationCount = Math.round(
-			everything.current.rotation[props.rAxis] / Math.PI * 2
-		); //Help with rounding to the nearest 90 degree
-		const initialAngle = ninetyDegreeRotationCount * Math.PI / 2;
-
 		if (step === "0_DEFAULT") {
+			const ninetyDegreeRotationCount = Math.round(
+				everything.current.rotation[props.rAxis] / Math.PI * 2
+			); //Help with rounding to the nearest 90 degree
+			const initialAngle = ninetyDegreeRotationCount * Math.PI / 2;
+
+			//Set the final angle, axis, corner when the user clicks the box
+			setFinalAngle(initialAngle + props.rDisplacement);
+			setFinalAxis(props.rAxis);
+			setFinalCorner(props.corner);
+
 			setStep("1_CLICKED");
-			setFinalAngle(initialAngle + props.rDisplacement ); //Set the final angle when the user clicks the box
-			// setFinalAxis(props.rAxis); //TODO: implement me
 		}
 		else {
 			alert("Before clicking again, wait until the current rotation has finished for this cube!");
@@ -62,8 +66,8 @@ const Cube = (props: {
 	// 1.1 Local - Subtract the pivot point from the object's original position
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			if (props.rAxis === "z") { //TODO: handle the other axes
-				switch(props.corner) {
+			if (finalAxis === "z") { //TODO: handle the other axes
+				switch(finalCorner) {
 					case "NorthEast": //(x+1, y+1)
 						everything.current.translateX(side/2);
 						everything.current.translateY(side/2);
@@ -97,24 +101,25 @@ const Cube = (props: {
 				setStep("2_ROTATING");
 			}
 		}
-	}, [step, props.rAxis])
+	}, [step, finalAxis])
 
 	// 2. Apply the rotation
 	useFrame(() => {
 		if (step === "2_ROTATING") {
-			// -- While Rotating --
-			const increment = 0.02;
-			if (props.rDisplacement > 0) {
-				everything.current.rotation[props.rAxis] += increment;
-			}
-			else {
-				everything.current.rotation[props.rAxis] -= increment;
-			}
-
-			// -- Done Rotating --
-			const delta = 0.01; // threshold to consider for equality
-			if (Math.abs(everything.current.rotation[props.rAxis] - finalAngle) < delta) {
-				setStep("3_END");
+			if (finalAxis === "z") {
+				// -- While Rotating --
+				const increment = 0.02;
+				if (everything.current.position[finalAxis] < finalAngle) {
+					everything.current.rotation[finalAxis] += increment;
+				}
+				else {
+					everything.current.rotation[finalAxis] -= increment;
+				}
+				// -- Done Rotating --
+				const delta = increment*2; // threshold to consider for equality
+				if (Math.abs(everything.current.rotation[finalAxis] - finalAngle) < delta) {
+					setStep("3_END");
+				}
 			}
 		}
     })
@@ -124,9 +129,10 @@ const Cube = (props: {
 	// 3.1 Move the object back by the pivot 
 	useEffect(() => {
 		if (step === "3_END") {
-			if (props.rAxis === "z") { //TODO: handle the other axes
-				switch(props.corner) {
+			if (finalAxis === "z") { //TODO: handle the other axes
+				switch(finalCorner) {
 					case "NorthEast": //(x+1, y+1)
+						// everything.current.position.add(new Vector3(-side/2, -side/2, 0));
 						everything.current.translateX(-side/2);
 						everything.current.translateY(-side/2);
 						forPivot.current.translateX(+side/2);
@@ -159,7 +165,7 @@ const Cube = (props: {
 				setStep("0_DEFAULT");
 			}
 		}
-	}, [step, props.rAxis]) 
+	}, [step, finalAxis]) 
 
 
 
