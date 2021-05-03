@@ -22,8 +22,6 @@ const Cube = (props: {
 	const side = 1;
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
-	const [isRotating, setIsRotating] = useState(false);
-	const [globalPosition, setGlobalPosition] = useState(props.initialPosition);
 	const [finalAngle, setFinalAngle] = useState(0);
 	// const [finalAxis, setFinalAxis] = useState<axisType>("x"); //TODO: implement this
 
@@ -40,7 +38,7 @@ const Cube = (props: {
 		forPivot.current.position.x = 0;
 		forPivot.current.position.y = 0;
 		forPivot.current.position.z = 0;
-	}, [])
+	}, [props.initialPosition])
 
 	// 0. Click to start the rotation
 	const handleClick = () => {
@@ -50,7 +48,6 @@ const Cube = (props: {
 		const initialAngle = ninetyDegreeRotationCount * Math.PI / 2;
 
 		if (step === "0_DEFAULT") {
-			// setIsRotating(true);
 			setStep("1_CLICKED");
 			setFinalAngle(initialAngle + props.rDisplacement ); //Set the final angle when the user clicks the box
 			// setFinalAxis(props.rAxis); //TODO: implement me
@@ -64,38 +61,40 @@ const Cube = (props: {
 	// 1.1 Local - Subtract the pivot point from the object's original position
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			switch(props.corner) {
-				case "NorthEast": //(x+1, y+1)
-					everything.current.translateX(side/2);
-					everything.current.translateY(side/2);
-					forPivot.current.translateX(-side/2);
-					forPivot.current.translateY(-side/2);
-					break;
-				case "SouthEast": //(x+1, y-1)
-					everything.current.translateX(side/2);
-					everything.current.translateY(-side/2);
-					forPivot.current.translateX(-side/2);
-					forPivot.current.translateY(+side/2);
-					break;
-				case "SouthWest": //(x-1, y-1)
-					everything.current.translateX(-side/2);
-					everything.current.translateY(-side/2);
-					forPivot.current.translateX(side/2);
-					forPivot.current.translateY(side/2);
-					break;
-				case "NorthWest": //(x-1, y+1)
-					everything.current.translateX(-side/2);
-					everything.current.translateY(side/2);
-					forPivot.current.translateX(side/2);
-					forPivot.current.translateY(-side/2);
-					break;
-				default:
-					everything.current.translateX(side/2);
-					everything.current.translateY(side/2);
-					forPivot.current.translateX(-side/2);
-					forPivot.current.translateY(-side/2);
+			if (props.rAxis === "z") { //TODO: handle the other axes
+				switch(props.corner) {
+					case "NorthEast": //(x+1, y+1)
+						everything.current.translateX(side/2);
+						everything.current.translateY(side/2);
+						forPivot.current.translateX(-side/2);
+						forPivot.current.translateY(-side/2);
+						break;
+					case "SouthEast": //(x+1, y-1)
+						everything.current.translateX(side/2);
+						everything.current.translateY(-side/2);
+						forPivot.current.translateX(-side/2);
+						forPivot.current.translateY(+side/2);
+						break;
+					case "SouthWest": //(x-1, y-1)
+						everything.current.translateX(-side/2);
+						everything.current.translateY(-side/2);
+						forPivot.current.translateX(side/2);
+						forPivot.current.translateY(side/2);
+						break;
+					case "NorthWest": //(x-1, y+1)
+						everything.current.translateX(-side/2);
+						everything.current.translateY(side/2);
+						forPivot.current.translateX(side/2);
+						forPivot.current.translateY(-side/2);
+						break;
+					default:
+						everything.current.translateX(side/2);
+						everything.current.translateY(side/2);
+						forPivot.current.translateX(-side/2);
+						forPivot.current.translateY(-side/2);
+				}
+				setStep("2_ROTATING");
 			}
-			setStep("2_ROTATING");
 		}
 	}, [step, props.corner])
 
@@ -114,8 +113,6 @@ const Cube = (props: {
 			// -- Done Rotating --
 			const delta = 0.01; // threshold to consider for equality
 			if (Math.abs(everything.current.rotation[props.rAxis] - finalAngle) < delta) {
-				setIsRotating(false);
-				setGlobalPosition(new Vector3(globalPosition.x+1, globalPosition.y+1, globalPosition.z));
 				setStep("3_END");
 			}
 		}
@@ -124,17 +121,44 @@ const Cube = (props: {
 	// After a rotation finishes, set the new permanent location of the cube	
 	// 3. Add the pivot point back to the object's position
 	// 3.1 Move the object back by the pivot 
+	const [globalPosition, setGlobalPosition] = useState(props.initialPosition);
 	useEffect(() => {
 		if (step === "3_END") {
-			everything.current.position.x = globalPosition.x;
-			everything.current.position.y = globalPosition.y;
-			everything.current.position.z = globalPosition.z;
-	
-			forPivot.current.position.x = 0;
-			forPivot.current.position.y = 0;
-			forPivot.current.position.z = 0;
+			if (props.rAxis === "z") { //TODO: handle the other axes
+				switch(props.corner) {
+					case "NorthEast": //(x+1, y+1)
+						everything.current.translateX(-side/2);
+						everything.current.translateY(-side/2);
+						forPivot.current.translateX(+side/2);
+						forPivot.current.translateY(+side/2);
+						break;
+					case "SouthEast": //(x+1, y-1)
+						everything.current.translateX(-side/2);
+						everything.current.translateY(+side/2);
+						forPivot.current.translateX(+side/2);
+						forPivot.current.translateY(-side/2);
+						break;
+					case "SouthWest": //(x-1, y-1)
+						everything.current.translateX(+side/2);
+						everything.current.translateY(+side/2);
+						forPivot.current.translateX(-side/2);
+						forPivot.current.translateY(-side/2);
+						break;
+					case "NorthWest": //(x-1, y+1)
+						everything.current.translateX(+side/2);
+						everything.current.translateY(-side/2);
+						forPivot.current.translateX(-side/2);
+						forPivot.current.translateY(+side/2);
+						break;
+					default:
+						everything.current.translateX(-side/2);
+						everything.current.translateY(-side/2);
+						forPivot.current.translateX(+side/2);
+						forPivot.current.translateY(+side/2);
+				}
+				setStep("0_DEFAULT");
+			}
 
-			setStep("0_DEFAULT");
 		}
 	}, [step]) 
 
