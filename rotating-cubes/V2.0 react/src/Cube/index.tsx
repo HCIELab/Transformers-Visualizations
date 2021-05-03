@@ -30,7 +30,6 @@ const Cube = (props: {
 	// Debug
 	useEffect(() => {
 		console.log(`(for cube ${props.id}) step: ${step}`);
-		console.log(everything.current.position)
 	})
 
 	// -1. Place cube at initial position on first render
@@ -42,6 +41,16 @@ const Cube = (props: {
 		forPivot.current.position.y = 0;
 		forPivot.current.position.z = 0;
 		console.log("CUBE POSITIONS WERE SET TO INITIAL");
+
+
+		// if (props.id === 1) {
+		// 	// everything.current.translateX(1);
+		// 	// everything.current.translateY(1);
+		// 	// everything.current.position.add(new Vector3(1, 1, 0));
+		// }
+
+
+
 	}, [props.initialPosition])
 
 	// 0. Click to start the rotation
@@ -65,37 +74,10 @@ const Cube = (props: {
 	useEffect(() => {
 		if (step === "1_CLICKED") {
 			if (finalAxis === "z") { //TODO: handle the other axes
-				switch(finalCorner) {
-					case "NorthEast": //(x+1, y+1)
-						everything.current.translateX(side/2);
-						everything.current.translateY(side/2);
-						forPivot.current.translateX(-side/2);
-						forPivot.current.translateY(-side/2);
-						break;
-					case "SouthEast": //(x+1, y-1)
-						everything.current.translateX(side/2);
-						everything.current.translateY(-side/2);
-						forPivot.current.translateX(-side/2);
-						forPivot.current.translateY(+side/2);
-						break;
-					case "SouthWest": //(x-1, y-1)
-						everything.current.translateX(-side/2);
-						everything.current.translateY(-side/2);
-						forPivot.current.translateX(side/2);
-						forPivot.current.translateY(side/2);
-						break;
-					case "NorthWest": //(x-1, y+1)
-						everything.current.translateX(-side/2);
-						everything.current.translateY(side/2);
-						forPivot.current.translateX(side/2);
-						forPivot.current.translateY(-side/2);
-						break;
-					default:
-						everything.current.translateX(side/2);
-						everything.current.translateY(side/2);
-						forPivot.current.translateX(-side/2);
-						forPivot.current.translateY(-side/2);
-				}
+				const [piv, opp] = getTranslateVectors(finalCorner, side);
+				translateGroup(everything, piv);
+				translateGroup(forPivot, opp);
+
 				setStep("2_ROTATING");
 			}
 		}
@@ -135,40 +117,9 @@ const Cube = (props: {
 		if (step === "3_END") {
 			//TODO: handle the other axes
 			if (finalAxis === "z") { 
-
-
-				switch(finalCorner) {
-					case "NorthEast": //(x+1, y+1)
-						// everything.current.position.add(new Vector3(-side/2, -side/2, 0));
-						everything.current.translateX(-side/2);
-						everything.current.translateY(-side/2);
-						forPivot.current.translateX(+side/2);
-						forPivot.current.translateY(+side/2);
-						break;
-					case "SouthEast": //(x+1, y-1)
-						everything.current.translateX(-side/2);
-						everything.current.translateY(+side/2);
-						forPivot.current.translateX(+side/2);
-						forPivot.current.translateY(-side/2);
-						break;
-					case "SouthWest": //(x-1, y-1)
-						everything.current.translateX(+side/2);
-						everything.current.translateY(+side/2);
-						forPivot.current.translateX(-side/2);
-						forPivot.current.translateY(-side/2);
-						break;
-					case "NorthWest": //(x-1, y+1)
-						everything.current.translateX(+side/2);
-						everything.current.translateY(-side/2);
-						forPivot.current.translateX(-side/2);
-						forPivot.current.translateY(+side/2);
-						break;
-					default:
-						everything.current.translateX(-side/2);
-						everything.current.translateY(-side/2);
-						forPivot.current.translateX(+side/2);
-						forPivot.current.translateY(+side/2);
-				}
+				const [piv, opp] = getTranslateVectors(finalCorner, side);
+				translateGroup(everything, opp);
+				translateGroup(forPivot, piv);
 
 				//At the end of the rotation, snap it to the nearest 90 degrees
 				const countNumRightAngles = Math.round(
@@ -207,6 +158,48 @@ const Cube = (props: {
 			</group>
 		</group>
 	)
+}
+
+
+const translateGroup = (object : React.MutableRefObject<THREE.Group>, vec : Vector3) => {
+	object.current.translateX(vec.x);
+	object.current.translateY(vec.y);
+	object.current.translateZ(vec.z);
+}
+
+/**
+ * Returns the vector that matches the pivot corner picked, and a negation of that vector
+ * To be used with translateGroup to translate local/world objects around
+ * 
+ * TODO: make this work for more than just the 'z' axis e.g. write cases for 'x' and 'y'
+ * 
+ * @param finalCorner NORTHEAST/SOUTHEAST/SOUTHWEST/NORTHWEST
+ * @param side The lenght of one side of the cube
+ * @returns two vectors, one equivalent to the pivot and one that is the 
+ * opposite of that
+ */
+const getTranslateVectors = (finalCorner: cornerType, side: number) => {
+	let vec = new Vector3(-3,-3,-3);
+	switch(finalCorner) {
+		case "NorthEast": //(x+1, y+1)
+			vec = new Vector3(side/2, side/2, 0);
+			break;
+		case "SouthEast": //(x+1, y-1)
+			vec = new Vector3(side/2, -side/2, 0);
+			break;
+		case "SouthWest": //(x-1, y-1)
+			vec = new Vector3(-side/2, -side/2, 0);
+			break;
+		case "NorthWest": //(x-1, y+1)
+			vec = new Vector3(-side/2, side/2, 0);
+			break;
+		default:
+			console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
+	}
+
+	let opp = vec.clone();
+	opp.negate()
+	return [vec, opp]
 }
 
 export default Cube;
