@@ -22,9 +22,10 @@ const Cube = (props: {
 	const side = 1;
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
+	const [finalCorner, setFinalCorner] = useState<cornerType>("NorthEast");
+	const [finalAxis, setFinalAxis] = useState<axisType>("x"); 
+	const [finalDisplacement, setFinalDisplacement] = useState(Math.PI);
 	const [finalAngle, setFinalAngle] = useState(0);
-	const [finalAxis, setFinalAxis] = useState<axisType>("x"); //TODO: implement this
-	const [finalCorner, setFinalCorner] = useState<cornerType>("NorthEast") //TODO: implement this
 
 	// Debug
 	useEffect(() => {
@@ -47,9 +48,10 @@ const Cube = (props: {
 	const handleClick = () => {
 		if (step === "0_DEFAULT") {
 			//Set the final angle, axis, corner when the user clicks the box
-			setFinalAngle(everything.current.rotation[props.rAxis] + props.rDisplacement);
 			setFinalAxis(props.rAxis);
 			setFinalCorner(props.corner);
+			setFinalDisplacement(props.rDisplacement);
+			setFinalAngle(everything.current.rotation[props.rAxis] + props.rDisplacement);
 
 			setStep("1_CLICKED");
 		}
@@ -97,24 +99,30 @@ const Cube = (props: {
 				setStep("2_ROTATING");
 			}
 		}
-	}, [step, finalAxis])
+	}, [step, finalAxis, finalCorner])
 
 	// 2. Apply the rotation
 	useFrame(() => {
 		if (step === "2_ROTATING") {
 			if (finalAxis === "z") {
 				// -- While Rotating --
-				const INCREMENT_AMT = 0.05; //increase this number to make the cubes rotate faster
-				if (everything.current.position[finalAxis] < finalAngle) {
+				const INCREMENT_AMT = 0.06; //increase this number to make the cubes rotate faster
+				if (finalDisplacement > 0) {
 					everything.current.rotation[finalAxis] += INCREMENT_AMT;
 				}
 				else {
 					everything.current.rotation[finalAxis] -= INCREMENT_AMT;
 				}
-				// -- Done Rotating --
-				const delta = INCREMENT_AMT*2; // threshold to consider for equality
-				if (Math.abs(everything.current.rotation[finalAxis] - finalAngle) < delta) {
-					setStep("3_END");
+				// // -- Done Rotating --
+				if (finalDisplacement > 0) {
+					if (everything.current.rotation[finalAxis] > finalAngle) {
+						setStep("3_END");
+					}
+				}
+				else {
+					if (everything.current.rotation[finalAxis] < finalAngle) {
+						setStep("3_END");
+					}
 				}
 			}
 		}
@@ -172,7 +180,7 @@ const Cube = (props: {
 				setStep("0_DEFAULT");
 			}
 		}
-	}, [step, finalAxis]) 
+	}, [step, finalAxis, finalCorner]) 
 
 
 
