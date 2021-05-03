@@ -5,10 +5,6 @@ import { DoubleSide, Vector3 } from 'three';
 import Numbering from "./numbering";
 import { axisType, cornerType } from '../Types/types';
 
-/**
- * For how to have persistent rotations in ThreeJS, credit to:
- * https://stackoverflow.com/questions/44287255/whats-the-right-way-to-rotate-an-object-around-a-point-in-three-js/44288885#:~:text=js%20suggest%20the%20way%20to,child%20rotates%20around%20the%20point.
- */
 const Cube = (props: {
 	id: number,
 	initialPosition: Vector3,
@@ -17,26 +13,19 @@ const Cube = (props: {
 	rAxis: axisType,
 	corner: cornerType,
 }) => {
-    const [hovered, setHover] = useState(false);
+	/**
+	 * For how to have persistent rotations in ThreeJS, credit to:
+	 * https://stackoverflow.com/questions/44287255/whats-the-right-way-to-rotate-an-object-around-a-point-in-three-js/44288885#:~:text=js%20suggest%20the%20way%20to,child%20rotates%20around%20the%20point.
+	 */
 	const everything = useRef<THREE.Group>(null!);
-
+	const forPivot = useRef<THREE.Group>(null!);
+	const side = 1;
 
 	const [globalPosition, setGlobalPosition] = useState(props.initialPosition);
 	const [isRotating, setIsRotating] = useState(false);
 	const [finalAngle, setFinalAngle] = useState(0);
-	useFrame(() => {
-		if (isRotating) {
-			// -- While Rotating --
-			everything.current.rotation[props.rAxis] += props.rDisplacement > 0 ? 0.01 : -0.01;
-			// -- Done Rotating --
-			const delta = 0.01; // threshold to consider for equality
-			if (Math.abs(everything.current.rotation[props.rAxis] - finalAngle) < delta) {
-				setIsRotating(false);
-				setGlobalPosition(new Vector3(globalPosition.x+1, globalPosition.y+1, globalPosition.z));
-			}
-		}
-    })
-	
+
+	// 0. Click to start the rotation
 	const handleClick = () => {
 		const ninetyDegreeRotationCount = Math.round(everything.current.rotation[props.rAxis] / Math.PI * 2);
 		// console.log(ninetyDegreeRotationCount);
@@ -49,21 +38,8 @@ const Cube = (props: {
 			alert("Before clicking again, wait until the current rotation has finished for this cube!");
 		}
 	}
-	
-	const side = 1;
-	const forPivot = useRef<THREE.Group>(null!);
-	useEffect(() => {
-		// After a rotation finishes, set the new permanent location of the cube	
-		// 3. Add the pivot point back to the object's position
-		everything.current.position.x = globalPosition.x;
-		everything.current.position.y = globalPosition.y;
-		everything.current.position.z = globalPosition.z;
 
-		// 3.1 Move the object back by the pivot 
-		forPivot.current.position.x = 0;
-		forPivot.current.position.y = 0;
-		forPivot.current.position.z = 0;
-		
+	useEffect(() => {
 		// 1. Move object to the pivot point
 		// 1.1 Local - Subtract the pivot point from the object's original position
 		switch(props.corner) {
@@ -97,13 +73,41 @@ const Cube = (props: {
 				forPivot.current.translateX(-side/2);
 				forPivot.current.translateY(-side/2);
 		}
-		// 2. Apply the rotation (handled by useFrame)
+	}, [isRotating])
 
-
-		return () => {
-			console.log("cleanup is called...")
+	// 2. Apply the rotation
+	useFrame(() => {
+		if (isRotating) {
+			// -- While Rotating --
+			everything.current.rotation[props.rAxis] += props.rDisplacement > 0 ? 0.02 : -0.02;
+			// -- Done Rotating --
+			const delta = 0.01; // threshold to consider for equality
+			if (Math.abs(everything.current.rotation[props.rAxis] - finalAngle) < delta) {
+				setIsRotating(false);
+				setGlobalPosition(new Vector3(globalPosition.x+1, globalPosition.y+1, globalPosition.z));
+			}
+		}
+    })
+	
+	useEffect(() => {
+		if (!isRotating) {
+			// After a rotation finishes, set the new permanent location of the cube	
+			// 3. Add the pivot point back to the object's position
+			everything.current.position.x = globalPosition.x;
+			everything.current.position.y = globalPosition.y;
+			everything.current.position.z = globalPosition.z;
+	
+			// 3.1 Move the object back by the pivot 
+			forPivot.current.position.x = 0;
+			forPivot.current.position.y = 0;
+			forPivot.current.position.z = 0;
 		}
 	}, [isRotating]) // Trigger this when a rotation starts
+
+
+
+
+	const [hovered, setHover] = useState(false);
 
 	return (
 		<group
