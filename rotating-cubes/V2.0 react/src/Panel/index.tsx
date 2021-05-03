@@ -40,8 +40,8 @@ const Panel = (props: {
 
             Buttons (only change these if cubes are not currently rotating)
             <div>
-                <button onClick={() => props.setRAxis("x")}>x</button>
-                <button onClick={() => props.setRAxis("y")}>y</button>
+                {/* <button onClick={() => props.setRAxis("x")}>x</button>
+                <button onClick={() => props.setRAxis("y")}>y</button> */}
                 <button onClick={() => props.setRAxis("z")}>z</button>
             </div>
             <div>

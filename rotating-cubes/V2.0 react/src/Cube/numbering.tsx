@@ -38,7 +38,7 @@ const Numbering = (props: {
 				<meshPhongMaterial/>
 			</mesh>
 
-			<mesh position={[0, half - letterOffset, half]}>
+			{/* <mesh position={[0, half - letterOffset, half]}>
 				<textGeometry args={["5", textOptions]} />
 				<meshPhongMaterial/>
 			</mesh>
@@ -70,7 +70,7 @@ const Numbering = (props: {
 			<mesh position={[-half, 0, -half]}>
 				<textGeometry args={["12", textOptions]} />
 				<meshPhongMaterial/>
-			</mesh>
+			</mesh> */}
 		</>
     )
 }
