@@ -29,6 +29,7 @@ const Cube = (props: {
 	// Debug
 	useEffect(() => {
 		console.log(`(for cube ${props.id}) step: ${step}`);
+		console.log(everything.current.position)
 	})
 
 	// -1. Place cube at initial position on first render
@@ -45,13 +46,8 @@ const Cube = (props: {
 	// 0. Click to start the rotation
 	const handleClick = () => {
 		if (step === "0_DEFAULT") {
-			const ninetyDegreeRotationCount = Math.round(
-				everything.current.rotation[props.rAxis] / Math.PI * 2
-			); //Help with rounding to the nearest 90 degree
-			const initialAngle = ninetyDegreeRotationCount * Math.PI / 2;
-
 			//Set the final angle, axis, corner when the user clicks the box
-			setFinalAngle(initialAngle + props.rDisplacement);
+			setFinalAngle(everything.current.rotation[props.rAxis] + props.rDisplacement);
 			setFinalAxis(props.rAxis);
 			setFinalCorner(props.corner);
 
@@ -108,15 +104,15 @@ const Cube = (props: {
 		if (step === "2_ROTATING") {
 			if (finalAxis === "z") {
 				// -- While Rotating --
-				const increment = 0.02;
+				const INCREMENT_AMT = 0.05; //increase this number to make the cubes rotate faster
 				if (everything.current.position[finalAxis] < finalAngle) {
-					everything.current.rotation[finalAxis] += increment;
+					everything.current.rotation[finalAxis] += INCREMENT_AMT;
 				}
 				else {
-					everything.current.rotation[finalAxis] -= increment;
+					everything.current.rotation[finalAxis] -= INCREMENT_AMT;
 				}
 				// -- Done Rotating --
-				const delta = increment*2; // threshold to consider for equality
+				const delta = INCREMENT_AMT*2; // threshold to consider for equality
 				if (Math.abs(everything.current.rotation[finalAxis] - finalAngle) < delta) {
 					setStep("3_END");
 				}
@@ -129,7 +125,10 @@ const Cube = (props: {
 	// 3.1 Move the object back by the pivot 
 	useEffect(() => {
 		if (step === "3_END") {
-			if (finalAxis === "z") { //TODO: handle the other axes
+			//TODO: handle the other axes
+			if (finalAxis === "z") { 
+
+
 				switch(finalCorner) {
 					case "NorthEast": //(x+1, y+1)
 						// everything.current.position.add(new Vector3(-side/2, -side/2, 0));
@@ -162,6 +161,14 @@ const Cube = (props: {
 						forPivot.current.translateX(+side/2);
 						forPivot.current.translateY(+side/2);
 				}
+
+				//At the end of the rotation, snap it to the nearest 90 degrees
+				const countNumRightAngles = Math.round(
+					everything.current.rotation[finalAxis] / (Math.PI / 2)
+				); 
+				const foo = countNumRightAngles * Math.PI / 2;
+				everything.current.rotation[finalAxis] = foo;
+
 				setStep("0_DEFAULT");
 			}
 		}
