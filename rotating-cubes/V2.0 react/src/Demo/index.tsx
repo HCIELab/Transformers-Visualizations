@@ -35,6 +35,11 @@ const Demo = () => {
 
     const [corner, setCorner] = useState<cornerType>("NorthEast");
 
+    // eslint-disable-next-line
+    const [cubeConfig, _] = useState([
+        {id: 1, initialPosition: new Vector3(0, 1, 0), color: "#000000"},
+        {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#211990"},
+    ])
 
     return (
         <DemoContainer>
@@ -54,22 +59,19 @@ const Demo = () => {
                     <ambientLight />
                     <pointLight position={[10, 10, 10]} />
                     <Controls/>
-                    <Cube 
-                        id={1} 
-                        initialPosition={new Vector3(0, 1, 0)} 
-                        color={"#000000"} 
-                        rDisplacement={rDisplacement}
-                        rAxis={rAxis}
-                        corner={corner}
-                    />
-                    <Cube 
-                        id={2} 
-                        initialPosition={new Vector3(0, 0, 0)} 
-                        color={"#000000"} 
-                        rDisplacement={rDisplacement}
-                        rAxis={rAxis}
-                        corner={corner}
-                    />
+                    {
+                        cubeConfig.map((config) => 
+                            <Cube 
+                                key={config.id}
+                                id={config.id} 
+                                initialPosition={config.initialPosition} 
+                                color={config.color} 
+                                rDisplacement={rDisplacement}
+                                rAxis={rAxis}
+                                corner={corner}
+                            />
+                        )
+                    }
                 </Canvas>
             </div>
         </DemoContainer>

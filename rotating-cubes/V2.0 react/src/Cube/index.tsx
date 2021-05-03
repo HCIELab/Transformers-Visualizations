@@ -38,6 +38,7 @@ const Cube = (props: {
 		forPivot.current.position.x = 0;
 		forPivot.current.position.y = 0;
 		forPivot.current.position.z = 0;
+		console.log("CUBE POSITIONS WERE SET TO INITIAL")
 	}, [props.initialPosition])
 
 	// 0. Click to start the rotation
@@ -96,7 +97,7 @@ const Cube = (props: {
 				setStep("2_ROTATING");
 			}
 		}
-	}, [step, props.corner])
+	}, [step, props.rAxis])
 
 	// 2. Apply the rotation
 	useFrame(() => {
@@ -121,7 +122,6 @@ const Cube = (props: {
 	// After a rotation finishes, set the new permanent location of the cube	
 	// 3. Add the pivot point back to the object's position
 	// 3.1 Move the object back by the pivot 
-	const [globalPosition, setGlobalPosition] = useState(props.initialPosition);
 	useEffect(() => {
 		if (step === "3_END") {
 			if (props.rAxis === "z") { //TODO: handle the other axes
@@ -158,9 +158,8 @@ const Cube = (props: {
 				}
 				setStep("0_DEFAULT");
 			}
-
 		}
-	}, [step]) 
+	}, [step, props.rAxis]) 
 
 
 
