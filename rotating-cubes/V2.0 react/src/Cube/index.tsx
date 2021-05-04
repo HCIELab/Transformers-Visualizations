@@ -73,7 +73,8 @@ const Cube = (props: {
 	// 1.1 Local - Subtract the pivot point from the object's original position
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			if (finalAxis === "z") { //TODO: handle the other axes
+			//TODO: handle the other axes
+			if (finalAxis === "z") { 
 				const [piv, opp] = getTranslateVectors(finalCorner, side);
 				translateGroup(everything, piv);
 				translateGroup(forPivot, opp);

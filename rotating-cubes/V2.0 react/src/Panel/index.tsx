@@ -36,6 +36,7 @@ const Panel = (props: {
             <PivotChooser
                 corner={props.corner}
                 setCorner={props.setCorner}
+                rAxis={props.rAxis}
             />
 
             <div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import {cornerType} from "../Types/types";
+import {axisType, cornerType, edgeType} from "../Types/types";
 
 const PivotChooserContainer = styled.div<{corner: cornerType}>`
     display: flex;
@@ -48,6 +48,29 @@ const PivotChooserContainer = styled.div<{corner: cornerType}>`
                 background-color: red;
             }
         `}
+
+        
+        .Edge {
+            position: absolute;
+            font-weight: 600;
+        }
+        .North {
+            top: -20px;
+            left: 33px;
+        }
+        .East {
+            right: -15px;
+            top: 25px;
+        }
+        .South {
+            left: 33px;
+            bottom: -20px;
+        }
+        .West {
+            left: -15px;
+            top: 25px;
+        }
+
     }
 `;
 
@@ -55,6 +78,7 @@ const PivotChooserContainer = styled.div<{corner: cornerType}>`
 const PivotChooser = (props: {
     corner: cornerType,
     setCorner: Function,
+    rAxis: axisType,
 }) => {
     
     return (
@@ -68,6 +92,11 @@ const PivotChooser = (props: {
                 <CornerElement corner={"SouthEast"} handleClick={props.setCorner}/>
                 <CornerElement corner={"SouthWest"} handleClick={props.setCorner}/>
                 <CornerElement corner={"NorthWest"} handleClick={props.setCorner}/>
+
+                <EdgeNumberLabelElement edge={"North"} rAxis={props.rAxis} />
+                <EdgeNumberLabelElement edge={"East"} rAxis={props.rAxis} />
+                <EdgeNumberLabelElement edge={"South"} rAxis={props.rAxis} />
+                <EdgeNumberLabelElement edge={"West"} rAxis={props.rAxis} />
             </div>
 
         </PivotChooserContainer>
@@ -86,5 +115,36 @@ const CornerElement = (props: {
         />
     )
 } 
+
+const EdgeNumberLabelElement = (props: {
+    edge: edgeType,
+    rAxis: axisType,
+}) => {
+    // TODO: make this work for all x/y/z, not just the z axis
+    let label;
+    switch(props.edge) {
+        case "North":
+            label = 1;
+            break;
+        case "East":
+            label = 2;
+            break;
+        case "South":
+            label = 3;
+            break;
+        default:
+        // case "West":
+            label = 4;
+            break;
+    }
+
+    return (
+        <div
+            className={`${props.edge} Edge`}
+        >
+            {label}
+        </div>
+    )
+}
 
 export default PivotChooser;
