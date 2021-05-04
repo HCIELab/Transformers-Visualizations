@@ -20,7 +20,8 @@ const PivotChooserContainer = styled.div<{corner: cornerType}>`
 
         .Corner {
             position: absolute;
-            background-color: #b5e7e7;
+            background-color: #e9e9e9;
+            border: 1px solid black;
             width: 20px;
             height: 20px;
             cursor: pointer;
@@ -53,6 +54,7 @@ const PivotChooserContainer = styled.div<{corner: cornerType}>`
         ${props => `
             .${props.corner} {
                 background-color: #f58787;
+                border: 2px solid red;
             }
         `}
 
