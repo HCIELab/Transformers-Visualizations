@@ -41,8 +41,9 @@ const Panel = (props: {
             />
 
             <div>
-                {/* <button onClick={() => props.setRAxis("x")}>x</button>
-                <button onClick={() => props.setRAxis("y")}>y</button> */}
+                {/* TODO: implement x and y axis, for now they are disabled */}
+                <button disabled onClick={() => props.setRAxis("x")}>x</button>
+                <button disabled onClick={() => props.setRAxis("y")}>y</button>
                 <button onClick={() => props.setRAxis("z")}>z</button>
             </div>
             <div>

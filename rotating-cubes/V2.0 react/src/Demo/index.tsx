@@ -6,7 +6,7 @@ import { Canvas } from '@react-three/fiber';
 import Cube from "./Cube";
 import ThreeControls from "./ThreeControls";
 import Panel from "./Panel";
-import { axisType, cornerType } from '../Types/types';
+import { axisType, cornerType } from './Types/types';
 import { Vector3 } from 'three';
 
 const DemoContainer = styled.div`
