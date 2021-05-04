@@ -9,13 +9,25 @@ const PivotChooserContainer = styled.div<{corner: cornerType}>`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+
+    p {
+        margin: 0;
+    }
+    .Note {
+        font-size: 12px;
+        color: gray;
+        padding-bottom: 10px;
+    }
+    .Instructions {
+        font-size: 20px;
+    }
 
     .MannequinSquare {
+        margin: 20px;
         position: relative;
         width: 80px;
         height: 80px;
-        background-color: #eeeeee;
+        background-color: #e8f9ff;
         border: 3px solid black;
 
         .Corner {
@@ -70,7 +82,10 @@ const PivotChooser = (props: {
     
     return (
         <PivotChooserContainer corner={props.corner}>
-            <p>
+            <p className="Note">
+                (currently this version only works in the z axis direction)
+            </p>
+            <p className="Instructions">
                 Choose your pivot point here:
             </p>
 

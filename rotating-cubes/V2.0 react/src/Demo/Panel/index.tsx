@@ -37,7 +37,7 @@ const Panel = (props: {
 
     return (
         <PanelContainer>
-            
+                        
             <PivotChooser
                 corner={props.corner}
                 setCorner={props.setCorner}
