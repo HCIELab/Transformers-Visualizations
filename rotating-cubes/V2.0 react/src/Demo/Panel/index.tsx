@@ -17,6 +17,10 @@ const PanelContainer = styled.div`
 
     button {
         margin: 4px 5px;
+        cursor: pointer;
+    }
+    .Selected {
+        border: 3px solid #f14b4b;
     }
 `;
 
@@ -42,28 +46,58 @@ const Panel = (props: {
 
             <div>
                 {/* TODO: implement x and y axis, for now they are disabled */}
-                <button disabled onClick={() => props.setRAxis("x")}>x</button>
-                <button disabled onClick={() => props.setRAxis("y")}>y</button>
-                <button onClick={() => props.setRAxis("z")}>z</button>
+                <button 
+                    disabled 
+                    onClick={() => props.setRAxis("x")}
+                    className={props.rAxis === "x" ? "Selected" : ""}
+                >
+                    x
+                </button>
+                <button 
+                    disabled 
+                    onClick={() => props.setRAxis("y")}
+                    className={props.rAxis === "y" ? "Selected" : ""}
+                >
+                    y
+                </button>
+                <button 
+                    onClick={() => props.setRAxis("z")}
+                    className={props.rAxis === "z" ? "Selected" : ""}
+                >
+                    z
+                </button>
             </div>
+            
             <div>
-                <button onClick={() => props.setRDisplacement(-pi)}>
+                <button 
+                    onClick={() => props.setRDisplacement(-pi)} 
+                    className={props.rDisplacement === -pi ? "Selected" : ""}
+                >
                     <Clockwise180Icon/>
                 </button>
-                <button onClick={() => props.setRDisplacement(-pi/2)}>
+                <button 
+                    onClick={() => props.setRDisplacement(-pi/2)}
+                    className={props.rDisplacement === -pi/2 ? "Selected" : ""}
+                >
                     <Clockwise90Icon/>
                 </button>
-                <button onClick={() => props.setRDisplacement(pi/2)}>
+                <button 
+                    onClick={() => props.setRDisplacement(pi/2)}
+                    className={props.rDisplacement === pi/2 ? "Selected" : ""}
+                >
                     <Counterclockwise90Icon/>
                 </button>
-                <button onClick={() => props.setRDisplacement(pi)}>
+                <button 
+                    onClick={() => props.setRDisplacement(pi)}
+                    className={props.rDisplacement === pi ? "Selected" : ""}
+                >
                     <Counterclockwise180Icon/>
                 </button>
             </div>
-            <div>
+            {/* <div>
                 <p>Current rAxis: {props.rAxis}</p>
                 <p>Current rDisplacement: {props.rDisplacement}</p>
-            </div>
+            </div> */}
         </PanelContainer>
     )
 }
