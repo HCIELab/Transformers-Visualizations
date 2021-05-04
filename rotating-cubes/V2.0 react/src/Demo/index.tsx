@@ -24,7 +24,7 @@ const DemoContainer = styled.div`
         margin: 0;
         height: 70%;
         width: 100%;
-        background-color: gray;
+        background-color: #252525;
     }
 `;
 
@@ -37,7 +37,7 @@ const Demo = () => {
 
     // eslint-disable-next-line
     const [cubeConfig, _] = useState([
-        {id: 1, initialPosition: new Vector3(0, 1, 0), color: "#000000"},
+        {id: 1, initialPosition: new Vector3(0, 1, 0), color: "#049101"},
         {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#211990"},
     ])
 
