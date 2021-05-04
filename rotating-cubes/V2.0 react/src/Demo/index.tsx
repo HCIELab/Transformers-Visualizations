@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Canvas } from '@react-three/fiber';
 
 import Cube from "../Cube";
-import Controls from "../Controls";
+import ThreeControls from "../ThreeControls";
 import Panel from "../Panel";
 import { axisType, cornerType } from '../Types/types';
 import { Vector3 } from 'three';
@@ -59,7 +59,7 @@ const Demo = () => {
                 <Canvas>
                     <ambientLight />
                     <pointLight position={[10, 10, 10]} />
-                    <Controls/>
+                    <ThreeControls/>
                     {
                         cubeConfig.map((config) => 
                             <Cube 

@@ -5,7 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 extend({OrbitControls})
 
-const Controls = () => {
+const ThreeControls = () => {
     const {
         camera,
         gl: { domElement }
@@ -22,4 +22,4 @@ const Controls = () => {
 	return null;
 }
 
-export default Controls;
+export default ThreeControls;
