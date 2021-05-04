@@ -18,6 +18,7 @@ const DemoContainer = styled.div`
     .TopSection {
         margin: 0;
         height: 30%;
+        background-color: #fdfdfd;
     }
 
     .CanvasContainer {
