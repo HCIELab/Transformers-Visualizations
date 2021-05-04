@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Color, useFrame } from "@react-three/fiber";
 import { DoubleSide, Vector3 } from 'three';
 import Numbering from "./numbering";
-import { axisType, cornerType, rotationStep } from '../Types/types';
+import { axisType, cornerType, rotationStep } from '../../Types/types';
 
 const Cube = (props: {
 	id: number,
