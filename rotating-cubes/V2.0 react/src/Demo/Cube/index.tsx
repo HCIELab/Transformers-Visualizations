@@ -118,16 +118,20 @@ const Cube = (props: {
 		if (step === "3_END") {
 			//TODO: handle the other axes
 			if (finalAxis === "z") { 
-				const [piv, opp] = getTranslateVectors(finalCorner, side);
-				translateGroup(everything, opp);
-				translateGroup(forPivot, piv);
-
-				//At the end of the rotation, snap it to the nearest 90 degrees
+				/**
+				 * Also at the end of the rotation, snap it to the nearest 90 degrees
+				 * Make sure to execute this step (of finishing the rotation) before 
+				 * the positions are moved again.
+				 */
 				const countNumRightAngles = Math.round(
 					everything.current.rotation[finalAxis] / (Math.PI / 2)
 				); 
 				const foo = countNumRightAngles * Math.PI / 2;
 				everything.current.rotation[finalAxis] = foo;
+					
+				const [piv, opp] = getTranslateVectors(finalCorner, side);
+				translateGroup(everything, opp);
+				translateGroup(forPivot, piv);
 
 				setStep("0_DEFAULT");
 			}
