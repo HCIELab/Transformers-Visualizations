@@ -51,29 +51,39 @@ const Demo = () => {
         {id: 0, initialPosition: new Vector3(-1, 0, 0), color: "#049101"},
         {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
     ])
+    /**
+     * A quick implementation of adding or removing buttons.
+     * Simple add: increment the cube id every time you add and place it one unit forward in the x axis
+     * Simple remove: remove the last element in the list (which would be the cube with the highest id)
+     * Pros: this method is not prone to errors
+     * Cons: this method may not be very sophisticated
+     */
+    const addOrRemoveButtons = () => {
+        return (
+            <div className="AddOrRemoveCubes">
+                <button onClick={() => {
+                    const nextID = cubesAndProperties.length;
+                    const nextCube = {id: nextID, initialPosition: new Vector3(nextID-1, 0, 0), color: "#049101"}
+                    setCubesAndProperties(
+                        [...cubesAndProperties, nextCube]
+                    )
+                }}>
+                    Add a cube
+                </button>
+                <button onClick={() => {
+                    const newList = cubesAndProperties.filter((aCube) => aCube.id !== cubesAndProperties.length-1);
+                    setCubesAndProperties(newList);
+                }}>
+                    Remove a cube
+                </button>
+            </div>
+        )
+    }
 
     return (
         <DemoContainer>
             <div className="TopSection">
-
-                <div className="AddOrRemoveCubes">
-                    <button onClick={() => {
-                        const nextID = cubesAndProperties.length;
-                        const nextCube = {id: nextID, initialPosition: new Vector3(nextID-1, 0, 0), color: "#049101"}
-                        setCubesAndProperties(
-                            [...cubesAndProperties, nextCube]
-                        )
-                    }}>
-                        Add a cube
-                    </button>
-                    <button onClick={() => {
-                        const newList = cubesAndProperties.filter((aCube) => aCube.id !== cubesAndProperties.length-1);
-                        setCubesAndProperties(newList);
-                    }}>
-                        Remove a cube
-                    </button>
-                </div>
-
+                {addOrRemoveButtons()}
                 <Panel
                     rAxis={rAxis}
                     setRAxis={setRAxis}
