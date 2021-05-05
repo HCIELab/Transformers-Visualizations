@@ -90,10 +90,10 @@ const PivotChooser = (props: {
             </p>
 
             <div className="MannequinSquare">
-                <CornerElement corner={"NorthEast"} handleClick={props.setCorner}/>
-                <CornerElement corner={"SouthEast"} handleClick={props.setCorner}/>
-                <CornerElement corner={"SouthWest"} handleClick={props.setCorner}/>
-                <CornerElement corner={"NorthWest"} handleClick={props.setCorner}/>
+                <CornerElement corner={"NorthEast"} handleClick={props.setCorner} rAxis={props.rAxis}/>
+                <CornerElement corner={"SouthEast"} handleClick={props.setCorner} rAxis={props.rAxis}/>
+                <CornerElement corner={"SouthWest"} handleClick={props.setCorner} rAxis={props.rAxis}/>
+                <CornerElement corner={"NorthWest"} handleClick={props.setCorner} rAxis={props.rAxis}/>
             </div>
 
         </PivotChooserContainer>
@@ -104,22 +104,62 @@ const PivotChooser = (props: {
 const CornerElement = (props: {
     corner: cornerType,
     handleClick: Function,
+    rAxis: axisType,
 }) => {
     // TODO: make this work for all x/y/z, not just the z axis
     let label;
-    switch(props.corner) {
-        case "NorthEast":
-            label = 1;
+    switch(props.rAxis) {
+        case "z":
+            switch(props.corner) {
+                case "NorthEast":
+                    label = 1;
+                    break;
+                case "SouthEast":
+                    label = 2;
+                    break;
+                case "SouthWest":
+                    label = 3;
+                    break;
+                // case "NorthWest":
+                default:
+                    label = 4;
+                    break;
+            }
             break;
-        case "SouthEast":
-            label = 2;
+        case "x":
+            switch(props.corner) {
+                case "NorthEast":
+                    label = 5;
+                    break;
+                case "SouthEast":
+                    label = 6;
+                    break;
+                case "SouthWest":
+                    label = 7;
+                    break;
+                // case "NorthWest":
+                default:
+                    label = 8;
+                    break;
+            }
             break;
-        case "SouthWest":
-            label = 3;
-            break;
+        // case "y":
         default:
-        // case "NorthWest":
-            label = 4;
+            switch(props.corner) {
+                case "NorthEast":
+                    label = 9;
+                    break;
+                case "SouthEast":
+                    label = 10;
+                    break;
+                case "SouthWest":
+                    label = 11;
+                    break;
+                // case "NorthWest":
+                default:
+                    label = 12;
+                    break;
+            }
             break;
     }
 
