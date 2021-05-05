@@ -99,6 +99,7 @@ const Demo = () => {
                     <ambientLight />
                     <pointLight position={[10, 10, 10]} />
                     <ThreeControls/>
+                    <axesHelper position={[-2, -2, 0]} scale={0.5}/>
                     {
                         cubesAndProperties.map((config) => 
                             <Cube 
