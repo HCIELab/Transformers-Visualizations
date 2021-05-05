@@ -12,8 +12,8 @@ const PanelContainer = styled.div`
     margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    padding: 10px;
 
     button {
         margin: 4px 5px;

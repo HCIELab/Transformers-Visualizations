@@ -21,9 +21,14 @@ const DemoContainer = styled.div`
         background-color: #fdfdfd;
 
         .AddOrRemoveCubes {
+            padding-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+
+            button {
+                margin: 0px 10px;
+            }
         }
     }
 
@@ -63,7 +68,6 @@ const Demo = () => {
                     </button>
                     <button onClick={() => {
                         const newList = cubesAndProperties.filter((aCube) => aCube.id !== cubesAndProperties.length-1);
-                        console.log(newList);
                         setCubesAndProperties(newList);
                     }}>
                         Remove a cube
