@@ -63,39 +63,34 @@ const Cube = (props: {
 	// 1.1 Local - Subtract the pivot point from the object's original position
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			//TODO: handle the other axes
-			if (finalAxis === "z") { 
-				const [piv, opp] = getTranslateVectors(finalCorner, side);
-				translateGroup(everything, piv);
-				translateGroup(forPivot, opp);
+			const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis);
+			translateGroup(everything, piv);
+			translateGroup(forPivot, opp);
 
-				setStep("2_ROTATING");
-			}
+			setStep("2_ROTATING");
 		}
 	}, [step, finalAxis, finalCorner])
 
 	// 2. Apply the rotation
 	useFrame(() => {
 		if (step === "2_ROTATING") {
-			if (finalAxis === "z") {
-				// -- While Rotating --
-				const INCREMENT_AMT = 0.06; //increase this number to make the cubes rotate faster
-				if (finalDisplacement > 0) {
-					everything.current.rotation[finalAxis] += INCREMENT_AMT;
+			// -- While Rotating --
+			const INCREMENT_AMT = 0.06; //increase this number to make the cubes rotate faster
+			if (finalDisplacement > 0) {
+				everything.current.rotation[finalAxis] += INCREMENT_AMT;
+			}
+			else {
+				everything.current.rotation[finalAxis] -= INCREMENT_AMT;
+			}
+			// // -- Done Rotating --
+			if (finalDisplacement > 0) {
+				if (everything.current.rotation[finalAxis] > finalAngle) {
+					setStep("3_END");
 				}
-				else {
-					everything.current.rotation[finalAxis] -= INCREMENT_AMT;
-				}
-				// // -- Done Rotating --
-				if (finalDisplacement > 0) {
-					if (everything.current.rotation[finalAxis] > finalAngle) {
-						setStep("3_END");
-					}
-				}
-				else {
-					if (everything.current.rotation[finalAxis] < finalAngle) {
-						setStep("3_END");
-					}
+			}
+			else {
+				if (everything.current.rotation[finalAxis] < finalAngle) {
+					setStep("3_END");
 				}
 			}
 		}
@@ -106,25 +101,22 @@ const Cube = (props: {
 	// 3.1 Move the object back by the pivot 
 	useEffect(() => {
 		if (step === "3_END") {
-			//TODO: handle the other axes
-			if (finalAxis === "z") { 
-				/**
-				 * Also at the end of the rotation, snap it to the nearest 90 degrees
-				 * Make sure to execute this step (of finishing the rotation) before 
-				 * the positions are moved again.
-				 */
-				const countNumRightAngles = Math.round(
-					everything.current.rotation[finalAxis] / (Math.PI / 2)
-				); 
-				const foo = countNumRightAngles * Math.PI / 2;
-				everything.current.rotation[finalAxis] = foo;
-					
-				const [piv, opp] = getTranslateVectors(finalCorner, side);
-				translateGroup(everything, opp);
-				translateGroup(forPivot, piv);
+			/**
+			 * Also at the end of the rotation, snap it to the nearest 90 degrees
+			 * Make sure to execute this step (of finishing the rotation) before 
+			 * the positions are moved again.
+			 */
+			const countNumRightAngles = Math.round(
+				everything.current.rotation[finalAxis] / (Math.PI / 2)
+			); 
+			const foo = countNumRightAngles * Math.PI / 2;
+			everything.current.rotation[finalAxis] = foo;
+				
+			const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis);
+			translateGroup(everything, opp);
+			translateGroup(forPivot, piv);
 
-				setStep("0_DEFAULT");
-			}
+			setStep("0_DEFAULT");
 		}
 	}, [step, finalAxis, finalCorner]) 
 
@@ -149,6 +141,7 @@ const Cube = (props: {
 				<Numbering
 					letterOffset={0.1}
 					side={side}
+					rAxis={props.rAxis}
 				/>
 			</group>
 		</group>
@@ -173,23 +166,67 @@ const translateGroup = (object : React.MutableRefObject<THREE.Group>, vec : Vect
  * @returns two vectors, one equivalent to the pivot and one that is the 
  * opposite of that
  */
-const getTranslateVectors = (finalCorner: cornerType, side: number) => {
+const getTranslateVectors = (finalCorner: cornerType, side: number, finalAxis: axisType) => {
+	console.log(`inside getTranslateVectors (${finalCorner}, ${side}, ${finalAxis})`);
+
 	let vec = new Vector3(-3,-3,-3);
-	switch(finalCorner) {
-		case "NorthEast": //(x+1, y+1)
-			vec = new Vector3(side/2, side/2, 0);
+
+	switch (finalAxis) {
+		case "z":
+			switch(finalCorner) {
+				case "NorthEast": //(x+1, y+1)
+					vec = new Vector3(side/2, side/2, 0);
+					break;
+				case "SouthEast": //(x+1, y-1)
+					vec = new Vector3(side/2, -side/2, 0);
+					break;
+				case "SouthWest": //(x-1, y-1)
+					vec = new Vector3(-side/2, -side/2, 0);
+					break;
+				case "NorthWest": //(x-1, y+1)
+					vec = new Vector3(-side/2, side/2, 0);
+					break;
+				default:
+					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
+			}
 			break;
-		case "SouthEast": //(x+1, y-1)
-			vec = new Vector3(side/2, -side/2, 0);
+		case "x":
+			switch(finalCorner) {
+				case "NorthEast": //(x+1, y+1)
+					// vec = new Vector3(side/2, side/2, 0);
+					break;
+				case "SouthEast": //(x+1, y-1)
+					// vec = new Vector3(side/2, -side/2, 0);
+					break;
+				case "SouthWest": //(x-1, y-1)
+					// vec = new Vector3(-side/2, -side/2, 0);
+					break;
+				case "NorthWest": //(x-1, y+1)
+					// vec = new Vector3(-side/2, side/2, 0);
+					break;
+				default:
+					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
+			}
 			break;
-		case "SouthWest": //(x-1, y-1)
-			vec = new Vector3(-side/2, -side/2, 0);
-			break;
-		case "NorthWest": //(x-1, y+1)
-			vec = new Vector3(-side/2, side/2, 0);
-			break;
+		// case "y":
 		default:
-			console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
+			switch(finalCorner) {
+				case "NorthEast": //(x+1, y+1)
+					// vec = new Vector3(side/2, side/2, 0);
+					break;
+				case "SouthEast": //(x+1, y-1)
+					// vec = new Vector3(side/2, -side/2, 0);
+					break;
+				case "SouthWest": //(x-1, y-1)
+					// vec = new Vector3(-side/2, -side/2, 0);
+					break;
+				case "NorthWest": //(x-1, y+1)
+					// vec = new Vector3(-side/2, side/2, 0);
+					break;
+				default:
+					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
+			}
+			break;
 	}
 
 	let opp = vec.clone();
