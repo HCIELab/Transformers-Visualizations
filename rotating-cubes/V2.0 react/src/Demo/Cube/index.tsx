@@ -41,16 +41,6 @@ const Cube = (props: {
 		forPivot.current.position.y = 0;
 		forPivot.current.position.z = 0;
 		console.log("CUBE POSITIONS WERE SET TO INITIAL");
-
-
-		// if (props.id === 1) {
-		// 	// everything.current.translateX(1);
-		// 	// everything.current.translateY(1);
-		// 	// everything.current.position.add(new Vector3(1, 1, 0));
-		// }
-
-
-
 	}, [props.initialPosition])
 
 	// 0. Click to start the rotation
