@@ -51,62 +51,63 @@ const Numbering = (props: {
 
 
 	const letterOffset = props.letterOffset;
+	const letterHeight = 0.01;
 	const half = props.side/2;
 	return (
 		<>	
 			{/* Edges parallel to the "z" axis */}
 			<group visible={props.rAxis === "z"}>
-				<mesh position={[half-letterOffset, half-letterOffset, 0+half-letterOffset]}>
+				<mesh position={[half-letterOffset, half-letterOffset, 0+half-letterHeight]}>
 					<textGeometry args={["1", textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
-				<mesh position={[half-letterOffset, -half, 0+half-letterOffset]}>
+				<mesh position={[half-letterOffset, -half, 0+half-letterHeight]}>
 					<textGeometry args={["2", textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
-				<mesh position={[-half, -half, 0+half-letterOffset]}>
+				<mesh position={[-half, -half, 0+half-letterHeight]}>
 					<textGeometry args={["3", textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
-				<mesh position={[-half, half - letterOffset, 0+half-letterOffset]}>
+				<mesh position={[-half, half - letterOffset, 0+half-letterHeight]}>
 					<textGeometry args={["4", textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
 			</group>
 			<group visible={props.rAxis === "x"}>
 				{/* Edges parallel to the "x" axis */}
-				<mesh position={[0+half-letterOffset, half-letterOffset, -half+letterOffset]} ref={xEdges.NorthWest}>
+				<mesh position={[0+half-letterHeight, half-letterOffset, -half+letterOffset]} ref={xEdges.NorthWest}>
 					<textGeometry args={["5", textOptions]}/>
 					<meshPhongMaterial/>
 				</mesh>
-				<mesh position={[0+half-letterOffset, -half, -half+letterOffset]}  ref={xEdges.SouthWest}>
+				<mesh position={[0+half-letterHeight, -half, -half+letterOffset]}  ref={xEdges.SouthWest}>
 					<textGeometry args={["6", textOptions]}/>
 					<meshPhongMaterial/>
 				</mesh>
-				<mesh position={[0+half-letterOffset, -half, half]}  ref={xEdges.SouthEast}>
+				<mesh position={[0+half-letterHeight, -half, half]}  ref={xEdges.SouthEast}>
 					<textGeometry args={["7", textOptions]}/>
 					<meshPhongMaterial/>
 				</mesh>
-				<mesh position={[0+half-letterOffset, half - letterOffset, half]} ref={xEdges.NorthEast}>
+				<mesh position={[0+half-letterHeight, half - letterOffset, half]} ref={xEdges.NorthEast}>
 					<textGeometry args={["8", textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
 			</group>
 			<group visible={props.rAxis === "y"}>
 				{/* Edges parallel to the "y" axis */}
-				<mesh position={[half-letterOffset, 0+half-letterOffset, -half+letterOffset]} ref={yEdges.NorthEast}>
+				<mesh position={[half-letterOffset, 0+half-letterHeight, -half+letterOffset]} ref={yEdges.NorthEast}>
 					<textGeometry args={["9", textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
-				<mesh position={[half-2*letterOffset, 0+half-letterOffset, half]} ref={yEdges.SouthEast}>
+				<mesh position={[half-2*letterOffset, 0+half-letterHeight, half]} ref={yEdges.SouthEast}>
 					<textGeometry args={["10", textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
-				<mesh position={[-half, 0+half-letterOffset, half]} ref={yEdges.SouthWest}>
+				<mesh position={[-half, 0+half-letterHeight, half]} ref={yEdges.SouthWest}>
 					<textGeometry args={["11", textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
-				<mesh position={[-half, 0+half-letterOffset, -half+letterOffset]} ref={yEdges.NorthWest}>
+				<mesh position={[-half, 0+half-letterHeight, -half+letterOffset]} ref={yEdges.NorthWest}>
 					<textGeometry args={["12", textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
