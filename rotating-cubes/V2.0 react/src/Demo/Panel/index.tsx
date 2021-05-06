@@ -12,8 +12,8 @@ const PanelContainer = styled.div`
     margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    padding: 10px;
 
     button {
         margin: 4px 5px;
@@ -45,16 +45,13 @@ const Panel = (props: {
             />
 
             <div>
-                {/* TODO: implement x and y axis, for now they are disabled */}
                 <button 
-                    disabled 
                     onClick={() => props.setRAxis("x")}
                     className={props.rAxis === "x" ? "Selected" : ""}
                 >
                     x
                 </button>
                 <button 
-                    disabled 
                     onClick={() => props.setRAxis("y")}
                     className={props.rAxis === "y" ? "Selected" : ""}
                 >
