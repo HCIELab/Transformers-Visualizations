@@ -159,8 +159,6 @@ const translateGroup = (object : React.MutableRefObject<THREE.Group>, vec : Vect
  * Returns the vector that matches the pivot corner picked, and a negation of that vector
  * To be used with translateGroup to translate local/world objects around
  * 
- * TODO: make this work for more than just the 'z' axis e.g. write cases for 'x' and 'y'
- * 
  * @param finalCorner NORTHEAST/SOUTHEAST/SOUTHWEST/NORTHWEST
  * @param side The lenght of one side of the cube
  * @returns two vectors, one equivalent to the pivot and one that is the 
@@ -192,17 +190,17 @@ const getTranslateVectors = (finalCorner: cornerType, side: number, finalAxis: a
 			break;
 		case "x":
 			switch(finalCorner) {
-				case "NorthEast": //(x+1, y+1)
-					// vec = new Vector3(side/2, side/2, 0);
+				case "NorthEast": 
+					vec = new Vector3(0, side/2, -side/2);
 					break;
-				case "SouthEast": //(x+1, y-1)
-					// vec = new Vector3(side/2, -side/2, 0);
+				case "SouthEast": 
+					vec = new Vector3(0, -side/2, -side/2);
 					break;
-				case "SouthWest": //(x-1, y-1)
-					// vec = new Vector3(-side/2, -side/2, 0);
+				case "SouthWest": 
+					vec = new Vector3(0, -side/2, side/2);
 					break;
-				case "NorthWest": //(x-1, y+1)
-					// vec = new Vector3(-side/2, side/2, 0);
+				case "NorthWest": 
+					vec = new Vector3(0, side/2, side/2);
 					break;
 				default:
 					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
@@ -211,17 +209,17 @@ const getTranslateVectors = (finalCorner: cornerType, side: number, finalAxis: a
 		// case "y":
 		default:
 			switch(finalCorner) {
-				case "NorthEast": //(x+1, y+1)
-					// vec = new Vector3(side/2, side/2, 0);
+				case "NorthEast": 
+					vec = new Vector3(side/2, 0, -side/2);
 					break;
-				case "SouthEast": //(x+1, y-1)
-					// vec = new Vector3(side/2, -side/2, 0);
+				case "SouthEast": 
+					vec = new Vector3(side/2, 0, side/2);
 					break;
-				case "SouthWest": //(x-1, y-1)
-					// vec = new Vector3(-side/2, -side/2, 0);
+				case "SouthWest": 
+					vec = new Vector3(-side/2, 0, side/2);
 					break;
-				case "NorthWest": //(x-1, y+1)
-					// vec = new Vector3(-side/2, side/2, 0);
+				case "NorthWest": 
+					vec = new Vector3(-side/2, 0, -side/2);
 					break;
 				default:
 					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");

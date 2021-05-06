@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 
 import "@react-three/fiber";
-import { FontLoader, Vector3 } from 'three';
+import { FontLoader } from 'three';
 import Roboto from "./Roboto_Regular.json";
-import { axisType, cornerType } from '../Types/types';
+import { axisType } from '../Types/types';
 
 const Numbering = (props: {
     side: number,

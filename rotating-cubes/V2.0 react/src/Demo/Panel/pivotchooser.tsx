@@ -106,7 +106,6 @@ const CornerElement = (props: {
     handleClick: Function,
     rAxis: axisType,
 }) => {
-    // TODO: make this work for all x/y/z, not just the z axis
     let label;
     switch(props.rAxis) {
         case "z":

@@ -45,7 +45,6 @@ const Panel = (props: {
             />
 
             <div>
-                {/* TODO: implement x and y axis, for now they are disabled */}
                 <button 
                     onClick={() => props.setRAxis("x")}
                     className={props.rAxis === "x" ? "Selected" : ""}
