@@ -111,34 +111,34 @@ const CornerElement = (props: {
         case "z":
             switch(props.corner) {
                 case "NorthEast":
-                    label = 1;
+                    label = 0;
                     break;
                 case "SouthEast":
-                    label = 2;
+                    label = 1;
                     break;
                 case "SouthWest":
-                    label = 3;
+                    label = 2;
                     break;
                 // case "NorthWest":
                 default:
-                    label = 4;
+                    label = 3;
                     break;
             }
             break;
         case "x":
             switch(props.corner) {
                 case "NorthEast":
-                    label = 5;
+                    label = 4;
                     break;
                 case "SouthEast":
-                    label = 6;
+                    label = 5;
                     break;
                 case "SouthWest":
-                    label = 7;
+                    label = 6;
                     break;
                 // case "NorthWest":
                 default:
-                    label = 8;
+                    label = 7;
                     break;
             }
             break;
@@ -146,17 +146,17 @@ const CornerElement = (props: {
         default:
             switch(props.corner) {
                 case "NorthEast":
-                    label = 9;
+                    label = 8;
                     break;
                 case "SouthEast":
-                    label = 10;
+                    label = 9;
                     break;
                 case "SouthWest":
-                    label = 11;
+                    label = 10;
                     break;
                 // case "NorthWest":
                 default:
-                    label = 12;
+                    label = 11;
                     break;
             }
             break;
