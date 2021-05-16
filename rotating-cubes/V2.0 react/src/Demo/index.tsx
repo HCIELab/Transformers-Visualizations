@@ -43,13 +43,13 @@ const DemoContainer = styled.div`
 const Demo = () => {
     
     const [rDisplacement, setRDisplacement] = useState(Math.PI);
-    const [rAxis, setRAxis] = useState<axisType>("z");
+    const [rAxis, setRAxis] = useState<axisType>("y");
 
     const [corner, setCorner] = useState<cornerType>("NorthEast");
 
     const [cubesAndProperties, setCubesAndProperties] = useState([
-        {id: 0, initialPosition: new Vector3(-1, 0, 0), color: "#049101"},
-        {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
+        {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
+        {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
     ])
     /**
      * A quick implementation of adding or removing buttons.
@@ -62,8 +62,10 @@ const Demo = () => {
         return (
             <div className="AddOrRemoveCubes">
                 <button onClick={() => {
-                    const nextID = cubesAndProperties.length;
-                    const nextCube = {id: nextID, initialPosition: new Vector3(nextID-1, 0, 0), color: "#049101"}
+                    const prevCube = cubesAndProperties[cubesAndProperties.length-1]
+                    const nextID = prevCube.id + 1;
+                    const nextInitialX = prevCube.initialPosition.x - 1;
+                    const nextCube = {id: nextID, initialPosition: new Vector3(nextInitialX, 0, 0), color: "#049101"}
                     setCubesAndProperties(
                         [...cubesAndProperties, nextCube]
                     )
@@ -71,8 +73,11 @@ const Demo = () => {
                     Add a cube
                 </button>
                 <button onClick={() => {
-                    const newList = cubesAndProperties.filter((aCube) => aCube.id !== cubesAndProperties.length-1);
-                    setCubesAndProperties(newList);
+                    // Do not remove if only one cube left
+                    if (cubesAndProperties.length > 1) {
+                        const newList = cubesAndProperties.filter((aCube) => aCube.id !== cubesAndProperties.length);
+                        setCubesAndProperties(newList);
+                    }
                 }}>
                     Remove a cube
                 </button>

@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import {axisType, cornerType} from "../Types/types";
+import {numbers} from "../Numbering/numbers";
 
 const PivotChooserContainer = styled.div<{corner: cornerType}>`
     display: flex;
@@ -83,7 +84,7 @@ const PivotChooser = (props: {
     return (
         <PivotChooserContainer corner={props.corner}>
             <p className="Note">
-                (currently this version only works in the z axis direction)
+                (notes here)
             </p>
             <p className="Instructions">
                 Choose your pivot point here:
@@ -111,34 +112,34 @@ const CornerElement = (props: {
         case "z":
             switch(props.corner) {
                 case "NorthEast":
-                    label = 0;
+                    label = numbers.z.NorthEast;
                     break;
                 case "SouthEast":
-                    label = 1;
+                    label = numbers.z.SouthEast;
                     break;
                 case "SouthWest":
-                    label = 2;
+                    label = numbers.z.SouthWest;
                     break;
                 // case "NorthWest":
                 default:
-                    label = 3;
+                    label = numbers.z.NorthWest;
                     break;
             }
             break;
         case "x":
             switch(props.corner) {
                 case "NorthEast":
-                    label = 4;
+                    label = numbers.x.NorthEast;
                     break;
                 case "SouthEast":
-                    label = 5;
+                    label = numbers.x.SouthEast;
                     break;
                 case "SouthWest":
-                    label = 6;
+                    label = numbers.x.SouthWest;
                     break;
                 // case "NorthWest":
                 default:
-                    label = 7;
+                    label = numbers.x.NorthWest;
                     break;
             }
             break;
@@ -146,17 +147,17 @@ const CornerElement = (props: {
         default:
             switch(props.corner) {
                 case "NorthEast":
-                    label = 8;
+                    label = numbers.y.NorthEast;
                     break;
                 case "SouthEast":
-                    label = 9;
+                    label = numbers.y.SouthEast;
                     break;
                 case "SouthWest":
-                    label = 10;
+                    label = numbers.y.SouthWest;
                     break;
                 // case "NorthWest":
                 default:
-                    label = 11;
+                    label = numbers.y.NorthWest;
                     break;
             }
             break;
