@@ -39,14 +39,23 @@ const Numbering = (props: {
 		"NorthWest": useRef<THREE.Mesh>(null!),
 	};
 	useEffect(() => {
-		// yEdges.NorthEast.current.rotation.z = Math.PI;
-		// yEdges.SouthEast.current.rotation.z = Math.PI;
-		// yEdges.SouthWest.current.rotation.z = Math.PI;
-		// yEdges.NorthWest.current.rotation.z = Math.PI;
 		yEdges.NorthEast.current.rotation.x = -Math.PI / 2;
 		yEdges.SouthEast.current.rotation.x = -Math.PI / 2;
 		yEdges.SouthWest.current.rotation.x = -Math.PI / 2;
 		yEdges.NorthWest.current.rotation.x = -Math.PI / 2;
+	})
+
+	const fakeNano = {
+		"L1": useRef<THREE.Mesh>(null!),
+		"L2": useRef<THREE.Mesh>(null!),
+		"L3": useRef<THREE.Mesh>(null!),
+		"L4": useRef<THREE.Mesh>(null!),
+	};
+	useEffect(() => {
+		fakeNano.L1.current.rotation.z = Math.PI;
+		fakeNano.L2.current.rotation.z = Math.PI;
+		fakeNano.L3.current.rotation.z = Math.PI;
+		fakeNano.L4.current.rotation.z = Math.PI;
 	})
 
 
@@ -55,6 +64,27 @@ const Numbering = (props: {
 	const half = props.side/2;
 	return (
 		<>	
+			{/* Nano */}
+			<group>
+				<mesh position={[letterOffset*2.5, letterOffset*3, half]}  ref={fakeNano.L1}>
+					<textGeometry args={["|             |", textOptions]} />
+					<meshPhongMaterial/>
+				</mesh>
+				<mesh position={[letterOffset*2.5, letterOffset, half]} ref={fakeNano.L2}>
+					<textGeometry args={["| NANO |", textOptions]} />
+					<meshPhongMaterial/>
+				</mesh>
+				<mesh position={[letterOffset*2.5, -letterOffset, half]} ref={fakeNano.L3}>
+					<textGeometry args={["| ID:       |", textOptions]} /> 
+					{/* TODO: fill in the cubeID here ^^^ */}
+					<meshPhongMaterial/>
+				</mesh>
+				<mesh position={[letterOffset*2.5, -letterOffset*3, half]} ref={fakeNano.L4}>
+					<textGeometry args={["|             |", textOptions]} />
+					<meshPhongMaterial/>
+				</mesh>
+			</group>
+
 			{/* Edges parallel to the "z" axis */}
 			<group visible={props.rAxis === "z"}>
 				<mesh position={[half-letterOffset, half-letterOffset, 0+half-letterHeight]}>
