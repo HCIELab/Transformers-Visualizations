@@ -84,7 +84,7 @@ const PivotChooser = (props: {
     return (
         <PivotChooserContainer corner={props.corner}>
             <p className="Note">
-                (currently this version only works in the z axis direction)
+                (notes here)
             </p>
             <p className="Instructions">
                 Choose your pivot point here:

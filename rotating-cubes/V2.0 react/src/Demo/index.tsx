@@ -73,8 +73,11 @@ const Demo = () => {
                     Add a cube
                 </button>
                 <button onClick={() => {
-                    const newList = cubesAndProperties.filter((aCube) => aCube.id !== cubesAndProperties.length-1);
-                    setCubesAndProperties(newList);
+                    // Do not remove if only one cube left
+                    if (cubesAndProperties.length > 1) {
+                        const newList = cubesAndProperties.filter((aCube) => aCube.id !== cubesAndProperties.length);
+                        setCubesAndProperties(newList);
+                    }
                 }}>
                     Remove a cube
                 </button>
