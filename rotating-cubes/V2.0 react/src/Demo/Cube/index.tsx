@@ -139,6 +139,7 @@ const Cube = (props: {
 					<meshPhongMaterial color={props.color} opacity={hovered ? 0.2 : 0.6} transparent={true} side={DoubleSide}/>
 				</mesh>
 				<Labeling
+					cubeID={props.id}
 					letterOffset={0.1}
 					side={side}
 					rAxis={props.rAxis}

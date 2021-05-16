@@ -6,13 +6,14 @@ import Roboto from "./Roboto_Regular.json";
 import { axisType } from '../Types/types';
 import { numbers } from '../Numbering/numbers';
 
-const Numbering = (props: {
+const Labeling = (props: {
+	cubeID: number,
     side: number,
     letterOffset: number,
 	rAxis: axisType,
 }) => {
 	
-    // Deal with the edge Numbering (using fonts)
+    // Deal with the edge Labeling (using fonts)
 	const font = new FontLoader().parse(Roboto);
 	const textOptions = {
 		font,
@@ -65,18 +66,18 @@ const Numbering = (props: {
 	const half = props.side/2;
 	return (
 		<>	
-			{/* Nano */}
+			{/* Fake Nano */}
 			<group>
 				<mesh position={[letterOffset*2.5, letterOffset*3, half]}  ref={fakeNano.L1}>
-					<textGeometry args={["|             |", textOptions]} />
+					<textGeometry args={[`|     ${props.cubeID}     |`, textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
 				<mesh position={[letterOffset*2.5, letterOffset, half]} ref={fakeNano.L2}>
-					<textGeometry args={["| NANO |", textOptions]} />
+					<textGeometry args={[`|    ID:    |`, textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
 				<mesh position={[letterOffset*2.5, -letterOffset, half]} ref={fakeNano.L3}>
-					<textGeometry args={["| ID:       |", textOptions]} /> 
+					<textGeometry args={["| NANO |", textOptions]} /> 
 					{/* TODO: fill in the cubeID here ^^^ */}
 					<meshPhongMaterial/>
 				</mesh>
@@ -147,4 +148,4 @@ const Numbering = (props: {
     )
 }
 
-export default Numbering;
+export default Labeling;

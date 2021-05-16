@@ -4,7 +4,7 @@ export const numbers = {
             "NorthEast": 11,
             "SouthEast": 10,
             "SouthWest": 9,
-            "NorthWest": 12,
+            "NorthWest": 8,
         },
     "x": 
         {
