@@ -4,6 +4,7 @@ import "@react-three/fiber";
 import { FontLoader } from 'three';
 import Roboto from "./Roboto_Regular.json";
 import { axisType } from '../Types/types';
+import { numbers } from '../Numbering/numbers';
 
 const Numbering = (props: {
     side: number,
@@ -87,58 +88,58 @@ const Numbering = (props: {
 
 			{/* Edges parallel to the "z" axis */}
 			<group visible={props.rAxis === "z"}>
-				<mesh position={[half-letterOffset, half-letterOffset, 0+half-letterHeight]}>
-					<textGeometry args={["0", textOptions]} />
+				<mesh position={[half-letterOffset*2, half-letterOffset, 0+half-letterHeight]}>
+					<textGeometry args={[`${numbers.z.NorthEast}`, textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
-				<mesh position={[half-letterOffset, -half, 0+half-letterHeight]}>
-					<textGeometry args={["1", textOptions]} />
+				<mesh position={[half-letterOffset*2, -half, 0+half-letterHeight]}>
+					<textGeometry args={[`${numbers.z.SouthEast}`, textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
 				<mesh position={[-half, -half, 0+half-letterHeight]}>
-					<textGeometry args={["2", textOptions]} />
+					<textGeometry args={[`${numbers.z.SouthWest}`, textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
 				<mesh position={[-half, half - letterOffset, 0+half-letterHeight]}>
-					<textGeometry args={["3", textOptions]} />
+					<textGeometry args={[`${numbers.z.NorthWest}`, textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
 			</group>
 			<group visible={props.rAxis === "x"}>
 				{/* Edges parallel to the "x" axis */}
 				<mesh position={[0+half-letterHeight, half-letterOffset, -half+letterOffset]} ref={xEdges.NorthWest}>
-					<textGeometry args={["4", textOptions]}/>
+					<textGeometry args={[`${numbers.x.NorthEast}`, textOptions]}/>
 					<meshPhongMaterial/>
 				</mesh>
 				<mesh position={[0+half-letterHeight, -half, -half+letterOffset]}  ref={xEdges.SouthWest}>
-					<textGeometry args={["5", textOptions]}/>
+					<textGeometry args={[`${numbers.x.SouthEast}`, textOptions]}/>
 					<meshPhongMaterial/>
 				</mesh>
 				<mesh position={[0+half-letterHeight, -half, half]}  ref={xEdges.SouthEast}>
-					<textGeometry args={["6", textOptions]}/>
+					<textGeometry args={[`${numbers.x.SouthWest}`, textOptions]}/>
 					<meshPhongMaterial/>
 				</mesh>
 				<mesh position={[0+half-letterHeight, half - letterOffset, half]} ref={xEdges.NorthEast}>
-					<textGeometry args={["7", textOptions]} />
+					<textGeometry args={[`${numbers.x.NorthWest}`, textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
 			</group>
 			<group visible={props.rAxis === "y"}>
 				{/* Edges parallel to the "y" axis */}
 				<mesh position={[half-letterOffset, 0+half-letterHeight, -half+letterOffset]} ref={yEdges.NorthEast}>
-					<textGeometry args={["8", textOptions]} />
+					<textGeometry args={[`${numbers.y.NorthEast}`, textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
-				<mesh position={[half-2*letterOffset, 0+half-letterHeight, half]} ref={yEdges.SouthEast}>
-					<textGeometry args={["9", textOptions]} />
+				<mesh position={[half-letterOffset, 0+half-letterHeight, half]} ref={yEdges.SouthEast}>
+					<textGeometry args={[`${numbers.y.SouthEast}`, textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
 				<mesh position={[-half, 0+half-letterHeight, half]} ref={yEdges.SouthWest}>
-					<textGeometry args={["10", textOptions]} />
+					<textGeometry args={[`${numbers.y.SouthWest}`, textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
 				<mesh position={[-half, 0+half-letterHeight, -half+letterOffset]} ref={yEdges.NorthWest}>
-					<textGeometry args={["11", textOptions]} />
+					<textGeometry args={[`${numbers.y.NorthWest}`, textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
 			</group>
