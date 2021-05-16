@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { Color, useFrame } from "@react-three/fiber";
 import { DoubleSide, Vector3 } from 'three';
-import Numbering from "./numbering";
+import Labeling from "./labeling";
 import { axisType, cornerType, rotationStep } from '../Types/types';
 
 const Cube = (props: {
@@ -138,7 +138,7 @@ const Cube = (props: {
 					<boxGeometry args={[side, side, side]} />
 					<meshPhongMaterial color={props.color} opacity={hovered ? 0.2 : 0.6} transparent={true} side={DoubleSide}/>
 				</mesh>
-				<Numbering
+				<Labeling
 					letterOffset={0.1}
 					side={side}
 					rAxis={props.rAxis}
