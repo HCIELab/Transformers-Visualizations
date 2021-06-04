@@ -6,7 +6,7 @@ import { Canvas } from '@react-three/fiber';
 import Cube from "./Cube";
 import ThreeControls from "./ThreeControls";
 import Panel from "./Panel";
-import { axisType, cornerType } from './Types/types';
+import { axisType, cornerType, instructionType } from './Types/types';
 import { Vector3 } from 'three';
 
 const DemoContainer = styled.div`
@@ -44,51 +44,34 @@ const Demo = () => {
     
     const [rDisplacement, setRDisplacement] = useState(Math.PI);
     const [rAxis, setRAxis] = useState<axisType>("y");
-
     const [corner, setCorner] = useState<cornerType>("NorthEast");
 
-    const [cubesAndProperties, setCubesAndProperties] = useState([
+    const [cubesAndProperties, _] = useState([
         {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
         {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
     ])
-    /**
-     * A quick implementation of adding or removing buttons.
-     * Simple add: increment the cube id every time you add and place it one unit forward in the x axis
-     * Simple remove: remove the last element in the list (which would be the cube with the highest id)
-     * Pros: this method is not prone to errors
-     * Cons: this method may not be very sophisticated
-     */
-    const addOrRemoveButtons = () => {
-        return (
-            <div className="AddOrRemoveCubes">
-                <button onClick={() => {
-                    const prevCube = cubesAndProperties[cubesAndProperties.length-1]
-                    const nextID = prevCube.id + 1;
-                    const nextInitialX = prevCube.initialPosition.x - 1;
-                    const nextCube = {id: nextID, initialPosition: new Vector3(nextInitialX, 0, 0), color: "#049101"}
-                    setCubesAndProperties(
-                        [...cubesAndProperties, nextCube]
-                    )
-                }}>
-                    Add a cube
-                </button>
-                <button onClick={() => {
-                    // Do not remove if only one cube left
-                    if (cubesAndProperties.length > 1) {
-                        const newList = cubesAndProperties.filter((aCube) => aCube.id !== cubesAndProperties.length);
-                        setCubesAndProperties(newList);
-                    }
-                }}>
-                    Remove a cube
-                </button>
-            </div>
-        )
-    }
+	const instructions : instructionType[] = [
+		{
+			cubeID: 1,
+			axis: "z",
+			corner: "NorthWest",
+			displacement: Math.PI/2,
+			timeToStart: 1000,
+		},
+		{
+			cubeID: 2,
+			axis: "z",
+			corner: "NorthEast",
+			displacement: -Math.PI/2,
+			timeToStart: 2000,
+		}
+	]
+
+    
 
     return (
         <DemoContainer>
             <div className="TopSection">
-                {addOrRemoveButtons()}
                 <Panel
                     rAxis={rAxis}
                     setRAxis={setRAxis}
@@ -108,6 +91,7 @@ const Demo = () => {
                     {
                         cubesAndProperties.map((config) => 
                             <Cube 
+                                instructions={instructions}
                                 key={config.id}
                                 id={config.id} 
                                 initialPosition={config.initialPosition} 

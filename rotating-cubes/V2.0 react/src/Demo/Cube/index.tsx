@@ -3,9 +3,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Color, useFrame } from "@react-three/fiber";
 import { DoubleSide, Vector3 } from 'three';
 import Labeling from "./labeling";
-import { axisType, cornerType, rotationStep } from '../Types/types';
+import { axisType, cornerType, instructionType, rotationStep } from '../Types/types';
+
+
 
 const Cube = (props: {
+	instructions: instructionType[],
 	id: number,
 	initialPosition: Vector3,
 	color: Color,
@@ -31,6 +34,22 @@ const Cube = (props: {
 	useEffect(() => {
 		console.log(`(for cube ${props.id}) step: ${step}`);
 	})
+
+	useEffect(() => {
+		props.instructions
+			.filter((ins) => ins.cubeID == props.id)
+			.forEach((ins) => {
+				setTimeout(() => {
+					//Set the final angle, axis, corner when the user clicks the box
+					setFinalAxis(ins.axis);
+					setFinalCorner(ins.corner);
+					setFinalDisplacement(ins.displacement);
+					setFinalAngle(everything.current.rotation[ins.axis] + ins.displacement);
+		
+					setStep("1_CLICKED");
+				}, ins.timeToStart);
+			})
+	}, [])
 
 	// -1. Place cube at initial position on first render
 	useEffect(() => {
