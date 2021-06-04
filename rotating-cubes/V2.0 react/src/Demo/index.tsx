@@ -6,8 +6,8 @@ import { Canvas } from '@react-three/fiber';
 import Cube from "./Cube";
 import ThreeControls from "./ThreeControls";
 import Panel from "./Panel";
-import { axisType, cornerType, instructionType } from './Types/types';
-import { Vector3 } from 'three';
+import Instructions from "./Instructions";
+import { axisType, cornerType, cubeAndPropertiesType, instructionType } from './Types/types';
 
 const DemoContainer = styled.div`
     width: 100%;
@@ -46,28 +46,8 @@ const Demo = () => {
     const [rAxis, setRAxis] = useState<axisType>("y");
     const [corner, setCorner] = useState<cornerType>("NorthEast");
 
-    const [cubesAndProperties, _] = useState([
-        {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
-        {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
-    ])
-	const instructions : instructionType[] = [
-		{
-			cubeID: 1,
-			axis: "z",
-			corner: "NorthWest",
-			displacement: Math.PI/2,
-			timeToStart: 1000,
-		},
-		{
-			cubeID: 2,
-			axis: "z",
-			corner: "NorthEast",
-			displacement: -Math.PI/2,
-			timeToStart: 2000,
-		}
-	]
-
-    
+    const [cubesAndProperties, setCubesAndProperties] = useState<cubeAndPropertiesType[]>([]);
+	const [instructions, setInstructions] = useState<instructionType[]>([]);
 
     return (
         <DemoContainer>
@@ -81,6 +61,11 @@ const Demo = () => {
                     setCorner={setCorner}
                 />
             </div>
+
+            <Instructions
+                setInstructions={setInstructions}
+                setCubesAndProperties={setCubesAndProperties}
+            />
 
             <div className="BottomSection">
                 <Canvas>
