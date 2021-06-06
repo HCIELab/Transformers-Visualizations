@@ -36,8 +36,13 @@ const Cube = (props: {
 	})
 
 	useEffect(() => {
+		console.log("STARTING INSTRUCTIONS");
+		// Start with rotations being 0
+		everything.current.rotation['x'] = 0;
+		everything.current.rotation['y'] = 0;
+		everything.current.rotation['z'] = 0;
 		props.instructions
-			.filter((ins) => ins.cubeID == props.id)
+			.filter((ins) => ins.cubeID === props.id)
 			.forEach((ins) => {
 				setTimeout(() => {
 					//Set the final angle, axis, corner when the user clicks the box
@@ -49,7 +54,7 @@ const Cube = (props: {
 					setStep("1_CLICKED");
 				}, ins.timeToStart);
 			})
-	}, [])
+	}, [props.id, props.instructions])
 
 	// -1. Place cube at initial position on first render
 	useEffect(() => {

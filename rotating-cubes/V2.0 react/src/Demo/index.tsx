@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 import { Canvas } from '@react-three/fiber';
@@ -48,6 +48,8 @@ const Demo = () => {
 
     const [cubesAndProperties, setCubesAndProperties] = useState<cubeAndPropertiesType[]>([]);
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
+
+    
 
     return (
         <DemoContainer>
