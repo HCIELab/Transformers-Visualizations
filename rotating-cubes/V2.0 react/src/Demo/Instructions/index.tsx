@@ -143,18 +143,18 @@ const Instructions = (props: {
                 },
                 {
                     cubeID: 1,
-                    axis: "x",
-                    corner: "NorthEast",
+                    axis: "y",
+                    corner: "SouthWest",
                     displacement: -Math.PI/2,
-                    timeToStart: 2000,
+                    timeToStart: 3000,
                 },
-                {
-                    cubeID: 2,
-                    axis: "x",
-                    corner: "NorthEast",
-                    displacement: Math.PI/2,
-                    timeToStart: 2000,
-                },
+                // {
+                //     cubeID: 2,
+                //     axis: "y",
+                //     corner: "SouthEast",
+                //     displacement: Math.PI/2,
+                //     timeToStart: 2000,
+                // },
             ])
         }}>
             Pivot multi-axis (away, up, towards) [NOT WORKING]

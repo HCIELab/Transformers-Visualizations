@@ -87,11 +87,31 @@ const Cube = (props: {
 	// 1.1 Local - Subtract the pivot point from the object's original position
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis);
-			translateGroup(everything, piv);
-			translateGroup(forPivot, opp);
+			const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis, finalDisplacement);
 
-			setStep("2_ROTATING");
+			let axis = new Vector3(0, 0, 0);
+			switch (finalAxis) {
+				case "x":
+					axis = new Vector3(1, 0, 0);
+					break;			
+				case "y":
+					axis = new Vector3(0, 1, 0);
+					break;			
+				case "z":
+					axis = new Vector3(0, 0, 1);
+					break;			
+				default:
+					axis = new Vector3(0, 0, 0);
+			} 		
+
+			rotateAboutPoint(forPivot.current, piv, axis, finalDisplacement, false);
+
+			// const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis, finalDisplacement);
+			// translateGroup(everything, piv);
+			// translateGroup(forPivot, opp);
+
+			// setStep("2_ROTATING");
+			setStep("0_DEFAULT");
 		}
 	}, [step, finalAxis, finalCorner])
 
@@ -136,7 +156,7 @@ const Cube = (props: {
 			const foo = countNumRightAngles * Math.PI / 2;
 			everything.current.rotation[finalAxis] = foo;
 				
-			const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis);
+			const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis, finalDisplacement);
 			translateGroup(everything, opp);
 			translateGroup(forPivot, piv);
 
@@ -185,11 +205,11 @@ const translateGroup = (object : React.MutableRefObject<THREE.Group>, vec : Vect
  * To be used with translateGroup to translate local/world objects around
  * 
  * @param finalCorner NORTHEAST/SOUTHEAST/SOUTHWEST/NORTHWEST
- * @param side The lenght of one side of the cube
- * @returns two vectors, one equivalent to the pivot and one that is the 
- * opposite of that
+ * @param side The length of one side of the cube
+ * @returns two vectors, one equivalent to the pivot and one that is 
+ * the final position after the rotation
  */
-const getTranslateVectors = (finalCorner: cornerType, side: number, finalAxis: axisType) => {
+const getTranslateVectors = (finalCorner: cornerType, side: number, finalAxis: axisType, finalDisplacement: number) => {
 	console.log(`inside getTranslateVectors (${finalCorner}, ${side}, ${finalAxis})`);
 
 	let vec = new Vector3(-3,-3,-3);
@@ -253,8 +273,57 @@ const getTranslateVectors = (finalCorner: cornerType, side: number, finalAxis: a
 	}
 
 	let opp = vec.clone();
-	opp.negate()
+	// opp.negate()
+	
+	let axis = new Vector3(0, 0, 0);
+	switch (finalAxis) {
+		case "x":
+			axis = new Vector3(1, 0, 0);
+			break;			
+		case "y":
+			axis = new Vector3(0, 1, 0);
+			break;			
+		case "z":
+			axis = new Vector3(0, 0, 1);
+			break;			
+		default:
+			axis = new Vector3(0, 0, 0);
+	} 
+
+	if (Math.abs(finalDisplacement) > Math.PI/2 - 0.0001) {
+		opp.applyAxisAngle(axis, 2*finalDisplacement);
+	}
+	else {
+		opp.applyAxisAngle(axis, finalDisplacement);
+	}
+	console.log("vvvvvvvvvvvvvvvvv");
+	console.log(vec, opp, axis, 2*finalDisplacement);
+	console.log("^^^^^^^^^^^^^^^^^");
+
+	
 	return [vec, opp]
+}
+
+
+function rotateAboutPoint (obj : any, point : Vector3, axis : Vector3, theta : number, pointIsWorld : boolean){
+    pointIsWorld = (pointIsWorld === undefined)? false : pointIsWorld;
+
+    if(pointIsWorld){
+        obj.parent.localToWorld(obj.position); // compensate for world coordinate
+    }
+
+	console.log("point: ", point);
+	console.log("obj:", obj);
+
+    obj.position.sub(point); // remove the offset
+    obj.position.applyAxisAngle(axis, theta); // rotate the POSITION
+    obj.position.add(point); // re-add the offset
+
+    if(pointIsWorld){
+        obj.parent.worldToLocal(obj.position); // undo world coordinates compensation
+    }
+
+    obj.rotateOnAxis(axis, theta); // rotate the OBJECT
 }
 
 export default Cube;
