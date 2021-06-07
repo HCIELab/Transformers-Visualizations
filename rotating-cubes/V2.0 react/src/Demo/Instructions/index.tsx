@@ -120,6 +120,89 @@ const Instructions = (props: {
         </button>
     )
 
+    const button3 = (
+        <button onClick={() => {
+            props.setCubesAndProperties([
+                {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
+                {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#049101"},            
+            ])
+            props.setInstructions([
+                {
+                    cubeID: 1,
+                    axis: "z",
+                    corner: "NorthWest",
+                    displacement: Math.PI/2,
+                    timeToStart: 1000,
+                },
+                {
+                    cubeID: 2,
+                    axis: "z",
+                    corner: "NorthEast",
+                    displacement: -Math.PI/2,
+                    timeToStart: 1000,
+                },
+                {
+                    cubeID: 1,
+                    axis: "x",
+                    corner: "NorthEast",
+                    displacement: -Math.PI/2,
+                    timeToStart: 2000,
+                },
+                {
+                    cubeID: 2,
+                    axis: "x",
+                    corner: "NorthEast",
+                    displacement: Math.PI/2,
+                    timeToStart: 2000,
+                },
+            ])
+        }}>
+            Pivot multi-axis (away, up, towards) [NOT WORKING]
+        </button>
+    )
+
+
+    const button4 = (
+        <button onClick={() => {
+            props.setCubesAndProperties([
+                {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
+                {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#049101"},            
+                {id: 3, initialPosition: new Vector3(0, 1, 0), color: "#049101"},            
+            ])
+            props.setInstructions([
+                {
+                    cubeID: 3,
+                    axis: "z",
+                    corner: "SouthEast",
+                    displacement: -Math.PI/2,
+                    timeToStart: 1000,
+                },
+                {
+                    cubeID: 3,
+                    axis: "z",
+                    corner: "SouthEast",
+                    displacement: Math.PI/2,
+                    timeToStart: 2000,
+                },
+                {
+                    cubeID: 3,
+                    axis: "z",
+                    corner: "SouthEast",
+                    displacement: -Math.PI/2,
+                    timeToStart: 3000,
+                },
+                {
+                    cubeID: 3,
+                    axis: "z",
+                    corner: "SouthEast",
+                    displacement: Math.PI/2,
+                    timeToStart: 4000,
+                },
+            ])
+        }}>
+            Traversal
+        </button>
+    )
 
     return (
         <div>
@@ -129,6 +212,8 @@ const Instructions = (props: {
 
             {button1}
             {button2}
+            {button3}
+            {button4}
 
         </div>
     )
