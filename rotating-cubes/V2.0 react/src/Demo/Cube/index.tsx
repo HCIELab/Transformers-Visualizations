@@ -38,9 +38,9 @@ const Cube = (props: {
 	useEffect(() => {
 		console.log("STARTING INSTRUCTIONS");
 		// Start with rotations being 0
-		everything.current.rotation['x'] = 0;
-		everything.current.rotation['y'] = 0;
-		everything.current.rotation['z'] = 0;
+		forPivot.current.rotation['x'] = 0;
+		forPivot.current.rotation['y'] = 0;
+		forPivot.current.rotation['z'] = 0;
 		props.instructions
 			.filter((ins) => ins.cubeID === props.id)
 			.forEach((ins) => {
@@ -106,59 +106,55 @@ const Cube = (props: {
 
 			rotateAboutPoint(forPivot.current, piv, axis, finalDisplacement, false);
 
-			// const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis, finalDisplacement);
-			// translateGroup(everything, piv);
-			// translateGroup(forPivot, opp);
-
-			// setStep("2_ROTATING");
-			setStep("0_DEFAULT");
+			setStep("2_ROTATING");
 		}
 	}, [step, finalAxis, finalCorner])
 
 	// 2. Apply the rotation
 	useFrame(() => {
 		if (step === "2_ROTATING") {
-			// -- While Rotating --
-			const INCREMENT_AMT = 0.06; //increase this number to make the cubes rotate faster
-			if (finalDisplacement > 0) {
-				everything.current.rotation[finalAxis] += INCREMENT_AMT;
-			}
-			else {
-				everything.current.rotation[finalAxis] -= INCREMENT_AMT;
-			}
-			// // -- Done Rotating --
-			if (finalDisplacement > 0) {
-				if (everything.current.rotation[finalAxis] > finalAngle) {
-					setStep("3_END");
-				}
-			}
-			else {
-				if (everything.current.rotation[finalAxis] < finalAngle) {
-					setStep("3_END");
-				}
-			}
+		// 	// -- While Rotating --
+		// 	const INCREMENT_AMT = 0.06; //increase this number to make the cubes rotate faster
+		// 	if (finalDisplacement > 0) {
+		// 		everything.current.rotation[finalAxis] += INCREMENT_AMT;
+		// 	}
+		// 	else {
+		// 		everything.current.rotation[finalAxis] -= INCREMENT_AMT;
+		// 	}
+		// 	// // -- Done Rotating --
+		// 	if (finalDisplacement > 0) {
+		// 		if (everything.current.rotation[finalAxis] > finalAngle) {
+		// 			setStep("3_END");
+		// 		}
+		// 	}
+		// 	else {
+		// 		if (everything.current.rotation[finalAxis] < finalAngle) {
+		// 			setStep("3_END");
+		// 		}
+		// 	}
+			setStep("3_END");
 		}
     })
-	
+
 	// After a rotation finishes, set the new permanent location of the cube	
 	// 3. Add the pivot point back to the object's position
 	// 3.1 Move the object back by the pivot 
 	useEffect(() => {
 		if (step === "3_END") {
-			/**
-			 * Also at the end of the rotation, snap it to the nearest 90 degrees
-			 * Make sure to execute this step (of finishing the rotation) before 
-			 * the positions are moved again.
-			 */
-			const countNumRightAngles = Math.round(
-				everything.current.rotation[finalAxis] / (Math.PI / 2)
-			); 
-			const foo = countNumRightAngles * Math.PI / 2;
-			everything.current.rotation[finalAxis] = foo;
+			// /**
+			//  * Also at the end of the rotation, snap it to the nearest 90 degrees
+			//  * Make sure to execute this step (of finishing the rotation) before 
+			//  * the positions are moved again.
+			//  */
+			// const countNumRightAngles = Math.round(
+			// 	everything.current.rotation[finalAxis] / (Math.PI / 2)
+			// ); 
+			// const foo = countNumRightAngles * Math.PI / 2;
+			// everything.current.rotation[finalAxis] = foo;
 				
-			const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis, finalDisplacement);
-			translateGroup(everything, opp);
-			translateGroup(forPivot, piv);
+			// const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis, finalDisplacement);
+			// translateGroup(everything, opp);
+			// translateGroup(forPivot, piv);
 
 			setStep("0_DEFAULT");
 		}

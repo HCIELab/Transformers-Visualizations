@@ -146,11 +146,11 @@ const Instructions = (props: {
                     axis: "y",
                     corner: "SouthWest",
                     displacement: -Math.PI/2,
-                    timeToStart: 3000,
+                    timeToStart: 2000,
                 },
                 // {
                 //     cubeID: 2,
-                //     axis: "y",
+                //     axis: "x",
                 //     corner: "SouthEast",
                 //     displacement: Math.PI/2,
                 //     timeToStart: 2000,
@@ -204,6 +204,22 @@ const Instructions = (props: {
         </button>
     )
 
+
+    const button5 = (
+        <button onClick={() => {
+            props.setCubesAndProperties([
+                {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
+                {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#049101"},            
+            ])
+            props.setInstructions([
+            ])
+        }}>
+            Just 2 initial blocks 
+        </button>
+    )
+
+
+
     return (
         <div>
             <h1>
@@ -214,6 +230,7 @@ const Instructions = (props: {
             {button2}
             {button3}
             {button4}
+            {button5}
 
         </div>
     )
