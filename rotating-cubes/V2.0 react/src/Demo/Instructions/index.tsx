@@ -148,13 +148,13 @@ const Instructions = (props: {
                     displacement: -Math.PI/2,
                     timeToStart: 2000,
                 },
-                // {
-                //     cubeID: 2,
-                //     axis: "x",
-                //     corner: "SouthEast",
-                //     displacement: Math.PI/2,
-                //     timeToStart: 2000,
-                // },
+                {
+                    cubeID: 2,
+                    axis: "y",
+                    corner: "SouthEast",
+                    displacement: Math.PI/2,
+                    timeToStart: 2000,
+                },
             ])
         }}>
             Pivot multi-axis (away, up, towards) [NOT WORKING]
@@ -210,11 +210,12 @@ const Instructions = (props: {
             props.setCubesAndProperties([
                 {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
                 {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#049101"},            
+                {id: 3, initialPosition: new Vector3(3, 0, 0), color: "#049101"},            
             ])
             props.setInstructions([
             ])
         }}>
-            Just 2 initial blocks 
+            Just 3 initial blocks 
         </button>
     )
 

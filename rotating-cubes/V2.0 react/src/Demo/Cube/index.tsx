@@ -28,7 +28,7 @@ const Cube = (props: {
 	const [finalCorner, setFinalCorner] = useState<cornerType>("NorthEast");
 	const [finalAxis, setFinalAxis] = useState<axisType>("x"); 
 	const [finalDisplacement, setFinalDisplacement] = useState(Math.PI);
-	const [finalAngle, setFinalAngle] = useState(0);
+	// const [finalAngle, setFinalAngle] = useState(0);
 
 	// Debug
 	useEffect(() => {
@@ -49,7 +49,7 @@ const Cube = (props: {
 					setFinalAxis(ins.axis);
 					setFinalCorner(ins.corner);
 					setFinalDisplacement(ins.displacement);
-					setFinalAngle(everything.current.rotation[ins.axis] + ins.displacement);
+					// setFinalAngle(everything.current.rotation[ins.axis] + ins.displacement);
 		
 					setStep("1_CLICKED");
 				}, ins.timeToStart);
@@ -74,7 +74,7 @@ const Cube = (props: {
 			setFinalAxis(props.rAxis);
 			setFinalCorner(props.corner);
 			setFinalDisplacement(props.rDisplacement);
-			setFinalAngle(everything.current.rotation[props.rAxis] + props.rDisplacement);
+			// setFinalAngle(everything.current.rotation[props.rAxis] + props.rDisplacement);
 
 			setStep("1_CLICKED");
 		}
@@ -83,8 +83,6 @@ const Cube = (props: {
 		}
 	}
 
-	// 1. Move object to the pivot point
-	// 1.1 Local - Subtract the pivot point from the object's original position
 	useEffect(() => {
 		if (step === "1_CLICKED") {
 			const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis, finalDisplacement);
@@ -104,64 +102,11 @@ const Cube = (props: {
 					axis = new Vector3(0, 0, 0);
 			} 		
 
-			rotateAboutPoint(forPivot.current, piv, axis, finalDisplacement, false);
-
-			setStep("2_ROTATING");
-		}
-	}, [step, finalAxis, finalCorner])
-
-	// 2. Apply the rotation
-	useFrame(() => {
-		if (step === "2_ROTATING") {
-		// 	// -- While Rotating --
-		// 	const INCREMENT_AMT = 0.06; //increase this number to make the cubes rotate faster
-		// 	if (finalDisplacement > 0) {
-		// 		everything.current.rotation[finalAxis] += INCREMENT_AMT;
-		// 	}
-		// 	else {
-		// 		everything.current.rotation[finalAxis] -= INCREMENT_AMT;
-		// 	}
-		// 	// // -- Done Rotating --
-		// 	if (finalDisplacement > 0) {
-		// 		if (everything.current.rotation[finalAxis] > finalAngle) {
-		// 			setStep("3_END");
-		// 		}
-		// 	}
-		// 	else {
-		// 		if (everything.current.rotation[finalAxis] < finalAngle) {
-		// 			setStep("3_END");
-		// 		}
-		// 	}
-			setStep("3_END");
-		}
-    })
-
-	// After a rotation finishes, set the new permanent location of the cube	
-	// 3. Add the pivot point back to the object's position
-	// 3.1 Move the object back by the pivot 
-	useEffect(() => {
-		if (step === "3_END") {
-			// /**
-			//  * Also at the end of the rotation, snap it to the nearest 90 degrees
-			//  * Make sure to execute this step (of finishing the rotation) before 
-			//  * the positions are moved again.
-			//  */
-			// const countNumRightAngles = Math.round(
-			// 	everything.current.rotation[finalAxis] / (Math.PI / 2)
-			// ); 
-			// const foo = countNumRightAngles * Math.PI / 2;
-			// everything.current.rotation[finalAxis] = foo;
-				
-			// const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis, finalDisplacement);
-			// translateGroup(everything, opp);
-			// translateGroup(forPivot, piv);
+			rotateAboutPoint(everything.current, piv, axis, finalDisplacement, false);
 
 			setStep("0_DEFAULT");
 		}
-	}, [step, finalAxis, finalCorner]) 
-
-
-
+	}, [step, finalAxis, finalCorner])
 
 	const [hovered, setHover] = useState(false);
 
@@ -187,13 +132,6 @@ const Cube = (props: {
 			</group>
 		</group>
 	)
-}
-
-
-const translateGroup = (object : React.MutableRefObject<THREE.Group>, vec : Vector3) => {
-	object.current.translateX(vec.x);
-	object.current.translateY(vec.y);
-	object.current.translateZ(vec.z);
 }
 
 /**
