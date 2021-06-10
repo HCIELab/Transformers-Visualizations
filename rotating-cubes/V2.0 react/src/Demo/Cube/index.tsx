@@ -4,7 +4,7 @@ import { Color, useFrame } from "@react-three/fiber";
 import { DoubleSide, Vector3 } from 'three';
 import Labeling from "./labeling";
 import { axisType, cornerType, instructionType, rotationStep } from '../Types/types';
-
+import { getPointOfRotation } from "./helpers/getPointOfRotation";
 
 
 const Cube = (props: {
@@ -70,7 +70,10 @@ const Cube = (props: {
 	// 0. Click to start the rotation
 	const handleClick = () => {
 		if (step === "0_DEFAULT") {
-			//Set the final angle, axis, corner when the user clicks the box
+			forPivot.current.position.x = 0;
+			forPivot.current.position.y = 0;
+			forPivot.current.position.z = 0;
+				//Set the final angle, axis, corner when the user clicks the box
 			setFinalAxis(props.rAxis);
 			setFinalCorner(props.corner);
 			setFinalDisplacement(props.rDisplacement);
@@ -87,7 +90,7 @@ const Cube = (props: {
 	// 1.1 Local - Subtract the pivot point from the object's original position
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis);
+			const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
 			translateGroup(everything, piv);
 			translateGroup(forPivot, opp);
 
@@ -136,7 +139,7 @@ const Cube = (props: {
 			const foo = countNumRightAngles * Math.PI / 2;
 			everything.current.rotation[finalAxis] = foo;
 				
-			const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis);
+			const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
 			translateGroup(everything, opp);
 			translateGroup(forPivot, piv);
 
@@ -178,83 +181,6 @@ const translateGroup = (object : React.MutableRefObject<THREE.Group>, vec : Vect
 	object.current.translateX(vec.x);
 	object.current.translateY(vec.y);
 	object.current.translateZ(vec.z);
-}
-
-/**
- * Returns the vector that matches the pivot corner picked, and a negation of that vector
- * To be used with translateGroup to translate local/world objects around
- * 
- * @param finalCorner NORTHEAST/SOUTHEAST/SOUTHWEST/NORTHWEST
- * @param side The lenght of one side of the cube
- * @returns two vectors, one equivalent to the pivot and one that is the 
- * opposite of that
- */
-const getTranslateVectors = (finalCorner: cornerType, side: number, finalAxis: axisType) => {
-	console.log(`inside getTranslateVectors (${finalCorner}, ${side}, ${finalAxis})`);
-
-	let vec = new Vector3(-3,-3,-3);
-
-	switch (finalAxis) {
-		case "z":
-			switch(finalCorner) {
-				case "NorthEast": //(x+1, y+1)
-					vec = new Vector3(side/2, side/2, 0);
-					break;
-				case "SouthEast": //(x+1, y-1)
-					vec = new Vector3(side/2, -side/2, 0);
-					break;
-				case "SouthWest": //(x-1, y-1)
-					vec = new Vector3(-side/2, -side/2, 0);
-					break;
-				case "NorthWest": //(x-1, y+1)
-					vec = new Vector3(-side/2, side/2, 0);
-					break;
-				default:
-					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
-			}
-			break;
-		case "x":
-			switch(finalCorner) {
-				case "NorthEast": 
-					vec = new Vector3(0, side/2, -side/2);
-					break;
-				case "SouthEast": 
-					vec = new Vector3(0, -side/2, -side/2);
-					break;
-				case "SouthWest": 
-					vec = new Vector3(0, -side/2, side/2);
-					break;
-				case "NorthWest": 
-					vec = new Vector3(0, side/2, side/2);
-					break;
-				default:
-					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
-			}
-			break;
-		// case "y":
-		default:
-			switch(finalCorner) {
-				case "NorthEast": 
-					vec = new Vector3(side/2, 0, -side/2);
-					break;
-				case "SouthEast": 
-					vec = new Vector3(side/2, 0, side/2);
-					break;
-				case "SouthWest": 
-					vec = new Vector3(-side/2, 0, side/2);
-					break;
-				case "NorthWest": 
-					vec = new Vector3(-side/2, 0, -side/2);
-					break;
-				default:
-					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
-			}
-			break;
-	}
-
-	let opp = vec.clone();
-	opp.negate()
-	return [vec, opp]
 }
 
 export default Cube;
