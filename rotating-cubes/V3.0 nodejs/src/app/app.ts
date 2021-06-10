@@ -12,7 +12,7 @@ export class App {
   private brick: Brick;
 
   constructor() {
-    this.brick = new Brick(100, new Color('rgb(255,0,0)'));
+    this.brick = new Brick(100, new Color('rgb(0,0,255)'));
     this.scene.add(this.brick);
 
     this.camera.position.set(200, 200, 200);
@@ -35,6 +35,9 @@ export class App {
     requestAnimationFrame(() => this.render());
 
     this.adjustCanvasSize();
-    this.brick.rotateY(0.03);
+    // this.brick.rotateY(0.03);
+    this.brick.rotation['x'] += 0.01;
+    this.brick.translateY(1);
+
   }
 }
