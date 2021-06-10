@@ -5,7 +5,8 @@ import { DoubleSide, Vector3 } from 'three';
 import Labeling from "./labeling";
 import { axisType, cornerType, instructionType, rotationStep } from '../Types/types';
 
-
+import { getPointOfRotation } from "./helpers/pointOfRotation";
+import { getAxisOfRotation } from "./helpers/axisOfRotation";
 
 const Cube = (props: {
 	instructions: instructionType[],
@@ -49,7 +50,7 @@ const Cube = (props: {
 					setFinalAxis(ins.axis);
 					setFinalCorner(ins.corner);
 					setFinalDisplacement(ins.displacement);
-					setFinalAngle(everything.current.rotation[ins.axis] + ins.displacement);
+					setFinalAngle((everything.current.rotation[ins.axis] + ins.displacement)%(2*Math.PI) - Math.PI);
 		
 					setStep("1_CLICKED");
 				}, ins.timeToStart);
@@ -74,7 +75,7 @@ const Cube = (props: {
 			setFinalAxis(props.rAxis);
 			setFinalCorner(props.corner);
 			setFinalDisplacement(props.rDisplacement);
-			setFinalAngle(everything.current.rotation[props.rAxis] + props.rDisplacement);
+			setFinalAngle((everything.current.rotation[props.rAxis] + props.rDisplacement)%(2*Math.PI) - Math.PI);
 
 			setStep("1_CLICKED");
 		}
@@ -87,9 +88,10 @@ const Cube = (props: {
 	// 1.1 Local - Subtract the pivot point from the object's original position
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis);
-			translateGroup(everything, piv);
-			translateGroup(forPivot, opp);
+			const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
+			// translateGroup(everything, piv);
+			// translateGroup(forPivot, opp);
+			everything.current.position.sub(piv);
 
 			setStep("2_ROTATING");
 		}
@@ -100,22 +102,29 @@ const Cube = (props: {
 		if (step === "2_ROTATING") {
 			// -- While Rotating --
 			const INCREMENT_AMT = 0.06; //increase this number to make the cubes rotate faster
-			if (finalDisplacement > 0) {
-				everything.current.rotation[finalAxis] += INCREMENT_AMT;
+			if (finalDisplacement < 0) {
+				everything.current.position.applyAxisAngle(getAxisOfRotation(finalAxis), INCREMENT_AMT);
+				everything.current.rotateOnAxis(getAxisOfRotation(finalAxis), INCREMENT_AMT);
 			}
 			else {
-				everything.current.rotation[finalAxis] -= INCREMENT_AMT;
+				everything.current.position.applyAxisAngle(getAxisOfRotation(finalAxis), -1*INCREMENT_AMT);
+				everything.current.rotateOnAxis(getAxisOfRotation(finalAxis), -1*INCREMENT_AMT);
 			}
+
 			// // -- Done Rotating --
-			if (finalDisplacement > 0) {
-				if (everything.current.rotation[finalAxis] > finalAngle) {
-					setStep("3_END");
-				}
-			}
-			else {
-				if (everything.current.rotation[finalAxis] < finalAngle) {
-					setStep("3_END");
-				}
+			console.log(`everything.current.rotation[finalAxis]: ${everything.current.rotation[finalAxis]}, finalAngle: ${finalAngle}`);
+			// if (finalDisplacement > 0) {
+			// 	if (everything.current.rotation[finalAxis] > (finalAngle)) {
+			// 		setStep("3_END");
+			// 	}
+			// }
+			// else {
+			// 	if (everything.current.rotation[finalAxis] < (finalAngle)) {
+			// 		setStep("3_END");
+			// 	}
+			// }
+			if ( Math.abs(everything.current.rotation[finalAxis] - finalAngle) < INCREMENT_AMT*2 || Math.abs(everything.current.rotation[finalAxis] - finalAngle-2*Math.PI) < INCREMENT_AMT*2) {
+				setStep("3_END");
 			}
 		}
     })
@@ -136,9 +145,11 @@ const Cube = (props: {
 			const foo = countNumRightAngles * Math.PI / 2;
 			everything.current.rotation[finalAxis] = foo;
 				
-			const [piv, opp] = getTranslateVectors(finalCorner, side, finalAxis);
-			translateGroup(everything, opp);
-			translateGroup(forPivot, piv);
+			const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
+			// translateGroup(everything, opp);
+			// translateGroup(forPivot, piv);
+			everything.current.position.add(piv);
+
 
 			setStep("0_DEFAULT");
 		}
@@ -180,81 +191,5 @@ const translateGroup = (object : React.MutableRefObject<THREE.Group>, vec : Vect
 	object.current.translateZ(vec.z);
 }
 
-/**
- * Returns the vector that matches the pivot corner picked, and a negation of that vector
- * To be used with translateGroup to translate local/world objects around
- * 
- * @param finalCorner NORTHEAST/SOUTHEAST/SOUTHWEST/NORTHWEST
- * @param side The lenght of one side of the cube
- * @returns two vectors, one equivalent to the pivot and one that is the 
- * opposite of that
- */
-const getTranslateVectors = (finalCorner: cornerType, side: number, finalAxis: axisType) => {
-	console.log(`inside getTranslateVectors (${finalCorner}, ${side}, ${finalAxis})`);
-
-	let vec = new Vector3(-3,-3,-3);
-
-	switch (finalAxis) {
-		case "z":
-			switch(finalCorner) {
-				case "NorthEast": //(x+1, y+1)
-					vec = new Vector3(side/2, side/2, 0);
-					break;
-				case "SouthEast": //(x+1, y-1)
-					vec = new Vector3(side/2, -side/2, 0);
-					break;
-				case "SouthWest": //(x-1, y-1)
-					vec = new Vector3(-side/2, -side/2, 0);
-					break;
-				case "NorthWest": //(x-1, y+1)
-					vec = new Vector3(-side/2, side/2, 0);
-					break;
-				default:
-					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
-			}
-			break;
-		case "x":
-			switch(finalCorner) {
-				case "NorthEast": 
-					vec = new Vector3(0, side/2, -side/2);
-					break;
-				case "SouthEast": 
-					vec = new Vector3(0, -side/2, -side/2);
-					break;
-				case "SouthWest": 
-					vec = new Vector3(0, -side/2, side/2);
-					break;
-				case "NorthWest": 
-					vec = new Vector3(0, side/2, side/2);
-					break;
-				default:
-					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
-			}
-			break;
-		// case "y":
-		default:
-			switch(finalCorner) {
-				case "NorthEast": 
-					vec = new Vector3(side/2, 0, -side/2);
-					break;
-				case "SouthEast": 
-					vec = new Vector3(side/2, 0, side/2);
-					break;
-				case "SouthWest": 
-					vec = new Vector3(-side/2, 0, side/2);
-					break;
-				case "NorthWest": 
-					vec = new Vector3(-side/2, 0, -side/2);
-					break;
-				default:
-					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
-			}
-			break;
-	}
-
-	let opp = vec.clone();
-	opp.negate()
-	return [vec, opp]
-}
 
 export default Cube;
