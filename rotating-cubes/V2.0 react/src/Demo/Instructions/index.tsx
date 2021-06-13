@@ -144,20 +144,20 @@ const Instructions = (props: {
                 {
                     cubeID: 1,
                     axis: "x",
-                    corner: "NorthEast",
+                    corner: "NorthWest",
                     displacement: -Math.PI/2,
                     timeToStart: 2000,
                 },
                 {
                     cubeID: 2,
                     axis: "x",
-                    corner: "NorthEast",
-                    displacement: Math.PI/2,
+                    corner: "NorthWest",
+                    displacement: -Math.PI/2,
                     timeToStart: 2000,
                 },
             ])
         }}>
-            Pivot multi-axis (away, up, towards) [NOT WORKING]
+            Pivot multi-axis (away, up, towards) [2/3 WORKING]
         </button>
     )
 

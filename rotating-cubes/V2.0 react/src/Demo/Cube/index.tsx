@@ -90,7 +90,7 @@ const Cube = (props: {
 
 	// 1. Move object to the pivot point
 	// 1.1 Local - Subtract the pivot point from the object's original position
-	const INCREMENT_AMT = 0.05; //increase this number to make the cubes rotate faster
+	const INCREMENT_AMT = 0.06; //increase this number to make the cubes rotate faster
 	const [maxIteration, setMaxIteration] = useState(0);
 	const [iteration, setIteration] = useState(0);
 	useEffect(() => {
@@ -108,7 +108,7 @@ const Cube = (props: {
 	// 2. Apply the rotation
 	useFrame(() => {
 		if (step === "2_ROTATING") {
-			console.log("(start of step 2_ROTATING)");
+			// console.log("(start of step 2_ROTATING)");
 			// -- While Rotating --
 			if (finalDisplacement > 0) {
 				everything.current.rotateOnAxis(getAxisFromText(finalAxis), INCREMENT_AMT)
@@ -120,15 +120,15 @@ const Cube = (props: {
 			}
 			setIteration(iteration+1);
 			// // -- Done Rotating --
-			console.log("axis for Quarternion: ", getAxisFromText(finalAxis));
-			console.log("everything.current.rotation: ", everything.current.rotation);
+			// console.log("axis for Quarternion: ", getAxisFromText(finalAxis));
+			// console.log("everything.current.rotation: ", everything.current.rotation);
 			if (iteration >= maxIteration) {
 				setStep("3_END");
 			}
 			// if (Math.abs(everything.current.rotation[finalAxis] - limitAngleRange(finalAngle)) < 0.1) {
 			// 	setStep("3_END");
 			// }
-			console.log("(end of step 2_ROTATING)");
+			// console.log("(end of step 2_ROTATING)");
 		}
     })
 	
