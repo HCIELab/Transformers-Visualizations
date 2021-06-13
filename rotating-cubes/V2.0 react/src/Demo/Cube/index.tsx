@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Color, useFrame } from "@react-three/fiber";
-import { DoubleSide, Quaternion, Vector3, Vector4 } from 'three';
+import { DoubleSide, Quaternion, Vector3 } from 'three';
 import Labeling from "./labeling";
 import { axisType, cornerType, instructionType, rotationStep } from '../Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
@@ -105,8 +105,9 @@ const Cube = (props: {
 	// 2. Apply the rotation
 	useFrame(() => {
 		if (step === "2_ROTATING") {
+			console.log("(start of step 2_ROTATING)");
 			// -- While Rotating --
-			const INCREMENT_AMT = 0.06; //increase this number to make the cubes rotate faster
+			const INCREMENT_AMT = 0.01; //increase this number to make the cubes rotate faster
 			if (finalDisplacement > 0) {
 				everything.current.rotation.setFromQuaternion(
 					new Quaternion().setFromAxisAngle(
@@ -124,8 +125,9 @@ const Cube = (props: {
 				// everything.current.rotation[finalAxis] -= INCREMENT_AMT;
 			}
 			// // -- Done Rotating --
-			console.log(everything.current.rotation[finalAxis], limitAngleRange(finalAngle));
-			if (Math.abs(everything.current.rotation[finalAxis] - limitAngleRange(finalAngle)) < INCREMENT_AMT*2) {
+			console.log("axis for Quarternion: ", getAxisFromText(finalAxis));
+			console.log("everything.current.rotation: ", everything.current.rotation);
+			if (Math.abs(everything.current.rotation[finalAxis] - limitAngleRange(finalAngle)) < 0.1) {
 				setStep("3_END");
 			}
 			// if (finalDisplacement > 0) {
@@ -138,6 +140,7 @@ const Cube = (props: {
 			// 		setStep("3_END");
 			// 	}
 			// }
+			console.log("(end of step 2_ROTATING)");
 		}
     })
 	
@@ -146,6 +149,7 @@ const Cube = (props: {
 	// 3.1 Move the object back by the pivot 
 	useEffect(() => {
 		if (step === "3_END") {
+			console.log("(start of step 3_END)");
 			/**
 			 * Also at the end of the rotation, snap it to the nearest 90 degrees
 			 * Make sure to execute this step (of finishing the rotation) before 
@@ -163,9 +167,9 @@ const Cube = (props: {
 
 			setStep("0_DEFAULT");
 
-			console.log("****");
 			console.log("finalAxis: ", finalAxis);
 			console.log("pointOfRotation", getPointOfRotation(finalCorner, side, finalAxis));
+			console.log("(end of step 3_END)");
 		}
 	}, [step, finalAxis, finalCorner]) 
 
