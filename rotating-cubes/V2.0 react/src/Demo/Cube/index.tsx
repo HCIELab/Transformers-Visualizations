@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Color, useFrame } from "@react-three/fiber";
-import { DoubleSide, Vector3, Vector4 } from 'three';
+import { DoubleSide, Quaternion, Vector3, Vector4 } from 'three';
 import Labeling from "./labeling";
 import { axisType, cornerType, instructionType, rotationStep } from '../Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
+import { getAxisFromText } from "./helpers/getAxisFromText";
+import { limitAngleRange } from "./helpers/limitAngleRange";
 
 
 const Cube = (props: {
@@ -94,7 +96,9 @@ const Cube = (props: {
 			translateGroup(everything, piv);
 			translateGroup(forPivot, opp);
 
-			setStep("2_ROTATING");
+			setTimeout(() => 
+				setStep("2_ROTATING")
+			, 1000)
 		}
 	}, [step, finalAxis, finalCorner])
 
@@ -104,22 +108,36 @@ const Cube = (props: {
 			// -- While Rotating --
 			const INCREMENT_AMT = 0.06; //increase this number to make the cubes rotate faster
 			if (finalDisplacement > 0) {
-				everything.current.rotation[finalAxis] += INCREMENT_AMT;
+				everything.current.rotation.setFromQuaternion(
+					new Quaternion().setFromAxisAngle(
+						getAxisFromText(finalAxis), 
+						everything.current.rotation[finalAxis] + INCREMENT_AMT)
+				)
+				// everything.current.rotation[finalAxis] += INCREMENT_AMT;
 			}
 			else {
-				everything.current.rotation[finalAxis] -= INCREMENT_AMT;
+				everything.current.rotation.setFromQuaternion(
+					new Quaternion().setFromAxisAngle(
+						getAxisFromText(finalAxis), 
+						everything.current.rotation[finalAxis] - INCREMENT_AMT)
+				)
+				// everything.current.rotation[finalAxis] -= INCREMENT_AMT;
 			}
 			// // -- Done Rotating --
-			if (finalDisplacement > 0) {
-				if (everything.current.rotation[finalAxis] > finalAngle) {
-					setStep("3_END");
-				}
+			console.log(everything.current.rotation[finalAxis], limitAngleRange(finalAngle));
+			if (Math.abs(everything.current.rotation[finalAxis] - limitAngleRange(finalAngle)) < INCREMENT_AMT*2) {
+				setStep("3_END");
 			}
-			else {
-				if (everything.current.rotation[finalAxis] < finalAngle) {
-					setStep("3_END");
-				}
-			}
+			// if (finalDisplacement > 0) {
+			// 	if (everything.current.rotation[finalAxis] > finalAngle) {
+			// 		setStep("3_END");
+			// 	}
+			// }
+			// else {
+			// 	if (everything.current.rotation[finalAxis] < finalAngle) {
+			// 		setStep("3_END");
+			// 	}
+			// }
 		}
     })
 	
