@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Color, useFrame } from "@react-three/fiber";
-import { DoubleSide, Vector3 } from 'three';
+import { DoubleSide, Vector3, Vector4 } from 'three';
 import Labeling from "./labeling";
 import { axisType, cornerType, instructionType, rotationStep } from '../Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
@@ -144,6 +144,10 @@ const Cube = (props: {
 			translateGroup(forPivot, piv);
 
 			setStep("0_DEFAULT");
+
+			console.log("****");
+			console.log("finalAxis: ", finalAxis);
+			console.log("pointOfRotation", getPointOfRotation(finalCorner, side, finalAxis));
 		}
 	}, [step, finalAxis, finalCorner]) 
 
@@ -160,6 +164,11 @@ const Cube = (props: {
 			onPointerOut={(event) => setHover(false)}
 			// position={props.initialPosition}
 		>
+			<axesHelper position={new Vector3(-0.5, 0, 0)} />
+			<mesh>
+				<boxGeometry args={[side+0.2, side+0.2, side+0.2]} />
+				<meshPhongMaterial color={"rgb(0, 204, 255)"} opacity={0.2} transparent={true} side={DoubleSide}/>
+			</mesh>
 			<group ref={forPivot}>
 				<mesh>
 					<boxGeometry args={[side, side, side]} />
@@ -171,6 +180,7 @@ const Cube = (props: {
 					side={side}
 					rAxis={props.rAxis}
 				/>
+				<axesHelper/>
 			</group>
 		</group>
 	)
