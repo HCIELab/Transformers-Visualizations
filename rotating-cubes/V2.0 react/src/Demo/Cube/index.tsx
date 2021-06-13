@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Color, useFrame } from "@react-three/fiber";
-import { DoubleSide, Euler, Quaternion, Vector3 } from 'three';
+import { DoubleSide, Vector3 } from 'three';
 import Labeling from "./labeling";
 import { axisType, cornerType, instructionType, rotationStep } from '../Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
@@ -90,13 +90,18 @@ const Cube = (props: {
 
 	// 1. Move object to the pivot point
 	// 1.1 Local - Subtract the pivot point from the object's original position
+	const INCREMENT_AMT = 0.05; //increase this number to make the cubes rotate faster
+	const [maxIteration, setMaxIteration] = useState(0);
+	const [iteration, setIteration] = useState(0);
 	useEffect(() => {
 		if (step === "1_CLICKED") {
 			const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
 			translateGroup(everything, piv);
 			translateGroup(forPivot, opp);
 
-			setStep("2_ROTATING")
+			setMaxIteration(Math.abs(finalDisplacement / INCREMENT_AMT));
+			setIteration(0);
+			setStep("2_ROTATING");
 		}
 	}, [step, finalAxis, finalCorner])
 
@@ -105,46 +110,23 @@ const Cube = (props: {
 		if (step === "2_ROTATING") {
 			console.log("(start of step 2_ROTATING)");
 			// -- While Rotating --
-			const INCREMENT_AMT = 0.05; //increase this number to make the cubes rotate faster
 			if (finalDisplacement > 0) {
 				everything.current.rotateOnAxis(getAxisFromText(finalAxis), INCREMENT_AMT)
-				// everything.current.rotation.setFromQuaternion(
-				// 	new Quaternion().setFromEuler(new Euler(
-				// 		limitAngleRange(everything.current.rotation['x'] + (finalAxis === 'x' ? INCREMENT_AMT : 0)), 
-				// 		limitAngleRange(everything.current.rotation['y'] + (finalAxis === 'y' ? INCREMENT_AMT : 0)), 
-				// 		limitAngleRange(everything.current.rotation['z'] + (finalAxis === 'z' ? INCREMENT_AMT : 0)),
-				// 	))
-				// )
 				console.log("incrementing up");
-				// everything.current.rotation[finalAxis] += INCREMENT_AMT;
 			}
 			else {
 				everything.current.rotateOnAxis(getAxisFromText(finalAxis), -INCREMENT_AMT)
-				// everything.current.rotation.setFromQuaternion(
-				// 	new Quaternion().setFromEuler(new Euler(
-				// 		limitAngleRange(everything.current.rotation['x'] - (finalAxis === 'x' ? INCREMENT_AMT : 0)), 
-				// 		limitAngleRange(everything.current.rotation['y'] - (finalAxis === 'y' ? INCREMENT_AMT : 0)), 
-				// 		limitAngleRange(everything.current.rotation['z'] - (finalAxis === 'z' ? INCREMENT_AMT : 0)),
-				// 	))
-				// )
 				console.log("decrementing down");
-				// everything.current.rotation[finalAxis] -= INCREMENT_AMT;
 			}
+			setIteration(iteration+1);
 			// // -- Done Rotating --
 			console.log("axis for Quarternion: ", getAxisFromText(finalAxis));
 			console.log("everything.current.rotation: ", everything.current.rotation);
-			if (Math.abs(everything.current.rotation[finalAxis] - limitAngleRange(finalAngle)) < 0.1) {
+			if (iteration >= maxIteration) {
 				setStep("3_END");
 			}
-			// if (finalDisplacement > 0) {
-			// 	if (everything.current.rotation[finalAxis] > finalAngle) {
-			// 		setStep("3_END");
-			// 	}
-			// }
-			// else {
-			// 	if (everything.current.rotation[finalAxis] < finalAngle) {
-			// 		setStep("3_END");
-			// 	}
+			// if (Math.abs(everything.current.rotation[finalAxis] - limitAngleRange(finalAngle)) < 0.1) {
+			// 	setStep("3_END");
 			// }
 			console.log("(end of step 2_ROTATING)");
 		}
@@ -165,6 +147,11 @@ const Cube = (props: {
 				everything.current.rotation[finalAxis] / (Math.PI / 2)
 			); 
 			const foo = countNumRightAngles * Math.PI / 2;
+			/**
+			 * TODO:
+			 * may have to change how we set the rotation here
+			 * to using quarternions
+			 */
 			everything.current.rotation[finalAxis] = foo;
 				
 			const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
