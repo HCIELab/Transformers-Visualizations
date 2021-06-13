@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Color, useFrame } from "@react-three/fiber";
-import { DoubleSide, Quaternion, Vector3 } from 'three';
+import { DoubleSide, Euler, Quaternion, Vector3 } from 'three';
 import Labeling from "./labeling";
 import { axisType, cornerType, instructionType, rotationStep } from '../Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
@@ -96,9 +96,7 @@ const Cube = (props: {
 			translateGroup(everything, piv);
 			translateGroup(forPivot, opp);
 
-			setTimeout(() => 
-				setStep("2_ROTATING")
-			, 1000)
+			setStep("2_ROTATING")
 		}
 	}, [step, finalAxis, finalCorner])
 
@@ -107,21 +105,29 @@ const Cube = (props: {
 		if (step === "2_ROTATING") {
 			console.log("(start of step 2_ROTATING)");
 			// -- While Rotating --
-			const INCREMENT_AMT = 0.01; //increase this number to make the cubes rotate faster
+			const INCREMENT_AMT = 0.05; //increase this number to make the cubes rotate faster
 			if (finalDisplacement > 0) {
-				everything.current.rotation.setFromQuaternion(
-					new Quaternion().setFromAxisAngle(
-						getAxisFromText(finalAxis), 
-						everything.current.rotation[finalAxis] + INCREMENT_AMT)
-				)
+				everything.current.rotateOnAxis(getAxisFromText(finalAxis), INCREMENT_AMT)
+				// everything.current.rotation.setFromQuaternion(
+				// 	new Quaternion().setFromEuler(new Euler(
+				// 		limitAngleRange(everything.current.rotation['x'] + (finalAxis === 'x' ? INCREMENT_AMT : 0)), 
+				// 		limitAngleRange(everything.current.rotation['y'] + (finalAxis === 'y' ? INCREMENT_AMT : 0)), 
+				// 		limitAngleRange(everything.current.rotation['z'] + (finalAxis === 'z' ? INCREMENT_AMT : 0)),
+				// 	))
+				// )
+				console.log("incrementing up");
 				// everything.current.rotation[finalAxis] += INCREMENT_AMT;
 			}
 			else {
-				everything.current.rotation.setFromQuaternion(
-					new Quaternion().setFromAxisAngle(
-						getAxisFromText(finalAxis), 
-						everything.current.rotation[finalAxis] - INCREMENT_AMT)
-				)
+				everything.current.rotateOnAxis(getAxisFromText(finalAxis), -INCREMENT_AMT)
+				// everything.current.rotation.setFromQuaternion(
+				// 	new Quaternion().setFromEuler(new Euler(
+				// 		limitAngleRange(everything.current.rotation['x'] - (finalAxis === 'x' ? INCREMENT_AMT : 0)), 
+				// 		limitAngleRange(everything.current.rotation['y'] - (finalAxis === 'y' ? INCREMENT_AMT : 0)), 
+				// 		limitAngleRange(everything.current.rotation['z'] - (finalAxis === 'z' ? INCREMENT_AMT : 0)),
+				// 	))
+				// )
+				console.log("decrementing down");
 				// everything.current.rotation[finalAxis] -= INCREMENT_AMT;
 			}
 			// // -- Done Rotating --
@@ -186,7 +192,6 @@ const Cube = (props: {
 			onPointerOut={(event) => setHover(false)}
 			// position={props.initialPosition}
 		>
-			<axesHelper position={new Vector3(-0.5, 0, 0)} />
 			<mesh>
 				<boxGeometry args={[side+0.2, side+0.2, side+0.2]} />
 				<meshPhongMaterial color={"rgb(0, 204, 255)"} opacity={0.2} transparent={true} side={DoubleSide}/>
