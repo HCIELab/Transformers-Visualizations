@@ -24,6 +24,12 @@ const PanelContainer = styled.div`
     }
 `;
 
+const AxisButton = styled.button`
+    color: ${props => props.color};
+    font-weight: 900;
+    background-color: #252525;
+`;
+
 const Panel = (props: {
     rAxis: axisType,
     setRAxis: Function,
@@ -45,24 +51,27 @@ const Panel = (props: {
             />
 
             <div>
-                <button 
+                <AxisButton
+                    color={"#df5900"} 
                     onClick={() => props.setRAxis("x")}
                     className={props.rAxis === "x" ? "Selected" : ""}
                 >
-                    x
-                </button>
-                <button 
+                    X
+                </AxisButton>
+                <AxisButton
+                    color={"#07e000"} 
                     onClick={() => props.setRAxis("y")}
                     className={props.rAxis === "y" ? "Selected" : ""}
                 >
-                    y
-                </button>
-                <button 
+                    Y
+                </AxisButton>
+                <AxisButton
+                    color={"#0099ff"} 
                     onClick={() => props.setRAxis("z")}
                     className={props.rAxis === "z" ? "Selected" : ""}
                 >
-                    z
-                </button>
+                    Z
+                </AxisButton>
             </div>
             
             <div>

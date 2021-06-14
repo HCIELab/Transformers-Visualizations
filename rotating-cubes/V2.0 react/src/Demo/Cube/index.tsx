@@ -167,7 +167,7 @@ const Cube = (props: {
 					side={side}
 					rAxis={props.rAxis}
 				/>
-				<axesHelper/>
+				<axesHelper scale={0.3}/>
 			</group>
 		</group>
 	)

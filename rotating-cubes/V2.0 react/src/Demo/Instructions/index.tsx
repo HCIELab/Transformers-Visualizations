@@ -234,7 +234,7 @@ const Instructions = (props: {
         <button onClick={() => {
             props.setCubesAndProperties([
                 {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
-                {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
+                {id: 2, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
             ])
             props.setInstructions([
             ])
