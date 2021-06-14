@@ -7,6 +7,7 @@ import { axisType, cornerType, instructionType, rotationStep } from '../Types/ty
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisFromText } from "./helpers/getAxisFromText";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
+import { translateGroup } from "./helpers/translateGroup";
 
 
 const Cube = (props: {
@@ -144,9 +145,9 @@ const Cube = (props: {
 
 			setStep("0_DEFAULT");
 
-			console.log(`***** (for cube ${props.id}) quarternion:`);
-			console.log(everything.current.quaternion);
-			console.log(everything.current.rotation);
+			// console.log(`***** (for cube ${props.id}) quarternion:`);
+			// console.log(everything.current.quaternion);
+			// console.log(everything.current.rotation);
 		}
 	}, [step, finalAxis, finalCorner]) 
 
@@ -180,10 +181,5 @@ const Cube = (props: {
 }
 
 
-const translateGroup = (object : React.MutableRefObject<THREE.Group>, vec : Vector3) => {
-	object.current.translateX(vec.x);
-	object.current.translateY(vec.y);
-	object.current.translateZ(vec.z);
-}
 
 export default Cube;
