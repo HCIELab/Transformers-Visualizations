@@ -19,10 +19,6 @@ const Cube = (props: {
 	rAxis: axisType,
 	corner: cornerType,
 }) => {
-	/**
-	 * For how to have persistent rotations in ThreeJS, credit to:
-	 * https://stackoverflow.com/questions/44287255/whats-the-right-way-to-rotate-an-object-around-a-point-in-three-js/44288885#:~:text=js%20suggest%20the%20way%20to,child%20rotates%20around%20the%20point.
-	 */
 	const everything = useRef<THREE.Group>(null!);
 	const forPivot = useRef<THREE.Group>(null!);
 	const side = 1;
@@ -31,7 +27,6 @@ const Cube = (props: {
 	const [finalCorner, setFinalCorner] = useState<cornerType>("NorthEast");
 	const [finalAxis, setFinalAxis] = useState<axisType>("x"); 
 	const [finalDisplacement, setFinalDisplacement] = useState(Math.PI);
-	const [finalAngle, setFinalAngle] = useState(0);
 
 	// Debug
 	useEffect(() => {
@@ -52,7 +47,6 @@ const Cube = (props: {
 					setFinalAxis(ins.axis);
 					setFinalCorner(ins.corner);
 					setFinalDisplacement(ins.displacement);
-					setFinalAngle(everything.current.rotation[ins.axis] + ins.displacement);
 		
 					setStep("1_CLICKED");
 				}, ins.timeToStart);
@@ -80,7 +74,6 @@ const Cube = (props: {
 			setFinalAxis(props.rAxis);
 			setFinalCorner(props.corner);
 			setFinalDisplacement(props.rDisplacement);
-			setFinalAngle(everything.current.rotation[props.rAxis] + props.rDisplacement);
 
 			setStep("1_CLICKED");
 		}
