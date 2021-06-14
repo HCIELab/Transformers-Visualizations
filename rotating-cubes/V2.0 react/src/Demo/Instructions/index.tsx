@@ -105,14 +105,14 @@ const Instructions = (props: {
                     axis: "z",
                     corner: "NorthWest",
                     displacement: -Math.PI/2,
-                    timeToStart: 2000,
+                    timeToStart: 3000,
                 },
                 {
                     cubeID: 2,
                     axis: "z",
                     corner: "NorthEast",
                     displacement: Math.PI/2,
-                    timeToStart: 2000,
+                    timeToStart: 3000,
                 },
             ])
         }}>
@@ -146,14 +146,14 @@ const Instructions = (props: {
                     axis: "x",
                     corner: "NorthWest",
                     displacement: -Math.PI/2,
-                    timeToStart: 2000,
+                    timeToStart: 3000,
                 },
                 {
                     cubeID: 2,
                     axis: "x",
                     corner: "NorthWest",
                     displacement: -Math.PI/2,
-                    timeToStart: 2000,
+                    timeToStart: 3000,
                 },
             ])
         }}>
@@ -182,21 +182,21 @@ const Instructions = (props: {
                     axis: "z",
                     corner: "SouthEast",
                     displacement: Math.PI/2,
-                    timeToStart: 2000,
-                },
-                {
-                    cubeID: 3,
-                    axis: "z",
-                    corner: "SouthEast",
-                    displacement: -Math.PI/2,
                     timeToStart: 3000,
                 },
                 {
                     cubeID: 3,
                     axis: "z",
                     corner: "SouthEast",
+                    displacement: -Math.PI/2,
+                    timeToStart: 5000,
+                },
+                {
+                    cubeID: 3,
+                    axis: "z",
+                    corner: "SouthEast",
                     displacement: Math.PI/2,
-                    timeToStart: 4000,
+                    timeToStart: 7000,
                 },
             ])
         }}>
@@ -216,6 +216,19 @@ const Instructions = (props: {
         </button>
     )
 
+    const button6 = (
+        <button onClick={() => {
+            props.setCubesAndProperties([
+                {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
+                {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
+            ])
+            props.setInstructions([
+            ])
+        }}>
+            Just 2 cubes
+        </button>
+    )
+
     return (
         <div>
             <h1>
@@ -227,6 +240,7 @@ const Instructions = (props: {
             {button3}
             {button4}
             {button5}
+            {button6}
 
         </div>
     )

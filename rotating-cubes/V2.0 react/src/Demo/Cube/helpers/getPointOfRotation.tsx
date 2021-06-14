@@ -11,8 +11,6 @@ import { axisType, cornerType } from '../../Types/types';
  * opposite of that
  */
  export const getPointOfRotation = (finalCorner: cornerType, side: number, finalAxis: axisType) => {
-	console.log(`inside getTranslateVectors (${finalCorner}, ${side}, ${finalAxis})`);
-
 	let piv = new Vector3(-3,-3,-3);
 
 	switch (finalAxis) {
@@ -75,8 +73,6 @@ import { axisType, cornerType } from '../../Types/types';
 
 	let opp = piv.clone();
 	opp.negate()
-
-    console.log("piv: ", piv);
 
 	return [piv, opp]
 }

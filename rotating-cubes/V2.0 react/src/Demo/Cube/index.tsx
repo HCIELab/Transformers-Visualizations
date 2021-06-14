@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Color, useFrame } from "@react-three/fiber";
-import { DoubleSide, Vector3 } from 'three';
+import { DoubleSide, Euler, Vector3 } from 'three';
 import Labeling from "./labeling";
 import { axisType, cornerType, instructionType, rotationStep } from '../Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisFromText } from "./helpers/getAxisFromText";
-import { limitAngleRange } from "./helpers/limitAngleRange";
+import { roundToRightAngle } from "./helpers/roundToRightAngle";
 
 
 const Cube = (props: {
@@ -90,7 +90,7 @@ const Cube = (props: {
 
 	// 1. Move object to the pivot point
 	// 1.1 Local - Subtract the pivot point from the object's original position
-	const INCREMENT_AMT = 0.06; //increase this number to make the cubes rotate faster
+	const INCREMENT_AMT = 0.1; //increase this number to make the cubes rotate faster
 	const [maxIteration, setMaxIteration] = useState(0);
 	const [iteration, setIteration] = useState(0);
 	useEffect(() => {
@@ -108,27 +108,17 @@ const Cube = (props: {
 	// 2. Apply the rotation
 	useFrame(() => {
 		if (step === "2_ROTATING") {
-			// console.log("(start of step 2_ROTATING)");
 			// -- While Rotating --
 			if (finalDisplacement > 0) {
 				everything.current.rotateOnAxis(getAxisFromText(finalAxis), INCREMENT_AMT)
-				console.log("incrementing up");
 			}
 			else {
 				everything.current.rotateOnAxis(getAxisFromText(finalAxis), -INCREMENT_AMT)
-				console.log("decrementing down");
 			}
 			setIteration(iteration+1);
-			// // -- Done Rotating --
-			// console.log("axis for Quarternion: ", getAxisFromText(finalAxis));
-			// console.log("everything.current.rotation: ", everything.current.rotation);
 			if (iteration >= maxIteration) {
 				setStep("3_END");
 			}
-			// if (Math.abs(everything.current.rotation[finalAxis] - limitAngleRange(finalAngle)) < 0.1) {
-			// 	setStep("3_END");
-			// }
-			// console.log("(end of step 2_ROTATING)");
 		}
     })
 	
@@ -137,22 +127,16 @@ const Cube = (props: {
 	// 3.1 Move the object back by the pivot 
 	useEffect(() => {
 		if (step === "3_END") {
-			console.log("(start of step 3_END)");
 			/**
 			 * Also at the end of the rotation, snap it to the nearest 90 degrees
 			 * Make sure to execute this step (of finishing the rotation) before 
 			 * the positions are moved again.
 			 */
-			const countNumRightAngles = Math.round(
-				everything.current.rotation[finalAxis] / (Math.PI / 2)
-			); 
-			const foo = countNumRightAngles * Math.PI / 2;
-			/**
-			 * TODO:
-			 * may have to change how we set the rotation here
-			 * to using quarternions
-			 */
-			everything.current.rotation[finalAxis] = foo;
+			everything.current.setRotationFromEuler(new Euler(
+				roundToRightAngle(everything.current.rotation.x),
+				roundToRightAngle(everything.current.rotation.y),
+				roundToRightAngle(everything.current.rotation.z)
+			))
 				
 			const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
 			translateGroup(everything, opp);
@@ -160,9 +144,9 @@ const Cube = (props: {
 
 			setStep("0_DEFAULT");
 
-			console.log("finalAxis: ", finalAxis);
-			console.log("pointOfRotation", getPointOfRotation(finalCorner, side, finalAxis));
-			console.log("(end of step 3_END)");
+			console.log(`***** (for cube ${props.id}) quarternion:`);
+			console.log(everything.current.quaternion);
+			console.log(everything.current.rotation);
 		}
 	}, [step, finalAxis, finalCorner]) 
 
@@ -177,12 +161,7 @@ const Cube = (props: {
 			onClick={handleClick}
 			onPointerOver={(event) => setHover(true)}
 			onPointerOut={(event) => setHover(false)}
-			// position={props.initialPosition}
 		>
-			<mesh>
-				<boxGeometry args={[side+0.2, side+0.2, side+0.2]} />
-				<meshPhongMaterial color={"rgb(0, 204, 255)"} opacity={0.2} transparent={true} side={DoubleSide}/>
-			</mesh>
 			<group ref={forPivot}>
 				<mesh>
 					<boxGeometry args={[side, side, side]} />
