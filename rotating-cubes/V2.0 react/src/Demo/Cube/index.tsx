@@ -97,7 +97,7 @@ const Cube = (props: {
 			setIteration(0);
 			setStep("2_ROTATING");
 		}
-	}, [step, finalAxis, finalCorner])
+	}, [step, finalAxis, finalCorner, finalDisplacement])
 
 	// 2. Apply the rotation
 	useFrame(() => {
