@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import ThreeControls from "./ThreeControls";
-import { axisType, cornerType, cubeAndPropertiesType, instructionType } from '../Util/Types/types';
+import { axisType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';
 import Cube from './Cube';
 
 const World = (props: {
-    cubesAndProperties: cubeAndPropertiesType[],
+    initialCubeConfigs: initialCubeConfigType[],
     instructions: instructionType[],
     rDisplacement: number,
     rAxis: axisType,
     corner: cornerType,
-
 }) => {
-    
+    const [locations, setLocations] = useState([]);    
+
     return (
         <Canvas>
             <ambientLight />
@@ -20,7 +20,7 @@ const World = (props: {
             <ThreeControls/>
             <axesHelper position={[-0.5, -0.5, 0]} scale={0.5}/>
             {
-                props.cubesAndProperties.map((config) => 
+                props.initialCubeConfigs.map((config) => 
                     <Cube
                         instructions={props.instructions}
                         key={config.id}

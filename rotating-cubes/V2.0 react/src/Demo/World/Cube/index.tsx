@@ -33,12 +33,9 @@ const Cube = (props: {
 		console.log(`(for cube ${props.id}) step: ${step}`);
 	})
 
+	// Handling instructions
 	useEffect(() => {
 		console.log("STARTING INSTRUCTIONS");
-		// Start with rotations being 0
-		everything.current.rotation['x'] = 0;
-		everything.current.rotation['y'] = 0;
-		everything.current.rotation['z'] = 0;
 		props.instructions
 			.filter((ins) => ins.cubeID === props.id)
 			.forEach((ins) => {
@@ -53,14 +50,22 @@ const Cube = (props: {
 			})
 	}, [props.id, props.instructions])
 
-	// -1. Place cube at initial position on first render
+
+
+	
+	// Place cube at initial position and rotation on first render
 	useEffect(() => {
 		everything.current.position.x = props.initialPosition.x;
 		everything.current.position.y = props.initialPosition.y;
 		everything.current.position.z = props.initialPosition.z;
+		// Just make sure forPivot is at its local center
 		forPivot.current.position.x = 0;
 		forPivot.current.position.y = 0;
 		forPivot.current.position.z = 0;
+		// Start with rotations being 0
+		everything.current.rotation['x'] = 0;
+		everything.current.rotation['y'] = 0;
+		everything.current.rotation['z'] = 0;
 		console.log("CUBE POSITIONS WERE SET TO INITIAL");
 	}, [props.initialPosition])
 
