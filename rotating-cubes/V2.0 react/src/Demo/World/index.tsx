@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import ThreeControls from "./ThreeControls";
 import { axisType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';
 import Cube from './Cube';
+import { Euler, Vector3 } from 'three';
 
 const World = (props: {
     initialCubeConfigs: initialCubeConfigType[],
@@ -31,6 +32,7 @@ const World = (props: {
             <pointLight position={[10, 10, 10]} />
             <ThreeControls/>
             <axesHelper position={[-0.5, -0.5, 0]} scale={0.5}/>
+            <gridHelper rotation={new Euler(Math.PI/2, 0, 0)} position={[0.5, 0.5, 0]}/>
             {
                 props.initialCubeConfigs.map((config) => 
                     <Cube
