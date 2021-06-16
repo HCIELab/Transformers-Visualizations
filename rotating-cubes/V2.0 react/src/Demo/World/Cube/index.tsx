@@ -18,6 +18,8 @@ const Cube = (props: {
 	rDisplacement: number,
 	rAxis: axisType,
 	corner: cornerType,
+	updatePosition: Function,
+	allPositions: any,
 }) => {
 	const everything = useRef<THREE.Group>(null!);
 	const forPivot = useRef<THREE.Group>(null!);
@@ -68,6 +70,15 @@ const Cube = (props: {
 		everything.current.rotation['z'] = 0;
 		console.log("CUBE POSITIONS WERE SET TO INITIAL");
 	}, [props.initialPosition])
+
+	// Update the position of the cube and store this information in the Parent component
+	const updatePosition = props.updatePosition;
+	useEffect(() => {
+		if (step === "0_DEFAULT") {
+			updatePosition(everything.current.position);
+		}
+	}, [step, updatePosition])
+
 
 	// 0. Click to start the rotation
 	const handleClick = () => {

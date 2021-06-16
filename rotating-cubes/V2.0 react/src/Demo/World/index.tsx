@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import ThreeControls from "./ThreeControls";
 import { axisType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';
@@ -11,7 +11,22 @@ const World = (props: {
     rAxis: axisType,
     corner: cornerType,
 }) => {
-    const [locations, setLocations] = useState([]);    
+    let allPositions : any = {};
+    useEffect(() => {
+        props.initialCubeConfigs.forEach((config) => {
+            allPositions[config.id] = config.initialPosition;
+        })
+    })
+ 
+    const setPosition = (cubeID : number) => {   
+        return (newPosition : number) => {
+            console.log("*****inside setPosition");
+            delete allPositions[cubeID];
+            allPositions[cubeID] = newPosition;
+            console.log(`(in cube ${cubeID})`, newPosition);
+            console.log(`(in cube ${cubeID})`, JSON.parse(JSON.stringify(allPositions)));
+        }
+    }
 
     return (
         <Canvas>
@@ -30,6 +45,8 @@ const World = (props: {
                         rDisplacement={props.rDisplacement}
                         rAxis={props.rAxis}
                         corner={props.corner}
+                        updatePosition={setPosition(config.id)}
+                        allPositions={allPositions}
                     />
                 )
             }
