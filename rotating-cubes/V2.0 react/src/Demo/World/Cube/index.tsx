@@ -8,6 +8,7 @@ import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisFromText } from "./helpers/getAxisFromText";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
 import { translateGroup } from "./helpers/translateGroup";
+import { detectCollisionsInPath } from "./helpers/detectCollisionsInPath";
 
 
 const Cube = (props: {
@@ -117,14 +118,19 @@ const Cube = (props: {
 			/**
 			 * TODO: check for collisions in your path before you start rotating
 			 */
-
-			const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
-			translateGroup(everything, piv);
-			translateGroup(forPivot, opp);
-
-			setMaxIteration(Math.abs(finalDisplacement / INCREMENT_AMT));
-			setIteration(0);
-			setStep("2_ROTATING");
+			if (detectCollisionsInPath(finalCorner, finalAxis, finalDisplacement > 0, everything.current.position, props.allPositions)) {
+				alert("Sorry there is a collision in your path!")
+				setStep("0_DEFAULT");
+			}
+			else {
+				const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
+				translateGroup(everything, piv);
+				translateGroup(forPivot, opp);
+	
+				setMaxIteration(Math.abs(finalDisplacement / INCREMENT_AMT));
+				setIteration(0);
+				setStep("2_ROTATING");
+			}
 		}
 	}, [step, finalAxis, finalCorner, finalDisplacement])
 

@@ -31,7 +31,7 @@ const World = (props: {
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
             <ThreeControls/>
-            <axesHelper position={[-0.5, -0.5, 0]} scale={0.5}/>
+            <axesHelper position={[-0.51, -0.51, 0]} scale={2}/>
             <gridHelper rotation={new Euler(Math.PI/2, 0, 0)} position={[0.5, 0.5, 0]}/>
             {
                 props.initialCubeConfigs.map((config) => 
