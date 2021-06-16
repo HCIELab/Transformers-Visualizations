@@ -8,6 +8,7 @@ import ThreeControls from "./ThreeControls";
 import Panel from "./Panel";
 import Instructions from "./Instructions";
 import { axisType, cornerType, cubeAndPropertiesType, instructionType } from './Types/types';
+import World from "./World";
 
 const DemoContainer = styled.div`
     width: 100%;
@@ -70,26 +71,13 @@ const Demo = () => {
             />
 
             <div className="BottomSection">
-                <Canvas>
-                    <ambientLight />
-                    <pointLight position={[10, 10, 10]} />
-                    <ThreeControls/>
-                    <axesHelper position={[-0.5, -0.5, 0]} scale={0.5}/>
-                    {
-                        cubesAndProperties.map((config) => 
-                            <Cube 
-                                instructions={instructions}
-                                key={config.id}
-                                id={config.id} 
-                                initialPosition={config.initialPosition} 
-                                color={config.color} 
-                                rDisplacement={rDisplacement}
-                                rAxis={rAxis}
-                                corner={corner}
-                            />
-                        )
-                    }
-                </Canvas>
+                <World
+                    cubesAndProperties={cubesAndProperties}
+                    instructions={instructions}
+                    rDisplacement={rDisplacement}
+                    rAxis={rAxis}
+                    corner={corner}
+                />
             </div>
         </DemoContainer>
     )
