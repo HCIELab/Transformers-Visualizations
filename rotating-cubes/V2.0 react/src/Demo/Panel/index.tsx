@@ -8,12 +8,12 @@ import {Clockwise180Icon, Clockwise90Icon, Counterclockwise90Icon, Counterclockw
 
 const PanelContainer = styled.div`
     width: 100%;
-    height: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
+    /* border: 10px solid lime; */
 
     button {
         margin: 4px 5px;

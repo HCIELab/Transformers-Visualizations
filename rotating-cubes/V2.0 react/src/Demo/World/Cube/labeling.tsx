@@ -3,8 +3,8 @@ import React, { useEffect, useRef } from 'react';
 import "@react-three/fiber";
 import { FontLoader } from 'three';
 import Roboto from "./Roboto_Regular.json";
-import { axisType } from '../Types/types';
-import { numbers } from '../Numbering/numbers';
+import { axisType } from '../../Types/types';
+import { numbers } from '../../Numbering/numbers';
 
 const Labeling = (props: {
 	cubeID: number,

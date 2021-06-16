@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Color, useFrame } from "@react-three/fiber";
 import { DoubleSide, Euler, Vector3 } from 'three';
 import Labeling from "./labeling";
-import { axisType, cornerType, instructionType, rotationStep } from '../Types/types';
+import { axisType, cornerType, instructionType, rotationStep } from '../../Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisFromText } from "./helpers/getAxisFromText";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";

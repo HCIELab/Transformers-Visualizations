@@ -16,6 +16,7 @@ const PivotChooserContainer = styled.div<{corner: cornerType}>`
     }
     .Instructions {
         font-size: 20px;
+        font-family: 'Trebuchet MS', sans-serif;
     }
 
     .MannequinSquare {
@@ -79,7 +80,7 @@ const PivotChooser = (props: {
     return (
         <PivotChooserContainer corner={props.corner}>
             <p className="Instructions">
-                Choose your pivot point here:
+                Choose a pivot point and direction. Then click on a cube to make it move.
             </p>
 
             <div className="MannequinSquare">

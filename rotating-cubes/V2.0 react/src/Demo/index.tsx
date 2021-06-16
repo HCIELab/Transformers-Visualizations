@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 
 import styled from 'styled-components';
-import { Canvas } from '@react-three/fiber';
 
-import Cube from "./Cube";
-import ThreeControls from "./ThreeControls";
 import Panel from "./Panel";
 import Instructions from "./Instructions";
 import { axisType, cornerType, cubeAndPropertiesType, instructionType } from './Types/types';

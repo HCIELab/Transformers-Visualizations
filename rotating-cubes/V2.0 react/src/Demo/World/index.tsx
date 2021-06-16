@@ -1,8 +1,8 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import ThreeControls from "../ThreeControls";
+import ThreeControls from "./ThreeControls";
 import { axisType, cornerType, cubeAndPropertiesType, instructionType } from '../Types/types';
-import Cube from '../Cube';
+import Cube from './Cube';
 
 const World = (props: {
     cubesAndProperties: cubeAndPropertiesType[],
