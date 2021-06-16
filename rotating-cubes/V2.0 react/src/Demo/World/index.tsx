@@ -20,11 +20,8 @@ const World = (props: {
  
     const setPosition = (cubeID : number) => {   
         return (newPosition : number) => {
-            console.log("*****inside setPosition");
             delete allPositions[cubeID];
             allPositions[cubeID] = newPosition;
-            console.log(`(in cube ${cubeID})`, newPosition);
-            console.log(`(in cube ${cubeID})`, JSON.parse(JSON.stringify(allPositions)));
         }
     }
 
