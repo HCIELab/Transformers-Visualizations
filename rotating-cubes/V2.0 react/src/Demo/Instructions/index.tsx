@@ -1,6 +1,22 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { Vector3 } from 'three';
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: row;
+    padding: 5px 0;
+
+    .ScriptsHeading {
+        font-weight: 600;
+        padding: 0px 5px;
+    }
+    button {
+        margin: 0 5px;
+        cursor: pointer;
+    }
+`;
 
 const Instructions = (props: {
     setInstructions: Function,
@@ -244,15 +260,18 @@ const Instructions = (props: {
     )
 
     return (
-        <div>
+        <Container>
+            <div className={"ScriptsHeading"}>
+                Pre-defined Scripts:
+            </div>
+
             {button1}
             {button2}
             {button3}
             {button4}
             {button5}
             {button6}
-
-        </div>
+        </Container>
     )
 }
 

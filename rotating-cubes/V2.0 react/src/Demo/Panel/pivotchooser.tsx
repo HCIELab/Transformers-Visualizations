@@ -14,11 +14,6 @@ const PivotChooserContainer = styled.div<{corner: cornerType}>`
     p {
         margin: 0;
     }
-    .Note {
-        font-size: 12px;
-        color: gray;
-        padding-bottom: 10px;
-    }
     .Instructions {
         font-size: 20px;
     }
@@ -83,9 +78,6 @@ const PivotChooser = (props: {
     
     return (
         <PivotChooserContainer corner={props.corner}>
-            <p className="Note">
-                (notes here)
-            </p>
             <p className="Instructions">
                 Choose your pivot point here:
             </p>
