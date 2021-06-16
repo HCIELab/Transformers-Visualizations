@@ -2,8 +2,8 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import {axisType, cornerType} from "../Types/types";
-import {numbers} from "../Numbering/numbers";
+import {axisType, cornerType} from "../Util/Types/types";
+import {numbers} from "../Util/Numbering/numbers";
 
 const PivotChooserContainer = styled.div<{corner: cornerType}>`
     display: flex;

@@ -1,5 +1,5 @@
 import { Vector3 } from 'three';
-import { axisType } from '../../../Types/types';
+import { axisType } from '../../../Util/Types/types';
 
 export const getAxisFromText = (finalAxis: axisType) => {
     switch (finalAxis) {

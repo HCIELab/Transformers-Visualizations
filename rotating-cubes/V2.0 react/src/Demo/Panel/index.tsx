@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { axisType, cornerType } from '../Types/types';
+import { axisType, cornerType } from '../Util/Types/types';
 
 import PivotChooser from "./pivotchooser";
 import {Clockwise180Icon, Clockwise90Icon, Counterclockwise90Icon, Counterclockwise180Icon} from "./arrowIcons";

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Panel from "./Panel";
 import Instructions from "./Instructions";
-import { axisType, cornerType, cubeAndPropertiesType, instructionType } from './Types/types';
+import { axisType, cornerType, cubeAndPropertiesType, instructionType } from './Util/Types/types';
 import World from "./World";
 
 const DemoContainer = styled.div`
@@ -15,24 +15,14 @@ const DemoContainer = styled.div`
 
     .TopSection {
         margin: 0;
-        height: 30%;
+        height: 35%;
         background-color: #fdfdfd;
-
-        .AddOrRemoveCubes {
-            padding-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            button {
-                margin: 0px 10px;
-            }
-        }
+        overflow: auto;
     }
 
     .BottomSection {
         margin: 0;
-        height: 70%;
+        height: calc(100% - 35%);
         width: 100%;
         background-color: #252525;
     }
@@ -60,12 +50,14 @@ const Demo = () => {
                     corner={corner}
                     setCorner={setCorner}
                 />
+                <br/>
+                <Instructions
+                    setInstructions={setInstructions}
+                    setCubesAndProperties={setCubesAndProperties}
+                />
             </div>
 
-            <Instructions
-                setInstructions={setInstructions}
-                setCubesAndProperties={setCubesAndProperties}
-            />
+
 
             <div className="BottomSection">
                 <World

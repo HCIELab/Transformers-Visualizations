@@ -1,5 +1,5 @@
 import { Vector3 } from 'three';
-import { axisType, cornerType } from '../../../Types/types';
+import { axisType, cornerType } from '../../../Util/Types/types';
 
 /**
  * Returns the vector that matches the pivot corner picked, and a negation of that vector
