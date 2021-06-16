@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { Color, useFrame } from "@react-three/fiber";
 import { DoubleSide, Euler, Vector3 } from 'three';
-import Labeling from "./labeling";
+import Labeling from "./Labeling/labeling";
 import { axisType, cornerType, instructionType, rotationStep } from '../../Util/Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisFromText } from "./helpers/getAxisFromText";
@@ -114,6 +114,10 @@ const Cube = (props: {
 	const [iteration, setIteration] = useState(0);
 	useEffect(() => {
 		if (step === "1_CLICKED") {
+			/**
+			 * TODO: check for collisions in your path before you start rotating
+			 */
+
 			const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
 			translateGroup(everything, piv);
 			translateGroup(forPivot, opp);
