@@ -17,6 +17,7 @@ const World = (props: {
     initialCubeConfigs.forEach((config) => {
         allPositions[config.id] = config.initialPosition;
     })
+    console.log("(World.tsx) Rendering the World component");
 
     const setPosition = (cubeID : number) => {   
         return (newPosition : number) => {

@@ -33,12 +33,12 @@ const Cube = (props: {
 
 	// Debug
 	useEffect(() => {
-		console.log(`(for cube ${props.id}) step: ${step}`);
+		console.log(`(Cube.tsx) (for cube ${props.id}) step: ${step}`);
 	})
 
 	// Handling instructions
 	useEffect(() => {
-		console.log("STARTING INSTRUCTIONS");
+		console.log("(Cube.tsx) Starting an Instructions Script");
 		props.instructions
 			.filter((ins) => ins.cubeID === props.id)
 			.forEach((ins) => {
@@ -72,7 +72,7 @@ const Cube = (props: {
 		everything.current.rotation['x'] = 0;
 		everything.current.rotation['y'] = 0;
 		everything.current.rotation['z'] = 0;
-		console.log("CUBE POSITIONS WERE SET TO INITIAL");
+		console.log("(Cube.tsx) Cubes set to initial positions");
 	}, [props.initialPosition])
 
 	// Update the position of the cube and store this information in the Parent component
