@@ -13,12 +13,11 @@ const World = (props: {
     corner: cornerType,
 }) => {
     let allPositions : any = {};
-    useEffect(() => {
-        props.initialCubeConfigs.forEach((config) => {
-            allPositions[config.id] = config.initialPosition;
-        })
+    const {initialCubeConfigs} = props; 
+    initialCubeConfigs.forEach((config) => {
+        allPositions[config.id] = config.initialPosition;
     })
- 
+
     const setPosition = (cubeID : number) => {   
         return (newPosition : number) => {
             delete allPositions[cubeID];
