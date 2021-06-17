@@ -1,5 +1,5 @@
 import { Vector3 } from "three";
-import { axisType, cornerType } from "../../../../Util/Types/types";
+import { axisType, coord2DType, cornerType } from "../../../../Util/Types/types";
 import { traversedPath } from "./path180degree";
 
 export const detectCollisionsInPath = (
@@ -19,6 +19,7 @@ export const detectCollisionsInPath = (
      */
 
     let callbackFunc = traversedPath.TOP_NEIGHBOR.COUNTERCLOCKWISE;
+    let path : coord2DType[] = [];
 
     switch(axisOfRotation) {
         case "z":
@@ -56,7 +57,7 @@ export const detectCollisionsInPath = (
                     }
                     break;
             }
-            const path = callbackFunc(cubePosition.x, cubePosition.y);
+            path = callbackFunc(cubePosition.x, cubePosition.y);
             console.log("***********path:");
             console.log(path);
             break;
@@ -71,5 +72,7 @@ export const detectCollisionsInPath = (
     }
 
 
-    return false;
+    let hasCollisionInPath = false;
+
+    return {hasCollisionInPath, path};
 }

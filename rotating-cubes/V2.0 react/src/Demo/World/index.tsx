@@ -29,13 +29,7 @@ const World = (props: {
         }
     }
 
-    const [pathBlocks, setPathBlocks] = useState<ReactNode[]>([
-        <PathBlock
-            key={-1}
-            color={"#ff0000"}
-            placement={new Vector3(0, 1, 0)}
-        />
-    ]);
+    const [pathBlocks, setPathBlocks] = useState<ReactNode[]>([]);
     const visualizePath = (pointsInPath: Vector3[]) => {
         // TODO: visually put cubes in the traversed path
         const pathElements: ReactNode[] = pointsInPath.map((point, index) => {
@@ -77,6 +71,7 @@ const World = (props: {
                         corner={props.corner}
                         updatePosition={setPosition(config.id)}
                         allPositions={allPositions}
+                        visualizePath={visualizePath}
                     />
                 )
             }

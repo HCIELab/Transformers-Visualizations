@@ -21,6 +21,7 @@ const Cube = (props: {
 	corner: cornerType,
 	updatePosition: Function,
 	allPositions: any,
+	visualizePath: Function,
 }) => {
 	const everything = useRef<THREE.Group>(null!);
 	const forPivot = useRef<THREE.Group>(null!);
@@ -118,7 +119,11 @@ const Cube = (props: {
 			/**
 			 * TODO: check for collisions in your path before you start rotating
 			 */
-			if (detectCollisionsInPath(finalCorner, finalAxis, finalDisplacement > 0, everything.current.position, props.allPositions)) {
+			const {hasCollisionInPath, path} = detectCollisionsInPath(finalCorner, finalAxis, finalDisplacement > 0, everything.current.position, props.allPositions);
+			props.visualizePath(
+				path.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
+			)
+			if (hasCollisionInPath) {
 				alert("Sorry there is a collision in your path!")
 				setStep("0_DEFAULT");
 			}
