@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import ThreeControls from "./ThreeControls";
 import { axisType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';
 import Cube from './Cube';
-import { Euler, Vector3 } from 'three';
+import { Euler } from 'three';
 
 const World = (props: {
     initialCubeConfigs: initialCubeConfigType[],
@@ -12,18 +12,25 @@ const World = (props: {
     rAxis: axisType,
     corner: cornerType,
 }) => {
-    let allPositions : any = {};
+    console.log("(World.tsx) Rendering the World component");
+
+    const allPositions: any = {};
     const {initialCubeConfigs} = props; 
     initialCubeConfigs.forEach((config) => {
         allPositions[config.id] = config.initialPosition;
     })
-    console.log("(World.tsx) Rendering the World component");
 
     const setPosition = (cubeID : number) => {   
         return (newPosition : number) => {
             delete allPositions[cubeID];
             allPositions[cubeID] = newPosition;
         }
+    }
+
+    const willCollide = (cubeID: number): boolean => {
+        // TODO: visually put cubes in the traversed path
+        // TODO: check for possible collisions and then return true or false
+        return false;
     }
 
     return (
