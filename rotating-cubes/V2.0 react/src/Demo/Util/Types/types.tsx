@@ -1,12 +1,14 @@
 import { Vector3 } from "three";
 import { Color } from "@react-three/fiber";
 
-
+// Used for specifying a rotation
 export type cornerType = "NorthEast" | "SouthEast" | "SouthWest" | "NorthWest";
 export type axisType = "x" | "y" | "z";
 
+// Used for keeping state during the Rotation Animation
 export type rotationStep = "0_DEFAULT" | "1_CLICKED" | "2_ROTATING" | "3_END";
 
+// Used for Instruction Scripts
 export type initialCubeConfigType = {
     id: number,
     initialPosition: Vector3,
@@ -19,3 +21,14 @@ export type instructionType = {
     displacement: number,
     timeToStart: number,
 }
+
+// Used for specifying a coordinate on the grid
+export type coord2DType = {
+    x: number,
+    y: number,
+}
+// export type coord3DType = {
+//     x: number,
+//     y: number,
+//     z: number,
+// }

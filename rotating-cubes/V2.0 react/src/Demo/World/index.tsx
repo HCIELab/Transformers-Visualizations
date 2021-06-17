@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import ThreeControls from "./ThreeControls";
+import { Euler, Vector3 } from 'three';
+
 import { axisType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';
 import Cube from './Cube';
-import { Euler } from 'three';
+import PathBlock from './PathBlock';
 
 const World = (props: {
     initialCubeConfigs: initialCubeConfigType[],
@@ -27,19 +29,41 @@ const World = (props: {
         }
     }
 
-    const willCollide = (cubeID: number): boolean => {
+    const [pathBlocks, setPathBlocks] = useState<ReactNode[]>([
+        <PathBlock
+            key={-1}
+            color={"#ff0000"}
+            placement={new Vector3(0, 1, 0)}
+        />
+    ]);
+    const visualizePath = (pointsInPath: Vector3[]) => {
         // TODO: visually put cubes in the traversed path
-        // TODO: check for possible collisions and then return true or false
-        return false;
+        const pathElements: ReactNode[] = pointsInPath.map((point, index) => {
+            return (
+                <PathBlock
+                    key={index}
+                    color={"#ff0000"}
+                    placement={point}
+                />
+            )
+        })
+        setPathBlocks(pathElements);
     }
 
     return (
         <Canvas>
+            {/* Lights */}
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
+
+            {/* Orbit Controls */}
             <ThreeControls/>
+            
+            {/* Visual Helpers */}
             <axesHelper position={[-0.5, -0.5, 0]} scale={2}/>
             <gridHelper rotation={new Euler(Math.PI/2, 0, 0)} position={[0.5, 0.5, -0.5]}/>
+            
+            {/* Cubes */}
             {
                 props.initialCubeConfigs.map((config) => 
                     <Cube
@@ -56,6 +80,7 @@ const World = (props: {
                     />
                 )
             }
+            {pathBlocks}
         </Canvas>
     )
 }

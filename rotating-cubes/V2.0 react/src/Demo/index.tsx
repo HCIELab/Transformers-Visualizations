@@ -31,7 +31,7 @@ const DemoContainer = styled.div`
 const Demo = () => {
     
     const [rDisplacement, setRDisplacement] = useState(Math.PI);
-    const [rAxis, setRAxis] = useState<axisType>("y");
+    const [rAxis, setRAxis] = useState<axisType>("z");
     const [corner, setCorner] = useState<cornerType>("NorthEast");
 
     const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([]);

@@ -1,9 +1,6 @@
-type coordType = {
-    x: number,
-    y: number,
-}
+import { coord2DType } from "../../../../Util/Types/types";
 
-type coordListCallbackType = (cx: number, cy: number) => coordType[];
+type coordListCallbackType = (cx: number, cy: number) => coord2DType[];
 
 type traversedPathType = {
     TOP_NEIGHBOR: {
