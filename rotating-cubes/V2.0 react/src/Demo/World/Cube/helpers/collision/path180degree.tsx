@@ -1,6 +1,6 @@
-import { coord2DType } from "../../../../Util/Types/types";
+import { Vector2 } from "three";
 
-type coordListCallbackType = (cx: number, cy: number) => coord2DType[];
+type coordListCallbackType = (a: number, b: number) => Vector2[];
 
 type traversedPathType = {
     TOP_NEIGHBOR: {
@@ -23,75 +23,82 @@ type traversedPathType = {
 
 export const traversedPath : traversedPathType = {
     TOP_NEIGHBOR: {
-        CLOCKWISE: (cx, cy) => [
-            {x: cx, y: cy+1},
-            {x: cx-1, y: cy+1},
-            {x: cx-1, y: cy},
-            {x: cx-2, y: cy},
-            {x: cx-1, y: cy-1},
-            {x: cx-2, y: cy-1},
+        CLOCKWISE: (a, b) => [
+            // TODO: fix these coords
+            new Vector2(a, b+1),
+            new Vector2(a-1, b+1),
+            new Vector2(a-1, b),
+            new Vector2(a-2, b),
+            new Vector2(a-1, b-1),
+            new Vector2(a-2, b-1),
         ],
-        COUNTERCLOCKWISE: (cx, cy) => [
-            {x: cx, y: cy+1},
-            {x: cx+1, y: cy+1},
-            {x: cx+1, y: cy},
-            {x: cx+2, y: cy},
-            {x: cx+1, y: cy-1},
-            {x: cx+2, y: cy-1},
+        COUNTERCLOCKWISE: (a, b) => [
+            new Vector2(a, b-1),
+            new Vector2(a+1, b-1),
+            new Vector2(a+1, b),
+            new Vector2(a+2, b),
+            new Vector2(a+2, b+1),
+            new Vector2(a+1, b+1),
         ]
     },
     RIGHT_NEIGHBOR: {
-        CLOCKWISE: (cx, cy) => [
-            {x: cx, y: cy-1},
-            {x: cx-1, y: cy},
-            {x: cx-1, y: cy-1},
-            {x: cx+1, y: cy-1},
-            {x: cx+1, y: cy-2},
-            {x: cx, y: cy-2},
+        CLOCKWISE: (a, b) => [
+            // TODO: fix these coords
+            new Vector2(a, b-1),
+            new Vector2(a-1, b),
+            new Vector2(a-1, b-1),
+            new Vector2(a+1, b-1),
+            new Vector2(a+1, b-2),
+            new Vector2(a, b-2),
         ],
-        COUNTERCLOCKWISE: (cx, cy) => [
-            {x: cx-1, y: cy},
-            {x: cx-1, y: cy+1},
-            {x: cx, y: cy+1},
-            {x: cx, y: cy+2},
-            {x: cx+1, y: cy+1},
-            {x: cx+1, y: cy+2},
+        COUNTERCLOCKWISE: (a, b) => [
+            // TODO: fix these coords
+            new Vector2(a-1, b),
+            new Vector2(a-1, b+1),
+            new Vector2(a, b+1),
+            new Vector2(a, b+2),
+            new Vector2(a+1, b+1),
+            new Vector2(a+1, b+2),
         ]
     },
     BOTTOM_NEIGHBOR: {
-        CLOCKWISE: (cx, cy) => [
-            {x: cx, y: cx-1},
-            {x: cx+1, y: cy-1},
-            {x: cx+1, y: cy},
-            {x: cx+2, y: cy},
-            {x: cx+1, y: cy+1},
-            {x: cx+2, y: cy+1},
+        CLOCKWISE: (a, b) => [
+            // TODO: fix these coords
+            new Vector2(a, a-1),
+            new Vector2(a+1, b-1),
+            new Vector2(a+1, b),
+            new Vector2(a+2, b),
+            new Vector2(a+1, b+1),
+            new Vector2(a+2, b+1),
         ],
-        COUNTERCLOCKWISE: (cx, cy) => [
-            {x: cx, y: cy-1},
-            {x: cx-1, y: cy-1},
-            {x: cx-1, y: cy},
-            {x: cx-2, y: cy},
-            {x: cx-1, y: cy+1},
-            {x: cx-2, y: cy+1},
+        COUNTERCLOCKWISE: (a, b) => [
+            // TODO: fix these coords
+            new Vector2(a, b-1),
+            new Vector2(a-1, b-1),
+            new Vector2(a-1, b),
+            new Vector2(a-2, b),
+            new Vector2(a-1, b+1),
+            new Vector2(a-2, b+1),
         ]
     },
     LEFT_NEIGHBOR: {
-        CLOCKWISE: (cx, cy) => [
-            {x: cx+1, y: cy},
-            {x: cx+1, y: cy+1},
-            {x: cx, y: cx+1},
-            {x: cx, y: cx+2},
-            {x: cx-1, y: cx+1},
-            {x: cx-1, y: cx+2},
+        CLOCKWISE: (a, b) => [
+            // TODO: fix these coords
+            new Vector2(a+1, b),
+            new Vector2(a+1, b+1),
+            new Vector2(a, a+1),
+            new Vector2(a, a+2),
+            new Vector2(a-1, a+1),
+            new Vector2(a-1, a+2),
         ],
-        COUNTERCLOCKWISE: (cx, cy) => [
-            {x: cx-1, y: cy-1},
-            {x: cx, y: cx-1},
-            {x: cx-1, y: cy-2},
-            {x: cx, y: cx-2},
-            {x: cx+1, y: cx-1},
-            {x: cx+1, y: cx},
+        COUNTERCLOCKWISE: (a, b) => [
+            // TODO: fix these coords
+            new Vector2(a-1, b-1),
+            new Vector2(a, a-1),
+            new Vector2(a-1, b-2),
+            new Vector2(a, a-2),
+            new Vector2(a+1, a-1),
+            new Vector2(a+1, a),
         ]
     }
 }

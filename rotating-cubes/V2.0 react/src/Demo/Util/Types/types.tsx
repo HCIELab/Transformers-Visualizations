@@ -22,13 +22,3 @@ export type instructionType = {
     timeToStart: number,
 }
 
-// Used for specifying a coordinate on the grid
-export type coord2DType = {
-    x: number,
-    y: number,
-}
-// export type coord3DType = {
-//     x: number,
-//     y: number,
-//     z: number,
-// }
