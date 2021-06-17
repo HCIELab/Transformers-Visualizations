@@ -1,5 +1,5 @@
-import { Vector3 } from "three";
-import { axisType, coord2DType, cornerType } from "../../../../Util/Types/types";
+import { Vector2, Vector3 } from "three";
+import { axisType, cornerType } from "../../../../Util/Types/types";
 import { traversedPath } from "./path180degree";
 
 export const detectCollisionsInPath = (
@@ -18,45 +18,13 @@ export const detectCollisionsInPath = (
      * use allPositions to check that these positions in world space are not already occupied by another cube
      */
 
-    let callbackFunc = traversedPath.TOP_NEIGHBOR.COUNTERCLOCKWISE;
-    let path : coord2DType[] = [];
+    let callbackFunc = traversedPath.NorthEast.COUNTERCLOCKWISE;
+    let path : Vector2[] = [];
+
 
     switch(axisOfRotation) {
         case "z":
-            switch (cornerOfRotation) {
-                case "NorthEast":
-                    if (isCounterclockwise) {
-                        callbackFunc = traversedPath.TOP_NEIGHBOR.COUNTERCLOCKWISE;
-                    }
-                    else {
-                        callbackFunc = traversedPath.RIGHT_NEIGHBOR.CLOCKWISE;
-                    }
-                    break; 
-                case "SouthEast":
-                    if (isCounterclockwise) {
-                        callbackFunc = traversedPath.RIGHT_NEIGHBOR.COUNTERCLOCKWISE;
-                    }
-                    else {
-                        callbackFunc = traversedPath.BOTTOM_NEIGHBOR.CLOCKWISE;
-                    }
-                    break;
-                case "SouthWest":
-                    if (isCounterclockwise) {
-                        callbackFunc = traversedPath.BOTTOM_NEIGHBOR.COUNTERCLOCKWISE;
-                    }
-                    else {
-                        callbackFunc = traversedPath.LEFT_NEIGHBOR.CLOCKWISE;
-                    }
-                    break;
-                case "NorthWest":
-                    if (isCounterclockwise) {
-                        callbackFunc = traversedPath.LEFT_NEIGHBOR.COUNTERCLOCKWISE;
-                    }
-                    else {
-                        callbackFunc = traversedPath.TOP_NEIGHBOR.CLOCKWISE;
-                    }
-                    break;
-            }
+            callbackFunc = traversedPath[cornerOfRotation][isCounterclockwise ? "COUNTERCLOCKWISE" : "CLOCKWISE"];
             path = callbackFunc(cubePosition.x, cubePosition.y);
             console.log("***********path:");
             console.log(path);
