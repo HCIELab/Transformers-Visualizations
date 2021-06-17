@@ -8,7 +8,7 @@ import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisFromText } from "./helpers/getAxisFromText";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
 import { translateGroup } from "./helpers/translateGroup";
-import { detectCollisionsInPath } from "./helpers/detectCollisionsInPath";
+import { detectCollisionsInPath } from "./helpers/collision/detectCollisionsInPath";
 
 
 const Cube = (props: {
