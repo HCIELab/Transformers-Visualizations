@@ -1,17 +1,17 @@
 import { Vector2 } from "three";
-import { cornerType } from "../../../../Util/Types/types";
+import { neighborType } from "../../../../Util/Types/types";
 
 type coordListCallbackType = (a: number, b: number) => Vector2[];
 
 type pathReturnType = {
-    [corner in cornerType]: {
+    [neighbor in neighborType]: {
         COUNTERCLOCKWISE: coordListCallbackType,
         CLOCKWISE: coordListCallbackType,
     };
 }
 
 export const traversedPath : pathReturnType = {
-    NorthEast: {
+    TOP_NEIGHBOR: {
         COUNTERCLOCKWISE: (a, b) => [
             new Vector2(a, b-1),
             new Vector2(a+1, b-1),
@@ -29,7 +29,7 @@ export const traversedPath : pathReturnType = {
             new Vector2(a+1, b+1),
         ],
     },
-    SouthEast: {
+    RIGHT_NEIGHBOR: {
         COUNTERCLOCKWISE: (a, b) => [
             // TODO: fix these coords
             new Vector2(a-1, b),
@@ -49,7 +49,7 @@ export const traversedPath : pathReturnType = {
             new Vector2(a, b-2),
         ],
     },
-    SouthWest: {
+    BOTTOM_NEIGHBOR: {
         COUNTERCLOCKWISE: (a, b) => [
             // TODO: fix these coords
             new Vector2(a, b-1),
@@ -69,7 +69,7 @@ export const traversedPath : pathReturnType = {
             new Vector2(a+2, b+1),
         ],
     },
-    NorthWest: {
+    LEFT_NEIGHBOR: {
         COUNTERCLOCKWISE: (a, b) => [
             // TODO: fix these coords
             new Vector2(a-1, b-1),

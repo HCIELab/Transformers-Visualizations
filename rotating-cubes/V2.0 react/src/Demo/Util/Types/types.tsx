@@ -22,3 +22,5 @@ export type instructionType = {
     timeToStart: number,
 }
 
+// Used for collision path 
+export type neighborType = "TOP_NEIGHBOR" | "RIGHT_NEIGHBOR" | "BOTTOM_NEIGHBOR" | "LEFT_NEIGHBOR";

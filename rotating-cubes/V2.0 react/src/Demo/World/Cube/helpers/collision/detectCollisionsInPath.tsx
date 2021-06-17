@@ -1,5 +1,5 @@
 import { Vector2, Vector3 } from "three";
-import { axisType, cornerType } from "../../../../Util/Types/types";
+import { axisType, cornerType, neighborType } from "../../../../Util/Types/types";
 import { traversedPath } from "./path180degree";
 
 export const detectCollisionsInPath = (
@@ -18,13 +18,15 @@ export const detectCollisionsInPath = (
      * use allPositions to check that these positions in world space are not already occupied by another cube
      */
 
-    let callbackFunc = traversedPath.NorthEast.COUNTERCLOCKWISE;
+    const neighborOfRotation : neighborType = "TOP_NEIGHBOR"; // TODO: implement this detection, but just use this hardcoded value for now
+    
+    let callbackFunc = traversedPath[neighborOfRotation].COUNTERCLOCKWISE;
     let path : Vector2[] = [];
 
 
     switch(axisOfRotation) {
         case "z":
-            callbackFunc = traversedPath[cornerOfRotation][isCounterclockwise ? "COUNTERCLOCKWISE" : "CLOCKWISE"];
+            callbackFunc = traversedPath[neighborOfRotation][isCounterclockwise ? "COUNTERCLOCKWISE" : "CLOCKWISE"];
             path = callbackFunc(cubePosition.x, cubePosition.y);
             console.log("***********path:");
             console.log(path);
