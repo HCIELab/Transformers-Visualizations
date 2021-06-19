@@ -6,6 +6,7 @@ import { Euler, Vector3 } from 'three';
 import { axisType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';
 import Cube from './Cube';
 import PathBlock from './PathBlock';
+import { detectCollisionsInPath } from './Cube/helpers/collision/detectCollisionsInPath';
 
 const World = (props: {
     initialCubeConfigs: initialCubeConfigType[],
@@ -44,6 +45,16 @@ const World = (props: {
         setPathBlocks(pathElements);
     }
 
+    const hasCollisionInPath = (cubeID: number) => {
+        console.log("*****hasCollisionInPath");
+        const neighborOfRotation = 'TOP_NEIGHBOR'; //TODO: this is hardcoded for now
+        const {path, hasCollision} = detectCollisionsInPath(props.rAxis, props.rDisplacement > 0, allPositions[cubeID], neighborOfRotation);
+        visualizePath(
+            path.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
+        )
+        return hasCollision;
+    }
+
     return (
         <Canvas>
             {/* Lights */}
@@ -70,8 +81,7 @@ const World = (props: {
                         rAxis={props.rAxis}
                         corner={props.corner}
                         updatePosition={setPosition(config.id)}
-                        allPositions={allPositions}
-                        visualizePath={visualizePath}
+                        hasCollisionInPath={hasCollisionInPath}
                     />
                 )
             }

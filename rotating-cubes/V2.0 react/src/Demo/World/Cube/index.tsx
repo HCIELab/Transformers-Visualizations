@@ -8,7 +8,6 @@ import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisFromText } from "./helpers/getAxisFromText";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
 import { translateGroup } from "./helpers/translateGroup";
-import { detectCollisionsInPath } from "./helpers/collision/detectCollisionsInPath";
 
 
 const Cube = (props: {
@@ -20,8 +19,7 @@ const Cube = (props: {
 	rAxis: axisType,
 	corner: cornerType,
 	updatePosition: Function,
-	allPositions: any,
-	visualizePath: Function,
+	hasCollisionInPath: Function,
 }) => {
 	const everything = useRef<THREE.Group>(null!);
 	const forPivot = useRef<THREE.Group>(null!);
@@ -118,12 +116,8 @@ const Cube = (props: {
 		if (step === "1_CLICKED") {
 			/**
 			 * TODO: check for collisions in your path before you start rotating
-			 */
-			const {hasCollisionInPath, path} = detectCollisionsInPath(finalCorner, finalAxis, finalDisplacement > 0, everything.current.position, props.allPositions);
-			props.visualizePath(
-				path.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
-			)
-			if (hasCollisionInPath) {
+			 */	
+			if (props.hasCollisionInPath(props.id)) {
 				alert("Sorry there is a collision in your path!")
 				setStep("0_DEFAULT");
 			}
