@@ -17,14 +17,14 @@ const World = (props: {
 }) => {
     console.log("(World.tsx) Rendering the World component");
 
-    const allPositions: any = {};
+    const allPositions: {[cubeID: number]: Vector3} = {};
     const {initialCubeConfigs} = props; 
     initialCubeConfigs.forEach((config) => {
         allPositions[config.id] = config.initialPosition;
     })
 
     const setPosition = (cubeID : number) => {   
-        return (newPosition : number) => {
+        return (newPosition : Vector3) => {
             delete allPositions[cubeID];
             allPositions[cubeID] = newPosition;
         }
