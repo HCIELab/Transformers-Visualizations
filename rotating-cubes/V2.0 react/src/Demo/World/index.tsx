@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import ThreeControls from "./ThreeControls";
 import { Euler, Vector3 } from 'three';
 
-import { axisType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';
+import { axisType, collisionType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';
 import Cube from './Cube';
 import PathBlock from './PathBlock';
 import { detectCollisionsInPath } from './Cube/helpers/collision/detectCollisionsInPath';
@@ -34,7 +34,6 @@ const World = (props: {
 
     const [pathBlocks, setPathBlocks] = useState<ReactNode[]>([]);
     const visualizePath = (pointsInPath: Vector3[]) => {
-        // TODO: visually put cubes in the traversed path
         const pathElements: ReactNode[] = pointsInPath.map((point, index) => {
             return (
                 <PathBlock
@@ -47,31 +46,20 @@ const World = (props: {
         setPathBlocks(pathElements);
     }
 
-    const hasCollisionInPath = (cubeID: number) => {
+    const hasCollisionInPath = (cubeID: number) : collisionType => {
         console.log("*****hasCollisionInPath");
 
         const neighborSpots = getListOfNeighborSpots(allPositions[cubeID], props.rAxis);
         const neighborOfRotation = getNeighborOfRotation(props.rDisplacement > 0, neighborSpots, allPositions);
-        
-        const temp : any = getListOfNeighborSpots(new Vector3(0, 0, 0), "y");
-        let foo = [];
-        for (let key in temp) {
-            foo.push(
-                <PathBlock
-                    color={"#ff0000"}
-                    placement={temp[key]}
-                />
-            )
+        if (neighborOfRotation === null) {
+            return "NO_NEIGHBORS";
         }
-        setPathBlocks(foo);
-
-
+        
         const {path, hasCollision} = detectCollisionsInPath(props.rAxis, props.rDisplacement > 0, allPositions[cubeID], neighborOfRotation);
-        console.log();
-        // visualizePath(
-        //     path.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
-        // )
-        return hasCollision;
+        visualizePath(
+            path.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
+        )
+        return hasCollision ? "HAS_COLLISION" : "NO_COLLISION";
     }
 
     return (

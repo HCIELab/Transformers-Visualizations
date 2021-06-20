@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Color, useFrame } from "@react-three/fiber";
 import { DoubleSide, Euler, Vector3 } from 'three';
 import Labeling from "./Labeling/labeling";
-import { axisType, cornerType, instructionType, rotationStep } from '../../Util/Types/types';
+import { axisType, cornerType, instructionType, rotationStep, collisionType } from '../../Util/Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisFromText } from "./helpers/getAxisFromText";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
@@ -19,7 +19,7 @@ const Cube = (props: {
 	rAxis: axisType,
 	corner: cornerType,
 	updatePosition: Function,
-	hasCollisionInPath: Function,
+	hasCollisionInPath: (cubeID: number) => collisionType,
 }) => {
 	const everything = useRef<THREE.Group>(null!);
 	const forPivot = useRef<THREE.Group>(null!);
@@ -116,19 +116,25 @@ const Cube = (props: {
 		if (step === "1_CLICKED") {
 			/**
 			 * TODO: check for collisions in your path before you start rotating
-			 */	
-			if (props.hasCollisionInPath(props.id)) {
-				alert("Sorry there is a collision in your path!")
-				setStep("0_DEFAULT");
-			}
-			else {
-				const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
-				translateGroup(everything, piv);
-				translateGroup(forPivot, opp);
-	
-				setMaxIteration(Math.abs(finalDisplacement / INCREMENT_AMT));
-				setIteration(0);
-				setStep("2_ROTATING");
+			 */
+			switch (props.hasCollisionInPath(props.id)) {
+				case "NO_NEIGHBORS":
+					alert("Sorry there are no neighbors to this cube!")
+					setStep("0_DEFAULT");
+					break;
+				case "HAS_COLLISION":
+					alert("Sorry there is a collision in your path!")
+					setStep("0_DEFAULT");
+					break;
+				case "NO_COLLISION":
+					const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
+					translateGroup(everything, piv);
+					translateGroup(forPivot, opp);
+		
+					setMaxIteration(Math.abs(finalDisplacement / INCREMENT_AMT));
+					setIteration(0);
+					setStep("2_ROTATING");
+					break;
 			}
 		}
 	}, [step, finalAxis, finalCorner, finalDisplacement])

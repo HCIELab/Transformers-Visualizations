@@ -24,3 +24,4 @@ export type instructionType = {
 
 // Used for collision path 
 export type neighborType = "TOP_NEIGHBOR" | "RIGHT_NEIGHBOR" | "BOTTOM_NEIGHBOR" | "LEFT_NEIGHBOR";
+export type collisionType = "HAS_COLLISION" | "NO_COLLISION" | "NO_NEIGHBORS";
