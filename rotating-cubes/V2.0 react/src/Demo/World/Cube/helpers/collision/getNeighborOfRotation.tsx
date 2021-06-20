@@ -12,50 +12,52 @@ type findingStateType = "START" | "FOUNDONE";
  * @param neighborsInCounterclockwise 
  * @param allPositions 
  */
-export const getNeighborOfRotation = (isCounterclockwise : boolean, neighborsInCounterclockwise : Vector3[], allPositions: {[cubeID: number]: Vector3}) : neighborType => {
+export const getNeighborOfRotation = (isCounterclockwise : boolean, neighborSpots: {[n in neighborType]: Vector3}, allPositions: {[cubeID: number]: Vector3}) : neighborType => {
     console.log("********inside getNeighborOfRotation");
 
     let findingState : findingStateType = "START"; 
     let lastNeighborFound = null;
 
-    let theList;
-    if (isCounterclockwise) {
-        theList = doubleList(neighborsInCounterclockwise);   
-    } else {
-        theList = doubleList(neighborsInCounterclockwise.reverse());   
-    }
+    // let theList;
+    // if (isCounterclockwise) {
+    //     theList = doubleList(neighborsInCounterclockwise);   
+    // } else {
+    //     theList = doubleList(neighborsInCounterclockwise.reverse());   
+    // }
 
-    for (let i = 0; i < theList; i++) {
-        const position = theList[i];
-        switch (findingState) {
-            case 'START':
-                const firstNeighborFound = searchMatchingCubePosition(position, allPositions) 
-                if (firstNeighborFound) {
-                    lastNeighborFound = firstNeighborFound;
-                    findingState = 'FOUNDONE';
-                }
-                break;
-            case 'FOUNDONE':
-                const anotherNeighborFound = searchMatchingCubePosition(position, allPositions) 
-                if (anotherNeighborFound) {
-                    lastNeighborFound = anotherNeighborFound;
-                } else {
-                    // return lastNeighborFound;
-                }
-                break;
-        }
+    // for (let i = 0; i < theList; i++) {
+    //     const position = theList[i];
+    //     switch (findingState) {
+    //         case 'START':
+    //             const firstNeighborFound = searchMatchingCubePosition(position, allPositions) 
+    //             if (firstNeighborFound) {
+    //                 lastNeighborFound = firstNeighborFound;
+    //                 findingState = 'FOUNDONE';
+    //             }
+    //             break;
+    //         case 'FOUNDONE':
+    //             const anotherNeighborFound = searchMatchingCubePosition(position, allPositions) 
+    //             if (anotherNeighborFound) {
+    //                 lastNeighborFound = anotherNeighborFound;
+    //             } else {
+    //                 // return lastNeighborFound;
+    //             }
+    //             break;
+    //     }
 
-    }
+    // }
 
     // TODO: this is hardcoded for now
     return "TOP_NEIGHBOR";
 }
 
 
-const doubleList = (l: any[]) => {
-    let result = JSON.parse(JSON.stringify(l));
-    result.push.apply(JSON.parse(JSON.stringify(l)));
-    return result;
+const doubleNeighborTypesCounterclockwise = () : neighborType[] => {
+    return ["LEFT_NEIGHBOR", "BOTTOM_NEIGHBOR", "RIGHT_NEIGHBOR", "TOP_NEIGHBOR", "LEFT_NEIGHBOR", "BOTTOM_NEIGHBOR", "RIGHT_NEIGHBOR", "TOP_NEIGHBOR"]
+}
+
+const doubleNeighborTypesClockwise = () : neighborType[] => {
+    return doubleNeighborTypesCounterclockwise().reverse();
 }
 
 const searchMatchingCubePosition = (position: Vector3, allPositions: {[cubeID: number]: Vector3}) => {

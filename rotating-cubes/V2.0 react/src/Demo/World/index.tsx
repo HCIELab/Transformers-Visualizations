@@ -50,13 +50,27 @@ const World = (props: {
     const hasCollisionInPath = (cubeID: number) => {
         console.log("*****hasCollisionInPath");
 
-        const neighborsInCounterclockwise = getListOfNeighborSpots(allPositions[cubeID], props.rAxis);
-        const neighborOfRotation = getNeighborOfRotation(props.rDisplacement > 0, neighborsInCounterclockwise, allPositions);
+        const neighborSpots = getListOfNeighborSpots(allPositions[cubeID], props.rAxis);
+        const neighborOfRotation = getNeighborOfRotation(props.rDisplacement > 0, neighborSpots, allPositions);
+        
+        const temp : any = getListOfNeighborSpots(new Vector3(0, 0, 0), "y");
+        let foo = [];
+        for (let key in temp) {
+            foo.push(
+                <PathBlock
+                    color={"#ff0000"}
+                    placement={temp[key]}
+                />
+            )
+        }
+        setPathBlocks(foo);
+
 
         const {path, hasCollision} = detectCollisionsInPath(props.rAxis, props.rDisplacement > 0, allPositions[cubeID], neighborOfRotation);
-        visualizePath(
-            path.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
-        )
+        console.log();
+        // visualizePath(
+        //     path.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
+        // )
         return hasCollision;
     }
 
