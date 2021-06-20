@@ -7,6 +7,8 @@ import { axisType, cornerType, initialCubeConfigType, instructionType } from '..
 import Cube from './Cube';
 import PathBlock from './PathBlock';
 import { detectCollisionsInPath } from './Cube/helpers/collision/detectCollisionsInPath';
+import { getListOfNeighborSpots } from './Cube/helpers/collision/getListOfNeighborSpots';
+import { getNeighborOfRotation } from './Cube/helpers/collision/getNeighborOfRotation';
 
 const World = (props: {
     initialCubeConfigs: initialCubeConfigType[],
@@ -47,7 +49,10 @@ const World = (props: {
 
     const hasCollisionInPath = (cubeID: number) => {
         console.log("*****hasCollisionInPath");
-        const neighborOfRotation = 'TOP_NEIGHBOR'; //TODO: this is hardcoded for now
+
+        const neighborsInCounterclockwise = getListOfNeighborSpots(allPositions[cubeID], props.rAxis);
+        const neighborOfRotation = getNeighborOfRotation(props.rDisplacement > 0, neighborsInCounterclockwise, allPositions);
+
         const {path, hasCollision} = detectCollisionsInPath(props.rAxis, props.rDisplacement > 0, allPositions[cubeID], neighborOfRotation);
         visualizePath(
             path.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))

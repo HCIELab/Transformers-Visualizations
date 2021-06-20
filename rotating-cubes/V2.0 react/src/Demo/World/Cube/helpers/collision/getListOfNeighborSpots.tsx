@@ -7,7 +7,7 @@ import { axisType } from "../../../../Util/Types/types";
  * @param axisOfRotation 
  * @returns list of neighbors in counterclockwise order
  */
-const getListOfNeighbors = (position: Vector3, axisOfRotation: axisType) => {
+export const getListOfNeighborSpots = (position: Vector3, axisOfRotation: axisType) => {
     switch (axisOfRotation) {
         case 'x':
             return [
