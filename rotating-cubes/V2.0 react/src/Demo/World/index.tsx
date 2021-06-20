@@ -1,7 +1,8 @@
 import React, { ReactNode, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import ThreeControls from "./ThreeControls";
+// import ThreeControls from "./ThreeControls";
 import { Euler, Vector3 } from 'three';
+import { ResizeObserver } from '@juggle/resize-observer';
 
 import { axisType, collisionType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';
 import Cube from './Cube';
@@ -46,6 +47,13 @@ const World = (props: {
         setPathBlocks(pathElements);
     }
 
+    console.log("**********************testing getNeighborOfRotation manually");
+    const cubePosition = new Vector3(0, 0, 0);
+    const neighborSpots = getListOfNeighborSpots(cubePosition, 'z');
+    const all = {1: cubePosition, 2: new Vector3(1, 0, 0), 3: new Vector3(0, 1, 0)};
+    const neighborOfRotation = getNeighborOfRotation(false, neighborSpots, all);
+    console.log("neighborOfRotation: ", neighborOfRotation);
+
     const hasCollisionInPath = (cubeID: number) : collisionType => {
         console.log("*****hasCollisionInPath");
 
@@ -63,13 +71,13 @@ const World = (props: {
     }
 
     return (
-        <Canvas>
+        <Canvas resize={{ polyfill: ResizeObserver }} >
             {/* Lights */}
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
 
             {/* Orbit Controls */}
-            <ThreeControls/>
+            {/* <ThreeControls/> */}
             
             {/* Visual Helpers */}
             <axesHelper position={[-0.5, -0.5, 0]} scale={2}/>
