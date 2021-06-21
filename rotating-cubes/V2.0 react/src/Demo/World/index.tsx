@@ -89,7 +89,7 @@ const World = (props: {
             positionsInPath.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
         )
         
-        const cornerOfRotation = deviseCornerOfRotation(isCounterclockwise, neighborOfRotation, rotation, props.rAxis);
+        const cornerOfRotation = deviseCornerOfRotation(isCounterclockwise, neighborOfRotation);
         console.log("(World.tsx) cornerOfRotation: ", cornerOfRotation);
         console.log("(World.tsx) rotation: ", rotation);
 
