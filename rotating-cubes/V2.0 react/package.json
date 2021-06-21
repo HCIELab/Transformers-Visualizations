@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@juggle/resize-observer": "^3.3.1",
     "@react-three/fiber": "^6.0.16",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -47,7 +48,6 @@
     ]
   },
   "devDependencies": {
-    "@juggle/resize-observer": "^3.3.1",
     "@react-three/test-renderer": "^6.2.3"
   }
 }
