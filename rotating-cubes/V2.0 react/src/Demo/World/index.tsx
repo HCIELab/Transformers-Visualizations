@@ -71,6 +71,8 @@ const World = (props: {
 
     const explorePathOfRotation = (cubeID: number, rotation: Vector3) : {collisionResult: collisionType, cornerOfRotation: cornerType} => {
         const neighborSpots = getListOfNeighborSpots(allPositions[cubeID], props.rAxis);
+        console.log("(World.tsx) clicked Cube position ", allPositions[cubeID]);
+        console.log("(World.tsx) neighborSpots: ", neighborSpots);
         const isCounterclockwise = props.rDisplacement > 0;
         const neighborOfRotation = getNeighborOfRotation(isCounterclockwise, neighborSpots, allPositions);
         console.log("(World.tsx) neighborOfRotation: ", neighborOfRotation);
