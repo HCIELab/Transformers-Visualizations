@@ -2,13 +2,13 @@ import { Vector2, Vector3 } from "three";
 import { axisType, neighborType } from "../../../../Util/Types/types";
 import { traversedPath } from "./path180degree";
 
-export const detectCollisionsInPath = (
+export const pathOfRotation = (
     axisOfRotation: axisType, 
     isCounterclockwise: boolean, 
     cubePosition : Vector3, 
     neighborOfRotation: neighborType,
 ) => {
-    console.log("*****inside detectCollisionsInPath");
+    console.log("*****inside pathOfRotation");
 
     /**
      * TODO
@@ -38,8 +38,5 @@ export const detectCollisionsInPath = (
             break;
     }
 
-
-    let hasCollision = false;
-
-    return {hasCollision, path};
+    return path;
 }

@@ -19,7 +19,7 @@ const Cube = (props: {
 	rAxis: axisType,
 	corner: cornerType,
 	updatePosition: Function,
-	hasCollisionInPath: (cubeID: number) => collisionType,
+	explorePathOfRotation: (cubeID: number) => collisionType,
 	showPath: boolean,
 }) => {
 	const everything = useRef<THREE.Group>(null!);
@@ -113,10 +113,10 @@ const Cube = (props: {
 	const INCREMENT_AMT = 0.1; //increase this number to make the cubes rotate faster
 	const [maxIteration, setMaxIteration] = useState(0);
 	const [iteration, setIteration] = useState(0);
-	const {hasCollisionInPath, id} = props;
+	const {explorePathOfRotation, id} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			const collisionResult = hasCollisionInPath(id);
+			const collisionResult = explorePathOfRotation(id);
 			if (props.showPath) {
 				setStep("0_DEFAULT");
 			}
@@ -142,7 +142,7 @@ const Cube = (props: {
 				}
 			}
 		}
-	}, [step, finalAxis, finalCorner, finalDisplacement, hasCollisionInPath, id])
+	}, [step, finalAxis, finalCorner, finalDisplacement, explorePathOfRotation, id])
 
 	// 2. Apply the rotation
 	useFrame(() => {

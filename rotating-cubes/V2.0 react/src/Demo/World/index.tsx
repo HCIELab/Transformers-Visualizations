@@ -7,7 +7,7 @@ import { ResizeObserver } from '@juggle/resize-observer';
 import { axisType, collisionType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';
 import Cube from './Cube';
 import PathBlock from './PathBlock';
-import { detectCollisionsInPath } from './Cube/helpers/collision/detectCollisionsInPath';
+import { pathOfRotation } from './Cube/helpers/collision/pathOfRotation';
 import { getListOfNeighborSpots } from './Cube/helpers/collision/getListOfNeighborSpots';
 import { getNeighborOfRotation } from './Cube/helpers/collision/getNeighborOfRotation';
 
@@ -35,30 +35,29 @@ const World = (props: {
         }
     }
 
+
+
     const [pathBlocks, setPathBlocks] = useState<ReactNode[]>([]);
+    const {showPath} = props;
     const visualizePath = (pointsInPath: Vector3[]) => {
-        console.log("(World.tsx) visualizePath was called");
-        if (props.showPath) {
-            const pathElements: ReactNode[] = pointsInPath.map((point, index) => {
-                return (
-                    <PathBlock
-                        key={index}
-                        color={"#ff0000"}
-                        placement={point}
-                    />
-                )
-            })
+        if (showPath) {
+            const pathElements: ReactNode[] = pointsInPath.map((point, index) => 
+                <PathBlock
+                    key={index}
+                    color={"#ff0000"}
+                    placement={point}
+                />
+            )
             setPathBlocks(pathElements);
         }
     }
-    const {showPath} = props;
     useEffect(() => {
         if (!showPath) {
             setPathBlocks([]);
         }
     }, [showPath])
 
-    const hasCollisionInPath = (cubeID: number) : collisionType => {
+    const explorePathOfRotation = (cubeID: number) : collisionType => {
         const neighborSpots = getListOfNeighborSpots(allPositions[cubeID], props.rAxis);
         const neighborOfRotation = getNeighborOfRotation(props.rDisplacement > 0, neighborSpots, allPositions);
         console.log("(World.tsx) neighborOfRotation: ", neighborOfRotation);
@@ -66,13 +65,18 @@ const World = (props: {
             return "NO_NEIGHBORS";
         }
         
-        const {path, hasCollision} = detectCollisionsInPath(props.rAxis, props.rDisplacement > 0, allPositions[cubeID], neighborOfRotation);
+        const positionsInPath = pathOfRotation(props.rAxis, props.rDisplacement > 0, allPositions[cubeID], neighborOfRotation);
+
         visualizePath(
-            path.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
+            positionsInPath.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
         )
         
+        const hasCollision = false; // TODO: compare allPositions with the positionsInPath in order to detect collision
         return hasCollision ? "HAS_COLLISION" : "NO_COLLISION";
     }
+
+
+
 
     return (
         <Canvas resize={{ polyfill: ResizeObserver }} >
@@ -100,7 +104,7 @@ const World = (props: {
                         rAxis={props.rAxis}
                         corner={props.corner}
                         updatePosition={setPosition(config.id)}
-                        hasCollisionInPath={hasCollisionInPath}
+                        explorePathOfRotation={explorePathOfRotation}
                         showPath={props.showPath}
                     />
                 )
