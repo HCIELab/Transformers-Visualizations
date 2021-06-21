@@ -161,13 +161,13 @@ const Cube = (props: {
 					<boxGeometry args={[side, side, side]} />
 					<meshPhongMaterial color={props.color} opacity={hovered ? 0.2 : 0.6} transparent={true} side={DoubleSide}/>
 				</mesh>
-				<Labeling
+				{/* <Labeling
 					cubeID={props.id}
 					letterOffset={0.1}
 					side={side}
 					rAxis={props.rAxis}
-				/>
-				<axesHelper scale={0.3}/>
+				/> */}
+				{/* <axesHelper scale={0.3}/> */}
 			</group>
 		</group>
 	)

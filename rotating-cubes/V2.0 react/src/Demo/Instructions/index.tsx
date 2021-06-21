@@ -10,8 +10,8 @@ const Instructions = (props: {
     const button1 = (
         <button onClick={() => {
             props.setCubesAndProperties([
-                {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
-                {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#049101"},            
+                {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#ffffff"},
+                {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#ffffff"},            
             ])
             props.setInstructions([
                 {
@@ -82,8 +82,8 @@ const Instructions = (props: {
     const button2 = (
         <button onClick={() => {
             props.setCubesAndProperties([
-                {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
-                {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#049101"},            
+                {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#ffffff"},
+                {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#ffffff"},            
             ])
             props.setInstructions([
                 {
@@ -123,8 +123,8 @@ const Instructions = (props: {
     const button3 = (
         <button onClick={() => {
             props.setCubesAndProperties([
-                {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#049101"},            
-                {id: 2, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
+                {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#ffffff"},            
+                {id: 2, initialPosition: new Vector3(1, 0, 0), color: "#ffffff"},
             ])
             props.setInstructions([
                 {
@@ -179,9 +179,9 @@ const Instructions = (props: {
     const button4 = (
         <button onClick={() => {
             props.setCubesAndProperties([
-                {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
-                {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#049101"},            
-                {id: 3, initialPosition: new Vector3(0, 1, 0), color: "#049101"},            
+                {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#ffffff"},
+                {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#ffffff"},            
+                {id: 3, initialPosition: new Vector3(0, 1, 0), color: "#ffffff"},            
             ])
             props.setInstructions([
                 {
@@ -221,7 +221,7 @@ const Instructions = (props: {
     const button5 = (
         <button onClick={() => {
             props.setCubesAndProperties([
-                {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
+                {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#ffffff"},
             ])
             props.setInstructions([
             ])
@@ -233,8 +233,8 @@ const Instructions = (props: {
     const button6 = (
         <button onClick={() => {
             props.setCubesAndProperties([
-                {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
-                {id: 2, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
+                {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#ffffff"},
+                {id: 2, initialPosition: new Vector3(1, 0, 0), color: "#ffffff"},
             ])
             props.setInstructions([
             ])
