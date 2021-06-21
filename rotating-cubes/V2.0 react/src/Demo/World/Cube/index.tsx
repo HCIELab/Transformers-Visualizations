@@ -95,7 +95,7 @@ const Cube = (props: {
 			forPivot.current.position.x = 0;
 			forPivot.current.position.y = 0;
 			forPivot.current.position.z = 0;
-				//Set the final angle, axis, corner when the user clicks the box
+			//Set the final angle, axis, corner when the user clicks the box
 			setFinalAxis(props.rAxis);
 			setFinalCorner(props.corner);
 			setFinalDisplacement(props.rDisplacement);
@@ -112,12 +112,10 @@ const Cube = (props: {
 	const INCREMENT_AMT = 0.1; //increase this number to make the cubes rotate faster
 	const [maxIteration, setMaxIteration] = useState(0);
 	const [iteration, setIteration] = useState(0);
+	const {hasCollisionInPath, id} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			/**
-			 * TODO: check for collisions in your path before you start rotating
-			 */
-			switch (props.hasCollisionInPath(props.id)) {
+			switch (hasCollisionInPath(id)) {
 				case "NO_NEIGHBORS":
 					alert("Sorry there are no neighbors to this cube!")
 					setStep("0_DEFAULT");
@@ -137,7 +135,7 @@ const Cube = (props: {
 					break;
 			}
 		}
-	}, [step, finalAxis, finalCorner, finalDisplacement])
+	}, [step, finalAxis, finalCorner, finalDisplacement, hasCollisionInPath, id])
 
 	// 2. Apply the rotation
 	useFrame(() => {
@@ -175,6 +173,10 @@ const Cube = (props: {
 			const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
 			translateGroup(everything, opp);
 			translateGroup(forPivot, piv);
+
+			// Make sure the position is rounded to the nearest integer
+			const {x, y, z} = everything.current.position;
+			everything.current.position.set(Math.round(x), Math.round(y), Math.round(z));
 
 			setStep("0_DEFAULT");
 

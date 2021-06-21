@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 // import ThreeControls from "./ThreeControls";
 import { Euler, Vector3 } from 'three';
@@ -28,6 +28,7 @@ const World = (props: {
 
     const setPosition = (cubeID : number) => {   
         return (newPosition : Vector3) => {
+            console.log("(World.tsx) allPositions: ", allPositions);
             delete allPositions[cubeID];
             allPositions[cubeID] = newPosition;
         }
@@ -35,6 +36,7 @@ const World = (props: {
 
     const [pathBlocks, setPathBlocks] = useState<ReactNode[]>([]);
     const visualizePath = (pointsInPath: Vector3[]) => {
+        console.log("(World.tsx) visualizePath was called");
         const pathElements: ReactNode[] = pointsInPath.map((point, index) => {
             return (
                 <PathBlock
@@ -48,18 +50,18 @@ const World = (props: {
     }
 
     const hasCollisionInPath = (cubeID: number) : collisionType => {
-        console.log("*****hasCollisionInPath");
-
         const neighborSpots = getListOfNeighborSpots(allPositions[cubeID], props.rAxis);
         const neighborOfRotation = getNeighborOfRotation(props.rDisplacement > 0, neighborSpots, allPositions);
+        console.log("(World.tsx) neighborOfRotation: ", neighborOfRotation);
         if (neighborOfRotation === null) {
             return "NO_NEIGHBORS";
         }
         
         const {path, hasCollision} = detectCollisionsInPath(props.rAxis, props.rDisplacement > 0, allPositions[cubeID], neighborOfRotation);
-        visualizePath(
-            path.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
-        )
+        // visualizePath(
+        //     path.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
+        // )
+        
         return hasCollision ? "HAS_COLLISION" : "NO_COLLISION";
     }
 
