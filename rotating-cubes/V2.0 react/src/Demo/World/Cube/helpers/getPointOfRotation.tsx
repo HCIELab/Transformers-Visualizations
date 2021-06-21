@@ -6,7 +6,10 @@ export const getPointOfRotation = (cornerOfRotation: cornerType, side: number, a
 	console.log("(getPointOfRotation.tsx) point: ", point);
 	point.applyEuler(rotation)
 	console.log("(getPointOfRotation.tsx) point: ", point);
-	return point;
+
+	const {x, y, z} = point;
+	const rounded = new Vector3(Math.round(x*2)/2, Math.round(y*2)/2, Math.round(z*2)/2)
+	return rounded;
 }
 
 /**

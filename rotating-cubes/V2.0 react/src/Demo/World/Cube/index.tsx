@@ -101,7 +101,7 @@ const Cube = (props: {
 			setFinalAxis(props.rAxis);
 			setCornerOfRotation(props.corner);
 			setFinalDisplacement(props.rDisplacement);
-			setInitialRotationAmount(everything.current.rotation);
+			setInitialRotationAmount(everything.current.rotation.clone());
 
 			setStep("1_CLICKED");
 		}
