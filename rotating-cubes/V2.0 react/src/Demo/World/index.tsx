@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import ThreeControls from "./ThreeControls";
-import { Euler, Vector3 } from 'three';
+import { Euler, Quaternion, Vector3 } from 'three';
 import { ResizeObserver } from '@juggle/resize-observer';
 
 import { axisType, collisionType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';
@@ -11,6 +11,7 @@ import { pathOfRotation } from './Cube/helpers/collision/pathOfRotation';
 import { deviseCornerOfRotation } from './Cube/helpers/collision/deviseCornerOfRotation';
 import { getListOfNeighborSpots } from './Cube/helpers/collision/getListOfNeighborSpots';
 import { getNeighborOfRotation } from './Cube/helpers/collision/getNeighborOfRotation';
+import { getPointOfRotation } from './Cube/helpers/getPointOfRotation';
 
 const World = (props: {
     initialCubeConfigs: initialCubeConfigType[],
@@ -21,6 +22,16 @@ const World = (props: {
     showPath: boolean,
 }) => {
     console.log("(World.tsx) Rendering the World component");
+
+
+    console.log("*****************");
+    const pointOfRotationWorld = getPointOfRotation("NorthEast", 1, 'y')[0];
+    console.log(pointOfRotationWorld);
+    // pointOfRotationWorld.applyEuler(new Euler(-Math.PI, 0, -Math.PI))
+    pointOfRotationWorld.applyEuler(new Euler(0, -Math.PI/2, 0))
+    console.log(pointOfRotationWorld);
+
+
 
     const allPositions: {[cubeID: number]: Vector3} = {};
     const {initialCubeConfigs} = props; 
@@ -78,6 +89,7 @@ const World = (props: {
         
         const cornerOfRotation = deviseCornerOfRotation(isCounterclockwise, neighborOfRotation, rotation, props.rAxis);
         console.log("(World.tsx) cornerOfRotation: ", cornerOfRotation);
+        console.log("(World.tsx) rotation: ", rotation);
 
         const hasCollision = false; // TODO: compare allPositions with the positionsInPath in order to detect collision
         return {

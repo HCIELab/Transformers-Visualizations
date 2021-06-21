@@ -4,7 +4,13 @@ import { axisType, cornerType, neighborType } from "../../../../Util/Types/types
 export const deviseCornerOfRotation = (isCounterclockwise : boolean, neighborOfRotation: neighborType, rotation: Vector3, axisOfRotation: axisType) : cornerType => {
     let cornerValues : cornerType[] = ["NorthEast", "SouthEast", "SouthWest", "NorthWest"]
     
-    const spinAmount = axisOfRotation === 'y' ? -1*rotation[axisOfRotation] : rotation[axisOfRotation];
+    let spinAmount = rotation[axisOfRotation];
+    if (axisOfRotation === 'y') {
+        if (rotation.x < -3.14 && rotation.z < -3.14) {
+            spinAmount = -Math.PI;
+        }
+    } 
+
     const numDiscreteSpins = spinAmount / (Math.PI / 2);
     if (numDiscreteSpins > 0) {
         for (let i = 0; i < numDiscreteSpins; i++) {
@@ -15,7 +21,6 @@ export const deviseCornerOfRotation = (isCounterclockwise : boolean, neighborOfR
             cornerValues = shiftListRight(cornerValues);
         }
     }
-    console.log("***********", cornerValues)
 
     switch (neighborOfRotation) {
         case "TOP_NEIGHBOR":

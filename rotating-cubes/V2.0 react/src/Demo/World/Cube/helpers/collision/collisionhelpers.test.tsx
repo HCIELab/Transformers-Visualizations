@@ -64,3 +64,12 @@ test('deviseCornerOfRotation (axis - y, rotation - pi, neighborOfRotation - top,
     const cornerOfRotation = deviseCornerOfRotation(isCounterclockwise, neighborOfRotation, rotation, axisOfRotation)
     expect(cornerOfRotation).toBe("SouthWest");
 })
+
+test('deviseCornerOfRotation (axis - y, rotation - -pi,0,-pi, neighborOfRotation - top, counterclockwise)', async () => {
+    const isCounterclockwise = true;
+    const neighborOfRotation = "TOP_NEIGHBOR";
+    const rotation = new Vector3(-Math.PI, 0, -Math.PI);
+    const axisOfRotation = 'y';
+    const cornerOfRotation = deviseCornerOfRotation(isCounterclockwise, neighborOfRotation, rotation, axisOfRotation)
+    expect(cornerOfRotation).toBe("SouthWest");
+})
