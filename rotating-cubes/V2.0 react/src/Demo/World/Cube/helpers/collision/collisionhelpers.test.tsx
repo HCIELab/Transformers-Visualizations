@@ -1,4 +1,3 @@
-import { Vector3 } from "three";
 import { deviseCornerOfRotation } from "./deviseCornerOfRotation";
 
 test('deviseCornerOfRotation (counterclockwise, neighborOfRotation - top)', async () => {

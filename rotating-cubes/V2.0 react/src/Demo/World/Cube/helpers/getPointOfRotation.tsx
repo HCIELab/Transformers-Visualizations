@@ -1,78 +1,61 @@
-import { Vector3 } from 'three';
+import { Euler, Vector3 } from 'three';
 import { axisType, cornerType } from '../../../Util/Types/types';
 
-/**
- * Returns the vector that matches the pivot corner picked, and a negation of that vector
- * To be used with translateGroup to translate local/world objects around
- * 
- * @param finalCorner NORTHEAST/SOUTHEAST/SOUTHWEST/NORTHWEST
- * @param side The lenght of one side of the cube
- * @returns two vectors, one equivalent to the pivot and one that is the 
- * opposite of that
- */
- export const getPointOfRotation = (finalCorner: cornerType, side: number, finalAxis: axisType) => {
-	let piv = new Vector3(-3,-3,-3);
+export const getPointOfRotation = (cornerOfRotation: cornerType, side: number, axisOfRotation: axisType, rotation: Euler) : Vector3 => {
+	const point = getPointOfRotationWithNoEulerCompensation(cornerOfRotation, side, axisOfRotation);
+	// point.applyEuler(rotation)
+	return point;
+}
 
-	switch (finalAxis) {
+/**
+ * Returns the vector that matches the pivot corner picked
+ */
+const getPointOfRotationWithNoEulerCompensation = (cornerOfRotation: cornerType, side: number, axisOfRotation: axisType) : Vector3 => {
+	switch (axisOfRotation) {
 		case "z":
-			switch(finalCorner) {
+			switch(cornerOfRotation) {
 				case "NorthEast": //(x+1, y+1)
-					piv = new Vector3(side/2, side/2, 0);
-					break;
+					return new Vector3(side/2, side/2, 0);
 				case "SouthEast": //(x+1, y-1)
-					piv = new Vector3(side/2, -side/2, 0);
-					break;
+					return new Vector3(side/2, -side/2, 0);
 				case "SouthWest": //(x-1, y-1)
-					piv = new Vector3(-side/2, -side/2, 0);
-					break;
+					return new Vector3(-side/2, -side/2, 0);
 				case "NorthWest": //(x-1, y+1)
-					piv = new Vector3(-side/2, side/2, 0);
-					break;
+					return new Vector3(-side/2, side/2, 0);
 				default:
 					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
 			}
 			break;
 		case "x":
-			switch(finalCorner) {
+			switch(cornerOfRotation) {
 				case "NorthEast": 
-					piv = new Vector3(0, side/2, -side/2);
-					break;
+					return new Vector3(0, side/2, -side/2);
 				case "SouthEast": 
-					piv = new Vector3(0, -side/2, -side/2);
-					break;
+					return new Vector3(0, -side/2, -side/2);
 				case "SouthWest": 
-					piv = new Vector3(0, -side/2, side/2);
-					break;
+					return new Vector3(0, -side/2, side/2);
 				case "NorthWest": 
-					piv = new Vector3(0, side/2, side/2);
-					break;
+					return new Vector3(0, side/2, side/2);
 				default:
 					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
 			}
 			break;
 		// case "y":
 		default:
-			switch(finalCorner) {
+			switch(cornerOfRotation) {
 				case "NorthEast": 
-					piv = new Vector3(side/2, 0, -side/2);
-					break;
+					return new Vector3(side/2, 0, -side/2);
 				case "SouthEast": 
-					piv = new Vector3(side/2, 0, side/2);
-					break;
+					return new Vector3(side/2, 0, side/2);
 				case "SouthWest": 
-					piv = new Vector3(-side/2, 0, side/2);
-					break;
+					return new Vector3(-side/2, 0, side/2);
 				case "NorthWest": 
-					piv = new Vector3(-side/2, 0, -side/2);
-					break;
+					return new Vector3(-side/2, 0, -side/2);
 				default:
-					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
+					console.log("SHOULD NEVER REACH THIS PART OF THE CODE");		
 			}
 			break;
 	}
-
-	let opp = piv.clone();
-	opp.negate()
-
-	return [piv, opp]
+	console.log("SHOULD NEVER REACH THIS PART OF THE CODE");
+	return new Vector3(-3, -3, -3);
 }

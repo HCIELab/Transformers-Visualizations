@@ -133,7 +133,10 @@ const Cube = (props: {
 						setStep("0_DEFAULT");
 						break;
 					case "NO_COLLISION":
-						const [piv, opp] = getPointOfRotation(cornerOfRotation, side, finalAxis);
+						const piv = getPointOfRotation(cornerOfRotation, side, finalAxis, everything.current.rotation);
+						let opp = piv.clone();
+						opp.negate();
+
 						translateGroup(everything, piv);
 						translateGroup(forPivot, opp);
 			
@@ -179,7 +182,9 @@ const Cube = (props: {
 				roundToRightAngle(everything.current.rotation.z)
 			))
 				
-			const [piv, opp] = getPointOfRotation(cornerOfRotation, side, finalAxis);
+			const piv = getPointOfRotation(cornerOfRotation, side, finalAxis, everything.current.rotation);
+			let opp = piv.clone();
+			opp.negate();
 			translateGroup(everything, opp);
 			translateGroup(forPivot, piv);
 

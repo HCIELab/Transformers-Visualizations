@@ -251,6 +251,19 @@ const Instructions = (props: {
             props.setInitialCubeConfigs([
                 {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
                 {id: 2, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
+            ])
+            props.setInstructions([
+            ])
+        }}>
+            Just 2 cubes
+        </button>
+    )
+
+    const button7 = (
+        <button onClick={() => {
+            props.setInitialCubeConfigs([
+                {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
+                {id: 2, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
                 {id: 3, initialPosition: new Vector3(2, 0, 0), color: "#049101"},
                 {id: 4, initialPosition: new Vector3(3, 0, 0), color: "#049101"},
             ])
@@ -273,6 +286,7 @@ const Instructions = (props: {
             {button4}
             {button5}
             {button6}
+            {button7}
         </Container>
     )
 }
