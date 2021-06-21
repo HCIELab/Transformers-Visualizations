@@ -116,7 +116,7 @@ const Cube = (props: {
 	const {explorePathOfRotation, id, showPath} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			const {collisionResult, cornerOfRotation} = explorePathOfRotation(id);
+			const {collisionResult, cornerOfRotation} = explorePathOfRotation(id, everything.current.rotation);
 			setCornerOfRotation(cornerOfRotation)
 			if (showPath) {
 				setStep("0_DEFAULT");

@@ -58,7 +58,7 @@ const World = (props: {
     //     }
     // }, [showPath])
 
-    const explorePathOfRotation = (cubeID: number) : {collisionResult: collisionType, cornerOfRotation: cornerType} => {
+    const explorePathOfRotation = (cubeID: number, rotation: Vector3) : {collisionResult: collisionType, cornerOfRotation: cornerType} => {
         const neighborSpots = getListOfNeighborSpots(allPositions[cubeID], props.rAxis);
         const isCounterclockwise = props.rDisplacement > 0;
         const neighborOfRotation = getNeighborOfRotation(isCounterclockwise, neighborSpots, allPositions);
@@ -77,7 +77,8 @@ const World = (props: {
         )
         
         // TODO: use the neighborOfRotation and the isCounterclockwise to figure out
-        const cornerOfRotation = deviseCornerOfRotation(isCounterclockwise, neighborOfRotation);
+        const spinAmount = rotation[props.rAxis];
+        const cornerOfRotation = deviseCornerOfRotation(isCounterclockwise, neighborOfRotation, spinAmount);
         console.log("(World.tsx) cornerOfRotation: ", cornerOfRotation);
 
         const hasCollision = false; // TODO: compare allPositions with the positionsInPath in order to detect collision
