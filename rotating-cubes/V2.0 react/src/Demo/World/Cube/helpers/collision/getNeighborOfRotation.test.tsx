@@ -1,6 +1,6 @@
 import { Vector3 } from 'three';
-import { getListOfNeighborSpots } from './World/Cube/helpers/collision/getListOfNeighborSpots';
-import { getNeighborOfRotation } from './World/Cube/helpers/collision/getNeighborOfRotation';
+import { getListOfNeighborSpots } from './getListOfNeighborSpots';
+import { getNeighborOfRotation } from './getNeighborOfRotation';
 
 {
 	const CUBE_POSITION = new Vector3(0, 0, 0);

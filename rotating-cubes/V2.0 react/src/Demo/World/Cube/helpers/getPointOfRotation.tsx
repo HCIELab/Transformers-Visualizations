@@ -3,7 +3,9 @@ import { axisType, cornerType } from '../../../Util/Types/types';
 
 export const getPointOfRotation = (cornerOfRotation: cornerType, side: number, axisOfRotation: axisType, rotation: Euler) : Vector3 => {
 	const point = getPointOfRotationWithNoEulerCompensation(cornerOfRotation, side, axisOfRotation);
-	// point.applyEuler(rotation)
+	console.log("(getPointOfRotation.tsx) point: ", point);
+	point.applyEuler(rotation)
+	console.log("(getPointOfRotation.tsx) point: ", point);
 	return point;
 }
 

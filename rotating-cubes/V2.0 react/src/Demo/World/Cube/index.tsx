@@ -91,6 +91,7 @@ const Cube = (props: {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 0. Click to start the rotation
+	const [initialRotationAmount, setInitialRotationAmount] = useState(new Euler(0, 0, 0));
 	const handleClick = () => {
 		if (step === "0_DEFAULT") {
 			forPivot.current.position.x = 0;
@@ -100,6 +101,7 @@ const Cube = (props: {
 			setFinalAxis(props.rAxis);
 			setCornerOfRotation(props.corner);
 			setFinalDisplacement(props.rDisplacement);
+			setInitialRotationAmount(everything.current.rotation);
 
 			setStep("1_CLICKED");
 		}
@@ -133,7 +135,7 @@ const Cube = (props: {
 						setStep("0_DEFAULT");
 						break;
 					case "NO_COLLISION":
-						const piv = getPointOfRotation(cornerOfRotation, side, finalAxis, everything.current.rotation);
+						const piv = getPointOfRotation(cornerOfRotation, side, finalAxis, initialRotationAmount);
 						let opp = piv.clone();
 						opp.negate();
 
@@ -147,7 +149,7 @@ const Cube = (props: {
 				}
 			}
 		}
-	}, [step, finalAxis, cornerOfRotation, finalDisplacement, explorePathOfRotation, id, showPath])
+	}, [step, finalAxis, cornerOfRotation, finalDisplacement, explorePathOfRotation, id, showPath, initialRotationAmount])
 
 	// 2. Apply the rotation
 	useFrame(() => {
@@ -182,7 +184,7 @@ const Cube = (props: {
 				roundToRightAngle(everything.current.rotation.z)
 			))
 				
-			const piv = getPointOfRotation(cornerOfRotation, side, finalAxis, everything.current.rotation);
+			const piv = getPointOfRotation(cornerOfRotation, side, finalAxis, initialRotationAmount);
 			let opp = piv.clone();
 			opp.negate();
 			translateGroup(everything, opp);
@@ -198,7 +200,7 @@ const Cube = (props: {
 			// console.log(everything.current.quaternion);
 			// console.log(everything.current.rotation);
 		}
-	}, [step, finalAxis, cornerOfRotation]) 
+	}, [step, finalAxis, cornerOfRotation, initialRotationAmount]) 
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////
