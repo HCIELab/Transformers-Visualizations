@@ -58,13 +58,14 @@ const World = (props: {
     //     }
     // }, [showPath])
 
-    const explorePathOfRotation = (cubeID: number, rotation: Vector3) : {collisionResult: collisionType, cornerOfRotation: cornerType} => {
-        const neighborSpots = getListOfNeighborSpots(allPositions[cubeID], props.rAxis);
-        console.log("(World.tsx) clicked Cube position ", allPositions[cubeID]);
-        console.log("(World.tsx) neighborSpots: ", neighborSpots);
+    const explorePathOfRotation = (cubeID: number) : {collisionResult: collisionType, cornerOfRotation: cornerType} => {
+        const cubePosition = allPositions[cubeID]
+        const neighborSpots = getListOfNeighborSpots(cubePosition, props.rAxis);
+        // console.log("(World.tsx) clicked Cube position ", cubePosition);
+        // console.log("(World.tsx) neighborSpots: ", neighborSpots);
         const isCounterclockwise = props.rDisplacement > 0;
         const neighborOfRotation = getNeighborOfRotation(isCounterclockwise, neighborSpots, allPositions);
-        console.log("(World.tsx) neighborOfRotation: ", neighborOfRotation);
+        // console.log("(World.tsx) neighborOfRotation: ", neighborOfRotation);
         if (neighborOfRotation === null) {
             return {
                 collisionResult: "NO_NEIGHBORS",
@@ -72,17 +73,18 @@ const World = (props: {
             }
         }
         
-        const positionsInPath = pathOfRotation(props.rAxis, props.rDisplacement > 0, allPositions[cubeID], neighborOfRotation);
-
+        const positionsInPath = pathOfRotation(props.rAxis, isCounterclockwise, cubePosition, neighborOfRotation);
         visualizePath(
             positionsInPath.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
         )
+
+        // TODO: compare allPositions with the positionsInPath in order to detect collision
+        const hasCollision = false; 
         
         const cornerOfRotation = deviseCornerOfRotation(isCounterclockwise, neighborOfRotation);
-        console.log("(World.tsx) cornerOfRotation: ", cornerOfRotation);
-        console.log("(World.tsx) rotation: ", rotation);
+        // console.log("(World.tsx) cornerOfRotation: ", cornerOfRotation);
+        // console.log("(World.tsx) rotation: ", rotation);
 
-        const hasCollision = false; // TODO: compare allPositions with the positionsInPath in order to detect collision
         return {
             collisionResult: hasCollision ? "HAS_COLLISION" : "NO_COLLISION",
             cornerOfRotation: cornerOfRotation, 

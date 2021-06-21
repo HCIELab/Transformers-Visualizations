@@ -28,7 +28,7 @@ const Cube = (props: {
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
 	const [cornerOfRotation, setCornerOfRotation] = useState<cornerType>("NorthEast");
-	const [finalAxis, setFinalAxis] = useState<axisType>("x"); 
+	const [axisOfRotation, setAxisOfRotation] = useState<axisType>("x"); 
 	const [finalDisplacement, setFinalDisplacement] = useState(Math.PI);
 
 	// Debug
@@ -44,7 +44,7 @@ const Cube = (props: {
 			.forEach((ins) => {
 				setTimeout(() => {
 					//Set the final angle, axis, corner when the user clicks the box
-					setFinalAxis(ins.axis);
+					setAxisOfRotation(ins.axis);
 					// setCornerOfRotation(ins.corner);
 					setFinalDisplacement(ins.displacement);
 		
@@ -98,7 +98,7 @@ const Cube = (props: {
 			forPivot.current.position.y = 0;
 			forPivot.current.position.z = 0;
 			//Set the final angle, axis, corner when the user clicks the box
-			setFinalAxis(props.rAxis);
+			setAxisOfRotation(props.rAxis);
 			setCornerOfRotation(props.corner);
 			setFinalDisplacement(props.rDisplacement);
 			setInitialRotationAmount(everything.current.rotation.clone());
@@ -118,7 +118,7 @@ const Cube = (props: {
 	const {explorePathOfRotation, id, showPath} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			const {collisionResult, cornerOfRotation} = explorePathOfRotation(id, everything.current.rotation);
+			const {collisionResult, cornerOfRotation} = explorePathOfRotation(id);
 			console.log("(Cube.tsx) collisionResult: ", collisionResult);
 			setCornerOfRotation(cornerOfRotation)
 			if (showPath) {
@@ -135,7 +135,7 @@ const Cube = (props: {
 						setStep("0_DEFAULT");
 						break;
 					case "NO_COLLISION":
-						const piv = getPointOfRotation(cornerOfRotation, side, finalAxis, initialRotationAmount);
+						const piv = getPointOfRotation(cornerOfRotation, side, axisOfRotation, initialRotationAmount);
 						let opp = piv.clone();
 						opp.negate();
 
@@ -149,17 +149,17 @@ const Cube = (props: {
 				}
 			}
 		}
-	}, [step, finalAxis, cornerOfRotation, finalDisplacement, explorePathOfRotation, id, showPath, initialRotationAmount])
+	}, [step, axisOfRotation, cornerOfRotation, finalDisplacement, explorePathOfRotation, id, showPath, initialRotationAmount])
 
 	// 2. Apply the rotation
 	useFrame(() => {
 		if (step === "2_ROTATING") {
 			// -- While Rotating --
 			if (finalDisplacement > 0) {
-				everything.current.rotateOnAxis(getAxisFromText(finalAxis), INCREMENT_AMT)
+				everything.current.rotateOnAxis(getAxisFromText(axisOfRotation), INCREMENT_AMT)
 			}
 			else {
-				everything.current.rotateOnAxis(getAxisFromText(finalAxis), -INCREMENT_AMT)
+				everything.current.rotateOnAxis(getAxisFromText(axisOfRotation), -INCREMENT_AMT)
 			}
 			setIteration(iteration+1);
 			if (iteration >= maxIteration) {
@@ -184,7 +184,7 @@ const Cube = (props: {
 				roundToRightAngle(everything.current.rotation.z)
 			))
 				
-			const piv = getPointOfRotation(cornerOfRotation, side, finalAxis, initialRotationAmount);
+			const piv = getPointOfRotation(cornerOfRotation, side, axisOfRotation, initialRotationAmount);
 			let opp = piv.clone();
 			opp.negate();
 			translateGroup(everything, opp);
@@ -200,7 +200,7 @@ const Cube = (props: {
 			// console.log(everything.current.quaternion);
 			// console.log(everything.current.rotation);
 		}
-	}, [step, finalAxis, cornerOfRotation, initialRotationAmount]) 
+	}, [step, axisOfRotation, cornerOfRotation, initialRotationAmount]) 
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////
