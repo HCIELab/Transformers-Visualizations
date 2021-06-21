@@ -20,6 +20,7 @@ const Cube = (props: {
 	corner: cornerType,
 	updatePosition: Function,
 	hasCollisionInPath: (cubeID: number) => collisionType,
+	showPath: boolean,
 }) => {
 	const everything = useRef<THREE.Group>(null!);
 	const forPivot = useRef<THREE.Group>(null!);
@@ -115,24 +116,30 @@ const Cube = (props: {
 	const {hasCollisionInPath, id} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			switch (hasCollisionInPath(id)) {
-				case "NO_NEIGHBORS":
-					alert("Sorry there are no neighbors to this cube!")
-					setStep("0_DEFAULT");
-					break;
-				case "HAS_COLLISION":
-					alert("Sorry there is a collision in your path!")
-					setStep("0_DEFAULT");
-					break;
-				case "NO_COLLISION":
-					const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
-					translateGroup(everything, piv);
-					translateGroup(forPivot, opp);
-		
-					setMaxIteration(Math.abs(finalDisplacement / INCREMENT_AMT));
-					setIteration(0);
-					setStep("2_ROTATING");
-					break;
+			const collisionResult = hasCollisionInPath(id);
+			if (props.showPath) {
+				setStep("0_DEFAULT");
+			}
+			else {
+				switch (collisionResult) {
+					case "NO_NEIGHBORS":
+						alert("Sorry there are no neighbors to this cube!")
+						setStep("0_DEFAULT");
+						break;
+					case "HAS_COLLISION":
+						alert("Sorry there is a collision in your path!")
+						setStep("0_DEFAULT");
+						break;
+					case "NO_COLLISION":
+						const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
+						translateGroup(everything, piv);
+						translateGroup(forPivot, opp);
+			
+						setMaxIteration(Math.abs(finalDisplacement / INCREMENT_AMT));
+						setIteration(0);
+						setStep("2_ROTATING");
+						break;
+				}
 			}
 		}
 	}, [step, finalAxis, finalCorner, finalDisplacement, hasCollisionInPath, id])

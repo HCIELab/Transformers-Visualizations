@@ -37,7 +37,7 @@ const Demo = () => {
     const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([]);
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
 
-    
+    const [showPath, setShowPath] = useState(false);
 
     return (
         <DemoContainer>
@@ -50,7 +50,18 @@ const Demo = () => {
                     corner={corner}
                     setCorner={setCorner}
                 />
+
                 <br/>
+                <br/>
+                [ {showPath ? "Showing Path" : "Moving Cubes"} ]
+                <button onClick={() => {
+                    setShowPath(!showPath)
+                }}>
+                    Click to toggle
+                </button>
+                <br/>
+                <br/>
+
                 <Instructions
                     setInstructions={setInstructions}
                     setInitialCubeConfigs={setInitialCubeConfigs}
@@ -66,6 +77,7 @@ const Demo = () => {
                     rDisplacement={rDisplacement}
                     rAxis={rAxis}
                     corner={corner}
+                    showPath={showPath}
                 />
             </div>
         </DemoContainer>

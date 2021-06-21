@@ -17,6 +17,7 @@ const World = (props: {
     rDisplacement: number,
     rAxis: axisType,
     corner: cornerType,
+    showPath: boolean,
 }) => {
     console.log("(World.tsx) Rendering the World component");
 
@@ -37,17 +38,25 @@ const World = (props: {
     const [pathBlocks, setPathBlocks] = useState<ReactNode[]>([]);
     const visualizePath = (pointsInPath: Vector3[]) => {
         console.log("(World.tsx) visualizePath was called");
-        const pathElements: ReactNode[] = pointsInPath.map((point, index) => {
-            return (
-                <PathBlock
-                    key={index}
-                    color={"#ff0000"}
-                    placement={point}
-                />
-            )
-        })
-        setPathBlocks(pathElements);
+        if (props.showPath) {
+            const pathElements: ReactNode[] = pointsInPath.map((point, index) => {
+                return (
+                    <PathBlock
+                        key={index}
+                        color={"#ff0000"}
+                        placement={point}
+                    />
+                )
+            })
+            setPathBlocks(pathElements);
+        }
     }
+    const {showPath} = props;
+    useEffect(() => {
+        if (!showPath) {
+            setPathBlocks([]);
+        }
+    }, [showPath])
 
     const hasCollisionInPath = (cubeID: number) : collisionType => {
         const neighborSpots = getListOfNeighborSpots(allPositions[cubeID], props.rAxis);
@@ -58,9 +67,9 @@ const World = (props: {
         }
         
         const {path, hasCollision} = detectCollisionsInPath(props.rAxis, props.rDisplacement > 0, allPositions[cubeID], neighborOfRotation);
-        // visualizePath(
-        //     path.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
-        // )
+        visualizePath(
+            path.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
+        )
         
         return hasCollision ? "HAS_COLLISION" : "NO_COLLISION";
     }
@@ -92,6 +101,7 @@ const World = (props: {
                         corner={props.corner}
                         updatePosition={setPosition(config.id)}
                         hasCollisionInPath={hasCollisionInPath}
+                        showPath={props.showPath}
                     />
                 )
             }
