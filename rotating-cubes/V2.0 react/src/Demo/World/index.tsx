@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-// import ThreeControls from "./ThreeControls";
+import ThreeControls from "./ThreeControls";
 import { Euler, Vector3 } from 'three';
 import { ResizeObserver } from '@juggle/resize-observer';
 
@@ -76,9 +76,7 @@ const World = (props: {
             positionsInPath.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
         )
         
-        // TODO: use the neighborOfRotation and the isCounterclockwise to figure out
-        const spinAmount = rotation[props.rAxis];
-        const cornerOfRotation = deviseCornerOfRotation(isCounterclockwise, neighborOfRotation, spinAmount);
+        const cornerOfRotation = deviseCornerOfRotation(isCounterclockwise, neighborOfRotation, rotation, props.rAxis);
         console.log("(World.tsx) cornerOfRotation: ", cornerOfRotation);
 
         const hasCollision = false; // TODO: compare allPositions with the positionsInPath in order to detect collision
@@ -98,7 +96,7 @@ const World = (props: {
             <pointLight position={[10, 10, 10]} />
 
             {/* Orbit Controls */}
-            {/* <ThreeControls/> */}
+            <ThreeControls/>
             
             {/* Visual Helpers */}
             <axesHelper position={[-0.5, -0.5, 0]} scale={2}/>
