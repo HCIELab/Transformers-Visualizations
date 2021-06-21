@@ -10,17 +10,15 @@ type findingStateType = "START" | "FOUNDONE";
  * 
  */
 export const getNeighborOfRotation = (rotationIsCounterclockwise : boolean, neighborSpots: {[n in neighborType]: Vector3}, allPositions: {[cubeID: number]: Vector3}) : neighborType | null => {
-    console.log("********inside getNeighborOfRotation");
-
     let findingState : findingStateType = "START"; 
     let lastNeighborFound : neighborType | null = null;
 
-    const neighborTypesList = rotationIsCounterclockwise ? doubleNeighborTypesClockwise() : doubleNeighborTypesCounterclockwise();
+    const neighborTypesList = rotationIsCounterclockwise ? neighborTypesClockwise() : neighborTypesCounterclockwise();
 
     for (let i = 0; i < neighborTypesList.length; i++) {
         const neighborTypeName = neighborTypesList[i];
         const position = neighborSpots[neighborTypeName];
-        console.log(neighborTypeName, position, findingState, lastNeighborFound);
+        // console.log(neighborTypeName, position, findingState, lastNeighborFound);
         switch (findingState) {
             case 'START':
                 const firstNeighborFound = findIfPositionExists(position, allPositions) 
@@ -44,12 +42,12 @@ export const getNeighborOfRotation = (rotationIsCounterclockwise : boolean, neig
 }
 
 
-const doubleNeighborTypesCounterclockwise = () : neighborType[] => {
-    return ["LEFT_NEIGHBOR", "BOTTOM_NEIGHBOR", "RIGHT_NEIGHBOR", "TOP_NEIGHBOR", "LEFT_NEIGHBOR", "BOTTOM_NEIGHBOR", "RIGHT_NEIGHBOR", "TOP_NEIGHBOR"]
+const neighborTypesCounterclockwise = () : neighborType[] => {
+    return ["LEFT_NEIGHBOR", "BOTTOM_NEIGHBOR", "RIGHT_NEIGHBOR", "TOP_NEIGHBOR"]
 }
 
-const doubleNeighborTypesClockwise = () : neighborType[] => {
-    return doubleNeighborTypesCounterclockwise().reverse();
+const neighborTypesClockwise = () : neighborType[] => {
+    return neighborTypesCounterclockwise().reverse();
 }
 
 const findIfPositionExists = (position: Vector3, allPositions: {[cubeID: number]: Vector3}) => {
