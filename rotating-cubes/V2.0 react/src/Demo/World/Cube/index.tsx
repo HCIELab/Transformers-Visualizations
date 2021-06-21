@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Color, useFrame } from "@react-three/fiber";
 import { DoubleSide, Euler, Vector3 } from 'three';
 import Labeling from "./Labeling/labeling";
-import { axisType, cornerType, instructionType, rotationStep, collisionType } from '../../Util/Types/types';
+import { axisType, cornerType, instructionType, rotationStep } from '../../Util/Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisFromText } from "./helpers/getAxisFromText";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
@@ -19,7 +19,7 @@ const Cube = (props: {
 	rAxis: axisType,
 	corner: cornerType,
 	updatePosition: Function,
-	explorePathOfRotation: (cubeID: number) => collisionType,
+	explorePathOfRotation: Function,
 	showPath: boolean,
 }) => {
 	const everything = useRef<THREE.Group>(null!);
@@ -27,7 +27,7 @@ const Cube = (props: {
 	const side = 1;
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
-	const [finalCorner, setFinalCorner] = useState<cornerType>("NorthEast");
+	const [cornerOfRotation, setCornerOfRotation] = useState<cornerType>("NorthEast");
 	const [finalAxis, setFinalAxis] = useState<axisType>("x"); 
 	const [finalDisplacement, setFinalDisplacement] = useState(Math.PI);
 
@@ -45,7 +45,7 @@ const Cube = (props: {
 				setTimeout(() => {
 					//Set the final angle, axis, corner when the user clicks the box
 					setFinalAxis(ins.axis);
-					setFinalCorner(ins.corner);
+					// setCornerOfRotation(ins.corner);
 					setFinalDisplacement(ins.displacement);
 		
 					setStep("1_CLICKED");
@@ -98,7 +98,7 @@ const Cube = (props: {
 			forPivot.current.position.z = 0;
 			//Set the final angle, axis, corner when the user clicks the box
 			setFinalAxis(props.rAxis);
-			setFinalCorner(props.corner);
+			setCornerOfRotation(props.corner);
 			setFinalDisplacement(props.rDisplacement);
 
 			setStep("1_CLICKED");
@@ -113,11 +113,12 @@ const Cube = (props: {
 	const INCREMENT_AMT = 0.1; //increase this number to make the cubes rotate faster
 	const [maxIteration, setMaxIteration] = useState(0);
 	const [iteration, setIteration] = useState(0);
-	const {explorePathOfRotation, id} = props;
+	const {explorePathOfRotation, id, showPath} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			const collisionResult = explorePathOfRotation(id);
-			if (props.showPath) {
+			const {collisionResult, cornerOfRotation} = explorePathOfRotation(id);
+			setCornerOfRotation(cornerOfRotation)
+			if (showPath) {
 				setStep("0_DEFAULT");
 			}
 			else {
@@ -131,7 +132,7 @@ const Cube = (props: {
 						setStep("0_DEFAULT");
 						break;
 					case "NO_COLLISION":
-						const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
+						const [piv, opp] = getPointOfRotation(cornerOfRotation, side, finalAxis);
 						translateGroup(everything, piv);
 						translateGroup(forPivot, opp);
 			
@@ -142,7 +143,7 @@ const Cube = (props: {
 				}
 			}
 		}
-	}, [step, finalAxis, finalCorner, finalDisplacement, explorePathOfRotation, id])
+	}, [step, finalAxis, cornerOfRotation, finalDisplacement, explorePathOfRotation, id, showPath])
 
 	// 2. Apply the rotation
 	useFrame(() => {
@@ -177,7 +178,7 @@ const Cube = (props: {
 				roundToRightAngle(everything.current.rotation.z)
 			))
 				
-			const [piv, opp] = getPointOfRotation(finalCorner, side, finalAxis);
+			const [piv, opp] = getPointOfRotation(cornerOfRotation, side, finalAxis);
 			translateGroup(everything, opp);
 			translateGroup(forPivot, piv);
 
@@ -191,7 +192,7 @@ const Cube = (props: {
 			// console.log(everything.current.quaternion);
 			// console.log(everything.current.rotation);
 		}
-	}, [step, finalAxis, finalCorner]) 
+	}, [step, finalAxis, cornerOfRotation]) 
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////

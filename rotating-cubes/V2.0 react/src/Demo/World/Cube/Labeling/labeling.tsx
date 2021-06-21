@@ -78,7 +78,6 @@ const Labeling = (props: {
 				</mesh>
 				<mesh position={[letterOffset*2.5, -letterOffset, half]} ref={fakeNano.L3}>
 					<textGeometry args={["| NANO |", textOptions]} /> 
-					{/* TODO: fill in the cubeID here ^^^ */}
 					<meshPhongMaterial/>
 				</mesh>
 				<mesh position={[letterOffset*2.5, -letterOffset*3, half]} ref={fakeNano.L4}>

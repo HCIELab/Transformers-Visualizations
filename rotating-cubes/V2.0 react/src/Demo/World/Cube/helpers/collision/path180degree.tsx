@@ -71,13 +71,12 @@ export const traversedPath : pathReturnType = {
     },
     LEFT_NEIGHBOR: {
         COUNTERCLOCKWISE: (a, b) => [
-            // TODO: fix these coords
-            new Vector2(a-1, b-1),
-            new Vector2(a, a-1),
-            new Vector2(a-1, b-2),
-            new Vector2(a, a-2),
-            new Vector2(a+1, a-1),
-            new Vector2(a+1, a),
+            new Vector2(a+1, b),
+            new Vector2(a+1, b+1),
+            new Vector2(a, b+1),
+            new Vector2(a, b+2),
+            new Vector2(a-1, b+2),
+            new Vector2(a, b+1),
         ],
         CLOCKWISE: (a, b) => [
             new Vector2(a, b-1),

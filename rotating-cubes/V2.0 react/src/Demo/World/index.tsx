@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 // import ThreeControls from "./ThreeControls";
 import { Euler, Vector3 } from 'three';
@@ -8,6 +8,7 @@ import { axisType, collisionType, cornerType, initialCubeConfigType, instruction
 import Cube from './Cube';
 import PathBlock from './PathBlock';
 import { pathOfRotation } from './Cube/helpers/collision/pathOfRotation';
+import { deviseCornerOfRotation } from './Cube/helpers/collision/deviseCornerOfRotation';
 import { getListOfNeighborSpots } from './Cube/helpers/collision/getListOfNeighborSpots';
 import { getNeighborOfRotation } from './Cube/helpers/collision/getNeighborOfRotation';
 
@@ -51,18 +52,22 @@ const World = (props: {
             setPathBlocks(pathElements);
         }
     }
-    useEffect(() => {
-        if (!showPath) {
-            setPathBlocks([]);
-        }
-    }, [showPath])
+    // useEffect(() => {
+    //     if (!showPath) {
+    //         setPathBlocks([]);
+    //     }
+    // }, [showPath])
 
-    const explorePathOfRotation = (cubeID: number) : collisionType => {
+    const explorePathOfRotation = (cubeID: number) : {collisionResult: collisionType, cornerOfRotation: cornerType} => {
         const neighborSpots = getListOfNeighborSpots(allPositions[cubeID], props.rAxis);
-        const neighborOfRotation = getNeighborOfRotation(props.rDisplacement > 0, neighborSpots, allPositions);
+        const isCounterclockwise = props.rDisplacement > 0;
+        const neighborOfRotation = getNeighborOfRotation(isCounterclockwise, neighborSpots, allPositions);
         console.log("(World.tsx) neighborOfRotation: ", neighborOfRotation);
         if (neighborOfRotation === null) {
-            return "NO_NEIGHBORS";
+            return {
+                collisionResult: "NO_NEIGHBORS",
+                cornerOfRotation: "NorthEast", 
+            }
         }
         
         const positionsInPath = pathOfRotation(props.rAxis, props.rDisplacement > 0, allPositions[cubeID], neighborOfRotation);
@@ -71,8 +76,15 @@ const World = (props: {
             positionsInPath.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
         )
         
+        // TODO: use the neighborOfRotation and the isCounterclockwise to figure out
+        const cornerOfRotation = deviseCornerOfRotation(isCounterclockwise, neighborOfRotation);
+        console.log("(World.tsx) cornerOfRotation: ", cornerOfRotation);
+
         const hasCollision = false; // TODO: compare allPositions with the positionsInPath in order to detect collision
-        return hasCollision ? "HAS_COLLISION" : "NO_COLLISION";
+        return {
+            collisionResult: hasCollision ? "HAS_COLLISION" : "NO_COLLISION",
+            cornerOfRotation: cornerOfRotation, 
+        };
     }
 
 

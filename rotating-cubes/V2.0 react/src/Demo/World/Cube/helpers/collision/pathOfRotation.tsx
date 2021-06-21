@@ -12,14 +12,10 @@ export const pathOfRotation = (
 
     /**
      * TODO
-     * use the (cornerOfRotation, axisOfRotation, isCoutnerclockwise) to figure out what path (in local coordinates) the cube will be travelling in
-     * use cubePosition to find the exact world coordinates of the path 
-     * use allPositions to check that these positions in world space are not already occupied by another cube
      */
 
     let callbackFunc = traversedPath[neighborOfRotation].COUNTERCLOCKWISE;
     let path : Vector2[] = [];
-
 
     switch(axisOfRotation) {
         case "z":
