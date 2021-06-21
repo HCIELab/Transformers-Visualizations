@@ -8,6 +8,7 @@ import ThreeControls from "./ThreeControls";
 import Panel from "./Panel";
 import Instructions from "./Instructions";
 import { axisType, cornerType, cubeAndPropertiesType, instructionType } from './Types/types';
+import { Euler, Vector3 } from 'three';
 
 const DemoContainer = styled.div`
     width: 100%;
@@ -75,6 +76,7 @@ const Demo = () => {
                     <pointLight position={[10, 10, 10]} />
                     <ThreeControls/>
                     {/* <axesHelper position={[-0.5, -0.5, 0]} scale={0.5}/> */}
+                    <gridHelper rotation={new Euler(Math.PI/2, 0, 0)} position={[0.5, 0.5, -0.5]}/>
                     {
                         cubesAndProperties.map((config) => 
                             <Cube 
