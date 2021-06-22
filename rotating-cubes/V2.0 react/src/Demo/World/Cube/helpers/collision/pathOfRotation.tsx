@@ -10,7 +10,8 @@ export const pathOfRotation = (
 ) : Vector3[] => {
     console.log("(pathOfRotation) params: ",axisOfRotation, isCounterclockwise, cubePosition, neighborOfRotation);
 
-    let pathCallback = traversedPath[axisOfRotation][neighborOfRotation][isCounterclockwise ? "COUNTERCLOCKWISE" : "CLOCKWISE"];
-    const {x, y, z} = cubePosition;
-    return pathCallback(x, y, z);
+    const pathLocal = traversedPath[axisOfRotation][neighborOfRotation][isCounterclockwise ? "COUNTERCLOCKWISE" : "CLOCKWISE"];
+    const pathWorld = pathLocal.map((vec) => new Vector3(vec.x + cubePosition.x, vec.y + cubePosition.y, vec.z + cubePosition.z))
+    console.log("(pathOfRotation.tsx) pathWorld: ", pathWorld)
+    return pathWorld;
 }
