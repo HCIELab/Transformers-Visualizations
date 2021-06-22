@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import ThreeControls from "./ThreeControls";
 import { Euler, Vector3 } from 'three';
@@ -21,16 +21,21 @@ const World = (props: {
     showPath: boolean,
 }) => {
     console.log("(World.tsx) Rendering the World component");
-
-    const allPositions: {[cubeID: number]: Vector3} = {};
+    
+    const [allPositions, setAllPositions] = useState<{[cubeID: number]: Vector3}>({});
     const {initialCubeConfigs} = props; 
-    initialCubeConfigs.forEach((config) => {
-        allPositions[config.id] = config.initialPosition;
-    })
+    useEffect(() => {
+        let temp : {[cubeID: number]: Vector3} = {};
+        initialCubeConfigs.forEach(({id, initialPosition}) => {
+            temp[id] = initialPosition;
+        })
+        setAllPositions(temp);
+    }, [initialCubeConfigs])
+
 
     const setPosition = (cubeID : number) => {   
         return (newPosition : Vector3) => {
-            console.log("(World.tsx) allPositions: ", allPositions);
+            console.log(`(World.tsx) (for cube ${cubeID}) setPosition to:`, newPosition)
             delete allPositions[cubeID];
             allPositions[cubeID] = newPosition;
         }
@@ -59,13 +64,14 @@ const World = (props: {
     // }, [showPath])
 
     const explorePathOfRotation = (cubeID: number) : {collisionResult: collisionType, cornerOfRotation: cornerType} => {
+        console.log("(World.tsx) allPositions: ", allPositions);
         const cubePosition = allPositions[cubeID]
         const neighborSpots = getListOfNeighborSpots(cubePosition, props.rAxis);
-        // console.log("(World.tsx) clicked Cube position ", cubePosition);
-        // console.log("(World.tsx) neighborSpots: ", neighborSpots);
+        console.log("(World.tsx) clicked Cube position ", cubePosition);
+        console.log("(World.tsx) neighborSpots: ", neighborSpots);
         const isCounterclockwise = props.rDisplacement > 0;
         const neighborOfRotation = getNeighborOfRotation(isCounterclockwise, neighborSpots, allPositions);
-        // console.log("(World.tsx) neighborOfRotation: ", neighborOfRotation);
+        console.log("(World.tsx) neighborOfRotation: ", neighborOfRotation);
         if (neighborOfRotation === null) {
             return {
                 collisionResult: "NO_NEIGHBORS",
