@@ -80,9 +80,7 @@ const World = (props: {
         }
         
         const positionsInPath = pathOfRotation(props.rAxis, isCounterclockwise, cubePosition, neighborOfRotation);
-        visualizePath(
-            positionsInPath.map((coord2D) => new Vector3(coord2D.x, coord2D.y, 0))
-        )
+        visualizePath(positionsInPath);
 
         // TODO: compare allPositions with the positionsInPath in order to detect collision
         const hasCollision = false; 
