@@ -1,7 +1,7 @@
-import { Euler, Vector3 } from 'three';
+import { Quaternion, Vector3 } from 'three';
 import { axisType } from '../../../Util/Types/types';
 
-export const getAxisOfRotationLocal = (finalAxis: axisType, currentRotation: Euler) => {
+export const getAxisOfRotationLocal = (finalAxis: axisType, currentRotation: Quaternion) => {
     let axisWorld : Vector3;
     switch (finalAxis) {
         case "x":
@@ -23,10 +23,12 @@ export const getAxisOfRotationLocal = (finalAxis: axisType, currentRotation: Eul
      * Convert from world to local if necessary
      * ex: world 'x' to local 'x'/'-x'
      */
-    axisWorld.applyEuler(currentRotation); // now axisWorld has been mutated to become axisLocal
+    const foo = currentRotation.clone();
+    foo.invert();
+    axisWorld.applyQuaternion(foo); // now axisWorld has been mutated to become axisLocal
     const {x, y, z} = axisWorld;
 	const rounded = new Vector3(Math.round(x*2)/2, Math.round(y*2)/2, Math.round(z*2)/2)
-    // console.log("(getAxisOfRotationLocal.tsx) axisOfRotationLocal: ", rounded);
+    console.log("(getAxisOfRotationLocal.tsx) axisOfRotationLocal: ", rounded);
 
     return rounded;    
 }

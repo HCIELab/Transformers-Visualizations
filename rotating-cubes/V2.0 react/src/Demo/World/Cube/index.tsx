@@ -151,10 +151,10 @@ const Cube = (props: {
 		if (step === "2_ROTATING") {
 			// -- While Rotating --
 			if (props.isCounterclockwise) {
-				everything.current.rotateOnAxis(getAxisOfRotationLocal(axisOfRotationWorld, everything.current.rotation), INCREMENT_AMT)
+				everything.current.rotateOnAxis(getAxisOfRotationLocal(axisOfRotationWorld, initialRotationAmount), INCREMENT_AMT)
 			}
 			else {
-				everything.current.rotateOnAxis(getAxisOfRotationLocal(axisOfRotationWorld, everything.current.rotation), -INCREMENT_AMT)
+				everything.current.rotateOnAxis(getAxisOfRotationLocal(axisOfRotationWorld, initialRotationAmount), -INCREMENT_AMT)
 			}
 			setIteration(iteration+1);
 			if (iteration >= maxIteration) {
