@@ -12,7 +12,7 @@ import {generateExplorePathOfRotation} from "./helpersworld/generateExplorePathO
 const World = (props: {
     initialCubeConfigs: initialCubeConfigType[],
     instructions: instructionType[],
-    rDisplacement: number,
+    isCounterclockwise: boolean,
     axisOfRotationWorld: axisType,
     showPath: boolean,
 }) => {
@@ -59,7 +59,7 @@ const World = (props: {
     // }, [showPath])
 
     const explorePathOfRotation = (cubeID: number) : {collisionResult: collisionType, cornerOfRotation: cornerType} => {
-        return generateExplorePathOfRotation(allPositions, visualizePath, props.rDisplacement, props.axisOfRotationWorld)(cubeID);
+        return generateExplorePathOfRotation(allPositions, visualizePath, props.isCounterclockwise, props.axisOfRotationWorld)(cubeID);
     }
 
     return (
@@ -84,7 +84,7 @@ const World = (props: {
                         id={config.id} 
                         initialPosition={config.initialPosition} 
                         color={config.color} 
-                        rDisplacement={props.rDisplacement}
+                        isCounterclockwise={props.isCounterclockwise}
                         axisOfRotationWorld={props.axisOfRotationWorld}
                         // corner={props.corner}
                         updatePosition={setPosition(config.id)}

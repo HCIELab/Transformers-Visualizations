@@ -9,10 +9,10 @@ import { Vector3 } from 'three';
 export const generateExplorePathOfRotation = (
     allPositions: {[cubeID: number]: Vector3},
     visualizePath: Function,
-    rDisplacement: number,
+    isCounterclockwise: boolean,
     axisOfRotationWorld : axisType
 ) : Function => {
-    return (cubeID: number) : {collisionResult: collisionType, cornerName: cornerType | null} => {
+    return (cubeID: number) : {collisionResult: collisionType, cornerName: cornerType | null, displacementMagnitude: number} => {
         const cubePosition = allPositions[cubeID];
         console.log("(generateExplorePathOfRotation.tsx) allPositions: ", allPositions);
         console.log("(generateExplorePathOfRotation.tsx) clicked Cube position ", cubePosition);
@@ -20,12 +20,10 @@ export const generateExplorePathOfRotation = (
         const neighborSpots = getListOfNeighborSpots(cubePosition, axisOfRotationWorld);
         console.log("(generateExplorePathOfRotation.tsx) neighborSpots: ", neighborSpots);
 
-        const isCounterclockwise = rDisplacement > 0;
-
         const neighborOfRotation = getNeighborOfRotation(isCounterclockwise, neighborSpots, allPositions);
         console.log("(generateExplorePathOfRotation.tsx) neighborOfRotation: ", neighborOfRotation);
         if (neighborOfRotation === null) {
-            return {collisionResult: "NO_NEIGHBORS", cornerName: null}
+            return {collisionResult: "NO_NEIGHBORS", cornerName: null, displacementMagnitude: 0,}
         } else {
             const cornerName = deviseCornerName(isCounterclockwise, neighborOfRotation);
 
@@ -36,7 +34,7 @@ export const generateExplorePathOfRotation = (
             if (!hasCollision180) {
                 console.log("(generateExplorePathOfRotation.tsx) rotating 180")
                 visualizePath(positionsInPath180);
-                return {collisionResult: "NO_COLLISION", cornerName: cornerName};    
+                return {collisionResult: "NO_COLLISION", cornerName: cornerName, displacementMagnitude: Math.PI};    
             }
 
             // Check for 90 degree rotation
@@ -46,10 +44,10 @@ export const generateExplorePathOfRotation = (
             if (!hasCollision90) {
                 console.log("(generateExplorePathOfRotation.tsx) rotating 90")
                 visualizePath(positionsInPath90);
-                return {collisionResult: "NO_COLLISION", cornerName: cornerName};    
+                return {collisionResult: "NO_COLLISION", cornerName: cornerName, displacementMagnitude: Math.PI/2};    
             }
         
-            return {collisionResult: "HAS_COLLISION", cornerName: cornerName};    
+            return {collisionResult: "HAS_COLLISION", cornerName: cornerName, displacementMagnitude: 0};    
         }
     }
 }

@@ -15,7 +15,7 @@ const Cube = (props: {
 	id: number,
 	initialPosition: Vector3,
 	color: Color,
-	rDisplacement: number,
+	isCounterclockwise: boolean,
 	axisOfRotationWorld: axisType,
 	updatePosition: Function,
 	explorePathOfRotation: Function,
@@ -28,7 +28,6 @@ const Cube = (props: {
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
 	const [cornerName, setCornerName] = useState<cornerType>("NorthEast");
 	const [axisOfRotationWorld, setAxisOfRotationWorld] = useState<axisType>("x"); 
-	const [finalDisplacement, setFinalDisplacement] = useState(Math.PI);
 
 	// Debug
 	useEffect(() => {
@@ -44,7 +43,6 @@ const Cube = (props: {
 				setTimeout(() => {
 					//Set the final angle, axis, corner when the user clicks the box
 					setAxisOfRotationWorld(ins.axis);
-					setFinalDisplacement(ins.displacement);
 		
 					setStep("1_CLICKED");
 				}, ins.timeToStart);
@@ -97,9 +95,7 @@ const Cube = (props: {
 			forPivot.current.position.z = 0;
 			//Set the final angle, axis, corner when the user clicks the box
 			setAxisOfRotationWorld(props.axisOfRotationWorld);
-			setFinalDisplacement(props.rDisplacement);
 			setInitialRotationAmount(everything.current.rotation.clone());
-			console.log(`(Cube.tsx) (for cube ${id}) axis and rDisplacement`, axisOfRotationWorld, props.rDisplacement)
 
 			setStep("1_CLICKED");
 		}
@@ -116,7 +112,7 @@ const Cube = (props: {
 	const {explorePathOfRotation, id, showPath} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			const {collisionResult, cornerName} = explorePathOfRotation(id);
+			const {collisionResult, cornerName, displacementMagnitude} = explorePathOfRotation(id);
 			console.log("(Cube.tsx) collisionResult: ", collisionResult);
 			setCornerName(cornerName)
 			if (showPath) {
@@ -140,20 +136,20 @@ const Cube = (props: {
 						translateGroup(everything, piv);
 						translateGroup(forPivot, opp);
 			
-						setMaxIteration(Math.abs(finalDisplacement / INCREMENT_AMT));
+						setMaxIteration(Math.abs(displacementMagnitude / INCREMENT_AMT));
 						setIteration(0);
 						setStep("2_ROTATING");
 						break;
 				}
 			}
 		}
-	}, [step, axisOfRotationWorld, cornerName, finalDisplacement, explorePathOfRotation, id, showPath, initialRotationAmount])
+	}, [step, axisOfRotationWorld, cornerName, explorePathOfRotation, id, showPath, initialRotationAmount])
 
 	// 2. Apply the rotation
 	useFrame(() => {
 		if (step === "2_ROTATING") {
 			// -- While Rotating --
-			if (finalDisplacement > 0) {
+			if (props.isCounterclockwise) {
 				everything.current.rotateOnAxis(getAxisOfRotationLocal(axisOfRotationWorld, everything.current.rotation), INCREMENT_AMT)
 			}
 			else {

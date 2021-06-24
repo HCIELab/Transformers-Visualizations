@@ -30,7 +30,7 @@ const DemoContainer = styled.div`
 
 const Demo = () => {
     
-    const [rDisplacement, setRDisplacement] = useState(Math.PI);
+    const [isCounterclockwise, setIsCounterclockwise] = useState(true);
     const [axisOfRotationWorld, setAxisOfRotationWorld] = useState<axisType>("z");
 
     const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([]);
@@ -44,8 +44,8 @@ const Demo = () => {
                 <Panel
                     axisOfRotationWorld={axisOfRotationWorld}
                     setAxisOfRotationWorld={setAxisOfRotationWorld}
-                    rDisplacement={rDisplacement}
-                    setRDisplacement={setRDisplacement}
+                    isCounterclockwise={isCounterclockwise}
+                    setIsCounterclockwise={setIsCounterclockwise}
                 />
 
                 <br/>
@@ -74,7 +74,7 @@ const Demo = () => {
                 <World
                     initialCubeConfigs={initialCubeConfigs}
                     instructions={instructions}
-                    rDisplacement={rDisplacement}
+                    isCounterclockwise={isCounterclockwise}
                     axisOfRotationWorld={axisOfRotationWorld}
                     showPath={showPath}
                 />
