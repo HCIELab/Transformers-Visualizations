@@ -25,22 +25,39 @@ const pi = Math.PI;
 export const traversedPath : pathReturnType = {
     x: {
         TOP_NEIGHBOR: {
-            COUNTERCLOCKWISE: generateTemplateCoordList(),
-            CLOCKWISE: generateTemplateCoordList(),
+            COUNTERCLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(0, pi/2, 3*pi/2))
+            ),
+            CLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(0, -pi/2, 3*pi/2))
+            ),
         },
         RIGHT_NEIGHBOR: {
-            COUNTERCLOCKWISE: generateTemplateCoordList(),
-            CLOCKWISE: generateTemplateCoordList(),
+            COUNTERCLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(0, pi/2, pi))
+            ),
+            CLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(pi, -pi/2, pi))
+            ),
         },
         BOTTOM_NEIGHBOR: {
-            COUNTERCLOCKWISE: generateTemplateCoordList(),
-            CLOCKWISE: generateTemplateCoordList(),
+            COUNTERCLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(0, pi/2, pi/2))
+                ),
+            CLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(0, -pi/2, pi/2))
+            ),
         },
         LEFT_NEIGHBOR: {
-            COUNTERCLOCKWISE: generateTemplateCoordList(),
-            CLOCKWISE: generateTemplateCoordList(),
-        },
+            COUNTERCLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(0, pi/2, 0))
+            ),
+            CLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(pi, -pi/2, 0))
+            ),
+        }
     },
+    
     y: {
         TOP_NEIGHBOR: {
             COUNTERCLOCKWISE: generateTemplateCoordList().map(
@@ -75,6 +92,7 @@ export const traversedPath : pathReturnType = {
             ),
         },
     },
+
     z: {
         TOP_NEIGHBOR: {
             COUNTERCLOCKWISE: generateTemplateCoordList().map(
