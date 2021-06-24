@@ -7,10 +7,7 @@ import { ResizeObserver } from '@juggle/resize-observer';
 import { axisType, collisionType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';
 import Cube from './Cube';
 import PathBlock from './PathBlock';
-import { pathOfRotation } from './Cube/helpers/collision/pathOfRotation';
-import { deviseCornerOfRotation } from './Cube/helpers/collision/deviseCornerOfRotation';
-import { getListOfNeighborSpots } from './Cube/helpers/collision/getListOfNeighborSpots';
-import { getNeighborOfRotation } from './Cube/helpers/collision/getNeighborOfRotation';
+import {generateExplorePathOfRotation} from "./helpersworld/generateExplorePathOfRotation";
 
 const World = (props: {
     initialCubeConfigs: initialCubeConfigType[],
@@ -41,7 +38,6 @@ const World = (props: {
     }
 
 
-
     const [pathBlocks, setPathBlocks] = useState<ReactNode[]>([]);
     const {showPath} = props;
     const visualizePath = (pointsInPath: Vector3[]) => {
@@ -63,39 +59,8 @@ const World = (props: {
     // }, [showPath])
 
     const explorePathOfRotation = (cubeID: number) : {collisionResult: collisionType, cornerOfRotation: cornerType} => {
-        console.log("(World.tsx) allPositions: ", allPositions);
-        const cubePosition = allPositions[cubeID]
-        const neighborSpots = getListOfNeighborSpots(cubePosition, props.axisOfRotationWorld);
-        console.log("(World.tsx) clicked Cube position ", cubePosition);
-        console.log("(World.tsx) neighborSpots: ", neighborSpots);
-        const isCounterclockwise = props.rDisplacement > 0;
-        const neighborOfRotation = getNeighborOfRotation(isCounterclockwise, neighborSpots, allPositions);
-        console.log("(World.tsx) neighborOfRotation: ", neighborOfRotation);
-        if (neighborOfRotation === null) {
-            return {
-                collisionResult: "NO_NEIGHBORS",
-                cornerOfRotation: "NorthEast", 
-            }
-        }
-        
-        const positionsInPath = pathOfRotation(props.axisOfRotationWorld, isCounterclockwise, cubePosition, neighborOfRotation);
-        visualizePath(positionsInPath);
-
-        // TODO: compare allPositions with the positionsInPath in order to detect collision
-        const hasCollision = false; 
-        
-        const cornerOfRotation = deviseCornerOfRotation(isCounterclockwise, neighborOfRotation);
-        // console.log("(World.tsx) cornerOfRotation: ", cornerOfRotation);
-        // console.log("(World.tsx) rotation: ", rotation);
-
-        return {
-            collisionResult: hasCollision ? "HAS_COLLISION" : "NO_COLLISION",
-            cornerOfRotation: cornerOfRotation, 
-        };
+        return generateExplorePathOfRotation(allPositions, visualizePath, props.rDisplacement, props.axisOfRotationWorld)(cubeID);
     }
-
-
-
 
     return (
         <Canvas resize={{ polyfill: ResizeObserver }} >
