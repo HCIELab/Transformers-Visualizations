@@ -2,10 +2,11 @@ import { Euler, Vector3 } from 'three';
 import { axisType, cornerType } from '../../../Util/Types/types';
 
 export const getPointOfRotation = (cornerOfRotation: cornerType, side: number, axisOfRotation: axisType, rotation: Euler) : Vector3 => {
-	console.log("(getPointOfRotation.tsx) params: ", cornerOfRotation, side, axisOfRotation, rotation);
-	const point = getPointOfRotationWithNoEulerCompensation(cornerOfRotation, side, axisOfRotation);
+	// console.log("(getPointOfRotation.tsx) params: ", cornerOfRotation, side, axisOfRotation, rotation);
+	const point = translateCornerToLocalPointUnrotated(cornerOfRotation, side, axisOfRotation);
 	console.log("(getPointOfRotation.tsx) point before euler rotation: ", point);
-	point.applyEuler(rotation)
+
+	point.applyEuler(rotation); // Rotate the point to be in local space
 	console.log("(getPointOfRotation.tsx) point after euler rotation: ", point);
 
 	const {x, y, z} = point;
@@ -13,10 +14,12 @@ export const getPointOfRotation = (cornerOfRotation: cornerType, side: number, a
 	return rounded;
 }
 
+
+
 /**
- * Returns the vector that matches the pivot corner picked
+ * Returns the point (with coordinates) that matches the pivot corner picked
  */
-const getPointOfRotationWithNoEulerCompensation = (cornerOfRotation: cornerType, side: number, axisOfRotation: axisType) : Vector3 => {
+const translateCornerToLocalPointUnrotated = (cornerOfRotation: cornerType, side: number, axisOfRotation: axisType) : Vector3 => {
 	switch (axisOfRotation) {
 		case "z":
 			switch(cornerOfRotation) {

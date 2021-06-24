@@ -26,7 +26,7 @@ const Cube = (props: {
 	const side = 1;
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
-	const [cornerOfRotation, setCornerOfRotation] = useState<cornerType>("NorthEast");
+	const [cornerName, setCornerName] = useState<cornerType>("NorthEast");
 	const [axisOfRotationWorld, setAxisOfRotationWorld] = useState<axisType>("x"); 
 	const [finalDisplacement, setFinalDisplacement] = useState(Math.PI);
 
@@ -116,9 +116,9 @@ const Cube = (props: {
 	const {explorePathOfRotation, id, showPath} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			const {collisionResult, cornerOfRotation} = explorePathOfRotation(id);
+			const {collisionResult, cornerName} = explorePathOfRotation(id);
 			console.log("(Cube.tsx) collisionResult: ", collisionResult);
-			setCornerOfRotation(cornerOfRotation)
+			setCornerName(cornerName)
 			if (showPath) {
 				setStep("0_DEFAULT");
 			}
@@ -133,7 +133,7 @@ const Cube = (props: {
 						setStep("0_DEFAULT");
 						break;
 					case "NO_COLLISION":
-						const piv = getPointOfRotation(cornerOfRotation, side, axisOfRotationWorld, initialRotationAmount);
+						const piv = getPointOfRotation(cornerName, side, axisOfRotationWorld, initialRotationAmount);
 						let opp = piv.clone();
 						opp.negate();
 
@@ -147,7 +147,7 @@ const Cube = (props: {
 				}
 			}
 		}
-	}, [step, axisOfRotationWorld, cornerOfRotation, finalDisplacement, explorePathOfRotation, id, showPath, initialRotationAmount])
+	}, [step, axisOfRotationWorld, cornerName, finalDisplacement, explorePathOfRotation, id, showPath, initialRotationAmount])
 
 	// 2. Apply the rotation
 	useFrame(() => {
@@ -182,7 +182,7 @@ const Cube = (props: {
 				roundToRightAngle(everything.current.rotation.z)
 			))
 				
-			const piv = getPointOfRotation(cornerOfRotation, side, axisOfRotationWorld, initialRotationAmount);
+			const piv = getPointOfRotation(cornerName, side, axisOfRotationWorld, initialRotationAmount);
 			let opp = piv.clone();
 			opp.negate();
 			translateGroup(everything, opp);
@@ -198,7 +198,7 @@ const Cube = (props: {
 			// console.log(everything.current.quaternion);
 			// console.log(everything.current.rotation);
 		}
-	}, [step, axisOfRotationWorld, cornerOfRotation, initialRotationAmount]) 
+	}, [step, axisOfRotationWorld, cornerName, initialRotationAmount]) 
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////

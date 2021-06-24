@@ -1,6 +1,6 @@
 import { cornerType, neighborType } from "../../../../Util/Types/types";
 
-export const deviseCornerOfRotation = (isCounterclockwise : boolean, neighborOfRotation: neighborType) : cornerType => {
+export const deviseCornerName = (isCounterclockwise : boolean, neighborOfRotation: neighborType) : cornerType => {
     let cornerValues : cornerType[] = ["NorthEast", "SouthEast", "SouthWest", "NorthWest"]
     
     switch (neighborOfRotation) {
