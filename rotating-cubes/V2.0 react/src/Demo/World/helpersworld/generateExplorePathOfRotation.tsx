@@ -31,15 +31,12 @@ export const generateExplorePathOfRotation = (
             }
         }
         
-        const positionsInPath = pathOfRotation(axisOfRotationWorld, isCounterclockwise, cubePosition, neighborOfRotation);
+        const positionsInPath : Vector3[] = pathOfRotation(axisOfRotationWorld, isCounterclockwise, cubePosition, neighborOfRotation);
         visualizePath(positionsInPath);
     
-        // TODO: compare allPositions with the positionsInPath in order to detect collision
-        const hasCollision = false; 
-        
+        const hasCollision = checkHasCollisions(allPositions, positionsInPath); 
+    
         const cornerName = deviseCornerName(isCounterclockwise, neighborOfRotation);
-        // console.log("(World.tsx) cornerName: ", cornerName);
-        // console.log("(World.tsx) rotation: ", rotation);
     
         return {
             collisionResult: hasCollision ? "HAS_COLLISION" : "NO_COLLISION",
@@ -49,3 +46,16 @@ export const generateExplorePathOfRotation = (
 }
 
 
+const checkHasCollisions = ( allPositions: {[cubeID: number]: Vector3}, positionsInPath: Vector3[] ) : boolean => {
+    console.log("(checkHasCollisions) allPositions and positionsInPath", allPositions, positionsInPath);
+    for (const cubeID in allPositions) {
+        const occupiedPosition = allPositions[cubeID];
+        for (let i = 0; i < positionsInPath.length; i++) {
+            const pathPosition = positionsInPath[i];
+            if (occupiedPosition.equals(pathPosition)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}

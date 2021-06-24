@@ -45,7 +45,7 @@ const World = (props: {
             const pathElements: ReactNode[] = pointsInPath.map((point, index) => 
                 <PathBlock
                     key={index}
-                    color={"#ff0000"}
+                    color={"#0044ff"}
                     placement={point}
                 />
             )

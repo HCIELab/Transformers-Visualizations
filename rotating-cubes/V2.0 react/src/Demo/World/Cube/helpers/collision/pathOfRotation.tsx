@@ -12,6 +12,12 @@ export const pathOfRotation = (
 
     const pathLocal = traversedPath[axisOfRotation][neighborOfRotation][isCounterclockwise ? "COUNTERCLOCKWISE" : "CLOCKWISE"];
     const pathWorld = pathLocal.map((vec) => new Vector3(vec.x + cubePosition.x, vec.y + cubePosition.y, vec.z + cubePosition.z))
-    console.log("(pathOfRotation.tsx) pathWorld: ", pathWorld)
-    return pathWorld;
+    
+    const pathWorldRounded = pathWorld.map((vec) => {
+        const {x, y, z} = vec;
+        return new Vector3(Math.round(x), Math.round(y), Math.round(z));
+    })
+    console.log("(pathOfRotation.tsx) pathWorldRounded: ", pathWorldRounded);
+    
+    return pathWorldRounded;
 }
