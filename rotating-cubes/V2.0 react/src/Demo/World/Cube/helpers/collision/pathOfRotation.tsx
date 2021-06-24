@@ -8,11 +8,13 @@ export const pathOfRotation = (
     isCounterclockwise: boolean, 
     cubePosition : Vector3, 
     neighborOfRotation: neighborType,
+    is180: boolean,
 ) : Vector3[] => {
     console.log("(pathOfRotation) params: ",axisOfRotation, isCounterclockwise, cubePosition, neighborOfRotation);
 
-    // const pathLocal = traversedPath180[axisOfRotation][neighborOfRotation][isCounterclockwise ? "COUNTERCLOCKWISE" : "CLOCKWISE"];
-    const pathLocal = traversedPath90[axisOfRotation][neighborOfRotation][isCounterclockwise ? "COUNTERCLOCKWISE" : "CLOCKWISE"];
+    const traversedPath = is180 ? traversedPath180 : traversedPath90;
+    const pathLocal = traversedPath[axisOfRotation][neighborOfRotation][isCounterclockwise ? "COUNTERCLOCKWISE" : "CLOCKWISE"];
+
     const pathWorld = pathLocal.map((vec) => new Vector3(vec.x + cubePosition.x, vec.y + cubePosition.y, vec.z + cubePosition.z))
     
     const pathWorldRounded = pathWorld.map((vec) => {
