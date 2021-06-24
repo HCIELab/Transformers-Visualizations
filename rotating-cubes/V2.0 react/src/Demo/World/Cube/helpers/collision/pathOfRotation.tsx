@@ -1,6 +1,7 @@
 import { Vector3 } from "three";
 import { axisType, neighborType } from "../../../../Util/Types/types";
-import { traversedPath } from "./path180degree";
+import { traversedPath180 } from "./path180degree";
+import { traversedPath90 } from "./path90degree";
 
 export const pathOfRotation = (
     axisOfRotation: axisType, 
@@ -10,7 +11,8 @@ export const pathOfRotation = (
 ) : Vector3[] => {
     console.log("(pathOfRotation) params: ",axisOfRotation, isCounterclockwise, cubePosition, neighborOfRotation);
 
-    const pathLocal = traversedPath[axisOfRotation][neighborOfRotation][isCounterclockwise ? "COUNTERCLOCKWISE" : "CLOCKWISE"];
+    // const pathLocal = traversedPath180[axisOfRotation][neighborOfRotation][isCounterclockwise ? "COUNTERCLOCKWISE" : "CLOCKWISE"];
+    const pathLocal = traversedPath90[axisOfRotation][neighborOfRotation][isCounterclockwise ? "COUNTERCLOCKWISE" : "CLOCKWISE"];
     const pathWorld = pathLocal.map((vec) => new Vector3(vec.x + cubePosition.x, vec.y + cubePosition.y, vec.z + cubePosition.z))
     
     const pathWorldRounded = pathWorld.map((vec) => {

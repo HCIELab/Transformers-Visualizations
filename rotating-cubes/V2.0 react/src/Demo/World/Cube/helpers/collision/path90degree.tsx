@@ -15,14 +15,14 @@ const generateTemplateCoordList = () => [
     new Vector3(1, 0, 0),
     new Vector3(1, 1, 0),
     new Vector3(0, 1, 0),
-    new Vector3(0, 2, 0),
-    new Vector3(-1, 2, 0),
-    new Vector3(-1, 1, 0),
+    // new Vector3(0, 2, 0),
+    // new Vector3(-1, 2, 0),
+    // new Vector3(-1, 1, 0),
 ]
 
 const pi = Math.PI;
 
-export const traversedPath180 : pathReturnType = {
+export const traversedPath90 : pathReturnType = {
     x: {
         TOP_NEIGHBOR: {
             COUNTERCLOCKWISE: generateTemplateCoordList().map(
