@@ -17,7 +17,6 @@ const Cube = (props: {
 	color: Color,
 	rDisplacement: number,
 	rAxis: axisType,
-	corner: cornerType,
 	updatePosition: Function,
 	explorePathOfRotation: Function,
 	showPath: boolean,
@@ -45,7 +44,6 @@ const Cube = (props: {
 				setTimeout(() => {
 					//Set the final angle, axis, corner when the user clicks the box
 					setAxisOfRotation(ins.axis);
-					// setCornerOfRotation(ins.corner);
 					setFinalDisplacement(ins.displacement);
 		
 					setStep("1_CLICKED");
@@ -99,9 +97,9 @@ const Cube = (props: {
 			forPivot.current.position.z = 0;
 			//Set the final angle, axis, corner when the user clicks the box
 			setAxisOfRotation(props.rAxis);
-			setCornerOfRotation(props.corner);
 			setFinalDisplacement(props.rDisplacement);
 			setInitialRotationAmount(everything.current.rotation.clone());
+			console.log(`(Cube.tsx) (for cube ${id}) axis and rDisplacement`, axisOfRotation, props.rDisplacement)
 
 			setStep("1_CLICKED");
 		}

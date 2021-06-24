@@ -17,7 +17,6 @@ const World = (props: {
     instructions: instructionType[],
     rDisplacement: number,
     rAxis: axisType,
-    corner: cornerType,
     showPath: boolean,
 }) => {
     console.log("(World.tsx) Rendering the World component");
@@ -122,7 +121,7 @@ const World = (props: {
                         color={config.color} 
                         rDisplacement={props.rDisplacement}
                         rAxis={props.rAxis}
-                        corner={props.corner}
+                        // corner={props.corner}
                         updatePosition={setPosition(config.id)}
                         explorePathOfRotation={explorePathOfRotation}
                         showPath={props.showPath}

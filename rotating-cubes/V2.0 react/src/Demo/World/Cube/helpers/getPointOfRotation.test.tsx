@@ -19,6 +19,16 @@ test('corner: NorthEast, axis: x, rotation: (0, 0, 0)', async () => {
     expect(point).toEqual(new Vector3(0, 0.5, -0.5));
 })
 
+test('corner: NorthEast, axis: x, rotation: (0, 0, -2*Math.PI)', async () => {
+    const point = getPointOfRotation("NorthEast", 1, "x", new Euler(0, 0, -2*Math.PI));
+    expect(point).toEqual(new Vector3(-0, 0.5, -0.5));
+})
+
+test('corner: NorthEast, axis: x, rotation: (0, 0, -Math.PI)', async () => {
+    const point = getPointOfRotation("NorthEast", 1, "x", new Euler(0, 0, -Math.PI));
+    expect(point).toEqual(new Vector3(0, -0.5, -0.5));
+})
+
 
 
 test('corner: NorthEast, axis: y, rotation: (0, 0, 0)', async () => {

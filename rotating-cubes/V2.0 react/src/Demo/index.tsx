@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Panel from "./Panel";
 import Instructions from "./Instructions";
-import { axisType, cornerType, initialCubeConfigType, instructionType } from './Util/Types/types';
+import { axisType, initialCubeConfigType, instructionType } from './Util/Types/types';
 import World from "./World";
 
 const DemoContainer = styled.div`
@@ -32,7 +32,6 @@ const Demo = () => {
     
     const [rDisplacement, setRDisplacement] = useState(Math.PI);
     const [rAxis, setRAxis] = useState<axisType>("z");
-    const [corner, setCorner] = useState<cornerType>("NorthEast");
 
     const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([]);
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
@@ -47,8 +46,6 @@ const Demo = () => {
                     setRAxis={setRAxis}
                     rDisplacement={rDisplacement}
                     setRDisplacement={setRDisplacement}
-                    corner={corner}
-                    setCorner={setCorner}
                 />
 
                 <br/>
@@ -79,7 +76,6 @@ const Demo = () => {
                     instructions={instructions}
                     rDisplacement={rDisplacement}
                     rAxis={rAxis}
-                    corner={corner}
                     showPath={showPath}
                 />
             </div>

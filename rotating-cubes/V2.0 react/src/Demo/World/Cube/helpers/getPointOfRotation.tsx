@@ -2,10 +2,11 @@ import { Euler, Vector3 } from 'three';
 import { axisType, cornerType } from '../../../Util/Types/types';
 
 export const getPointOfRotation = (cornerOfRotation: cornerType, side: number, axisOfRotation: axisType, rotation: Euler) : Vector3 => {
+	console.log("(getPointOfRotation.tsx) params: ", cornerOfRotation, side, axisOfRotation, rotation);
 	const point = getPointOfRotationWithNoEulerCompensation(cornerOfRotation, side, axisOfRotation);
-	console.log("(getPointOfRotation.tsx) point: ", point);
+	console.log("(getPointOfRotation.tsx) point before euler rotation: ", point);
 	point.applyEuler(rotation)
-	console.log("(getPointOfRotation.tsx) point: ", point);
+	console.log("(getPointOfRotation.tsx) point after euler rotation: ", point);
 
 	const {x, y, z} = point;
 	const rounded = new Vector3(Math.round(x*2)/2, Math.round(y*2)/2, Math.round(z*2)/2)

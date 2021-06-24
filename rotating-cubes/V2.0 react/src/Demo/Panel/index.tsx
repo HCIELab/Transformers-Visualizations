@@ -1,9 +1,9 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { axisType, cornerType } from '../Util/Types/types';
+import { axisType } from '../Util/Types/types';
 
-import PivotChooser from "./pivotchooser";
+// import PivotChooser from "./pivotchooser";
 import {Clockwise180Icon, Clockwise90Icon, Counterclockwise90Icon, Counterclockwise180Icon} from "./arrowIcons";
 
 const PanelContainer = styled.div`
@@ -35,8 +35,6 @@ const Panel = (props: {
     setRAxis: Function,
     rDisplacement: number,
     setRDisplacement: Function,
-    corner: cornerType,
-    setCorner: Function,
 }) => {
     
     const pi = Math.PI;
@@ -44,11 +42,11 @@ const Panel = (props: {
     return (
         <PanelContainer>
                         
-            <PivotChooser
+            {/* <PivotChooser
                 corner={props.corner}
                 setCorner={props.setCorner}
                 rAxis={props.rAxis}
-            />
+            /> */}
 
             <div>
                 <AxisButton
