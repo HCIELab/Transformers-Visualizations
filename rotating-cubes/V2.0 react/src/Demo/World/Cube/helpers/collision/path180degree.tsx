@@ -59,16 +59,28 @@ export const traversedPath : pathReturnType = {
     },
     z: {
         TOP_NEIGHBOR: {
-            COUNTERCLOCKWISE: generateTemplateCoordList(),
-            CLOCKWISE: generateTemplateCoordList(),
+            COUNTERCLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(0, 0, 3*Math.PI/2))
+            ),
+            CLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(0, Math.PI, 3*Math.PI/2))
+            ),
         },
         RIGHT_NEIGHBOR: {
-            COUNTERCLOCKWISE: generateTemplateCoordList(),
-            CLOCKWISE: generateTemplateCoordList(),
+            COUNTERCLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(0, 0, Math.PI))
+            ),
+            CLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(Math.PI, 0, Math.PI))
+            ),
         },
         BOTTOM_NEIGHBOR: {
-            COUNTERCLOCKWISE: generateTemplateCoordList(),
-            CLOCKWISE: generateTemplateCoordList(),
+            COUNTERCLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(0, 0, Math.PI/2))
+            ),
+            CLOCKWISE: generateTemplateCoordList().map(
+                (v) => v.applyEuler(new Euler(0, Math.PI, Math.PI/2))
+            ),
         },
         LEFT_NEIGHBOR: {
             COUNTERCLOCKWISE: generateTemplateCoordList(),
