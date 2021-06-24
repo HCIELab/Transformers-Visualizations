@@ -52,11 +52,11 @@ const World = (props: {
             setPathBlocks(pathElements);
         }
     }
-    // useEffect(() => {
-    //     if (!showPath) {
-    //         setPathBlocks([]);
-    //     }
-    // }, [showPath])
+    useEffect(() => {
+        if (!showPath) {
+            setPathBlocks([]);
+        }
+    }, [showPath])
 
     const explorePathOfRotation = (cubeID: number) : {collisionResult: collisionType, cornerOfRotation: cornerType} => {
         return generateExplorePathOfRotation(allPositions, visualizePath, props.isCounterclockwise, props.axisOfRotationWorld)(cubeID);

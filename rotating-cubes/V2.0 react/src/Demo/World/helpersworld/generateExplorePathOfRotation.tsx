@@ -26,6 +26,7 @@ export const generateExplorePathOfRotation = (
             return {collisionResult: "NO_NEIGHBORS", cornerName: null, displacementMagnitude: 0,}
         } else {
             const cornerName = deviseCornerName(isCounterclockwise, neighborOfRotation);
+            console.log("(generateExplorePathOfRotation.tsx) cornerName: ", cornerName);
 
             // Check for 180 degree rotation
             const yes180 = true;

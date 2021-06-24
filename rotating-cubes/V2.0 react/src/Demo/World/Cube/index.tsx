@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Color, useFrame } from "@react-three/fiber";
-import { DoubleSide, Euler, Vector3 } from 'three';
+import { DoubleSide, Euler, Vector3, Quaternion } from 'three';
 import Labeling from "./Labeling/labeling";
 import { axisType, cornerType, instructionType, rotationStep } from '../../Util/Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
@@ -87,7 +87,7 @@ const Cube = (props: {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 0. Click to start the rotation
-	const [initialRotationAmount, setInitialRotationAmount] = useState(new Euler(0, 0, 0));
+	const [initialRotationAmount, setInitialRotationAmount] = useState(new Quaternion());
 	const handleClick = () => {
 		if (step === "0_DEFAULT") {
 			forPivot.current.position.x = 0;
@@ -95,7 +95,8 @@ const Cube = (props: {
 			forPivot.current.position.z = 0;
 			//Set the final angle, axis, corner when the user clicks the box
 			setAxisOfRotationWorld(props.axisOfRotationWorld);
-			setInitialRotationAmount(everything.current.rotation.clone());
+			// setInitialRotationAmount(everything.current.rotation.clone());
+			setInitialRotationAmount(everything.current.quaternion.clone());
 
 			setStep("1_CLICKED");
 		}
