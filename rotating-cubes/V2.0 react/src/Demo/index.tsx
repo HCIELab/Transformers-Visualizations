@@ -31,7 +31,7 @@ const DemoContainer = styled.div`
 const Demo = () => {
     
     const [rDisplacement, setRDisplacement] = useState(Math.PI);
-    const [rAxis, setRAxis] = useState<axisType>("z");
+    const [axisOfRotationWorld, setAxisOfRotationWorld] = useState<axisType>("z");
 
     const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([]);
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
@@ -42,8 +42,8 @@ const Demo = () => {
         <DemoContainer>
             <div className="TopSection">
                 <Panel
-                    rAxis={rAxis}
-                    setRAxis={setRAxis}
+                    axisOfRotationWorld={axisOfRotationWorld}
+                    setAxisOfRotationWorld={setAxisOfRotationWorld}
                     rDisplacement={rDisplacement}
                     setRDisplacement={setRDisplacement}
                 />
@@ -75,7 +75,7 @@ const Demo = () => {
                     initialCubeConfigs={initialCubeConfigs}
                     instructions={instructions}
                     rDisplacement={rDisplacement}
-                    rAxis={rAxis}
+                    axisOfRotationWorld={axisOfRotationWorld}
                     showPath={showPath}
                 />
             </div>

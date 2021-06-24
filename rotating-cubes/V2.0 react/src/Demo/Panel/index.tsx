@@ -31,8 +31,8 @@ const AxisButton = styled.button`
 `;
 
 const Panel = (props: {
-    rAxis: axisType,
-    setRAxis: Function,
+    axisOfRotationWorld: axisType,
+    setAxisOfRotationWorld: Function,
     rDisplacement: number,
     setRDisplacement: Function,
 }) => {
@@ -45,28 +45,28 @@ const Panel = (props: {
             {/* <PivotChooser
                 corner={props.corner}
                 setCorner={props.setCorner}
-                rAxis={props.rAxis}
+                axisOfRotationWorld={props.axisOfRotationWorld}
             /> */}
 
             <div>
                 <AxisButton
                     color={"#df5900"} 
-                    onClick={() => props.setRAxis("x")}
-                    className={props.rAxis === "x" ? "Selected" : ""}
+                    onClick={() => props.setAxisOfRotationWorld("x")}
+                    className={props.axisOfRotationWorld === "x" ? "Selected" : ""}
                 >
                     X
                 </AxisButton>
                 <AxisButton
                     color={"#07e000"} 
-                    onClick={() => props.setRAxis("y")}
-                    className={props.rAxis === "y" ? "Selected" : ""}
+                    onClick={() => props.setAxisOfRotationWorld("y")}
+                    className={props.axisOfRotationWorld === "y" ? "Selected" : ""}
                 >
                     Y
                 </AxisButton>
                 <AxisButton
                     color={"#0099ff"} 
-                    onClick={() => props.setRAxis("z")}
-                    className={props.rAxis === "z" ? "Selected" : ""}
+                    onClick={() => props.setAxisOfRotationWorld("z")}
+                    className={props.axisOfRotationWorld === "z" ? "Selected" : ""}
                 >
                     Z
                 </AxisButton>
@@ -99,7 +99,7 @@ const Panel = (props: {
                 </button>
             </div>
             {/* <div>
-                <p>Current rAxis: {props.rAxis}</p>
+                <p>Current axisOfRotationWorld: {props.axisOfRotationWorld}</p>
                 <p>Current rDisplacement: {props.rDisplacement}</p>
             </div> */}
         </PanelContainer>

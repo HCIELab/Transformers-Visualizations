@@ -5,7 +5,7 @@ import { DoubleSide, Euler, Vector3 } from 'three';
 import Labeling from "./Labeling/labeling";
 import { axisType, cornerType, instructionType, rotationStep } from '../../Util/Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
-import { getAxisFromText } from "./helpers/getAxisFromText";
+import { getAxisOfRotationLocal } from "./helpers/getAxisOfRotationLocal";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
 import { translateGroup } from "./helpers/translateGroup";
 
@@ -16,7 +16,7 @@ const Cube = (props: {
 	initialPosition: Vector3,
 	color: Color,
 	rDisplacement: number,
-	rAxis: axisType,
+	axisOfRotationWorld: axisType,
 	updatePosition: Function,
 	explorePathOfRotation: Function,
 	showPath: boolean,
@@ -27,7 +27,7 @@ const Cube = (props: {
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
 	const [cornerOfRotation, setCornerOfRotation] = useState<cornerType>("NorthEast");
-	const [axisOfRotation, setAxisOfRotation] = useState<axisType>("x"); 
+	const [axisOfRotationWorld, setAxisOfRotationWorld] = useState<axisType>("x"); 
 	const [finalDisplacement, setFinalDisplacement] = useState(Math.PI);
 
 	// Debug
@@ -43,7 +43,7 @@ const Cube = (props: {
 			.forEach((ins) => {
 				setTimeout(() => {
 					//Set the final angle, axis, corner when the user clicks the box
-					setAxisOfRotation(ins.axis);
+					setAxisOfRotationWorld(ins.axis);
 					setFinalDisplacement(ins.displacement);
 		
 					setStep("1_CLICKED");
@@ -96,10 +96,10 @@ const Cube = (props: {
 			forPivot.current.position.y = 0;
 			forPivot.current.position.z = 0;
 			//Set the final angle, axis, corner when the user clicks the box
-			setAxisOfRotation(props.rAxis);
+			setAxisOfRotationWorld(props.axisOfRotationWorld);
 			setFinalDisplacement(props.rDisplacement);
 			setInitialRotationAmount(everything.current.rotation.clone());
-			console.log(`(Cube.tsx) (for cube ${id}) axis and rDisplacement`, axisOfRotation, props.rDisplacement)
+			console.log(`(Cube.tsx) (for cube ${id}) axis and rDisplacement`, axisOfRotationWorld, props.rDisplacement)
 
 			setStep("1_CLICKED");
 		}
@@ -133,7 +133,7 @@ const Cube = (props: {
 						setStep("0_DEFAULT");
 						break;
 					case "NO_COLLISION":
-						const piv = getPointOfRotation(cornerOfRotation, side, axisOfRotation, initialRotationAmount);
+						const piv = getPointOfRotation(cornerOfRotation, side, axisOfRotationWorld, initialRotationAmount);
 						let opp = piv.clone();
 						opp.negate();
 
@@ -147,17 +147,17 @@ const Cube = (props: {
 				}
 			}
 		}
-	}, [step, axisOfRotation, cornerOfRotation, finalDisplacement, explorePathOfRotation, id, showPath, initialRotationAmount])
+	}, [step, axisOfRotationWorld, cornerOfRotation, finalDisplacement, explorePathOfRotation, id, showPath, initialRotationAmount])
 
 	// 2. Apply the rotation
 	useFrame(() => {
 		if (step === "2_ROTATING") {
 			// -- While Rotating --
 			if (finalDisplacement > 0) {
-				everything.current.rotateOnAxis(getAxisFromText(axisOfRotation), INCREMENT_AMT)
+				everything.current.rotateOnAxis(getAxisOfRotationLocal(axisOfRotationWorld, everything.current.rotation), INCREMENT_AMT)
 			}
 			else {
-				everything.current.rotateOnAxis(getAxisFromText(axisOfRotation), -INCREMENT_AMT)
+				everything.current.rotateOnAxis(getAxisOfRotationLocal(axisOfRotationWorld, everything.current.rotation), -INCREMENT_AMT)
 			}
 			setIteration(iteration+1);
 			if (iteration >= maxIteration) {
@@ -182,7 +182,7 @@ const Cube = (props: {
 				roundToRightAngle(everything.current.rotation.z)
 			))
 				
-			const piv = getPointOfRotation(cornerOfRotation, side, axisOfRotation, initialRotationAmount);
+			const piv = getPointOfRotation(cornerOfRotation, side, axisOfRotationWorld, initialRotationAmount);
 			let opp = piv.clone();
 			opp.negate();
 			translateGroup(everything, opp);
@@ -198,7 +198,7 @@ const Cube = (props: {
 			// console.log(everything.current.quaternion);
 			// console.log(everything.current.rotation);
 		}
-	}, [step, axisOfRotation, cornerOfRotation, initialRotationAmount]) 
+	}, [step, axisOfRotationWorld, cornerOfRotation, initialRotationAmount]) 
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -225,7 +225,7 @@ const Cube = (props: {
 					cubeID={props.id}
 					letterOffset={0.1}
 					side={side}
-					rAxis={props.rAxis}
+					axis={props.axisOfRotationWorld}
 				/>
 				<axesHelper scale={0.3}/>
 			</group>

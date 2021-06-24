@@ -16,7 +16,7 @@ const World = (props: {
     initialCubeConfigs: initialCubeConfigType[],
     instructions: instructionType[],
     rDisplacement: number,
-    rAxis: axisType,
+    axisOfRotationWorld: axisType,
     showPath: boolean,
 }) => {
     console.log("(World.tsx) Rendering the World component");
@@ -65,7 +65,7 @@ const World = (props: {
     const explorePathOfRotation = (cubeID: number) : {collisionResult: collisionType, cornerOfRotation: cornerType} => {
         console.log("(World.tsx) allPositions: ", allPositions);
         const cubePosition = allPositions[cubeID]
-        const neighborSpots = getListOfNeighborSpots(cubePosition, props.rAxis);
+        const neighborSpots = getListOfNeighborSpots(cubePosition, props.axisOfRotationWorld);
         console.log("(World.tsx) clicked Cube position ", cubePosition);
         console.log("(World.tsx) neighborSpots: ", neighborSpots);
         const isCounterclockwise = props.rDisplacement > 0;
@@ -78,7 +78,7 @@ const World = (props: {
             }
         }
         
-        const positionsInPath = pathOfRotation(props.rAxis, isCounterclockwise, cubePosition, neighborOfRotation);
+        const positionsInPath = pathOfRotation(props.axisOfRotationWorld, isCounterclockwise, cubePosition, neighborOfRotation);
         visualizePath(positionsInPath);
 
         // TODO: compare allPositions with the positionsInPath in order to detect collision
@@ -120,7 +120,7 @@ const World = (props: {
                         initialPosition={config.initialPosition} 
                         color={config.color} 
                         rDisplacement={props.rDisplacement}
-                        rAxis={props.rAxis}
+                        axisOfRotationWorld={props.axisOfRotationWorld}
                         // corner={props.corner}
                         updatePosition={setPosition(config.id)}
                         explorePathOfRotation={explorePathOfRotation}
