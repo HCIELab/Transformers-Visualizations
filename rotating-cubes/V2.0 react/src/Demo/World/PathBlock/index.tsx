@@ -8,7 +8,7 @@ const PathBlock = (props: {
 	color: Color,
     placement: Vector3,
 }) => {
-	const side = 1.1;
+	const side = 1;
 
 	return (
         <mesh position={props.placement}>
