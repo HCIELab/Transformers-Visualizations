@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Color, useFrame } from "@react-three/fiber";
 import { DoubleSide, Euler, Vector3, Quaternion } from 'three';
 import Labeling from "./Labeling/labeling";
+import Emags from "./Emags/index";
 import { axisType, cornerType, instructionType, rotationStep } from '../../Util/Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisOfRotationLocal } from "./helpers/getAxisOfRotationLocal";
@@ -229,6 +230,7 @@ const Cube = (props: {
 					side={side}
 					axis={props.axisOfRotationWorld}
 				/>
+				<Emags/>
 				<axesHelper scale={0.3}/>
 			</group>
 		</group>
