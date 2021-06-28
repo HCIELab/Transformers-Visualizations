@@ -30,6 +30,8 @@ const Cube = (props: {
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
 	const [cornerName, setCornerName] = useState<cornerType>("NorthEast");
+	
+	const [showEmags, setShowEmags] = useState(false);
 
 	// Debug
 	useEffect(() => {
@@ -64,6 +66,7 @@ const Cube = (props: {
 	useEffect(() => {
 		if (step === "0_DEFAULT") {
 			updatePosition(everything.current.position);
+			setShowEmags(false);
 		}
 	}, [step, updatePosition])
 
@@ -128,6 +131,7 @@ const Cube = (props: {
 						break;
 				}
 			}
+			setShowEmags(true);
 		}
 	}, [step, props.axisOfRotationWorld, cornerName, explorePathOfRotation, id, showPath, initialRotationAmount])
 
@@ -230,7 +234,9 @@ const Cube = (props: {
 					side={side}
 					axis={props.axisOfRotationWorld}
 				/>
-				<Emags/>
+				<Emags
+					showEmags={showEmags}
+				/>
 				<axesHelper scale={0.3}/>
 			</group>
 		</group>
