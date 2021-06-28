@@ -30,6 +30,7 @@ const Cube = (props: {
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
 	const [cornerName, setCornerName] = useState<cornerType>("NorthEast");
+	const [pointOfRotation, setPointOfRotation] = useState(new Vector3(0, 0, 0));
 	
 	const [showEmags, setShowEmags] = useState(false);
 
@@ -119,6 +120,7 @@ const Cube = (props: {
 						break;
 					case "NO_COLLISION":
 						const piv = getPointOfRotation(cornerName, side, props.axisOfRotationWorld, initialRotationAmount);
+						setPointOfRotation(piv);						
 						let opp = piv.clone();
 						opp.negate();
 
@@ -168,11 +170,10 @@ const Cube = (props: {
 				roundToRightAngle(everything.current.rotation.z)
 			))
 				
-			const piv = getPointOfRotation(cornerName, side, props.axisOfRotationWorld, initialRotationAmount);
-			let opp = piv.clone();
+			let opp = pointOfRotation.clone();
 			opp.negate();
 			translateGroup(everything, opp);
-			translateGroup(forPivot, piv);
+			translateGroup(forPivot, pointOfRotation);
 
 			// Make sure the position is rounded to the nearest integer
 			const {x, y, z} = everything.current.position;
@@ -184,7 +185,7 @@ const Cube = (props: {
 			// console.log(everything.current.quaternion);
 			// console.log(everything.current.rotation);
 		}
-	}, [step, props.axisOfRotationWorld, cornerName, initialRotationAmount]) 
+	}, [step, props.axisOfRotationWorld, cornerName, initialRotationAmount, pointOfRotation]) 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -236,6 +237,8 @@ const Cube = (props: {
 				/>
 				<Emags
 					showEmags={showEmags}
+					pointOfRotation={pointOfRotation}
+					axisOfRotationWorld={props.axisOfRotationWorld}
 				/>
 				<axesHelper scale={0.3}/>
 			</group>
