@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 
 import styled from 'styled-components';
-import { Canvas } from '@react-three/fiber';
 
-import Cube from "./Cube";
-import ThreeControls from "./ThreeControls";
 import Panel from "./Panel";
 import Instructions from "./Instructions";
-import { axisType, cornerType, cubeAndPropertiesType, instructionType } from './Types/types';
+import { axisType, initialCubeConfigType, instructionType } from './Util/Types/types';
+import World from "./World";
 
 const DemoContainer = styled.div`
     width: 100%;
@@ -17,24 +15,14 @@ const DemoContainer = styled.div`
 
     .TopSection {
         margin: 0;
-        height: 30%;
+        height: 35%;
         background-color: #fdfdfd;
-
-        .AddOrRemoveCubes {
-            padding-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            button {
-                margin: 0px 10px;
-            }
-        }
+        overflow: auto;
     }
 
     .BottomSection {
         margin: 0;
-        height: 70%;
+        height: calc(100% - 35%);
         width: 100%;
         background-color: #252525;
     }
@@ -42,54 +30,56 @@ const DemoContainer = styled.div`
 
 const Demo = () => {
     
-    const [rDisplacement, setRDisplacement] = useState(Math.PI);
-    const [rAxis, setRAxis] = useState<axisType>("y");
-    const [corner, setCorner] = useState<cornerType>("NorthEast");
+    const [isCounterclockwise, setIsCounterclockwise] = useState(true);
+    const [axisOfRotationWorld, setAxisOfRotationWorld] = useState<axisType>("z");
 
-    const [cubesAndProperties, setCubesAndProperties] = useState<cubeAndPropertiesType[]>([]);
+    const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([]);
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
 
-    
+    const [showPath, setShowPath] = useState(false);
 
     return (
         <DemoContainer>
             <div className="TopSection">
                 <Panel
-                    rAxis={rAxis}
-                    setRAxis={setRAxis}
-                    rDisplacement={rDisplacement}
-                    setRDisplacement={setRDisplacement}
-                    corner={corner}
-                    setCorner={setCorner}
+                    axisOfRotationWorld={axisOfRotationWorld}
+                    setAxisOfRotationWorld={setAxisOfRotationWorld}
+                    isCounterclockwise={isCounterclockwise}
+                    setIsCounterclockwise={setIsCounterclockwise}
                 />
+
+                <br/>
+                <br/>
+                [ {showPath ? "Showing Path" : "Moving Cubes"} ]
+                <button onClick={() => {
+                    setShowPath(!showPath)
+                }}>
+                    Click to toggle
+                </button>
+                <br/>
+                <br/>
+
+                <Instructions
+                    setInstructions={setInstructions}
+                    setInitialCubeConfigs={setInitialCubeConfigs}
+                />
+
+                <br/>
+                <p>NOTE: do NOT move the camera while cubes are in motion</p>
             </div>
 
-            <Instructions
-                setInstructions={setInstructions}
-                setCubesAndProperties={setCubesAndProperties}
-            />
+
 
             <div className="BottomSection">
-                <Canvas>
-                    <ambientLight />
-                    <pointLight position={[10, 10, 10]} />
-                    <ThreeControls/>
-                    <axesHelper position={[-0.5, -0.5, 0]} scale={0.5}/>
-                    {
-                        cubesAndProperties.map((config) => 
-                            <Cube 
-                                instructions={instructions}
-                                key={config.id}
-                                id={config.id} 
-                                initialPosition={config.initialPosition} 
-                                color={config.color} 
-                                rDisplacement={rDisplacement}
-                                rAxis={rAxis}
-                                corner={corner}
-                            />
-                        )
-                    }
-                </Canvas>
+                <World
+                    initialCubeConfigs={initialCubeConfigs}
+                    instructions={instructions}
+                    isCounterclockwise={isCounterclockwise}
+                    setIsCounterclockwise={setIsCounterclockwise}
+                    axisOfRotationWorld={axisOfRotationWorld}
+                    setAxisOfRotationWorld={setAxisOfRotationWorld}
+                    showPath={showPath}
+                />
             </div>
         </DemoContainer>
     )

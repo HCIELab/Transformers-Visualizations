@@ -1,19 +1,19 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { axisType, cornerType } from '../Types/types';
+import { axisType } from '../Util/Types/types';
 
-import PivotChooser from "./pivotchooser";
-import {Clockwise180Icon, Clockwise90Icon, Counterclockwise90Icon, Counterclockwise180Icon} from "./arrowIcons";
+// import PivotChooser from "./pivotchooser";
+import {Clockwise180Icon, Counterclockwise180Icon} from "./arrowIcons";
 
 const PanelContainer = styled.div`
     width: 100%;
-    height: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
+    /* border: 10px solid lime; */
 
     button {
         margin: 4px 5px;
@@ -31,44 +31,39 @@ const AxisButton = styled.button`
 `;
 
 const Panel = (props: {
-    rAxis: axisType,
-    setRAxis: Function,
-    rDisplacement: number,
-    setRDisplacement: Function,
-    corner: cornerType,
-    setCorner: Function,
+    axisOfRotationWorld: axisType,
+    setAxisOfRotationWorld: Function,
+    isCounterclockwise: boolean,
+    setIsCounterclockwise: Function,
 }) => {
-    
-    const pi = Math.PI;
-
     return (
         <PanelContainer>
                         
-            <PivotChooser
+            {/* <PivotChooser
                 corner={props.corner}
                 setCorner={props.setCorner}
-                rAxis={props.rAxis}
-            />
+                axisOfRotationWorld={props.axisOfRotationWorld}
+            /> */}
 
             <div>
                 <AxisButton
                     color={"#df5900"} 
-                    onClick={() => props.setRAxis("x")}
-                    className={props.rAxis === "x" ? "Selected" : ""}
+                    onClick={() => props.setAxisOfRotationWorld("x")}
+                    className={props.axisOfRotationWorld === "x" ? "Selected" : ""}
                 >
                     X
                 </AxisButton>
                 <AxisButton
                     color={"#07e000"} 
-                    onClick={() => props.setRAxis("y")}
-                    className={props.rAxis === "y" ? "Selected" : ""}
+                    onClick={() => props.setAxisOfRotationWorld("y")}
+                    className={props.axisOfRotationWorld === "y" ? "Selected" : ""}
                 >
                     Y
                 </AxisButton>
                 <AxisButton
                     color={"#0099ff"} 
-                    onClick={() => props.setRAxis("z")}
-                    className={props.rAxis === "z" ? "Selected" : ""}
+                    onClick={() => props.setAxisOfRotationWorld("z")}
+                    className={props.axisOfRotationWorld === "z" ? "Selected" : ""}
                 >
                     Z
                 </AxisButton>
@@ -76,32 +71,20 @@ const Panel = (props: {
             
             <div>
                 <button 
-                    onClick={() => props.setRDisplacement(-pi)} 
-                    className={props.rDisplacement === -pi ? "Selected" : ""}
+                    onClick={() => props.setIsCounterclockwise(false)} 
+                    className={!props.isCounterclockwise ? "Selected" : ""}
                 >
                     <Clockwise180Icon/>
                 </button>
                 <button 
-                    onClick={() => props.setRDisplacement(-pi/2)}
-                    className={props.rDisplacement === -pi/2 ? "Selected" : ""}
-                >
-                    <Clockwise90Icon/>
-                </button>
-                <button 
-                    onClick={() => props.setRDisplacement(pi/2)}
-                    className={props.rDisplacement === pi/2 ? "Selected" : ""}
-                >
-                    <Counterclockwise90Icon/>
-                </button>
-                <button 
-                    onClick={() => props.setRDisplacement(pi)}
-                    className={props.rDisplacement === pi ? "Selected" : ""}
+                    onClick={() => props.setIsCounterclockwise(true)} 
+                    className={props.isCounterclockwise ? "Selected" : ""}
                 >
                     <Counterclockwise180Icon/>
                 </button>
             </div>
             {/* <div>
-                <p>Current rAxis: {props.rAxis}</p>
+                <p>Current axisOfRotationWorld: {props.axisOfRotationWorld}</p>
                 <p>Current rDisplacement: {props.rDisplacement}</p>
             </div> */}
         </PanelContainer>

@@ -1,15 +1,31 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { Vector3 } from 'three';
 
+const Container = styled.div`
+    display: flex;
+    flex-direction: row;
+    padding: 5px 0;
+
+    .ScriptsHeading {
+        font-weight: 600;
+        padding: 0px 5px;
+    }
+    button {
+        margin: 0 5px;
+        cursor: pointer;
+    }
+`;
+
 const Instructions = (props: {
     setInstructions: Function,
-    setCubesAndProperties: Function,
+    setInitialCubeConfigs: Function,
 }) => {
 
     const button1 = (
         <button onClick={() => {
-            props.setCubesAndProperties([
+            props.setInitialCubeConfigs([
                 {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
                 {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#049101"},            
             ])
@@ -17,61 +33,29 @@ const Instructions = (props: {
                 {
                     cubeID: 1,
                     axis: "z",
-                    corner: "NorthWest",
-                    displacement: Math.PI/2,
-                    timeToStart: 1000,
-                },
-                {
-                    cubeID: 2,
-                    axis: "z",
-                    corner: "NorthEast",
-                    displacement: -Math.PI/2,
+                    isCounterclockwise: true,
                     timeToStart: 1000,
                 },
         
                 {
                     cubeID: 1,
                     axis: "z",
-                    corner: "NorthEast",
-                    displacement: Math.PI/2,
-                    timeToStart: 2000,
-                },
-                {
-                    cubeID: 2,
-                    axis: "z",
-                    corner: "NorthWest",
-                    displacement: -Math.PI/2,
-                    timeToStart: 2000,
-                },
-        
-                {
-                    cubeID: 1,
-                    axis: "z",
-                    corner: "SouthEast",
-                    displacement: Math.PI/2,
-                    timeToStart: 3000,
-                },
-                {
-                    cubeID: 2,
-                    axis: "z",
-                    corner: "SouthWest",
-                    displacement: -Math.PI/2,
+                    isCounterclockwise: true,
                     timeToStart: 3000,
                 },
         
                 {
                     cubeID: 1,
                     axis: "z",
-                    corner: "SouthWest",
-                    displacement: Math.PI/2,
-                    timeToStart: 4000,
+                    isCounterclockwise: true,
+                    timeToStart: 5000,
                 },
+        
                 {
-                    cubeID: 2,
+                    cubeID: 1,
                     axis: "z",
-                    corner: "SouthEast",
-                    displacement: -Math.PI/2,
-                    timeToStart: 4000,
+                    isCounterclockwise: true,
+                    timeToStart: 7000,
                 },
             ])
         }}>
@@ -81,7 +65,7 @@ const Instructions = (props: {
 
     const button2 = (
         <button onClick={() => {
-            props.setCubesAndProperties([
+            props.setInitialCubeConfigs([
                 {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
                 {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#049101"},            
             ])
@@ -89,29 +73,13 @@ const Instructions = (props: {
                 {
                     cubeID: 1,
                     axis: "z",
-                    corner: "NorthWest",
-                    displacement: Math.PI/2,
-                    timeToStart: 1000,
-                },
-                {
-                    cubeID: 2,
-                    axis: "z",
-                    corner: "NorthEast",
-                    displacement: -Math.PI/2,
+                    isCounterclockwise: true,
                     timeToStart: 1000,
                 },
                 {
                     cubeID: 1,
                     axis: "z",
-                    corner: "NorthWest",
-                    displacement: -Math.PI/2,
-                    timeToStart: 3000,
-                },
-                {
-                    cubeID: 2,
-                    axis: "z",
-                    corner: "NorthEast",
-                    displacement: Math.PI/2,
+                    isCounterclockwise: false,
                     timeToStart: 3000,
                 },
             ])
@@ -122,7 +90,7 @@ const Instructions = (props: {
 
     const button3 = (
         <button onClick={() => {
-            props.setCubesAndProperties([
+            props.setInitialCubeConfigs([
                 {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#049101"},            
                 {id: 2, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
             ])
@@ -130,43 +98,19 @@ const Instructions = (props: {
                 {
                     cubeID: 1,
                     axis: "z",
-                    corner: "NorthEast",
-                    displacement: -Math.PI/2,
-                    timeToStart: 1000,
-                },
-                {
-                    cubeID: 2,
-                    axis: "z",
-                    corner: "NorthWest",
-                    displacement: Math.PI/2,
+                    isCounterclockwise: false,
                     timeToStart: 1000,
                 },
                 {
                     cubeID: 1,
                     axis: "x",
-                    corner: "NorthWest",
-                    displacement: -Math.PI/2,
-                    timeToStart: 3000,
-                },
-                {
-                    cubeID: 2,
-                    axis: "x",
-                    corner: "NorthWest",
-                    displacement: -Math.PI/2,
+                    isCounterclockwise: false,
                     timeToStart: 3000,
                 },
                 {
                     cubeID: 1,
                     axis: "y",
-                    corner: "SouthEast",
-                    displacement: -Math.PI/2,
-                    timeToStart: 5000,
-                },
-                {
-                    cubeID: 2,
-                    axis: "y",
-                    corner: "SouthWest",
-                    displacement: Math.PI/2,
+                    isCounterclockwise: false,
                     timeToStart: 5000,
                 },
             ])
@@ -178,7 +122,7 @@ const Instructions = (props: {
 
     const button4 = (
         <button onClick={() => {
-            props.setCubesAndProperties([
+            props.setInitialCubeConfigs([
                 {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
                 {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#049101"},            
                 {id: 3, initialPosition: new Vector3(0, 1, 0), color: "#049101"},            
@@ -187,29 +131,25 @@ const Instructions = (props: {
                 {
                     cubeID: 3,
                     axis: "z",
-                    corner: "SouthEast",
-                    displacement: -Math.PI/2,
+                    isCounterclockwise: false,
                     timeToStart: 1000,
                 },
                 {
                     cubeID: 3,
                     axis: "z",
-                    corner: "SouthEast",
-                    displacement: Math.PI/2,
+                    isCounterclockwise: true,
                     timeToStart: 3000,
                 },
                 {
                     cubeID: 3,
                     axis: "z",
-                    corner: "SouthEast",
-                    displacement: -Math.PI/2,
+                    isCounterclockwise: false,
                     timeToStart: 5000,
                 },
                 {
                     cubeID: 3,
                     axis: "z",
-                    corner: "SouthEast",
-                    displacement: Math.PI/2,
+                    isCounterclockwise: true,
                     timeToStart: 7000,
                 },
             ])
@@ -220,7 +160,7 @@ const Instructions = (props: {
 
     const button5 = (
         <button onClick={() => {
-            props.setCubesAndProperties([
+            props.setInitialCubeConfigs([
                 {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
             ])
             props.setInstructions([
@@ -232,7 +172,7 @@ const Instructions = (props: {
 
     const button6 = (
         <button onClick={() => {
-            props.setCubesAndProperties([
+            props.setInitialCubeConfigs([
                 {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
                 {id: 2, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
             ])
@@ -243,16 +183,35 @@ const Instructions = (props: {
         </button>
     )
 
+    const button7 = (
+        <button onClick={() => {
+            props.setInitialCubeConfigs([
+                {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#049101"},
+                {id: 2, initialPosition: new Vector3(1, 0, 0), color: "#049101"},
+                {id: 3, initialPosition: new Vector3(2, 0, 0), color: "#049101"},
+                {id: 4, initialPosition: new Vector3(3, 0, 0), color: "#049101"},
+            ])
+            props.setInstructions([
+            ])
+        }}>
+            Just 4 cubes
+        </button>
+    )
+
     return (
-        <div>
+        <Container>
+            <div className={"ScriptsHeading"}>
+                Pre-defined Scripts:
+            </div>
+
             {button1}
             {button2}
             {button3}
             {button4}
             {button5}
             {button6}
-
-        </div>
+            {button7}
+        </Container>
     )
 }
 

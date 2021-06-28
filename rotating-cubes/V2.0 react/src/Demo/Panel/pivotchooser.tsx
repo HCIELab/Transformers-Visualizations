@@ -2,8 +2,8 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import {axisType, cornerType} from "../Types/types";
-import {numbers} from "../Numbering/numbers";
+import {axisType, cornerType} from "../Util/Types/types";
+import {numbers} from "../Util/Numbering/numbers";
 
 const PivotChooserContainer = styled.div<{corner: cornerType}>`
     display: flex;
@@ -14,13 +14,9 @@ const PivotChooserContainer = styled.div<{corner: cornerType}>`
     p {
         margin: 0;
     }
-    .Note {
-        font-size: 12px;
-        color: gray;
-        padding-bottom: 10px;
-    }
     .Instructions {
         font-size: 20px;
+        font-family: 'Trebuchet MS', sans-serif;
     }
 
     .MannequinSquare {
@@ -83,11 +79,8 @@ const PivotChooser = (props: {
     
     return (
         <PivotChooserContainer corner={props.corner}>
-            <p className="Note">
-                (notes here)
-            </p>
             <p className="Instructions">
-                Choose your pivot point here:
+                Choose a pivot point and direction. Then click on a cube to make it move.
             </p>
 
             <div className="MannequinSquare">

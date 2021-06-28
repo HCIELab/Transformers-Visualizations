@@ -3,14 +3,14 @@ import React, { useEffect, useRef } from 'react';
 import "@react-three/fiber";
 import { FontLoader } from 'three';
 import Roboto from "./Roboto_Regular.json";
-import { axisType } from '../Types/types';
-import { numbers } from '../Numbering/numbers';
+import { axisType } from '../../../Util/Types/types';
+import { numbers } from '../../../Util/Numbering/numbers';
 
 const Labeling = (props: {
 	cubeID: number,
     side: number,
     letterOffset: number,
-	rAxis: axisType,
+	axis: axisType,
 }) => {
 	
     // Deal with the edge Labeling (using fonts)
@@ -78,7 +78,6 @@ const Labeling = (props: {
 				</mesh>
 				<mesh position={[letterOffset*2.5, -letterOffset, half]} ref={fakeNano.L3}>
 					<textGeometry args={["| NANO |", textOptions]} /> 
-					{/* TODO: fill in the cubeID here ^^^ */}
 					<meshPhongMaterial/>
 				</mesh>
 				<mesh position={[letterOffset*2.5, -letterOffset*3, half]} ref={fakeNano.L4}>
@@ -88,7 +87,7 @@ const Labeling = (props: {
 			</group>
 
 			{/* Edges parallel to the "z" axis */}
-			<group visible={props.rAxis === "z"}>
+			<group visible={props.axis === "z"}>
 				<mesh position={[half-letterOffset*2, half-letterOffset, 0+half-letterHeight]}>
 					<textGeometry args={[`${numbers.z.NorthEast}`, textOptions]} />
 					<meshPhongMaterial/>
@@ -106,7 +105,7 @@ const Labeling = (props: {
 					<meshPhongMaterial/>
 				</mesh>
 			</group>
-			<group visible={props.rAxis === "x"}>
+			<group visible={props.axis === "x"}>
 				{/* Edges parallel to the "x" axis */}
 				<mesh position={[0+half-letterHeight, half-letterOffset, -half+letterOffset]} ref={xEdges.NorthWest}>
 					<textGeometry args={[`${numbers.x.NorthEast}`, textOptions]}/>
@@ -125,7 +124,7 @@ const Labeling = (props: {
 					<meshPhongMaterial/>
 				</mesh>
 			</group>
-			<group visible={props.rAxis === "y"}>
+			<group visible={props.axis === "y"}>
 				{/* Edges parallel to the "y" axis */}
 				<mesh position={[half-letterOffset, 0+half-letterHeight, -half+letterOffset]} ref={yEdges.NorthEast}>
 					<textGeometry args={[`${numbers.y.NorthEast}`, textOptions]} />
