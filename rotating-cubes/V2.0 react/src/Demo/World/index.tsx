@@ -13,6 +13,7 @@ const World = (props: {
     initialCubeConfigs: initialCubeConfigType[],
     instructions: instructionType[],
     isCounterclockwise: boolean,
+    setIsCounterclockwise: Function,
     axisOfRotationWorld: axisType,
     showPath: boolean,
 }) => {
@@ -85,8 +86,8 @@ const World = (props: {
                         initialPosition={config.initialPosition} 
                         color={config.color} 
                         isCounterclockwise={props.isCounterclockwise}
+                        setIsCounterclockwise={props.setIsCounterclockwise}                        
                         axisOfRotationWorld={props.axisOfRotationWorld}
-                        // corner={props.corner}
                         updatePosition={setPosition(config.id)}
                         explorePathOfRotation={explorePathOfRotation}
                         showPath={props.showPath}

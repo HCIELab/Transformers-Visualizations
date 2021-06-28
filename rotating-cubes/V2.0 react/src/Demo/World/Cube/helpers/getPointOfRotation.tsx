@@ -4,14 +4,14 @@ import { axisType, cornerType } from '../../../Util/Types/types';
 export const getPointOfRotation = (cornerOfRotation: cornerType, side: number, axisOfRotation: axisType, rotation: Quaternion) : Vector3 => {
 	// console.log("(getPointOfRotation.tsx) params: ", cornerOfRotation, side, axisOfRotation, rotation);
 	const point = translateCornerToLocalPointUnrotated(cornerOfRotation, side, axisOfRotation);
-	console.log("(getPointOfRotation.tsx) point before rotation: ", point);
+	console.log("(getPointOfRotation.tsx) point before quarternion applied: ", point);
 
 	
 	// Rotate the point to be in local space
 	const foo = rotation.clone();
 	foo.invert()
 	point.applyQuaternion(foo);
-	console.log("(getPointOfRotation.tsx) point after rotation: ", point);
+	console.log("(getPointOfRotation.tsx) point after quarternion applied: ", point);
 
 	const {x, y, z} = point;
 	const rounded = new Vector3(Math.round(x*2)/2, Math.round(y*2)/2, Math.round(z*2)/2)

@@ -75,6 +75,7 @@ const Demo = () => {
                     initialCubeConfigs={initialCubeConfigs}
                     instructions={instructions}
                     isCounterclockwise={isCounterclockwise}
+                    setIsCounterclockwise={setIsCounterclockwise}
                     axisOfRotationWorld={axisOfRotationWorld}
                     showPath={showPath}
                 />

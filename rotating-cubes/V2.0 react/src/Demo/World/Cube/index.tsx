@@ -16,6 +16,7 @@ const Cube = (props: {
 	initialPosition: Vector3,
 	color: Color,
 	isCounterclockwise: boolean,
+	setIsCounterclockwise: Function,
 	axisOfRotationWorld: axisType,
 	updatePosition: Function,
 	explorePathOfRotation: Function,
@@ -43,11 +44,11 @@ const Cube = (props: {
 				setTimeout(() => {
 					//Set the final angle, axis, corner when the user clicks the box
 					setAxisOfRotationWorld(ins.axis);
-		
-					setStep("1_CLICKED");
+					props.setIsCounterclockwise(ins.isCounterclockwise);
+					handleClick();
 				}, ins.timeToStart);
 			})
-	}, [props.id, props.instructions])
+	}, [props.id, props.instructions, props.setIsCounterclockwise])
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////

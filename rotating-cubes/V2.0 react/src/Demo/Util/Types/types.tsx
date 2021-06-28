@@ -17,7 +17,7 @@ export type initialCubeConfigType = {
 export type instructionType = {
     cubeID: number,
     axis: axisType,
-    displacement: number,
+    isCounterclockwise: boolean,
     timeToStart: number,
 }
 

@@ -33,28 +33,28 @@ const Instructions = (props: {
                 {
                     cubeID: 1,
                     axis: "z",
-                    displacement: Math.PI,
+                    isCounterclockwise: true,
                     timeToStart: 1000,
                 },
         
                 {
                     cubeID: 1,
                     axis: "z",
-                    displacement: Math.PI,
+                    isCounterclockwise: true,
                     timeToStart: 3000,
                 },
         
                 {
                     cubeID: 1,
                     axis: "z",
-                    displacement: Math.PI,
+                    isCounterclockwise: true,
                     timeToStart: 5000,
                 },
         
                 {
                     cubeID: 1,
                     axis: "z",
-                    displacement: Math.PI,
+                    isCounterclockwise: true,
                     timeToStart: 7000,
                 },
             ])
@@ -73,13 +73,13 @@ const Instructions = (props: {
                 {
                     cubeID: 1,
                     axis: "z",
-                    displacement: Math.PI,
+                    isCounterclockwise: true,
                     timeToStart: 1000,
                 },
                 {
                     cubeID: 1,
                     axis: "z",
-                    displacement: -Math.PI,
+                    isCounterclockwise: false,
                     timeToStart: 3000,
                 },
             ])
@@ -98,19 +98,19 @@ const Instructions = (props: {
                 {
                     cubeID: 1,
                     axis: "z",
-                    displacement: -Math.PI,
+                    isCounterclockwise: false,
                     timeToStart: 1000,
                 },
                 {
                     cubeID: 1,
                     axis: "x",
-                    displacement: -Math.PI,
+                    isCounterclockwise: false,
                     timeToStart: 3000,
                 },
                 {
                     cubeID: 1,
                     axis: "y",
-                    displacement: -Math.PI,
+                    isCounterclockwise: false,
                     timeToStart: 5000,
                 },
             ])
@@ -131,25 +131,25 @@ const Instructions = (props: {
                 {
                     cubeID: 3,
                     axis: "z",
-                    displacement: -Math.PI/2,
+                    isCounterclockwise: false,
                     timeToStart: 1000,
                 },
                 {
                     cubeID: 3,
                     axis: "z",
-                    displacement: Math.PI/2,
+                    isCounterclockwise: true,
                     timeToStart: 3000,
                 },
                 {
                     cubeID: 3,
                     axis: "z",
-                    displacement: -Math.PI/2,
+                    isCounterclockwise: false,
                     timeToStart: 5000,
                 },
                 {
                     cubeID: 3,
                     axis: "z",
-                    displacement: Math.PI/2,
+                    isCounterclockwise: true,
                     timeToStart: 7000,
                 },
             ])

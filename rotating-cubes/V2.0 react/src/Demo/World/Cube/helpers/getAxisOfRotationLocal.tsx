@@ -28,7 +28,7 @@ export const getAxisOfRotationLocal = (finalAxis: axisType, currentRotation: Qua
     axisWorld.applyQuaternion(foo); // now axisWorld has been mutated to become axisLocal
     const {x, y, z} = axisWorld;
 	const rounded = new Vector3(Math.round(x*2)/2, Math.round(y*2)/2, Math.round(z*2)/2)
-    console.log("(getAxisOfRotationLocal.tsx) axisOfRotationLocal: ", rounded);
+    // console.log("(getAxisOfRotationLocal.tsx) axisOfRotationLocal: ", rounded);
 
     return rounded;    
 }
