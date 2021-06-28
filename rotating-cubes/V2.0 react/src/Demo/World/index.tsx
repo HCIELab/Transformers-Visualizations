@@ -15,6 +15,7 @@ const World = (props: {
     isCounterclockwise: boolean,
     setIsCounterclockwise: Function,
     axisOfRotationWorld: axisType,
+    setAxisOfRotationWorld: Function,
     showPath: boolean,
 }) => {
     console.log("(World.tsx) Rendering the World component");
@@ -88,6 +89,7 @@ const World = (props: {
                         isCounterclockwise={props.isCounterclockwise}
                         setIsCounterclockwise={props.setIsCounterclockwise}                        
                         axisOfRotationWorld={props.axisOfRotationWorld}
+                        setAxisOfRotationWorld={props.setAxisOfRotationWorld}
                         updatePosition={setPosition(config.id)}
                         explorePathOfRotation={explorePathOfRotation}
                         showPath={props.showPath}

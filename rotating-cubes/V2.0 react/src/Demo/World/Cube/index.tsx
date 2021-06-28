@@ -18,6 +18,7 @@ const Cube = (props: {
 	isCounterclockwise: boolean,
 	setIsCounterclockwise: Function,
 	axisOfRotationWorld: axisType,
+	setAxisOfRotationWorld: Function,
 	updatePosition: Function,
 	explorePathOfRotation: Function,
 	showPath: boolean,
@@ -28,27 +29,12 @@ const Cube = (props: {
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
 	const [cornerName, setCornerName] = useState<cornerType>("NorthEast");
-	const [axisOfRotationWorld, setAxisOfRotationWorld] = useState<axisType>("x"); 
 
 	// Debug
 	useEffect(() => {
 		console.log(`(Cube.tsx) (for cube ${props.id}) step: ${step}`);
 	})
 
-	// Handling instructions
-	useEffect(() => {
-		console.log("(Cube.tsx) Starting an Instructions Script");
-		props.instructions
-			.filter((ins) => ins.cubeID === props.id)
-			.forEach((ins) => {
-				setTimeout(() => {
-					//Set the final angle, axis, corner when the user clicks the box
-					setAxisOfRotationWorld(ins.axis);
-					props.setIsCounterclockwise(ins.isCounterclockwise);
-					handleClick();
-				}, ins.timeToStart);
-			})
-	}, [props.id, props.instructions, props.setIsCounterclockwise])
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,9 +80,6 @@ const Cube = (props: {
 			forPivot.current.position.x = 0;
 			forPivot.current.position.y = 0;
 			forPivot.current.position.z = 0;
-			//Set the final angle, axis, corner when the user clicks the box
-			setAxisOfRotationWorld(props.axisOfRotationWorld);
-			// setInitialRotationAmount(everything.current.rotation.clone());
 			setInitialRotationAmount(everything.current.quaternion.clone());
 
 			setStep("1_CLICKED");
@@ -111,7 +94,7 @@ const Cube = (props: {
 	const INCREMENT_AMT = 0.1; //increase this number to make the cubes rotate faster
 	const [maxIteration, setMaxIteration] = useState(0);
 	const [iteration, setIteration] = useState(0);
-	const {explorePathOfRotation, id, showPath} = props;
+	const {id, explorePathOfRotation, showPath} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
 			const {collisionResult, cornerName, displacementMagnitude} = explorePathOfRotation(id);
@@ -131,7 +114,7 @@ const Cube = (props: {
 						setStep("0_DEFAULT");
 						break;
 					case "NO_COLLISION":
-						const piv = getPointOfRotation(cornerName, side, axisOfRotationWorld, initialRotationAmount);
+						const piv = getPointOfRotation(cornerName, side, props.axisOfRotationWorld, initialRotationAmount);
 						let opp = piv.clone();
 						opp.negate();
 
@@ -145,17 +128,17 @@ const Cube = (props: {
 				}
 			}
 		}
-	}, [step, axisOfRotationWorld, cornerName, explorePathOfRotation, id, showPath, initialRotationAmount])
+	}, [step, props.axisOfRotationWorld, cornerName, explorePathOfRotation, id, showPath, initialRotationAmount])
 
 	// 2. Apply the rotation
 	useFrame(() => {
 		if (step === "2_ROTATING") {
 			// -- While Rotating --
 			if (props.isCounterclockwise) {
-				everything.current.rotateOnAxis(getAxisOfRotationLocal(axisOfRotationWorld, initialRotationAmount), INCREMENT_AMT)
+				everything.current.rotateOnAxis(getAxisOfRotationLocal(props.axisOfRotationWorld, initialRotationAmount), INCREMENT_AMT)
 			}
 			else {
-				everything.current.rotateOnAxis(getAxisOfRotationLocal(axisOfRotationWorld, initialRotationAmount), -INCREMENT_AMT)
+				everything.current.rotateOnAxis(getAxisOfRotationLocal(props.axisOfRotationWorld, initialRotationAmount), -INCREMENT_AMT)
 			}
 			setIteration(iteration+1);
 			if (iteration >= maxIteration) {
@@ -180,7 +163,7 @@ const Cube = (props: {
 				roundToRightAngle(everything.current.rotation.z)
 			))
 				
-			const piv = getPointOfRotation(cornerName, side, axisOfRotationWorld, initialRotationAmount);
+			const piv = getPointOfRotation(cornerName, side, props.axisOfRotationWorld, initialRotationAmount);
 			let opp = piv.clone();
 			opp.negate();
 			translateGroup(everything, opp);
@@ -196,7 +179,28 @@ const Cube = (props: {
 			// console.log(everything.current.quaternion);
 			// console.log(everything.current.rotation);
 		}
-	}, [step, axisOfRotationWorld, cornerName, initialRotationAmount]) 
+	}, [step, props.axisOfRotationWorld, cornerName, initialRotationAmount]) 
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////--- HANDLING Instructions ---/////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	const {instructions, setIsCounterclockwise, setAxisOfRotationWorld} = props;
+	useEffect(() => {
+		console.log("(Cube.tsx) Starting an Instructions Script");
+		instructions
+			.filter((ins) => ins.cubeID === id)
+			.forEach((ins) => {
+				setTimeout(() => {
+					//Set the final angle, axis, corner when the user clicks the box
+					setAxisOfRotationWorld(ins.axis);
+					setIsCounterclockwise(ins.isCounterclockwise);
+					handleClick();
+				}, ins.timeToStart);
+			})
+	// eslint-disable-next-line 
+	}, [id, instructions, setIsCounterclockwise, setAxisOfRotationWorld])
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////

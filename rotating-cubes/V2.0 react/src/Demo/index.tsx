@@ -77,6 +77,7 @@ const Demo = () => {
                     isCounterclockwise={isCounterclockwise}
                     setIsCounterclockwise={setIsCounterclockwise}
                     axisOfRotationWorld={axisOfRotationWorld}
+                    setAxisOfRotationWorld={setAxisOfRotationWorld}
                     showPath={showPath}
                 />
             </div>
