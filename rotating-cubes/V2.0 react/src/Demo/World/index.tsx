@@ -72,7 +72,6 @@ const World = (props: {
 
             {/* Orbit Controls */}
             <OrbitControls/>
-            {/* <ThreeControls/> */}
             
             {/* Visual Helpers */}
             <axesHelper position={[-0.5, -0.5, 0]} scale={2}/>

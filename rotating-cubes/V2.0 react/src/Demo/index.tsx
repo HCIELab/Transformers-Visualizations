@@ -64,8 +64,6 @@ const Demo = () => {
                     setInitialCubeConfigs={setInitialCubeConfigs}
                 />
 
-                <br/>
-                <p>NOTE: do NOT move the camera while cubes are in motion</p>
             </div>
 
 
