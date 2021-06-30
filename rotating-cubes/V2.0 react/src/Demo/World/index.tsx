@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import ThreeControls from "./ThreeControls";
+import { OrbitControls } from "@react-three/drei";
 import { Euler, Vector3 } from 'three';
 import { ResizeObserver } from '@juggle/resize-observer';
 
@@ -71,7 +71,8 @@ const World = (props: {
             <pointLight position={[10, 10, 10]} />
 
             {/* Orbit Controls */}
-            <ThreeControls/>
+            <OrbitControls/>
+            {/* <ThreeControls/> */}
             
             {/* Visual Helpers */}
             <axesHelper position={[-0.5, -0.5, 0]} scale={2}/>
