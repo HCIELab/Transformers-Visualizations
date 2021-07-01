@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Color, useFrame } from "@react-three/fiber";
-import { DoubleSide, Euler, Vector3, Quaternion } from 'three';
+import { Euler, Vector3, Quaternion } from 'three';
 import Labeling from "./Labeling/labeling";
 import Emags from "./Emags/index";
+import Model from "./Model/index";
 import { axisType, cornerType, instructionType, rotationStep } from '../../Util/Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisOfRotationLocal } from "./helpers/getAxisOfRotationLocal";
@@ -215,20 +216,16 @@ const Cube = (props: {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 
-	const [hovered, setHover] = useState(false);
-
 	return (
 		<group
 			ref={everything}	
 			onClick={handleClick}
-			onPointerOver={(event) => setHover(true)}
-			onPointerOut={(event) => setHover(false)}
 		>
 			<group ref={forPivot}>
-				<mesh>
-					<boxGeometry args={[side, side, side]} />
-					<meshPhongMaterial color={props.color} opacity={hovered ? 0.2 : 0.6} transparent={true} side={DoubleSide}/>
-				</mesh>
+				<Model
+					side={side}
+					color={props.color}
+				/>
 				<Labeling
 					cubeID={props.id}
 					letterOffset={0.1}
