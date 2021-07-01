@@ -5,7 +5,7 @@ import { Euler, Vector3, Quaternion } from 'three';
 import Labeling from "./Labeling/labeling";
 import Emags from "./Emags/index";
 import Model from "./Model/index";
-import { axisType, cornerType, instructionType, rotationStep } from '../../Util/Types/types';
+import { axisType, instructionType, rotationStep } from '../../Util/Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisOfRotationLocal } from "./helpers/getAxisOfRotationLocal";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
@@ -30,9 +30,8 @@ const Cube = (props: {
 	const side = 1;
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
-	const [cornerName, setCornerName] = useState<cornerType>("NorthEast");
 	const [pointOfRotation, setPointOfRotation] = useState(new Vector3(0, 0, 0));
-	
+	const [initialRotationAmount, setInitialRotationAmount] = useState(new Quaternion());
 	const [showEmags, setShowEmags] = useState(false);
 
 	// Debug
@@ -80,7 +79,6 @@ const Cube = (props: {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 0. Click to start the rotation
-	const [initialRotationAmount, setInitialRotationAmount] = useState(new Quaternion());
 	const handleClick = () => {
 		if (step === "0_DEFAULT") {
 			forPivot.current.position.x = 0;
@@ -105,7 +103,6 @@ const Cube = (props: {
 		if (step === "1_CLICKED") {
 			const {collisionResult, cornerName, displacementMagnitude} = explorePathOfRotation(id);
 			console.log("(Cube.tsx) collisionResult: ", collisionResult);
-			setCornerName(cornerName)
 			if (showPath) {
 				setStep("0_DEFAULT");
 			}
@@ -136,7 +133,7 @@ const Cube = (props: {
 			}
 			setShowEmags(true);
 		}
-	}, [step, props.axisOfRotationWorld, cornerName, explorePathOfRotation, id, showPath, initialRotationAmount])
+	}, [step, props.axisOfRotationWorld, explorePathOfRotation, id, showPath, initialRotationAmount])
 
 	// 2. Apply the rotation
 	useFrame(() => {
@@ -186,7 +183,7 @@ const Cube = (props: {
 			// console.log(everything.current.quaternion);
 			// console.log(everything.current.rotation);
 		}
-	}, [step, props.axisOfRotationWorld, cornerName, initialRotationAmount, pointOfRotation]) 
+	}, [step, props.axisOfRotationWorld, initialRotationAmount, pointOfRotation]) 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -14,6 +14,7 @@ const Model = (props: {
     
     const [hovered, setHover] = useState(false);
 	
+    
     return (
         <mesh onPointerOver={() => setHover(true)} onPointerOut={() => {setHover(false)}}>
             <boxGeometry args={[props.side, props.side, props.side]} />
