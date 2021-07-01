@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from "@react-three/drei";
 import { Euler, Vector3 } from 'three';
@@ -80,26 +80,39 @@ const World = (props: {
             {/* Cubes */}
             {
                 props.initialCubeConfigs.map((config) => 
-                    <Cube
-                        instructions={props.instructions}
-                        key={config.id}
-                        id={config.id} 
-                        initialPosition={config.initialPosition} 
-                        color={config.color} 
-                        isCounterclockwise={props.isCounterclockwise}
-                        setIsCounterclockwise={props.setIsCounterclockwise}                        
-                        axisOfRotationWorld={props.axisOfRotationWorld}
-                        setAxisOfRotationWorld={props.setAxisOfRotationWorld}
-                        updatePosition={setPosition(config.id)}
-                        explorePathOfRotation={explorePathOfRotation}
-                        showPath={props.showPath}
-                    />
+                    <Suspense fallback={<FallbackBox/>}>
+                        <Cube
+                            instructions={props.instructions}
+                            key={config.id}
+                            id={config.id} 
+                            initialPosition={config.initialPosition} 
+                            color={config.color} 
+                            isCounterclockwise={props.isCounterclockwise}
+                            setIsCounterclockwise={props.setIsCounterclockwise}                        
+                            axisOfRotationWorld={props.axisOfRotationWorld}
+                            setAxisOfRotationWorld={props.setAxisOfRotationWorld}
+                            updatePosition={setPosition(config.id)}
+                            explorePathOfRotation={explorePathOfRotation}
+                            showPath={props.showPath}
+                        />
+                    </Suspense>        
                 )
             }
             {pathBlocks}
         </Canvas>
     )
 }
+
+
+const FallbackBox = () => {
+    return (
+        <mesh>
+            <boxGeometry/>
+            <meshStandardMaterial color={"gray"}/>
+        </mesh>
+    ) 
+}
+
 
 
 export default World;
