@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 import "@react-three/fiber";
-import { FontLoader } from 'three';
+import { FontLoader, Vector3 } from 'three';
 import Roboto from "./Roboto_Regular.json";
 import { axisType } from '../../../Util/Types/types';
 import { numbers } from '../../../Util/Numbering/numbers';
@@ -60,6 +60,10 @@ const Labeling = (props: {
 		fakeNano.L4.current.rotation.z = Math.PI;
 	})
 
+	const fooRef = useRef<THREE.Mesh>(null!);
+	useEffect(() => {
+		console.log(`(labeling.tsx) (for cube ${props.cubeID}) Location of the Z NorthEast labeltext: `, numbers.z.NorthEast, fooRef.current.getWorldPosition(new Vector3(0, 0, 0)));	
+	})
 
 	const letterOffset = props.letterOffset;
 	const letterHeight = 0.01;
@@ -88,7 +92,7 @@ const Labeling = (props: {
 
 			{/* Edges parallel to the "z" axis */}
 			<group visible={props.axis === "z"}>
-				<mesh position={[half-letterOffset*2, half-letterOffset, 0+half-letterHeight]}>
+				<mesh ref={fooRef} position={[half-letterOffset*2, half-letterOffset, 0+half-letterHeight]}>
 					<textGeometry args={[`${numbers.z.NorthEast}`, textOptions]} />
 					<meshPhongMaterial/>
 				</mesh>
