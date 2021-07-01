@@ -83,10 +83,6 @@ const Panel = (props: {
                     <Counterclockwise180Icon/>
                 </button>
             </div>
-            {/* <div>
-                <p>Current axisOfRotationWorld: {props.axisOfRotationWorld}</p>
-                <p>Current rDisplacement: {props.rDisplacement}</p>
-            </div> */}
         </PanelContainer>
     )
 }
