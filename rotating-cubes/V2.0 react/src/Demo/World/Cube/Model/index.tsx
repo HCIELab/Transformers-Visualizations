@@ -1,7 +1,7 @@
-import React, { useState, Suspense } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 
 import "@react-three/fiber";
-import { DoubleSide } from 'three';
+import { DoubleSide, Vector3 } from 'three';
 import { Color, useLoader } from "@react-three/fiber";
 
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
@@ -11,16 +11,30 @@ const Model = (props: {
     color: Color,
 }) => {
     
-    const [hovered, setHover] = useState(false);
-	
     const obj = useLoader(STLLoader, "cube.stl");
-      
+    
+	const meshRef = useRef<THREE.Mesh>(null!);
+    const [hovered, setHover] = useState(false);
+
+    useEffect(() => {
+        meshRef.current.geometry.center()
+    }, [])
+
     return (
-            <mesh onPointerOver={() => setHover(true)} onPointerOut={() => {setHover(false)}}>
-                {/* <boxGeometry args={[props.side, props.side, props.side]} /> */}
+        <mesh 
+            ref={meshRef}
+            onPointerOver={() => setHover(true)} 
+            onPointerOut={() => {setHover(false)}} 
+            scale={0.05}
+        >
+            <Suspense
+                fallback={<boxGeometry args={[props.side, props.side, props.side]} />}
+            >
                 <primitive object={obj} attach="geometry" />
-                <meshPhongMaterial color={props.color} opacity={hovered ? 0.2 : 0.6} transparent={true} side={DoubleSide}/>
-            </mesh>    
+            </Suspense>
+            <meshNormalMaterial color={props.color} opacity={hovered ? 0.2 : 0.6} transparent={true} side={DoubleSide}/>
+            {/* TODO: Note if using meshNormalMaterial, then the color prop is not useful */}
+        </mesh>    
     )
 }
 

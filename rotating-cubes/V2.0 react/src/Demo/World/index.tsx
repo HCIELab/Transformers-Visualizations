@@ -80,10 +80,12 @@ const World = (props: {
             {/* Cubes */}
             {
                 props.initialCubeConfigs.map((config) => 
-                    <Suspense fallback={<FallbackBox/>}>
+                    <Suspense 
+                        fallback={<FallbackBox/>}
+                        key={config.id}
+                    >
                         <Cube
                             instructions={props.instructions}
-                            key={config.id}
                             id={config.id} 
                             initialPosition={config.initialPosition} 
                             color={config.color} 
