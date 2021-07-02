@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import "@react-three/fiber";
-import { DoubleSide } from 'three';
+import { DoubleSide, Euler } from 'three';
 import { Color } from "@react-three/fiber";
 
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
@@ -15,7 +15,7 @@ const Model = (props: {
 
 
     const [obj, setObj] = useState<any>(null);
-    const filepath = "cube.stl";
+    const filepath = "TFmodel.stl";
     useEffect(() => {
         new STLLoader().load(filepath, setObj)
     }, [filepath])
@@ -31,7 +31,8 @@ const Model = (props: {
             ref={meshRef}
             onPointerOver={() => setHover(true)} 
             onPointerOut={() => {setHover(false)}} 
-            scale={0.05}
+            scale={0.015}
+            rotation={new Euler(0, 0, 0.5)}
         >
             {obj ?
                 <primitive object={obj} attach="geometry" />
