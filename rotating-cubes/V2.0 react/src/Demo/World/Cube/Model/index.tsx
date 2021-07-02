@@ -15,7 +15,8 @@ const Model = (props: {
 
 
     const [obj, setObj] = useState<any>(null);
-    const filepath = "TFmodel.stl";
+    // const filepath = "TFmodel-fake.stl";
+    const filepath = "TFmodel-smaller.stl";
     useEffect(() => {
         new STLLoader().load(filepath, setObj)
     }, [filepath])
@@ -39,7 +40,7 @@ const Model = (props: {
                 :
                 <boxGeometry args={[props.side, props.side, props.side]} />
             }
-            <meshNormalMaterial color={props.color} opacity={hovered ? 0.2 : 0.6} transparent={true} side={DoubleSide}/>
+            <meshStandardMaterial color={props.color} opacity={hovered ? 0.3 : 0.7} transparent={true} side={DoubleSide}/>
             {/* TODO: Note if using meshNormalMaterial, then the color prop is not useful */}
         </mesh>    
     )
