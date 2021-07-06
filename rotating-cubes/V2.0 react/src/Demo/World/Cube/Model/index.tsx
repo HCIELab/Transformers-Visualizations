@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import "@react-three/fiber";
-import { DoubleSide, Euler } from 'three';
+import { DoubleSide } from 'three';
 import { Color } from "@react-three/fiber";
 
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
@@ -10,38 +10,58 @@ const Model = (props: {
     side: number,
     color: Color,
 }) => {
-    const meshRef = useRef<THREE.Mesh>(null!);
+    // STL File One
+    const [objOne, setObjOne] = useState<any>(null);
+    const filepathOne = "stl-assets/assem-Simul-coils.STL";
+    useEffect(() => {
+        new STLLoader().load(filepathOne, setObjOne)
+    }, [filepathOne])
+
+    // STL File Two
+    const [objTwo, setObjTwo] = useState<any>(null);
+    const filepathTwo = "stl-assets/assem-Simul-corners.STL";
+    useEffect(() => {
+        new STLLoader().load(filepathTwo, setObjTwo)
+    }, [filepathTwo])
+
+
+    const meshRefOne = useRef<THREE.Mesh>(null!);
+    useEffect(() => {
+        if (objOne) {
+            meshRefOne.current.geometry.center()
+        }
+    }, [objOne])
+    const meshRefTwo = useRef<THREE.Mesh>(null!);
+    useEffect(() => {
+        if (objTwo) {
+            meshRefTwo.current.geometry.center()
+        }
+    }, [objTwo])
+
     const [hovered, setHover] = useState(false);
 
 
-    const [obj, setObj] = useState<any>(null);
-    // const filepath = "TFmodel-fake.stl";
-    const filepath = "stl-assets/assem-Simul-coils.STL";
-    useEffect(() => {
-        new STLLoader().load(filepath, setObj)
-    }, [filepath])
-
-    useEffect(() => {
-        if (obj) {
-            meshRef.current.geometry.center()
-        }
-    }, [obj])
-
     return (
-        <mesh 
-            ref={meshRef}
+        <group
+            scale={0.015}
             onPointerOver={() => setHover(true)} 
             onPointerOut={() => {setHover(false)}} 
-            scale={0.015}
         >
-            {obj ?
-                <primitive object={obj} attach="geometry" />
-                :
-                <boxGeometry args={[props.side, props.side, props.side]} />
-            }
-            <meshStandardMaterial color={props.color} opacity={hovered ? 0.3 : 0.7} transparent={true} side={DoubleSide}/>
-            {/* TODO: Note if using meshNormalMaterial, then the color prop is not useful */}
-        </mesh>    
+            <mesh ref={meshRefOne}>
+                {objOne ?
+                    <primitive object={objOne} attach="geometry" /> :
+                    <boxGeometry args={[props.side, props.side, props.side]} />
+                }
+                <meshStandardMaterial color={props.color} opacity={hovered ? 0.3 : 0.7} transparent={true} side={DoubleSide}/>
+            </mesh>    
+            <mesh ref={meshRefTwo}>
+                {objTwo ?
+                    <primitive object={objTwo} attach="geometry" /> :
+                    <boxGeometry args={[props.side, props.side, props.side]} />
+                }
+                <meshStandardMaterial color={"#5f0020"} opacity={hovered ? 0.3 : 0.7} transparent={true} side={DoubleSide}/>
+            </mesh>    
+        </group>
     )
 }
 
