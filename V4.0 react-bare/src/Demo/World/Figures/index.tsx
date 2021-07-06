@@ -34,14 +34,11 @@ export const Figure1 = (props: {
             fallback={<FallbackBox/>}
             key={initialConfig.id}
         >
-            <group
-                position={initialConfig.initialPosition}
+            <Box
                 ref={ref}
-            >
-                <Box
-                    color={initialConfig.color}
-                />
-            </group>
+                position={initialConfig.initialPosition}
+                color={initialConfig.color}
+            />
         </Suspense>        
     )
 }
@@ -69,14 +66,11 @@ export const Figure2 = (props: {
             fallback={<FallbackBox/>}
             key={initialConfig.id}
         >
-            <group
-                position={initialConfig.initialPosition}
+            <Box
                 ref={ref}
-            >
-                <Box
-                    color={initialConfig.color}
-                />
-            </group>
+                position={initialConfig.initialPosition}
+                color={initialConfig.color}
+            />
         </Suspense>        
     )
 }

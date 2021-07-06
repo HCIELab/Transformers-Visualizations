@@ -3,14 +3,19 @@ import React from 'react';
 import { Color } from "@react-three/fiber";
 
 import STLHelper from "./STLhelper";
+import { Vector3 } from 'three';
 
-const Cube = (props: {
-	color: Color,
-}) => {
+const Box = React.forwardRef<THREE.Group, {
+    color: Color,
+    position: Vector3,
+}>( (props, ref) => {
 	const side = 1;
 
 	return (
-		<group>
+		<group
+            ref={ref}
+            position={props.position}
+        >
             <STLHelper
                 side={side}
                 color={props.color}
@@ -23,8 +28,8 @@ const Cube = (props: {
             />
 		</group>
 	)
-}
+})
 
 
 
-export default Cube;
+export default Box;
