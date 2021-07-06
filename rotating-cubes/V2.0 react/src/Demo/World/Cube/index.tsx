@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Color, useFrame } from "@react-three/fiber";
-import { DoubleSide, Euler, Vector3, Quaternion } from 'three';
+import { Euler, Vector3, Quaternion } from 'three';
 import Labeling from "./Labeling/labeling";
-import { axisType, cornerType, instructionType, rotationStep } from '../../Util/Types/types';
+import Emags from "./Emags/index";
+import Model from "./Model/index";
+import { axisType, instructionType, rotationStep } from '../../Util/Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisOfRotationLocal } from "./helpers/getAxisOfRotationLocal";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
@@ -28,7 +30,9 @@ const Cube = (props: {
 	const side = 1;
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
-	const [cornerName, setCornerName] = useState<cornerType>("NorthEast");
+	const [pointOfRotation, setPointOfRotation] = useState(new Vector3(0, 0, 0));
+	const [initialRotationAmount, setInitialRotationAmount] = useState(new Quaternion());
+	const [showEmags, setShowEmags] = useState(false);
 
 	// Debug
 	useEffect(() => {
@@ -63,6 +67,7 @@ const Cube = (props: {
 	useEffect(() => {
 		if (step === "0_DEFAULT") {
 			updatePosition(everything.current.position);
+			setShowEmags(false);
 		}
 	}, [step, updatePosition])
 
@@ -74,7 +79,6 @@ const Cube = (props: {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 0. Click to start the rotation
-	const [initialRotationAmount, setInitialRotationAmount] = useState(new Quaternion());
 	const handleClick = () => {
 		if (step === "0_DEFAULT") {
 			forPivot.current.position.x = 0;
@@ -99,7 +103,6 @@ const Cube = (props: {
 		if (step === "1_CLICKED") {
 			const {collisionResult, cornerName, displacementMagnitude} = explorePathOfRotation(id);
 			console.log("(Cube.tsx) collisionResult: ", collisionResult);
-			setCornerName(cornerName)
 			if (showPath) {
 				setStep("0_DEFAULT");
 			}
@@ -115,6 +118,7 @@ const Cube = (props: {
 						break;
 					case "NO_COLLISION":
 						const piv = getPointOfRotation(cornerName, side, props.axisOfRotationWorld, initialRotationAmount);
+						setPointOfRotation(piv);						
 						let opp = piv.clone();
 						opp.negate();
 
@@ -127,8 +131,9 @@ const Cube = (props: {
 						break;
 				}
 			}
+			setShowEmags(true);
 		}
-	}, [step, props.axisOfRotationWorld, cornerName, explorePathOfRotation, id, showPath, initialRotationAmount])
+	}, [step, props.axisOfRotationWorld, explorePathOfRotation, id, showPath, initialRotationAmount])
 
 	// 2. Apply the rotation
 	useFrame(() => {
@@ -163,11 +168,10 @@ const Cube = (props: {
 				roundToRightAngle(everything.current.rotation.z)
 			))
 				
-			const piv = getPointOfRotation(cornerName, side, props.axisOfRotationWorld, initialRotationAmount);
-			let opp = piv.clone();
+			let opp = pointOfRotation.clone();
 			opp.negate();
 			translateGroup(everything, opp);
-			translateGroup(forPivot, piv);
+			translateGroup(forPivot, pointOfRotation);
 
 			// Make sure the position is rounded to the nearest integer
 			const {x, y, z} = everything.current.position;
@@ -179,7 +183,7 @@ const Cube = (props: {
 			// console.log(everything.current.quaternion);
 			// console.log(everything.current.rotation);
 		}
-	}, [step, props.axisOfRotationWorld, cornerName, initialRotationAmount]) 
+	}, [step, props.axisOfRotationWorld, initialRotationAmount, pointOfRotation]) 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -209,25 +213,26 @@ const Cube = (props: {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 
-	const [hovered, setHover] = useState(false);
-
 	return (
 		<group
 			ref={everything}	
 			onClick={handleClick}
-			onPointerOver={(event) => setHover(true)}
-			onPointerOut={(event) => setHover(false)}
 		>
 			<group ref={forPivot}>
-				<mesh>
-					<boxGeometry args={[side, side, side]} />
-					<meshPhongMaterial color={props.color} opacity={hovered ? 0.2 : 0.6} transparent={true} side={DoubleSide}/>
-				</mesh>
+				<Model
+					side={side}
+					color={props.color}
+				/>
 				<Labeling
 					cubeID={props.id}
 					letterOffset={0.1}
 					side={side}
 					axis={props.axisOfRotationWorld}
+				/>
+				<Emags
+					showEmags={showEmags}
+					pointOfRotation={pointOfRotation}
+					axisOfRotationWorld={props.axisOfRotationWorld}
 				/>
 				<axesHelper scale={0.3}/>
 			</group>

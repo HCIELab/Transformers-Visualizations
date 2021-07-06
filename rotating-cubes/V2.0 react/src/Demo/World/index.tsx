@@ -1,6 +1,6 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import ThreeControls from "./ThreeControls";
+import { OrbitControls } from "@react-three/drei";
 import { Euler, Vector3 } from 'three';
 import { ResizeObserver } from '@juggle/resize-observer';
 
@@ -71,7 +71,7 @@ const World = (props: {
             <pointLight position={[10, 10, 10]} />
 
             {/* Orbit Controls */}
-            <ThreeControls/>
+            <OrbitControls/>
             
             {/* Visual Helpers */}
             <axesHelper position={[-0.5, -0.5, 0]} scale={2}/>
@@ -80,26 +80,41 @@ const World = (props: {
             {/* Cubes */}
             {
                 props.initialCubeConfigs.map((config) => 
-                    <Cube
-                        instructions={props.instructions}
+                    <Suspense 
+                        fallback={<FallbackBox/>}
                         key={config.id}
-                        id={config.id} 
-                        initialPosition={config.initialPosition} 
-                        color={config.color} 
-                        isCounterclockwise={props.isCounterclockwise}
-                        setIsCounterclockwise={props.setIsCounterclockwise}                        
-                        axisOfRotationWorld={props.axisOfRotationWorld}
-                        setAxisOfRotationWorld={props.setAxisOfRotationWorld}
-                        updatePosition={setPosition(config.id)}
-                        explorePathOfRotation={explorePathOfRotation}
-                        showPath={props.showPath}
-                    />
+                    >
+                        <Cube
+                            instructions={props.instructions}
+                            id={config.id} 
+                            initialPosition={config.initialPosition} 
+                            color={config.color} 
+                            isCounterclockwise={props.isCounterclockwise}
+                            setIsCounterclockwise={props.setIsCounterclockwise}                        
+                            axisOfRotationWorld={props.axisOfRotationWorld}
+                            setAxisOfRotationWorld={props.setAxisOfRotationWorld}
+                            updatePosition={setPosition(config.id)}
+                            explorePathOfRotation={explorePathOfRotation}
+                            showPath={props.showPath}
+                        />
+                    </Suspense>        
                 )
             }
             {pathBlocks}
         </Canvas>
     )
 }
+
+
+const FallbackBox = () => {
+    return (
+        <mesh>
+            <boxGeometry/>
+            <meshStandardMaterial color={"gray"}/>
+        </mesh>
+    ) 
+}
+
 
 
 export default World;
