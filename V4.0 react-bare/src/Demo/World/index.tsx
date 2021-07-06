@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from "@react-three/drei";
 import { Euler } from 'three';
 import { ResizeObserver } from '@juggle/resize-observer';
-import { Figure1, Figure2 } from "./Figures/index";
+import Figures from "./Figures/index";
 
 
 const World = (props: {
@@ -25,8 +25,7 @@ const World = (props: {
 
 
             {/* ------- FIGURES -------- */}
-            <Figure1/>
-            <Figure2/>
+            <Figures/>
 
         </Canvas>
     )
