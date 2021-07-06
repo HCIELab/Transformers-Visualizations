@@ -20,12 +20,7 @@ const Figure1 = () => {
 
 const Figure2 = () => {
     const ref = useRef<THREE.Group>(null!);
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         ref.current.position.set(0, 1, 0);
-    //     }, 1000)
-    // }, [])
-    
+
     return (
         <Box
             ref={ref}
@@ -57,7 +52,15 @@ const Figure3 = () => {
 
 const Figure4 = () => {
     const ref = useRef<THREE.Group>(null!);
-    
+    useEffect(() => {
+        for (let i = 0; i < 10; i++) {
+            setTimeout(() => {
+                const {x, y, z} = ref.current.position;
+                ref.current.position.set(x+0.1, y, z);
+            }, 1000 + 100*i)
+        }
+    }, [])
+
     return (
         <Box
             ref={ref}
