@@ -1,19 +1,16 @@
 import React from 'react';
 
 import { Color } from "@react-three/fiber";
-import { Vector3 } from 'three';
 
 import STLHelper from "./STLhelper";
 
 const Cube = (props: {
-	id: number,
-	initialPosition: Vector3,
 	color: Color,
 }) => {
 	const side = 1;
 
 	return (
-		<group position={props.initialPosition}>
+		<group>
             <STLHelper
                 side={side}
                 color={props.color}
