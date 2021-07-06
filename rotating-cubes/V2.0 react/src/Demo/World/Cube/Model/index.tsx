@@ -16,7 +16,7 @@ const Model = (props: {
 
     const [obj, setObj] = useState<any>(null);
     // const filepath = "TFmodel-fake.stl";
-    const filepath = "TFmodel-smaller.stl";
+    const filepath = "stl-assets/assem-Simul-coils.STL";
     useEffect(() => {
         new STLLoader().load(filepath, setObj)
     }, [filepath])
@@ -33,7 +33,6 @@ const Model = (props: {
             onPointerOver={() => setHover(true)} 
             onPointerOut={() => {setHover(false)}} 
             scale={0.015}
-            rotation={new Euler(0, 0, 0.5)}
         >
             {obj ?
                 <primitive object={obj} attach="geometry" />
