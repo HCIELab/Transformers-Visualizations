@@ -9,7 +9,7 @@ const DemoContainer = styled.div`
     height: 100%;
     overflow: auto;
     border: 25px solid #000000;
-    background-color: black;
+    background-color: #f0f0f0;
 
 `;
 

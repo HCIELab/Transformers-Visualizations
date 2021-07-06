@@ -11,7 +11,7 @@ const Figure1 = () => {
             ref={ref}
             id={1}
             position={new Vector3(0, 0, 0)}
-            color={"#ffffff"}
+            color={"#c56104"}
         />
     )
 }
@@ -31,7 +31,7 @@ const Figure2 = () => {
             ref={ref}
             id={2}
             position={new Vector3(0, 1, 0)}
-            color={"#ffffff"}
+            color={"#c56104"}
         />
     )
 }
@@ -47,7 +47,7 @@ const Figure3 = () => {
             ref={ref}
             id={3}
             position={new Vector3(1, 0, 0)}
-            color={"#00f535"}
+            color={"#77410e"}
         />
     )
 }
@@ -63,7 +63,7 @@ const Figure4 = () => {
             ref={ref}
             id={4}
             position={new Vector3(1, 1, 0)}
-            color={"#00f535"}
+            color={"#77410e"}
         />
     )
 }
