@@ -1,5 +1,7 @@
+import { useFrame } from '@react-three/fiber';
 import React, { useEffect, useRef } from 'react';
 import { Vector3 } from 'three';
+import {Figure3} from "./Figure3";
 
 import Box from "./Box";
 
@@ -30,23 +32,6 @@ const Figure2 = () => {
         />
     )
 }
-
-
-
-
-const Figure3 = () => {
-    const ref = useRef<THREE.Group>(null!);
-    
-    return (
-        <Box
-            ref={ref}
-            id={3}
-            position={new Vector3(1, 0, 0)}
-            color={"#77410e"}
-        />
-    )
-}
-
 
 
 
