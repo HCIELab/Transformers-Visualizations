@@ -4,14 +4,13 @@ import { Color } from "@react-three/fiber";
 
 import STLHelper from "./STLhelper";
 import { Vector3 } from 'three';
+import { sideLength } from "../helpers/constants";
 
 const Box = React.forwardRef<THREE.Group, {
     id: number,
     color: Color,
     position: Vector3,
 }>( (props, ref) => {
-	const side = 1;
-
 	return (
         <Suspense 
             fallback={<FallbackBox/>}
@@ -23,12 +22,12 @@ const Box = React.forwardRef<THREE.Group, {
                 position={props.position}
             >
                 <STLHelper
-                    side={side}
+                    side={sideLength}
                     color={props.color}
                     filepath={"stl-assets/assem-Simul-coils.STL"}
                 />
                 <STLHelper
-                    side={side}
+                    side={sideLength}
                     color={"#000000"} // Color of the corners. Change this to a prop if you want greater customization over this color
                     filepath={"stl-assets/assem-Simul-corners.STL"}
                 />

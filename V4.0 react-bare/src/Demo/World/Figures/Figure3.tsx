@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Vector3 } from "three";
 import { rotationStep } from "../../Util/Types/types";
 import Box from "./Box";
+import {translateGroup} from "./helpers/translateGroup";
 
 
 export const Figure3 = () => {
@@ -11,6 +12,7 @@ export const Figure3 = () => {
 
     const [step, setStep] = useState<rotationStep>("0_DEFAULT");
 
+    // Wait some time after first render and then start animating
     const TIME_TO_START = 2000;
     useEffect(() => {
         if (step === "0_DEFAULT") {
@@ -18,13 +20,16 @@ export const Figure3 = () => {
         }
     }, [step])
 
-
+    // Do the right group positioning to get ready
     useEffect(() => {
         if (step === "1_CLICKED") {
+            translateGroup(outerRef, new Vector3(0, 0, 1))
+            translateGroup(innerRef, new Vector3(0, 0, -1))
             setStep("2_ROTATING");
         }
     }, [step])
 
+    // Execute the rotation animation
     const INCREMENT = 0.05;
     useFrame(() => {
         if (step === "2_ROTATING") {
@@ -38,12 +43,15 @@ export const Figure3 = () => {
         }
     })
 
+    // Done with animation
     useEffect(() => {
         if (step === "3_END") {
             console.log("animation complete for this Box");
         }
     }, [step])
     
+
+
     return (
         <group ref={outerRef}>
             <Box
