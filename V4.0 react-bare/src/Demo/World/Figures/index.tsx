@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Vector3 } from 'three';
 import {Figure3} from "./Figure3";
 
-import Box from "./Box";
 
 // const Figure1 = () => {
 //     const ref = useRef<THREE.Group>(null!);
@@ -63,7 +62,11 @@ const Figures = (props: {}) => {
         <>
             {/* <Figure1/> */}
             {/* <Figure2/> */}
-            <Figure3/>
+            <Figure3
+                id={3}
+                position={new Vector3(1, 0, 0)}
+                color={"#77410e"}
+            />
             {/* <Figure4/> */}
         </>
     )

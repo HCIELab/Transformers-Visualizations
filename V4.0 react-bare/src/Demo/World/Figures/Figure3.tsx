@@ -1,4 +1,4 @@
-import { useFrame } from "@react-three/fiber";
+import { Color, useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { Vector3 } from "three";
 import { rotationStep } from "../../Util/Types/types";
@@ -7,13 +7,11 @@ import { sideLength } from "./helpers/constants";
 import {translateGroup} from "./helpers/translateGroup";
 
 
-export const Figure3 = () => {
-    const args = {
-        position: new Vector3(1, 0, 0),
-        id: 3,
-        color: "#77410e",
-    }
-
+export const Figure3 = (props: {
+    position: Vector3,
+    id: number,
+    color: Color    
+}) => {
     const innerRef = useRef<THREE.Group>(null!);
     const outerRef = useRef<THREE.Group>(null!);
 
@@ -21,10 +19,10 @@ export const Figure3 = () => {
 
     // Set the initial position only at first render
     useEffect(() => {
-        const {x, y, z} = args.position;
+        const {x, y, z} = props.position;
         outerRef.current.position.set(x, y, z);
         console.log("setting initial position");
-    }, [])
+    }, [props.position])
 
     // Wait some time after first render and then start animating
     const TIME_TO_START = 2000;
@@ -37,15 +35,9 @@ export const Figure3 = () => {
     // Do the right group positioning to get ready
     useEffect(() => {
         if (step === "1_CLICKED") {
-            setTimeout(() => {
-                translateGroup(outerRef, new Vector3(-sideLength/2, -sideLength/2, 0))
-            }, 1000);
-            setTimeout(() => {
-                translateGroup(innerRef, new Vector3(sideLength/2, sideLength/2, 0))
-            }, 2000);
-            setTimeout(() => {
-                setStep("2_ROTATING");
-            }, 3000);
+            translateGroup(outerRef, new Vector3(-sideLength/2, -sideLength/2, 0))
+            translateGroup(innerRef, new Vector3(sideLength/2, sideLength/2, 0))
+            setStep("2_ROTATING");
         }
     }, [step])
 
@@ -75,16 +67,16 @@ export const Figure3 = () => {
         <group 
             ref={outerRef} 
         >
-            <mesh>
+            {/* <mesh>
                 <boxGeometry args={[sideLength, sideLength, sideLength]} />
                 <meshStandardMaterial color={"#5d31ff"}/>
-            </mesh>
+            </mesh> */}
             <group 
                 ref={innerRef}
             >
                 <Box
-                    id={args.id}
-                    color={args.color}
+                    id={props.id}
+                    color={props.color}
                 />
             </group>
         </group>
