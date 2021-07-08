@@ -8,10 +8,23 @@ import {translateGroup} from "./helpers/translateGroup";
 
 
 export const Figure3 = () => {
+    const args = {
+        position: new Vector3(1, 0, 0),
+        id: 3,
+        color: "#77410e",
+    }
+
     const innerRef = useRef<THREE.Group>(null!);
     const outerRef = useRef<THREE.Group>(null!);
 
     const [step, setStep] = useState<rotationStep>("0_DEFAULT");
+
+    // Set the initial position only at first render
+    useEffect(() => {
+        const {x, y, z} = args.position;
+        outerRef.current.position.set(x, y, z);
+        console.log("setting initial position");
+    }, [])
 
     // Wait some time after first render and then start animating
     const TIME_TO_START = 2000;
@@ -24,9 +37,15 @@ export const Figure3 = () => {
     // Do the right group positioning to get ready
     useEffect(() => {
         if (step === "1_CLICKED") {
-            translateGroup(outerRef, new Vector3(-sideLength/2, -sideLength/2, 0))
-            translateGroup(innerRef, new Vector3(sideLength/2, sideLength/2, 0))
-            setStep("2_ROTATING");
+            setTimeout(() => {
+                translateGroup(outerRef, new Vector3(-sideLength/2, -sideLength/2, 0))
+            }, 1000);
+            setTimeout(() => {
+                translateGroup(innerRef, new Vector3(sideLength/2, sideLength/2, 0))
+            }, 2000);
+            setTimeout(() => {
+                setStep("2_ROTATING");
+            }, 3000);
         }
     }, [step])
 
@@ -52,11 +71,9 @@ export const Figure3 = () => {
     }, [step])
     
 
-
     return (
         <group 
             ref={outerRef} 
-            position={new Vector3(1, 0, 0)}
         >
             <mesh>
                 <boxGeometry args={[sideLength, sideLength, sideLength]} />
@@ -66,8 +83,8 @@ export const Figure3 = () => {
                 ref={innerRef}
             >
                 <Box
-                    id={3}
-                    color={"#77410e"}
+                    id={args.id}
+                    color={args.color}
                 />
             </group>
         </group>
