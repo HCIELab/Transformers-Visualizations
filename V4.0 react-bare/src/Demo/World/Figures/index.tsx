@@ -1,4 +1,3 @@
-import { useFrame } from '@react-three/fiber';
 import React, { useEffect, useRef } from 'react';
 import { Vector3 } from 'three';
 import {Figure3} from "./Figure3";
