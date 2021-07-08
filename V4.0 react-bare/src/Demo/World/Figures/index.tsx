@@ -11,7 +11,7 @@ const Figure1 = () => {
             ref={ref}
             id={1}
             position={new Vector3(0, 0, 0)}
-            color={"#c56104"}
+            color={"#77410e"}
         />
     )
 }
@@ -26,7 +26,7 @@ const Figure2 = () => {
             ref={ref}
             id={2}
             position={new Vector3(0, 1, 0)}
-            color={"#c56104"}
+            color={"#77410e"}
         />
     )
 }
