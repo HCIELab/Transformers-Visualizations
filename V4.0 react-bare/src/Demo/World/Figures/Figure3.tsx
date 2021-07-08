@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Vector3 } from "three";
 import { rotationStep } from "../../Util/Types/types";
 import Box from "./Box";
+import { sideLength } from "./helpers/constants";
 import {translateGroup} from "./helpers/translateGroup";
 
 
@@ -23,8 +24,8 @@ export const Figure3 = () => {
     // Do the right group positioning to get ready
     useEffect(() => {
         if (step === "1_CLICKED") {
-            translateGroup(outerRef, new Vector3(0, 0, 1))
-            translateGroup(innerRef, new Vector3(0, 0, -1))
+            translateGroup(outerRef, new Vector3(-sideLength/2, -sideLength/2, 0))
+            translateGroup(innerRef, new Vector3(sideLength/2, sideLength/2, 0))
             setStep("2_ROTATING");
         }
     }, [step])
@@ -33,11 +34,11 @@ export const Figure3 = () => {
     const INCREMENT = 0.05;
     useFrame(() => {
         if (step === "2_ROTATING") {
-            if (innerRef.current.rotation.z > -Math.PI/2) {
-                innerRef.current.rotateOnAxis(new Vector3(0, 0, 1), -1*INCREMENT);
+            if (outerRef.current.rotation.z > -Math.PI/2) {
+                outerRef.current.rotateOnAxis(new Vector3(0, 0, 1), -1*INCREMENT);
             }
             else {
-                innerRef.current.rotation.set(0, 0, -Math.PI/2);
+                outerRef.current.rotation.set(0, 0, -Math.PI/2);
                 setStep("3_END")
             }
         }
@@ -53,13 +54,22 @@ export const Figure3 = () => {
 
 
     return (
-        <group ref={outerRef}>
-            <Box
+        <group 
+            ref={outerRef} 
+            position={new Vector3(1, 0, 0)}
+        >
+            <mesh>
+                <boxGeometry args={[sideLength, sideLength, sideLength]} />
+                <meshStandardMaterial color={"#5d31ff"}/>
+            </mesh>
+            <group 
                 ref={innerRef}
-                id={3}
-                position={new Vector3(1, 0, 0)}
-                color={"#77410e"}
-            />
+            >
+                <Box
+                    id={3}
+                    color={"#77410e"}
+                />
+            </group>
         </group>
     )
 }

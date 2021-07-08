@@ -3,23 +3,18 @@ import React, { Suspense } from 'react';
 import { Color } from "@react-three/fiber";
 
 import STLHelper from "./STLhelper";
-import { Vector3 } from 'three';
 import { sideLength } from "../helpers/constants";
 
-const Box = React.forwardRef<THREE.Group, {
+const Box = (props: {
     id: number,
     color: Color,
-    position: Vector3,
-}>( (props, ref) => {
+}) => {
 	return (
         <Suspense 
             fallback={<FallbackBox/>}
             key={props.id}
         >
-
             <group
-                ref={ref}
-                position={props.position}
             >
                 <STLHelper
                     side={sideLength}
@@ -34,7 +29,7 @@ const Box = React.forwardRef<THREE.Group, {
             </group>
         </Suspense>
 	)
-})
+}
 
 
 
