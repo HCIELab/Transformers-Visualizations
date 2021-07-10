@@ -25,7 +25,7 @@ export const Figure2 = (props: {
     }, [props.position])
 
     // Wait some time after first render and then start animating
-    const TIME_TO_START = 2000;
+    const TIME_TO_START = 1000;
     useEffect(() => {
         if (step === "0_DEFAULT") {
             setTimeout(() => setStep("1_CLICKED"), TIME_TO_START)
@@ -35,8 +35,8 @@ export const Figure2 = (props: {
     // Do the right group positioning to get ready
     useEffect(() => {
         if (step === "1_CLICKED") {
-            translateGroup(outerRef, new Vector3(-sideLength/2, -sideLength/2, 0))
-            translateGroup(innerRef, new Vector3(sideLength/2, sideLength/2, 0))
+            translateGroup(outerRef, new Vector3(sideLength/2, -3*sideLength/2, 0))
+            translateGroup(innerRef, new Vector3(-sideLength/2, 3*sideLength/2, 0))
             setStep("2_ROTATING");
         }
     }, [step])
@@ -45,11 +45,11 @@ export const Figure2 = (props: {
     const INCREMENT = 0.05;
     useFrame(() => {
         if (step === "2_ROTATING") {
-            if (outerRef.current.rotation.z > -Math.PI/2) {
-                outerRef.current.rotateOnAxis(new Vector3(0, 0, 1), -1*INCREMENT);
+            if (outerRef.current.rotation.z < Math.PI/2) {
+                outerRef.current.rotateOnAxis(new Vector3(0, 0, 1), INCREMENT);
             }
             else {
-                outerRef.current.rotation.set(0, 0, -Math.PI/2);
+                outerRef.current.rotation.set(0, 0, Math.PI/2);
                 setStep("3_END")
             }
         }

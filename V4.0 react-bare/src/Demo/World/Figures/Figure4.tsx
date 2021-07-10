@@ -25,7 +25,7 @@ export const Figure4 = (props: {
     }, [props.position])
 
     // Wait some time after first render and then start animating
-    const TIME_TO_START = 2000;
+    const TIME_TO_START = 1000;
     useEffect(() => {
         if (step === "0_DEFAULT") {
             setTimeout(() => setStep("1_CLICKED"), TIME_TO_START)
@@ -35,8 +35,8 @@ export const Figure4 = (props: {
     // Do the right group positioning to get ready
     useEffect(() => {
         if (step === "1_CLICKED") {
-            translateGroup(outerRef, new Vector3(-sideLength/2, -sideLength/2, 0))
-            translateGroup(innerRef, new Vector3(sideLength/2, sideLength/2, 0))
+            translateGroup(outerRef, new Vector3(-sideLength/2, -3*sideLength/2, 0))
+            translateGroup(innerRef, new Vector3(sideLength/2, 3*sideLength/2, 0))
             setStep("2_ROTATING");
         }
     }, [step])

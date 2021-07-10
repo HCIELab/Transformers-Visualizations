@@ -25,7 +25,7 @@ export const Figure3 = (props: {
     }, [props.position])
 
     // Wait some time after first render and then start animating
-    const TIME_TO_START = 2000;
+    const TIME_TO_START = 1000;
     useEffect(() => {
         if (step === "0_DEFAULT") {
             setTimeout(() => setStep("1_CLICKED"), TIME_TO_START)
