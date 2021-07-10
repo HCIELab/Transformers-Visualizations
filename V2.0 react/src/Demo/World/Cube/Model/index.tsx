@@ -17,7 +17,7 @@ const Model = (props: {
             />
             <STLHelper
                 side={props.side}
-                color={"#007e9e"} // Color of the corners. Change this to a prop if you want greater customization over this color
+                color={"#000000"} // Color of the corners. Change this to a prop if you want greater customization over this color
                 filepath={"stl-assets/assem-Simul-corners.STL"}
             />
         </group>

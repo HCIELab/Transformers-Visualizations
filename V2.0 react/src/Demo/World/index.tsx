@@ -71,7 +71,7 @@ const World = (props: {
             <pointLight position={[10, 10, 10]} />
 
             {/* Orbit Controls */}
-            <OrbitControls/>
+            <OrbitControls enableDamping={false}/>
             
             {/* Visual Helpers */}
             <axesHelper position={[-0.5, -0.5, 0]} scale={2}/>

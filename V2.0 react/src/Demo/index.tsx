@@ -24,7 +24,7 @@ const DemoContainer = styled.div`
         margin: 0;
         height: calc(100% - 35%);
         width: 100%;
-        background-color: #252525;
+        background-color: #f0f0f0;
     }
 `;
 
