@@ -10,7 +10,7 @@ import {Button6} from "./button6";
 import {Button7} from "./button7";
 import {Button8} from "./button8";
 // import {Button9} from "./button9";
-import {Button10} from "./button10";
+import {Button10} from "./button10/button10";
 
 const Container = styled.div`
     display: flex;

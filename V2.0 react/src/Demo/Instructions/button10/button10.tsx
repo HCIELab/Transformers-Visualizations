@@ -1,5 +1,7 @@
 import { Vector3 } from "three"
-import { instructionType } from "../Util/Types/types";
+import { instructionType } from "../../Util/Types/types";
+import {chairToTableLeft} from "./chairToTableLeft";
+import {chairToTableRight} from "./chairToTableRight";
 
 export const Button10 = (props: {
     setInstructions: Function,
@@ -39,74 +41,14 @@ export const Button10 = (props: {
 
         ])
 
-        const interval = 750;
-        let count = 1;
-        const instructions : instructionType[] = [];
-        instructions.push({
-            cubeID: 4,
-            axis: "x",
-            isCounterclockwise: true,
-            timeToStart: interval*count,
-        })
-        count += 1;
-        instructions.push({
-            cubeID: 4,
-            axis: "x",
-            isCounterclockwise: true,
-            timeToStart: interval*1,
-        })
-        count += 1;
-        instructions.push({
-            cubeID: 4,
-            axis: "x",
-            isCounterclockwise: true,
-            timeToStart: interval*2,
-        })
-        instructions.push({
-            cubeID: 4,
-            axis: "x",
-            isCounterclockwise: true,
-            timeToStart: interval*3,
-        })
-        count += 1;
-        instructions.push({
-            cubeID: 4,
-            axis: "x",
-            isCounterclockwise: true,
-            timeToStart: interval*4,
-        })
-        count += 1;
-        instructions.push({
-            cubeID: 4,
-            axis: "x",
-            isCounterclockwise: true,
-            timeToStart: interval*5,
-        })
-        count += 1;
-        instructions.push({
-            cubeID: 3,
-            axis: "x",
-            isCounterclockwise: false,
-            timeToStart: interval*6,
-        })
-        count += 1;
-        instructions.push({
-            cubeID: 3,
-            axis: "x",
-            isCounterclockwise: false,
-            timeToStart: interval*7,
-        })
-        count += 1;
-        instructions.push({
-            cubeID: 3,
-            axis: "x",
-            isCounterclockwise: false,
-            timeToStart: interval*8,
-        })
-        count += 1;
-
+        let instructions : instructionType[] = [];
+        instructions = instructions.concat(chairToTableLeft(1000, 750));
+        instructions = instructions.concat(chairToTableRight(1000 + 750*9, 750));
         props.setInstructions(instructions);
+        console.log("****************");
+        console.log(instructions);
     }}>
         Chair to Table to Couch
     </button>
 )
+
