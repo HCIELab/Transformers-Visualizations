@@ -28,10 +28,11 @@ const DemoContainer = styled.div`
     }
 `;
 
-const Demo = () => {
-    
+const Demo = () => {    
     const [isCounterclockwise, setIsCounterclockwise] = useState(true);
     const [axisOfRotationWorld, setAxisOfRotationWorld] = useState<axisType>("z");
+
+    const [incrementAmount, setIncrementAmount] = useState(0.1);
 
     const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([]);
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
@@ -62,6 +63,7 @@ const Demo = () => {
                 <Instructions
                     setInstructions={setInstructions}
                     setInitialCubeConfigs={setInitialCubeConfigs}
+                    setIncrementAmount={setIncrementAmount}
                 />
 
                 <p>NOTE: please do not move the camera while a rotation is in motion</p>
@@ -79,6 +81,7 @@ const Demo = () => {
                     axisOfRotationWorld={axisOfRotationWorld}
                     setAxisOfRotationWorld={setAxisOfRotationWorld}
                     showPath={showPath}
+                    incrementAmount={incrementAmount}
                 />
             </div>
         </DemoContainer>

@@ -17,6 +17,7 @@ const World = (props: {
     axisOfRotationWorld: axisType,
     setAxisOfRotationWorld: Function,
     showPath: boolean,
+    incrementAmount: number,
 }) => {
     console.log("(World.tsx) Rendering the World component");
     
@@ -96,6 +97,7 @@ const World = (props: {
                             updatePosition={setPosition(config.id)}
                             explorePathOfRotation={explorePathOfRotation}
                             showPath={props.showPath}
+                            incrementAmount={props.incrementAmount}
                         />
                     </Suspense>        
                 )

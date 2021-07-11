@@ -3,6 +3,7 @@ import { Vector3 } from "three"
 export const Button9 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
+    setIncrementAmount: Function,
 }) => (
     <button onClick={() => {
         let foo = [];
@@ -15,6 +16,8 @@ export const Button9 = (props: {
                 }
             }
         }
+
+        props.setIncrementAmount(0.1);
         props.setInitialCubeConfigs(foo)
         props.setInstructions([])
     }}>

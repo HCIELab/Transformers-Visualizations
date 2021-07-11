@@ -3,8 +3,10 @@ import { Vector3 } from "three"
 export const Button10 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
+    setIncrementAmount: Function,
 }) => (
     <button onClick={() => {
+        props.setIncrementAmount(0.3);
         props.setInitialCubeConfigs([
             // Chair left side
             {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#77410e"},
@@ -36,6 +38,37 @@ export const Button10 = (props: {
 
         ])
         props.setInstructions([
+            {
+                cubeID: 4,
+                axis: "x",
+                isCounterclockwise: true,
+                timeToStart: 1000,
+            },
+            {
+                cubeID: 4,
+                axis: "x",
+                isCounterclockwise: true,
+                timeToStart: 2000,
+            },
+            {
+                cubeID: 4,
+                axis: "x",
+                isCounterclockwise: true,
+                timeToStart: 3000,
+            },
+            {
+                cubeID: 4,
+                axis: "x",
+                isCounterclockwise: true,
+                timeToStart: 4000,
+            },
+            {
+                cubeID: 4,
+                axis: "x",
+                isCounterclockwise: true,
+                timeToStart: 5000,
+            },
+
         ])
     }}>
         Chair to Table to Couch
