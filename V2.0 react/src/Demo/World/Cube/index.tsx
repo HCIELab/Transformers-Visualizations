@@ -139,14 +139,16 @@ const Cube = (props: {
 	useFrame(() => {
 		if (step === "2_ROTATING") {
 			// -- While Rotating --
-			if (props.isCounterclockwise) {
-				everything.current.rotateOnAxis(getAxisOfRotationLocal(props.axisOfRotationWorld, initialRotationAmount), props.incrementAmount)
+			if (iteration < maxIteration) {
+				if (props.isCounterclockwise) {
+					everything.current.rotateOnAxis(getAxisOfRotationLocal(props.axisOfRotationWorld, initialRotationAmount), props.incrementAmount)
+				}
+				else {
+					everything.current.rotateOnAxis(getAxisOfRotationLocal(props.axisOfRotationWorld, initialRotationAmount), -props.incrementAmount)
+				}
+				setIteration(iteration+1);
 			}
 			else {
-				everything.current.rotateOnAxis(getAxisOfRotationLocal(props.axisOfRotationWorld, initialRotationAmount), -props.incrementAmount)
-			}
-			setIteration(iteration+1);
-			if (iteration >= maxIteration) {
 				setStep("3_END");
 			}
 		}
