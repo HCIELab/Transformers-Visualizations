@@ -6,6 +6,7 @@ import Panel from "./Panel";
 import Instructions from "./Instructions";
 import { axisType, initialCubeConfigType, instructionType } from './Util/Types/types';
 import World from "./World";
+import { Vector3 } from 'three';
 
 const DemoContainer = styled.div`
     width: 100%;
@@ -42,7 +43,7 @@ const Demo = () => {
 
     const [incrementAmount, setIncrementAmount] = useState(0.1);
 
-    const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([]);
+    const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([{id: 1, initialPosition: new Vector3(0, 0, 0), color: "#77410e"}]);
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
 
     const [showPath, setShowPath] = useState(false);

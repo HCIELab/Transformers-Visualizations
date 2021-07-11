@@ -39,17 +39,18 @@ export const Button10 = (props: {
             {id: 17, initialPosition: new Vector3(1, 3, 0), color: "#77410e"},            
             {id: 18, initialPosition: new Vector3(1, 1, 1), color: "#77410e"},            
             {id: 19, initialPosition: new Vector3(1, 1, 2), color: "#77410e"},            
+            // {id: 20, initialPosition: new Vector3(1, 4, 0), color: "#77410e"},            
 
         ])
 
         props.setIncrementAmount(1.4);
 
         let instructions : instructionType[] = [];
-        const interval = 250;
-        instructions = instructions.concat(chairToTableLeft(1000 + interval*instructions.length, interval));
-        instructions = instructions.concat(chairToTableRight(1000 + interval*instructions.length, interval));
-        instructions = instructions.concat(chairToTableMiddle(1000 + interval*instructions.length, interval));
-        instructions = instructions.concat(tableToCouch(1000 + interval*instructions.length, interval));
+        const interval = 600;
+        instructions = instructions.concat(chairToTableLeft(1500 + interval*instructions.length, interval));
+        instructions = instructions.concat(chairToTableRight(1500 + interval*instructions.length, interval));
+        instructions = instructions.concat(chairToTableMiddle(1500 + interval*instructions.length, interval));
+        instructions = instructions.concat(tableToCouch(1500 + interval*instructions.length, interval));
 
         props.setInstructions(instructions);
     }}>
