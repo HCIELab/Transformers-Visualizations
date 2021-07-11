@@ -24,6 +24,7 @@ const Cube = (props: {
 	updatePosition: Function,
 	explorePathOfRotation: Function,
 	showPath: boolean,
+	incrementAmount: number,
 }) => {
 	const everything = useRef<THREE.Group>(null!);
 	const forPivot = useRef<THREE.Group>(null!);
@@ -95,9 +96,8 @@ const Cube = (props: {
 
 	// 1. Move object to the pivot point
 	// 1.1 Local - Subtract the pivot point from the object's original position
-	const INCREMENT_AMT = 0.1; //increase this number to make the cubes rotate faster
 	const [maxIteration, setMaxIteration] = useState(0);
-	const [iteration, setIteration] = useState(0);
+	const [iteration, setIteration] = useState(1);
 	const {id, explorePathOfRotation, showPath} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
@@ -125,28 +125,31 @@ const Cube = (props: {
 						translateGroup(everything, piv);
 						translateGroup(forPivot, opp);
 			
-						setMaxIteration(Math.abs(displacementMagnitude / INCREMENT_AMT));
-						setIteration(0);
+						setMaxIteration(Math.abs(displacementMagnitude / props.incrementAmount));
+						setIteration(1);
 						setStep("2_ROTATING");
 						break;
 				}
 			}
 			setShowEmags(true);
 		}
-	}, [step, props.axisOfRotationWorld, explorePathOfRotation, id, showPath, initialRotationAmount])
+	}, [step, props.axisOfRotationWorld, explorePathOfRotation, id, showPath, initialRotationAmount, props.incrementAmount])
 
 	// 2. Apply the rotation
 	useFrame(() => {
 		if (step === "2_ROTATING") {
 			// -- While Rotating --
-			if (props.isCounterclockwise) {
-				everything.current.rotateOnAxis(getAxisOfRotationLocal(props.axisOfRotationWorld, initialRotationAmount), INCREMENT_AMT)
+			if (iteration < maxIteration) {
+				console.log(`(Cube.tsx) iteration: ${iteration}, maxIteration: ${maxIteration}`)
+				if (props.isCounterclockwise) {
+					everything.current.rotateOnAxis(getAxisOfRotationLocal(props.axisOfRotationWorld, initialRotationAmount), props.incrementAmount)
+				}
+				else {
+					everything.current.rotateOnAxis(getAxisOfRotationLocal(props.axisOfRotationWorld, initialRotationAmount), -props.incrementAmount)
+				}
+				setIteration(iteration+1);
 			}
 			else {
-				everything.current.rotateOnAxis(getAxisOfRotationLocal(props.axisOfRotationWorld, initialRotationAmount), -INCREMENT_AMT)
-			}
-			setIteration(iteration+1);
-			if (iteration >= maxIteration) {
 				setStep("3_END");
 			}
 		}
