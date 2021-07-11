@@ -10,7 +10,7 @@ export const Button10 = (props: {
     setIncrementAmount: Function,
 }) => (
     <button onClick={() => {
-        props.setIncrementAmount(0.3);
+        props.setIncrementAmount(0.7);
         props.setInitialCubeConfigs([
             // Chair left side
             {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#77410e"},
@@ -43,7 +43,7 @@ export const Button10 = (props: {
         ])
 
         let instructions : instructionType[] = [];
-        const interval = 750;
+        const interval = 500;
         instructions = instructions.concat(chairToTableLeft(1000 + interval*instructions.length, interval));
         instructions = instructions.concat(chairToTableRight(1000 + interval*instructions.length, interval));
         instructions = instructions.concat(chairToTableMiddle(1000 + interval*instructions.length, interval));
