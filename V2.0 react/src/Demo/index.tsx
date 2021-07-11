@@ -11,20 +11,28 @@ const DemoContainer = styled.div`
     width: 100%;
     height: 100%;
     overflow: auto;
-    border: 25px solid #000000;
+    border: 10px solid #ffffff;
+    padding: 20px;
 
-    .TopSection {
-        margin: 0;
-        height: 35%;
-        background-color: #fdfdfd;
-        overflow: auto;
-    }
-
-    .BottomSection {
-        margin: 0;
-        height: calc(100% - 35%);
+    .Inner {
         width: 100%;
-        background-color: #f0f0f0;
+        height: 100%;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        padding: 20px;
+
+        .TopSection {
+            margin: 0;
+            height: 35%;
+            background-color: #fdfdfd;
+            overflow: auto;
+        }
+    
+        .BottomSection {
+            margin: 0;
+            height: calc(100% - 35%);
+            width: 100%;
+            background-color: #f0f0f0;
+        }
     }
 `;
 
@@ -41,48 +49,50 @@ const Demo = () => {
 
     return (
         <DemoContainer>
-            <div className="TopSection">
-                <Panel
-                    axisOfRotationWorld={axisOfRotationWorld}
-                    setAxisOfRotationWorld={setAxisOfRotationWorld}
-                    isCounterclockwise={isCounterclockwise}
-                    setIsCounterclockwise={setIsCounterclockwise}
-                />
+            <div className="Inner">
+                <div className="TopSection">
+                    <Panel
+                        axisOfRotationWorld={axisOfRotationWorld}
+                        setAxisOfRotationWorld={setAxisOfRotationWorld}
+                        isCounterclockwise={isCounterclockwise}
+                        setIsCounterclockwise={setIsCounterclockwise}
+                    />
 
-                <br/>
-                <br/>
-                [ {showPath ? "Showing Path" : "Moving Cubes"} ]
-                <button onClick={() => {
-                    setShowPath(!showPath)
-                }}>
-                    Click to toggle
-                </button>
-                <br/>
-                <br/>
+                    <br/>
+                    <br/>
+                    [ {showPath ? "Showing Path" : "Moving Cubes"} ]
+                    <button onClick={() => {
+                        setShowPath(!showPath)
+                    }}>
+                        Click to toggle
+                    </button>
+                    <br/>
+                    <br/>
 
-                <Instructions
-                    setInstructions={setInstructions}
-                    setInitialCubeConfigs={setInitialCubeConfigs}
-                    setIncrementAmount={setIncrementAmount}
-                />
+                    <Instructions
+                        setInstructions={setInstructions}
+                        setInitialCubeConfigs={setInitialCubeConfigs}
+                        setIncrementAmount={setIncrementAmount}
+                    />
 
-                <p>NOTE: please do not move the camera while a rotation is in motion</p>
+                    <p>NOTE: please do not move the camera while a rotation is in motion</p>
 
-            </div>
+                </div>
 
 
 
-            <div className="BottomSection">
-                <World
-                    initialCubeConfigs={initialCubeConfigs}
-                    instructions={instructions}
-                    isCounterclockwise={isCounterclockwise}
-                    setIsCounterclockwise={setIsCounterclockwise}
-                    axisOfRotationWorld={axisOfRotationWorld}
-                    setAxisOfRotationWorld={setAxisOfRotationWorld}
-                    showPath={showPath}
-                    incrementAmount={incrementAmount}
-                />
+                <div className="BottomSection">
+                    <World
+                        initialCubeConfigs={initialCubeConfigs}
+                        instructions={instructions}
+                        isCounterclockwise={isCounterclockwise}
+                        setIsCounterclockwise={setIsCounterclockwise}
+                        axisOfRotationWorld={axisOfRotationWorld}
+                        setAxisOfRotationWorld={setAxisOfRotationWorld}
+                        showPath={showPath}
+                        incrementAmount={incrementAmount}
+                    />
+                </div>
             </div>
         </DemoContainer>
     )
