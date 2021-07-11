@@ -2,6 +2,7 @@ import { Vector3 } from "three"
 import { instructionType } from "../../Util/Types/types";
 import {chairToTableLeft} from "./chairToTableLeft";
 import {chairToTableRight} from "./chairToTableRight";
+import {chairToTableMiddle} from "./chairToTableMiddle";
 
 export const Button10 = (props: {
     setInstructions: Function,
@@ -42,11 +43,12 @@ export const Button10 = (props: {
         ])
 
         let instructions : instructionType[] = [];
-        instructions = instructions.concat(chairToTableLeft(1000, 750));
-        instructions = instructions.concat(chairToTableRight(1000 + 750*9, 750));
+        const interval = 750;
+        instructions = instructions.concat(chairToTableLeft(1000 + interval*instructions.length, interval));
+        instructions = instructions.concat(chairToTableRight(1000 + interval*instructions.length, interval));
+        instructions = instructions.concat(chairToTableMiddle(1000 + interval*instructions.length, interval));
+
         props.setInstructions(instructions);
-        console.log("****************");
-        console.log(instructions);
     }}>
         Chair to Table to Couch
     </button>
