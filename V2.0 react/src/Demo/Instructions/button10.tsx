@@ -1,4 +1,5 @@
 import { Vector3 } from "three"
+import { instructionType } from "../Util/Types/types";
 
 export const Button10 = (props: {
     setInstructions: Function,
@@ -37,39 +38,74 @@ export const Button10 = (props: {
             {id: 19, initialPosition: new Vector3(1, 1, 2), color: "#77410e"},            
 
         ])
-        props.setInstructions([
-            {
-                cubeID: 4,
-                axis: "x",
-                isCounterclockwise: true,
-                timeToStart: 1000,
-            },
-            {
-                cubeID: 4,
-                axis: "x",
-                isCounterclockwise: true,
-                timeToStart: 2000,
-            },
-            {
-                cubeID: 4,
-                axis: "x",
-                isCounterclockwise: true,
-                timeToStart: 3000,
-            },
-            {
-                cubeID: 4,
-                axis: "x",
-                isCounterclockwise: true,
-                timeToStart: 4000,
-            },
-            {
-                cubeID: 4,
-                axis: "x",
-                isCounterclockwise: true,
-                timeToStart: 5000,
-            },
 
-        ])
+        const interval = 750;
+        let count = 1;
+        const instructions : instructionType[] = [];
+        instructions.push({
+            cubeID: 4,
+            axis: "x",
+            isCounterclockwise: true,
+            timeToStart: interval*count,
+        })
+        count += 1;
+        instructions.push({
+            cubeID: 4,
+            axis: "x",
+            isCounterclockwise: true,
+            timeToStart: interval*1,
+        })
+        count += 1;
+        instructions.push({
+            cubeID: 4,
+            axis: "x",
+            isCounterclockwise: true,
+            timeToStart: interval*2,
+        })
+        instructions.push({
+            cubeID: 4,
+            axis: "x",
+            isCounterclockwise: true,
+            timeToStart: interval*3,
+        })
+        count += 1;
+        instructions.push({
+            cubeID: 4,
+            axis: "x",
+            isCounterclockwise: true,
+            timeToStart: interval*4,
+        })
+        count += 1;
+        instructions.push({
+            cubeID: 4,
+            axis: "x",
+            isCounterclockwise: true,
+            timeToStart: interval*5,
+        })
+        count += 1;
+        instructions.push({
+            cubeID: 3,
+            axis: "x",
+            isCounterclockwise: false,
+            timeToStart: interval*6,
+        })
+        count += 1;
+        instructions.push({
+            cubeID: 3,
+            axis: "x",
+            isCounterclockwise: false,
+            timeToStart: interval*7,
+        })
+        count += 1;
+        instructions.push({
+            cubeID: 3,
+            axis: "x",
+            isCounterclockwise: false,
+            timeToStart: interval*8,
+        })
+        count += 1;
+
+        props.setInstructions(instructions);
     }}>
         Chair to Table to Couch
     </button>

@@ -74,19 +74,19 @@ const Labeling = (props: {
 			<group>
 				<mesh position={[letterOffset*2.5, letterOffset*3, half]}  ref={fakeNano.L1}>
 					<textGeometry args={[`|     ${props.cubeID}     |`, textOptions]} />
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 				<mesh position={[letterOffset*2.5, letterOffset, half]} ref={fakeNano.L2}>
 					<textGeometry args={[`|    ID:    |`, textOptions]} />
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 				<mesh position={[letterOffset*2.5, -letterOffset, half]} ref={fakeNano.L3}>
 					<textGeometry args={["| NANO |", textOptions]} /> 
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 				<mesh position={[letterOffset*2.5, -letterOffset*3, half]} ref={fakeNano.L4}>
 					<textGeometry args={["|             |", textOptions]} />
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 			</group>
 
@@ -94,57 +94,57 @@ const Labeling = (props: {
 			<group visible={props.axis === "z"}>
 				<mesh ref={fooRef} position={[half-letterOffset*2, half-letterOffset, 0+half-letterHeight]}>
 					<textGeometry args={[`${numbers.z.NorthEast}`, textOptions]} />
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 				<mesh position={[half-letterOffset*2, -half, 0+half-letterHeight]}>
 					<textGeometry args={[`${numbers.z.SouthEast}`, textOptions]} />
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 				<mesh position={[-half, -half, 0+half-letterHeight]}>
 					<textGeometry args={[`${numbers.z.SouthWest}`, textOptions]} />
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 				<mesh position={[-half, half - letterOffset, 0+half-letterHeight]}>
 					<textGeometry args={[`${numbers.z.NorthWest}`, textOptions]} />
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 			</group>
 			<group visible={props.axis === "x"}>
 				{/* Edges parallel to the "x" axis */}
 				<mesh position={[0+half-letterHeight, half-letterOffset, -half+letterOffset]} ref={xEdges.NorthWest}>
 					<textGeometry args={[`${numbers.x.NorthEast}`, textOptions]}/>
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 				<mesh position={[0+half-letterHeight, -half, -half+letterOffset]}  ref={xEdges.SouthWest}>
 					<textGeometry args={[`${numbers.x.SouthEast}`, textOptions]}/>
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 				<mesh position={[0+half-letterHeight, -half, half]}  ref={xEdges.SouthEast}>
 					<textGeometry args={[`${numbers.x.SouthWest}`, textOptions]}/>
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 				<mesh position={[0+half-letterHeight, half - letterOffset, half]} ref={xEdges.NorthEast}>
 					<textGeometry args={[`${numbers.x.NorthWest}`, textOptions]} />
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 			</group>
 			<group visible={props.axis === "y"}>
 				{/* Edges parallel to the "y" axis */}
 				<mesh position={[half-letterOffset, 0+half-letterHeight, -half+letterOffset]} ref={yEdges.NorthEast}>
 					<textGeometry args={[`${numbers.y.NorthEast}`, textOptions]} />
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 				<mesh position={[half-letterOffset, 0+half-letterHeight, half]} ref={yEdges.SouthEast}>
 					<textGeometry args={[`${numbers.y.SouthEast}`, textOptions]} />
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 				<mesh position={[-half, 0+half-letterHeight, half]} ref={yEdges.SouthWest}>
 					<textGeometry args={[`${numbers.y.SouthWest}`, textOptions]} />
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 				<mesh position={[-half, 0+half-letterHeight, -half+letterOffset]} ref={yEdges.NorthWest}>
 					<textGeometry args={[`${numbers.y.NorthWest}`, textOptions]} />
-					<meshPhongMaterial/>
+					<meshPhongMaterial color={"#5e5e5e"}/>
 				</mesh>
 			</group>
 		</>

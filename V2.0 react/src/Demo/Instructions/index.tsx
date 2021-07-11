@@ -45,6 +45,7 @@ const Instructions = (props: {
                 <Button2 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button3 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button4 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
+                <Button10 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
             </div>
             <div>
                 No Instructions
@@ -53,7 +54,6 @@ const Instructions = (props: {
                 <Button7 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button8 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 {/* <Button9 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} /> */}
-                <Button10 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
             </div>
         </Container>
     )
