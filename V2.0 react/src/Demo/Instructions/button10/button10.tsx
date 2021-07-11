@@ -3,6 +3,7 @@ import { instructionType } from "../../Util/Types/types";
 import {chairToTableLeft} from "./chairToTableLeft";
 import {chairToTableRight} from "./chairToTableRight";
 import {chairToTableMiddle} from "./chairToTableMiddle";
+import {tableToCouch} from "./tableToCouch";
 
 export const Button10 = (props: {
     setInstructions: Function,
@@ -10,7 +11,6 @@ export const Button10 = (props: {
     setIncrementAmount: Function,
 }) => (
     <button onClick={() => {
-        props.setIncrementAmount(0.7);
         props.setInitialCubeConfigs([
             // Chair left side
             {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#77410e"},
@@ -42,11 +42,14 @@ export const Button10 = (props: {
 
         ])
 
+        props.setIncrementAmount(1.4);
+
         let instructions : instructionType[] = [];
-        const interval = 500;
+        const interval = 250;
         instructions = instructions.concat(chairToTableLeft(1000 + interval*instructions.length, interval));
         instructions = instructions.concat(chairToTableRight(1000 + interval*instructions.length, interval));
         instructions = instructions.concat(chairToTableMiddle(1000 + interval*instructions.length, interval));
+        instructions = instructions.concat(tableToCouch(1000 + interval*instructions.length, interval));
 
         props.setInstructions(instructions);
     }}>
