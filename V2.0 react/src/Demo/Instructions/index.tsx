@@ -13,17 +13,28 @@ import {Button8} from "./button8";
 import {Button10} from "./button10/button10";
 
 const Container = styled.div`
-    display: flex;
-    flex-direction: row;
     padding: 5px 0;
 
     .ScriptsHeading {
+        text-align: center;
         font-weight: 600;
         padding: 0px 5px;
     }
-    button {
-        margin: 0 5px;
-        cursor: pointer;
+
+    .Section {
+        display: flex;
+        flex-direction: row;
+        padding: 4px;
+
+        .Label {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        button {
+            margin: 0 5px;
+            cursor: pointer;
+            padding: 15px;
+        }
     }
 `;
 
@@ -36,19 +47,23 @@ const Instructions = (props: {
     return (
         <Container>
             <div className={"ScriptsHeading"}>
-                Starter Scripts:
+                Starter Scripts
             </div>
 
-            <div>
-                With Instructions
+            <div className="Section">
+                <p className={"Label"}>
+                    With Instructions:
+                </p>
                 <Button1 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button2 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button3 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button4 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button10 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
             </div>
-            <div>
-                No Instructions
+            <div className="Section">
+                <p className={"Label"}>
+                    No Instructions:
+                </p>
                 <Button5 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button6 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button7 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
