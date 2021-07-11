@@ -97,7 +97,7 @@ const Cube = (props: {
 	// 1. Move object to the pivot point
 	// 1.1 Local - Subtract the pivot point from the object's original position
 	const [maxIteration, setMaxIteration] = useState(0);
-	const [iteration, setIteration] = useState(0);
+	const [iteration, setIteration] = useState(1);
 	const {id, explorePathOfRotation, showPath} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
@@ -126,7 +126,7 @@ const Cube = (props: {
 						translateGroup(forPivot, opp);
 			
 						setMaxIteration(Math.abs(displacementMagnitude / props.incrementAmount));
-						setIteration(0);
+						setIteration(1);
 						setStep("2_ROTATING");
 						break;
 				}
@@ -140,6 +140,7 @@ const Cube = (props: {
 		if (step === "2_ROTATING") {
 			// -- While Rotating --
 			if (iteration < maxIteration) {
+				console.log(`(Cube.tsx) iteration: ${iteration}, maxIteration: ${maxIteration}`)
 				if (props.isCounterclockwise) {
 					everything.current.rotateOnAxis(getAxisOfRotationLocal(props.axisOfRotationWorld, initialRotationAmount), props.incrementAmount)
 				}
