@@ -4,7 +4,6 @@ export const chairToTableLeft = (startTime: number, interval: number) => {
     let count = 0;
     const instructions : instructionType[] = [];
 
-    // Left Side
     instructions.push({cubeID: 4, axis: "x", isCounterclockwise: true, timeToStart: startTime + interval*count})
     count += 1;
     instructions.push({cubeID: 4, axis: "x", isCounterclockwise: true, timeToStart: startTime + interval*count})
