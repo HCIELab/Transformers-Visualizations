@@ -1,11 +1,12 @@
 import { Vector3 } from "three"
+import Button from '@material-ui/core/Button';
 
 export const Button4 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
     setIncrementAmount: Function,
 }) => (
-    <button onClick={() => {
+    <Button variant="outlined" color="primary" onClick={() => {
         props.setIncrementAmount(0.1);
         props.setInitialCubeConfigs([
             {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#77410e"},
@@ -40,5 +41,5 @@ export const Button4 = (props: {
         ])
     }}>
         Traversal
-    </button>
+    </Button>
 )

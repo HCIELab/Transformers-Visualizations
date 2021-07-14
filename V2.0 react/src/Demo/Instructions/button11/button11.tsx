@@ -1,4 +1,6 @@
 import { Vector3 } from "three"
+import Button from '@material-ui/core/Button';
+
 import { instructionType } from "../../Util/Types/types";
 import {letterI} from "./letterI";
 import {letterS} from "./letterS";
@@ -8,7 +10,7 @@ export const Button11 = (props: {
     setInitialCubeConfigs: Function,
     setIncrementAmount: Function,
 }) => (
-    <button onClick={() => {
+    <Button variant="outlined" color="primary" onClick={() => {
         props.setInitialCubeConfigs([
             // Chair left side
             {id: 1, initialPosition: new Vector3(1-7, -2, 0), color: "#77410e"},
@@ -64,6 +66,6 @@ export const Button11 = (props: {
         props.setInstructions(instructions);
     }}>
         Line to UIST Letters
-    </button>
+    </Button>
 )
 

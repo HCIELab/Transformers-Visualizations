@@ -1,4 +1,6 @@
 import { Vector3 } from "three"
+import Button from '@material-ui/core/Button';
+
 import { instructionType } from "../../Util/Types/types";
 import {chairToTableLeft} from "./chairToTableLeft";
 import {chairToTableRight} from "./chairToTableRight";
@@ -10,7 +12,7 @@ export const Button10 = (props: {
     setInitialCubeConfigs: Function,
     setIncrementAmount: Function,
 }) => (
-    <button onClick={() => {
+    <Button variant="outlined" color="primary" onClick={() => {
         props.setInitialCubeConfigs([
             // Chair left side
             {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#77410e"},
@@ -55,6 +57,6 @@ export const Button10 = (props: {
         props.setInstructions(instructions);
     }}>
         Chair to Table to Couch
-    </button>
+    </Button>
 )
 
