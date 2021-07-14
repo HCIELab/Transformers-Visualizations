@@ -5,6 +5,7 @@ import { instructionType } from "../../Util/Types/types";
 import {letterI} from "./letterI";
 import {letterS} from "./letterS";
 import {letterU} from "./letterU";
+import {letterT} from "./letterT";
 
 export const Button11 = (props: {
     setInstructions: Function,
@@ -60,10 +61,11 @@ export const Button11 = (props: {
         props.setIncrementAmount(1.5);
 
         let instructions : instructionType[] = [];
-        const interval = 200;
+        const interval = 500;
         instructions = instructions.concat(letterI(1500 + interval*instructions.length, interval));
         instructions = instructions.concat(letterS(1500 + interval*instructions.length, interval));
         instructions = instructions.concat(letterU(1500 + interval*instructions.length, interval));
+        instructions = instructions.concat(letterT(1500 + interval*instructions.length, interval));
 
         props.setInstructions(instructions);
     }}>
