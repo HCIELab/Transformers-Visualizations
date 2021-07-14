@@ -14,7 +14,6 @@ export const Button11 = (props: {
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {
         props.setInitialCubeConfigs([
-            // Chair left side
             {id: 1, initialPosition: new Vector3(1-7, -2, 0), color: "#77410e"},
             {id: 2, initialPosition: new Vector3(2-7, -2, 0), color: "#77410e"},
             {id: 3, initialPosition: new Vector3(3-7, -2, 0), color: "#77410e"},
@@ -55,13 +54,15 @@ export const Button11 = (props: {
             {id: 13*2+10, initialPosition: new Vector3(10-7, 0, 0), color: "#77410e"},
             {id: 13*2+11, initialPosition: new Vector3(11-7, 0, 0), color: "#77410e"},
             {id: 13*2+12, initialPosition: new Vector3(12-7, 0, 0), color: "#77410e"},
-            {id: 13*2+13, initialPosition: new Vector3(13-7, 0, 0), color: "#77410e"},
+            // {id: 13*2+13, initialPosition: new Vector3(13-7, 0, 0), color: "#77410e"},
         ])
 
-        props.setIncrementAmount(1.5);
+        props.setIncrementAmount(0.6);
+        // props.setIncrementAmount(1.5);
 
         let instructions : instructionType[] = [];
-        const interval = 500;
+        // const interval = 200;
+        const interval = 1000;
         instructions = instructions.concat(letterI(1500 + interval*instructions.length, interval));
         instructions = instructions.concat(letterS(1500 + interval*instructions.length, interval));
         instructions = instructions.concat(letterU(1500 + interval*instructions.length, interval));
