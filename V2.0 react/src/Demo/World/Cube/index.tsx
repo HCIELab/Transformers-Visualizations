@@ -232,11 +232,11 @@ const Cube = (props: {
 					side={side}
 					axis={props.axisOfRotationWorld}
 				/> */}
-				<Emags
+				{/* <Emags
 					showEmags={showEmags}
 					pointOfRotation={pointOfRotation}
 					axisOfRotationWorld={props.axisOfRotationWorld}
-				/>
+				/> */}
 				{/* <axesHelper scale={0.3}/> */}
 			</group>
 		</group>

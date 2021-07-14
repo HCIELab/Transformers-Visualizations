@@ -23,14 +23,14 @@ const DemoContainer = styled.div`
 
         .TopSection {
             margin: 0;
-            height: 8%;
+            height: 9%;
             background-color: #fdfdfd;
             overflow: auto;
         }
     
         .BottomSection {
             margin: 0;
-            height: calc(100% - 8%);
+            height: calc(100% - 9%);
             width: 100%;
             background-color: #f0f0f0;
         }
