@@ -25,7 +25,7 @@ const Model = (props: {
             {/* Alternative: Basic Solid Cube */}
             <mesh>
                 <boxGeometry args={[props.side, props.side, props.side]} />
-                <meshStandardMaterial color={props.color} />
+                <meshStandardMaterial color={"#ffffff"} transparent={true} opacity={0.9} />
             </mesh>
         </group>
     )
