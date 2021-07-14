@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { instructionType } from "../../Util/Types/types";
 import {letterI} from "./letterI";
 import {letterS} from "./letterS";
+import {letterU} from "./letterU";
 
 export const Button11 = (props: {
     setInstructions: Function,
@@ -62,6 +63,7 @@ export const Button11 = (props: {
         const interval = 200;
         instructions = instructions.concat(letterI(1500 + interval*instructions.length, interval));
         instructions = instructions.concat(letterS(1500 + interval*instructions.length, interval));
+        instructions = instructions.concat(letterU(1500 + interval*instructions.length, interval));
 
         props.setInstructions(instructions);
     }}>
