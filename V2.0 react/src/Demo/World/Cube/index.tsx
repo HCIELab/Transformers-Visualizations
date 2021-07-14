@@ -226,12 +226,12 @@ const Cube = (props: {
 					side={side}
 					color={props.color}
 				/>
-				<Labeling
+				{/* <Labeling
 					cubeID={props.id}
 					letterOffset={0.1}
 					side={side}
 					axis={props.axisOfRotationWorld}
-				/>
+				/> */}
 				<Emags
 					showEmags={showEmags}
 					pointOfRotation={pointOfRotation}

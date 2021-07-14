@@ -1,6 +1,7 @@
 import { Vector3 } from "three"
 import { instructionType } from "../../Util/Types/types";
 import {letterI} from "./letterI";
+import {letterS} from "./letterS";
 
 export const Button11 = (props: {
     setInstructions: Function,
@@ -58,6 +59,7 @@ export const Button11 = (props: {
         let instructions : instructionType[] = [];
         const interval = 1000;
         instructions = instructions.concat(letterI(1500 + interval*instructions.length, interval));
+        instructions = instructions.concat(letterS(1500 + interval*instructions.length, interval));
 
         props.setInstructions(instructions);
     }}>
