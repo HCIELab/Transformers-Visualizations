@@ -35,6 +35,9 @@ const Container = styled.div`
             margin: 0 5px;
             cursor: pointer;
             padding: 15px;
+            font-size: 18px;
+            font-weight: 500;
+            text-transform: none;
         }
     }
 `;
