@@ -54,10 +54,10 @@ export const Button11 = (props: {
             {id: 13*2+13, initialPosition: new Vector3(13-7, 0, 0), color: "#77410e"},
         ])
 
-        props.setIncrementAmount(0.6);
+        props.setIncrementAmount(1.5);
 
         let instructions : instructionType[] = [];
-        const interval = 1000;
+        const interval = 200;
         instructions = instructions.concat(letterI(1500 + interval*instructions.length, interval));
         instructions = instructions.concat(letterS(1500 + interval*instructions.length, interval));
 
