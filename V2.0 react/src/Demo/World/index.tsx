@@ -75,7 +75,7 @@ const World = (props: {
             <OrbitControls enableDamping={false}/>
             
             {/* Visual Helpers */}
-            <axesHelper position={[-0.5, -0.5, 0]} scale={2}/>
+            {/* <axesHelper position={[-0.5, -0.5, 0]} scale={2}/> */}
             <gridHelper rotation={new Euler(Math.PI/2, 0, 0)} position={[0.5, 0.5, -0.5]}/>
             
             {/* Cubes */}
