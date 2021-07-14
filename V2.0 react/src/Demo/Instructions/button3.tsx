@@ -32,6 +32,6 @@ export const Button3 = (props: {
             },
         ])
     }}>
-        Pivot multi-axis (away, up, towards)
+        Pivot multi-axis
     </button>
 )

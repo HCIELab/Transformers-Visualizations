@@ -41,6 +41,6 @@ export const Button1 = (props: {
             },
         ])
     }}>
-        Walking (in the Z axis)
+        Walking
     </button>
 )

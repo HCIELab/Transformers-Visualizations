@@ -26,6 +26,6 @@ export const Button2 = (props: {
             },
         ])
     }}>
-        Pivot back and forth (in the Z axis)
+        Pivot Back and Forth
     </button>
 )
