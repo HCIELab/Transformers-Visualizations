@@ -23,14 +23,14 @@ const DemoContainer = styled.div`
 
         .TopSection {
             margin: 0;
-            height: 35%;
+            height: 8%;
             background-color: #fdfdfd;
             overflow: auto;
         }
     
         .BottomSection {
             margin: 0;
-            height: calc(100% - 35%);
+            height: calc(100% - 8%);
             width: 100%;
             background-color: #f0f0f0;
         }
@@ -52,7 +52,7 @@ const Demo = () => {
         <DemoContainer>
             <div className="Inner">
                 <div className="TopSection">
-                    <Panel
+                    {/* <Panel
                         axisOfRotationWorld={axisOfRotationWorld}
                         setAxisOfRotationWorld={setAxisOfRotationWorld}
                         isCounterclockwise={isCounterclockwise}
@@ -68,7 +68,7 @@ const Demo = () => {
                         Click to toggle
                     </button>
                     <br/>
-                    <br/>
+                    <br/> */}
 
                     <Instructions
                         setInstructions={setInstructions}
@@ -76,7 +76,7 @@ const Demo = () => {
                         setIncrementAmount={setIncrementAmount}
                     />
 
-                    <p>NOTE: please do not move the camera while a rotation is in motion</p>
+                    {/* <p>NOTE: please do not move the camera while a rotation is in motion</p> */}
 
                 </div>
 

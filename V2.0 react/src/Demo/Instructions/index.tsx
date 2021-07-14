@@ -47,14 +47,14 @@ const Instructions = (props: {
 
     return (
         <Container>
-            <div className={"ScriptsHeading"}>
+            {/* <div className={"ScriptsHeading"}>
                 Starter Scripts
-            </div>
+            </div> */}
 
             <div className="Section">
-                <p className={"Label"}>
+                {/* <p className={"Label"}>
                     With Instructions:
-                </p>
+                </p> */}
                 <Button1 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button2 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button3 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
@@ -62,7 +62,7 @@ const Instructions = (props: {
                 <Button10 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button11 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
             </div>
-            <div className="Section">
+            {/* <div className="Section">
                 <p className={"Label"}>
                     No Instructions:
                 </p>
@@ -70,8 +70,8 @@ const Instructions = (props: {
                 <Button6 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button7 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button8 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                {/* <Button9 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} /> */}
-            </div>
+            </div> */}
+            {/* <Button9 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} /> */}
         </Container>
     )
 }
