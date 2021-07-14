@@ -11,6 +11,7 @@ import {Button7} from "./button7";
 import {Button8} from "./button8";
 // import {Button9} from "./button9";
 import {Button10} from "./button10/button10";
+import {Button11} from "./button11/button11";
 
 const Container = styled.div`
     padding: 5px 0;
@@ -59,6 +60,7 @@ const Instructions = (props: {
                 <Button3 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button4 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button10 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
+                <Button11 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
             </div>
             <div className="Section">
                 <p className={"Label"}>
