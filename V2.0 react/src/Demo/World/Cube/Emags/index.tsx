@@ -28,7 +28,7 @@ const Emags = (props: {
                 <group>
                     <mesh position={props.pointOfRotation} rotation={getRotation()}>
                         <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
-                        <meshPhongMaterial color={"#c70fff"} transparent={true} opacity={0.5}/>
+                        <meshPhongMaterial color={"#1975ee"} transparent={true} opacity={0.5}/>
                     </mesh>
                 </group>
             }
