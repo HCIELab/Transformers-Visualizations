@@ -11,12 +11,12 @@ import PathBlock from './PathBlock';
 import {generateExplorePathOfRotation} from "./helpersworld/generateExplorePathOfRotation";
 
 const World = (props: {
-    initialCubeConfigs: initialCubeConfigType[],
-    instructions: instructionType[],
-    isCounterclockwise: boolean,
-    setIsCounterclockwise: Function,
     axisOfRotationWorld: axisType,
     setAxisOfRotationWorld: Function,
+    isCounterclockwise: boolean,
+    setIsCounterclockwise: Function,
+    initialCubeConfigs: initialCubeConfigType[],
+    instructions: instructionType[],
     showPath: boolean,
     incrementAmount: number,
 }) => {
@@ -108,7 +108,12 @@ const World = (props: {
             {pathBlocks}
 
             {/* Arrows */}
-            <Arrows/>
+            <Arrows
+                axisOfRotationWorld={props.axisOfRotationWorld}
+                setAxisOfRotationWorld={props.setAxisOfRotationWorld}
+                isCounterclockwise={props.isCounterclockwise}
+                setIsCounterclockwise={props.setIsCounterclockwise}
+            />
         </Canvas>
     )
 }

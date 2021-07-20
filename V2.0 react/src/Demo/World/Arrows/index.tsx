@@ -4,12 +4,18 @@ import { axisType } from '../../Util/Types/types';
 import STLHelper from '../Cube/Model/STLhelper';
 
 const Arrows = (props: {
+    axisOfRotationWorld: axisType,
+    setAxisOfRotationWorld: Function,
+    isCounterclockwise: boolean,
+    setIsCounterclockwise: Function,
 }) => {
     console.log("(Arrow.tsx) Rendering component");
     
     const arrowClick = (axis: axisType, isCounterclockwise: boolean) => {
         console.log("arrowclick clicked!");
         console.log(`${axis}, ${isCounterclockwise}`)
+        props.setAxisOfRotationWorld(axis);
+        props.setIsCounterclockwise(isCounterclockwise);
     }
 
     return (
