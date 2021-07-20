@@ -1,7 +1,7 @@
 import React, { ReactNode, Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from "@react-three/drei";
-import { Euler, Vector3 } from 'three';
+import { Vector3 } from 'three';
 import { ResizeObserver } from '@juggle/resize-observer';
 
 import { axisType, collisionType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';

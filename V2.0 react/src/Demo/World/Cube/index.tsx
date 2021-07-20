@@ -226,18 +226,18 @@ const Cube = (props: {
 					side={side}
 					color={props.color}
 				/>
-				{/* <Labeling
+				<Labeling
 					cubeID={props.id}
 					letterOffset={0.1}
 					side={side}
 					axis={props.axisOfRotationWorld}
-				/> */}
-				{/* <Emags
+				/>
+				<Emags
 					showEmags={showEmags}
 					pointOfRotation={pointOfRotation}
 					axisOfRotationWorld={props.axisOfRotationWorld}
-				/> */}
-				{/* <axesHelper scale={0.3}/> */}
+				/>
+				<axesHelper scale={0.3}/>
 			</group>
 		</group>
 	)

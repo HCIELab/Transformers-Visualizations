@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
-import Panel from "./Panel";
+// import Panel from "./Panel";
 import Instructions from "./Instructions";
 import { axisType, initialCubeConfigType, instructionType } from './Util/Types/types';
 import World from "./World";
