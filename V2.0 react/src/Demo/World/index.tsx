@@ -6,6 +6,7 @@ import { ResizeObserver } from '@juggle/resize-observer';
 
 import { axisType, collisionType, cornerType, initialCubeConfigType, instructionType } from '../Util/Types/types';
 import Cube from './Cube';
+import Arrows from './Arrows';
 import PathBlock from './PathBlock';
 import {generateExplorePathOfRotation} from "./helpersworld/generateExplorePathOfRotation";
 
@@ -102,7 +103,12 @@ const World = (props: {
                     </Suspense>        
                 )
             }
+
+            {/* Path Blocks */}
             {pathBlocks}
+
+            {/* Arrows */}
+            <Arrows/>
         </Canvas>
     )
 }
