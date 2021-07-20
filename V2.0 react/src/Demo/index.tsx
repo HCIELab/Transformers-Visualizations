@@ -23,14 +23,14 @@ const DemoContainer = styled.div`
 
         .TopSection {
             margin: 0;
-            height: 9%;
+            height: 20%;
             background-color: #fdfdfd;
             overflow: auto;
         }
     
         .BottomSection {
             margin: 0;
-            height: calc(100% - 9%);
+            height: calc(100% - 20%);
             width: 100%;
             background-color: #f0f0f0;
         }
@@ -58,9 +58,9 @@ const Demo = () => {
                         isCounterclockwise={isCounterclockwise}
                         setIsCounterclockwise={setIsCounterclockwise}
                     />
+                    <br/>
+                    <br/> */}
 
-                    <br/>
-                    <br/>
                     [ {showPath ? "Showing Path" : "Moving Cubes"} ]
                     <button onClick={() => {
                         setShowPath(!showPath)
@@ -68,7 +68,7 @@ const Demo = () => {
                         Click to toggle
                     </button>
                     <br/>
-                    <br/> */}
+                    <br/>
 
                     <Instructions
                         setInstructions={setInstructions}
