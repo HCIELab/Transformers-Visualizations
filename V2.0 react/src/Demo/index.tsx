@@ -7,6 +7,7 @@ import Instructions from "./Instructions";
 import { axisType, initialCubeConfigType, instructionType } from './Util/Types/types';
 import World from "./World";
 import { Vector3 } from 'three';
+import { FormControlLabel, Switch } from '@material-ui/core';
 
 const DemoContainer = styled.div`
     width: 100%;
@@ -74,8 +75,17 @@ const Demo = () => {
 
 
                     <div>                        
-                        <button onClick={() => setShowPath(!showPath)}> Click to toggle </button>
-                        [ {showPath ? "Showing Path" : "Moving Cubes"} ]
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={showPath}
+                                    onChange={() => setShowPath(!showPath)}
+                                    name="showPathToggle"
+                                    color="primary"
+                                />
+                            }
+                            label={showPath ? "Showing Path of Rotation without Movement" : "Simulating and Animating Cube Movement"}
+                        />
                         <br/><br/>
 
                         <p> 💡 Please do not move the camera while a rotation is in motion</p>
