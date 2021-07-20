@@ -26,6 +26,9 @@ const DemoContainer = styled.div`
             height: 20%;
             background-color: #fdfdfd;
             overflow: auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
         }
     
         .BottomSection {
@@ -60,24 +63,25 @@ const Demo = () => {
                     />
                     <br/>
                     <br/> */}
+                    
+                    <div>
+                        <Instructions
+                            setInstructions={setInstructions}
+                            setInitialCubeConfigs={setInitialCubeConfigs}
+                            setIncrementAmount={setIncrementAmount}
+                        />
+                    </div>
 
-                    [ {showPath ? "Showing Path" : "Moving Cubes"} ]
-                    <button onClick={() => {
-                        setShowPath(!showPath)
-                    }}>
-                        Click to toggle
-                    </button>
-                    <br/>
-                    <br/>
 
-                    <Instructions
-                        setInstructions={setInstructions}
-                        setInitialCubeConfigs={setInitialCubeConfigs}
-                        setIncrementAmount={setIncrementAmount}
-                    />
+                    <div>                        
+                        <button onClick={() => setShowPath(!showPath)}> Click to toggle </button>
+                        [ {showPath ? "Showing Path" : "Moving Cubes"} ]
+                        <br/><br/>
 
-                    {/* <p>NOTE: please do not move the camera while a rotation is in motion</p> */}
-
+                        <p> 💡 Please do not move the camera while a rotation is in motion</p>
+                        <p> 💡 Please do not change to a different browser tab while a rotation is in motion</p>
+                        <p> 💡 Refresh the page if an instruction script encounters an error</p>
+                    </div>
                 </div>
 
 

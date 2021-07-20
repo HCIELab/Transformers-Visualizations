@@ -23,15 +23,15 @@ const Container = styled.div`
         padding: 4px;
 
         .Label {
-            font-size: 18px;
+            font-size: 16px;
             font-family: Roboto;
-            margin: 0 15px;
+            margin: 0 12px;
         }
         button {
             margin: 0 5px;
             cursor: pointer;
             padding: 15px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
             text-transform: none;
         }
