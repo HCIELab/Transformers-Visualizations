@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
-import Panel from "./Panel";
+// import Panel from "./Panel";
 import Instructions from "./Instructions";
 import { axisType, initialCubeConfigType, instructionType } from './Util/Types/types';
 import World from "./World";
 import { Vector3 } from 'three';
+import { FormControlLabel, Switch } from '@material-ui/core';
 
 const DemoContainer = styled.div`
     width: 100%;
@@ -23,14 +24,17 @@ const DemoContainer = styled.div`
 
         .TopSection {
             margin: 0;
-            height: 35%;
+            height: 20%;
             background-color: #fdfdfd;
             overflow: auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
         }
     
         .BottomSection {
             margin: 0;
-            height: calc(100% - 35%);
+            height: calc(100% - 20%);
             width: 100%;
             background-color: #f0f0f0;
         }
@@ -52,32 +56,42 @@ const Demo = () => {
         <DemoContainer>
             <div className="Inner">
                 <div className="TopSection">
-                    <Panel
+                    {/* <Panel
                         axisOfRotationWorld={axisOfRotationWorld}
                         setAxisOfRotationWorld={setAxisOfRotationWorld}
                         isCounterclockwise={isCounterclockwise}
                         setIsCounterclockwise={setIsCounterclockwise}
                     />
-
                     <br/>
-                    <br/>
-                    [ {showPath ? "Showing Path" : "Moving Cubes"} ]
-                    <button onClick={() => {
-                        setShowPath(!showPath)
-                    }}>
-                        Click to toggle
-                    </button>
-                    <br/>
-                    <br/>
+                    <br/> */}
+                    
+                    <div>
+                        <Instructions
+                            setInstructions={setInstructions}
+                            setInitialCubeConfigs={setInitialCubeConfigs}
+                            setIncrementAmount={setIncrementAmount}
+                        />
+                    </div>
 
-                    <Instructions
-                        setInstructions={setInstructions}
-                        setInitialCubeConfigs={setInitialCubeConfigs}
-                        setIncrementAmount={setIncrementAmount}
-                    />
 
-                    <p>NOTE: please do not move the camera while a rotation is in motion</p>
+                    <div>                        
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={showPath}
+                                    onChange={() => setShowPath(!showPath)}
+                                    name="showPathToggle"
+                                    color="primary"
+                                />
+                            }
+                            label={showPath ? "Showing Path of Rotation without Movement" : "Simulating and Animating Cube Movement"}
+                        />
+                        <br/><br/>
 
+                        <p> 💡 Please do not move the camera while a rotation is in motion</p>
+                        <p> 💡 Please do not change to a different browser tab while a rotation is in motion</p>
+                        <p> 💡 Refresh the page if an instruction script encounters an error</p>
+                    </div>
                 </div>
 
 

@@ -1,11 +1,12 @@
 import { Vector3 } from "three"
+import Button from '@material-ui/core/Button';
 
 export const Button8 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
     setIncrementAmount: Function,
 }) => (
-    <button onClick={() => {
+    <Button variant="outlined" color="default" onClick={() => {
         let foo = [];
         for (let a = 0; a < 5; a++) {
             for (let b = 0; b < 5; b++) {
@@ -22,5 +23,5 @@ export const Button8 = (props: {
         props.setInstructions([])
     }}>
         5x5x5 cubes
-    </button>
+    </Button>
 )
