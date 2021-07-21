@@ -237,7 +237,7 @@ const Cube = (props: {
 					pointOfRotation={pointOfRotation}
 					axisOfRotationWorld={props.axisOfRotationWorld}
 				/>
-				<axesHelper scale={0.3}/>
+				{/* <axesHelper scale={0.3}/> */}
 			</group>
 		</group>
 	)
