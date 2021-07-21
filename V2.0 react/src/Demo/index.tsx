@@ -98,12 +98,12 @@ const Demo = () => {
 
                 <div className="BottomSection">
                     <World
-                        initialCubeConfigs={initialCubeConfigs}
-                        instructions={instructions}
-                        isCounterclockwise={isCounterclockwise}
-                        setIsCounterclockwise={setIsCounterclockwise}
                         axisOfRotationWorld={axisOfRotationWorld}
                         setAxisOfRotationWorld={setAxisOfRotationWorld}
+                        isCounterclockwise={isCounterclockwise}
+                        setIsCounterclockwise={setIsCounterclockwise}
+                        initialCubeConfigs={initialCubeConfigs}
+                        instructions={instructions}
                         showPath={showPath}
                         incrementAmount={incrementAmount}
                     />
