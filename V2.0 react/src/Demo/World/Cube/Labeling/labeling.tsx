@@ -47,17 +47,10 @@ const Labeling = (props: {
 		yEdges.NorthWest.current.rotation.x = -Math.PI / 2;
 	})
 
-	const fakeNano = {
-		"L1": useRef<THREE.Mesh>(null!),
-		"L2": useRef<THREE.Mesh>(null!),
-		"L3": useRef<THREE.Mesh>(null!),
-		"L4": useRef<THREE.Mesh>(null!),
-	};
+	const IDLabel = useRef<THREE.Mesh>(null!)
+
 	useEffect(() => {
-		fakeNano.L1.current.rotation.z = Math.PI;
-		fakeNano.L2.current.rotation.z = Math.PI;
-		fakeNano.L3.current.rotation.z = Math.PI;
-		fakeNano.L4.current.rotation.z = Math.PI;
+		IDLabel.current.rotation.z = Math.PI;
 	})
 
 	const fooRef = useRef<THREE.Mesh>(null!);
@@ -70,22 +63,10 @@ const Labeling = (props: {
 	const half = props.side/2;
 	return (
 		<>	
-			{/* Fake Nano */}
+			{/* ID */}
 			<group>
-				<mesh position={[letterOffset*2.5, letterOffset*3, half]}  ref={fakeNano.L1}>
-					<textGeometry args={[`|     ${props.cubeID}     |`, textOptions]} />
-					<meshPhongMaterial color={"#000000"}/>
-				</mesh>
-				<mesh position={[letterOffset*2.5, letterOffset, half]} ref={fakeNano.L2}>
-					<textGeometry args={[`|    ID:    |`, textOptions]} />
-					<meshPhongMaterial color={"#000000"}/>
-				</mesh>
-				<mesh position={[letterOffset*2.5, -letterOffset, half]} ref={fakeNano.L3}>
-					<textGeometry args={["| NANO |", textOptions]} /> 
-					<meshPhongMaterial color={"#000000"}/>
-				</mesh>
-				<mesh position={[letterOffset*2.5, -letterOffset*3, half]} ref={fakeNano.L4}>
-					<textGeometry args={["|             |", textOptions]} />
+				<mesh position={[letterOffset, letterOffset*2, half]}  ref={IDLabel}>
+					<textGeometry args={[`${props.cubeID}`, {font, size: 0.3, height: 0.05}]} />
 					<meshPhongMaterial color={"#000000"}/>
 				</mesh>
 			</group>
