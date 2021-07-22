@@ -58,7 +58,8 @@ const Demo = () => {
 
     const [showPath, setShowPath] = useState(false);
     const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
-    const [displayCubeBox, setDisplayCubeBox] = useState(false);
+    const [displayCubeBox, setDisplayCubeBox] = useState(true);
+    const [displayCoilsAndCorners, setDisplayCoilsAndCorners] = useState(true);
 
     return (
         <DemoContainer>
@@ -86,13 +87,22 @@ const Demo = () => {
                         <FormControlLabel
                             control={
                                 <Switch
-                                    checked={showPath}
-                                    onChange={() => setShowPath(!showPath)}
-                                    name="showPathToggle"
+                                    checked={displayCubeBox}
+                                    onChange={() => setDisplayCubeBox(!displayCubeBox)}
                                     color="primary"
                                 />
                             }
-                            label={showPath ? "Showing Path of Rotation without Movement" : "Simulating and Animating Cube Movement"}
+                            label={displayCubeBox ? "Displaying Cube Box" : "Not Displaying Cube Box"}
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={displayCoilsAndCorners}
+                                    onChange={() => setDisplayCoilsAndCorners(!displayCoilsAndCorners)}
+                                    color="primary"
+                                />
+                            }
+                            label={displayCoilsAndCorners ? "Displaying Coils and Corners" : "Not Displaying Coils and Corners"}
                         />
                         <FormControlLabel
                             control={
@@ -107,12 +117,13 @@ const Demo = () => {
                         <FormControlLabel
                             control={
                                 <Switch
-                                    checked={displayCubeBox}
-                                    onChange={() => setDisplayCubeBox(!displayCubeBox)}
+                                    checked={showPath}
+                                    onChange={() => setShowPath(!showPath)}
+                                    name="showPathToggle"
                                     color="primary"
                                 />
                             }
-                            label={displayCubeBox ? "Displaying Cube Box" : "Not Displaying Cube Box"}
+                            label={showPath ? "Showing Path of Rotation without Movement" : "Simulating and Animating Cube Movement"}
                         />
                         <br/><br/>
 
@@ -136,6 +147,7 @@ const Demo = () => {
                         showPath={showPath}
                         displayEmagIDs={displayEmagIDs}
                         displayCubeBox={displayCubeBox}
+                        displayCoilsAndCorners={displayCoilsAndCorners}
                     />
                 </div>
             </div>

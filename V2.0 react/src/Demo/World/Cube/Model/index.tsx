@@ -8,6 +8,7 @@ const Model = (props: {
     side: number,
     color: Color,
     displayCubeBox: boolean,
+    displayCoilsAndCorners: boolean,
 }) => {
     const [hovered, setHover] = useState(false);
 
@@ -16,23 +17,26 @@ const Model = (props: {
             onPointerOver={() => setHover(true)} 
             onPointerOut={() => {setHover(false)}} 
         >
-            {/* Hollow with Coils */}
-            <STLHelper
-                side={props.side}
-                color={props.color}
-                filepath={"stl-assets/assem-Simul-coils.STL"}
-                normalOpacity={0.7}
-                hoverOpacity={0.3}
-            />
-            {/* Corners */}
-            <STLHelper
-                side={props.side}
-                color={"#000000"} // Color of the corners. Change this to a prop if you want greater customization over this color
-                filepath={"stl-assets/assem-Simul-corners.STL"}
-                normalOpacity={0.7}
-                hoverOpacity={0.3}
-            />
-            {/* Alternative: Basic Solid Cube */}
+            <group visible={props.displayCoilsAndCorners}>
+                {/* Hollow with Coils */}
+                <STLHelper
+                    side={props.side}
+                    color={props.color}
+                    filepath={"stl-assets/assem-Simul-coils.STL"}
+                    normalOpacity={0.7}
+                    hoverOpacity={0.3}
+                />
+                {/* Corners */}
+                <STLHelper
+                    side={props.side}
+                    color={"#000000"} // Color of the corners. Change this to a prop if you want greater customization over this color
+                    filepath={"stl-assets/assem-Simul-corners.STL"}
+                    normalOpacity={0.7}
+                    hoverOpacity={0.3}
+                />
+            </group>
+
+            {/* Basic Solid Cube */}
             <group visible={props.displayCubeBox}>
                 <mesh>
                     <boxGeometry args={[props.side, props.side, props.side]} />
