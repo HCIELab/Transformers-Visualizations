@@ -24,17 +24,23 @@ const DemoContainer = styled.div`
 
         .TopSection {
             margin: 0;
-            height: 20%;
+            height: 200px;
             background-color: #fdfdfd;
             overflow: auto;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+
+            .InstructionsContainer {
+                width: 2000px;
+            }
+            .ToggleContainer {
+            }
         }
     
         .BottomSection {
             margin: 0;
-            height: calc(100% - 20%);
+            height: calc(100% - 200px);
             width: 100%;
             background-color: #f0f0f0;
         }
@@ -51,6 +57,8 @@ const Demo = () => {
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
 
     const [showPath, setShowPath] = useState(false);
+    const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
+    const [displayCubeBox, setDisplayCubeBox] = useState(false);
 
     return (
         <DemoContainer>
@@ -65,7 +73,7 @@ const Demo = () => {
                     <br/>
                     <br/> */}
                     
-                    <div>
+                    <div className="InstructionsContainer">
                         <Instructions
                             setInstructions={setInstructions}
                             setInitialCubeConfigs={setInitialCubeConfigs}
@@ -74,7 +82,7 @@ const Demo = () => {
                     </div>
 
 
-                    <div>                        
+                    <div className="TogglesContainer">
                         <FormControlLabel
                             control={
                                 <Switch
@@ -85,6 +93,26 @@ const Demo = () => {
                                 />
                             }
                             label={showPath ? "Showing Path of Rotation without Movement" : "Simulating and Animating Cube Movement"}
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={displayEmagIDs}
+                                    onChange={() => setDisplayEmagIDs(!displayEmagIDs)}
+                                    color="primary"
+                                />
+                            }
+                            label={displayEmagIDs ? "Displaying Emag IDs" : "Not Displaying Emag IDs"}
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={displayCubeBox}
+                                    onChange={() => setDisplayCubeBox(!displayCubeBox)}
+                                    color="primary"
+                                />
+                            }
+                            label={displayCubeBox ? "Displaying Cube Box" : "Not Displaying Cube Box"}
                         />
                         <br/><br/>
 
