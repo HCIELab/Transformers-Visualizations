@@ -108,6 +108,16 @@ const Demo = () => {
                         <FormControlLabel
                             control={
                                 <Switch
+                                    checked={displayBlueCubeBox}
+                                    onChange={() => setDisplayBlueCubeBox(!displayBlueCubeBox)}
+                                    color="primary"
+                                />
+                            }
+                            label={displayBlueCubeBox ? "Displaying Blue Cube Box" : "Not Displaying Blue Cube Box"}
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
                                     checked={displayEmagIDs}
                                     onChange={() => setDisplayEmagIDs(!displayEmagIDs)}
                                     color="primary"
@@ -115,6 +125,7 @@ const Demo = () => {
                             }
                             label={displayEmagIDs ? "Displaying Emag IDs" : "Not Displaying Emag IDs"}
                         />
+                        {/*  */}
                         <FormControlLabel
                             control={
                                 <Switch
@@ -125,16 +136,6 @@ const Demo = () => {
                                 />
                             }
                             label={showPath ? "Showing Path of Rotation without Movement" : "Simulating and Animating Cube Movement"}
-                        />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={displayBlueCubeBox}
-                                    onChange={() => setDisplayBlueCubeBox(!displayBlueCubeBox)}
-                                    color="primary"
-                                />
-                            }
-                            label={displayBlueCubeBox ? "Displaying Blue Cube Box" : "Not Displaying Blue Cube Box"}
                         />
                         <br/><br/>
 
