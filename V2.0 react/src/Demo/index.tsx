@@ -26,15 +26,19 @@ const DemoContainer = styled.div`
             margin: 0;
             height: 200px;
             background-color: #fdfdfd;
-            overflow: auto;
+            /* overflow: auto; */
             display: flex;
             flex-direction: row;
             justify-content: space-between;
 
             .InstructionsContainer {
-                width: 2000px;
+                width: 3100px;
+                height: 100%;
+                overflow: auto;
             }
-            .ToggleContainer {
+            .TogglesContainer {
+                height: 100%;
+                overflow: auto;
             }
         }
     
