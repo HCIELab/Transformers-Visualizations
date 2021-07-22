@@ -28,6 +28,7 @@ const Cube = (props: {
 	displayEmagIDs: boolean,
     displayCubeBox: boolean,
     displayCoilsAndCorners: boolean,
+    displayBlueCubeBox: boolean,
 }) => {
 	const everything = useRef<THREE.Group>(null!);
 	const forPivot = useRef<THREE.Group>(null!);
@@ -230,6 +231,7 @@ const Cube = (props: {
 					color={props.color}
 					displayCubeBox={props.displayCubeBox}
 					displayCoilsAndCorners={props.displayCoilsAndCorners}
+					displayBlueCubeBox={props.displayBlueCubeBox}
 				/>
 				<Labeling
 					cubeID={props.id}

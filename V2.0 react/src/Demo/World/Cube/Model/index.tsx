@@ -9,6 +9,7 @@ const Model = (props: {
     color: Color,
     displayCubeBox: boolean,
     displayCoilsAndCorners: boolean,
+    displayBlueCubeBox: boolean,
 }) => {
     const [hovered, setHover] = useState(false);
 
@@ -36,11 +37,18 @@ const Model = (props: {
                 />
             </group>
 
-            {/* Basic Solid Cube */}
+            {/* Basic Solid White Cube */}
             <group visible={props.displayCubeBox}>
                 <mesh>
                     <boxGeometry args={[props.side, props.side, props.side]} />
                     <meshStandardMaterial color={"#ffffff"} transparent={true} opacity={hovered ? 0.3 : 0.9} />
+                </mesh>
+            </group>
+            {/* Basic Solid Blue Cube */}
+            <group visible={props.displayBlueCubeBox}>
+                <mesh>
+                    <boxGeometry args={[props.side, props.side, props.side]} />
+                    <meshStandardMaterial color={"#427eff"} transparent={true} opacity={hovered ? 0.2 : 0.5} />
                 </mesh>
             </group>
         </group>

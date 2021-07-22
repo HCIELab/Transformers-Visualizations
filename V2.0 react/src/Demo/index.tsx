@@ -57,9 +57,10 @@ const Demo = () => {
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
 
     const [showPath, setShowPath] = useState(false);
-    const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
     const [displayCubeBox, setDisplayCubeBox] = useState(true);
     const [displayCoilsAndCorners, setDisplayCoilsAndCorners] = useState(true);
+    const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
+    const [displayBlueCubeBox, setDisplayBlueCubeBox] = useState(false);
 
     return (
         <DemoContainer>
@@ -92,7 +93,7 @@ const Demo = () => {
                                     color="primary"
                                 />
                             }
-                            label={displayCubeBox ? "Displaying Cube Box" : "Not Displaying Cube Box"}
+                            label={displayCubeBox ? "Displaying White Cube Box" : "Not Displaying White Cube Box"}
                         />
                         <FormControlLabel
                             control={
@@ -125,6 +126,16 @@ const Demo = () => {
                             }
                             label={showPath ? "Showing Path of Rotation without Movement" : "Simulating and Animating Cube Movement"}
                         />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={displayBlueCubeBox}
+                                    onChange={() => setDisplayBlueCubeBox(!displayBlueCubeBox)}
+                                    color="primary"
+                                />
+                            }
+                            label={displayBlueCubeBox ? "Displaying Blue Cube Box" : "Not Displaying Blue Cube Box"}
+                        />
                         <br/><br/>
 
                         <p> 💡 Please do not move the camera while a rotation is in motion</p>
@@ -148,6 +159,7 @@ const Demo = () => {
                         displayEmagIDs={displayEmagIDs}
                         displayCubeBox={displayCubeBox}
                         displayCoilsAndCorners={displayCoilsAndCorners}
+                        displayBlueCubeBox={displayBlueCubeBox}
                     />
                 </div>
             </div>
