@@ -7,6 +7,7 @@ import STLHelper from "./STLhelper";
 const Model = (props: {
     side: number,
     color: Color,
+    displayCubeBox: boolean,
 }) => {
     const [hovered, setHover] = useState(false);
 
@@ -32,10 +33,12 @@ const Model = (props: {
                 hoverOpacity={0.3}
             />
             {/* Alternative: Basic Solid Cube */}
-            <mesh>
-                <boxGeometry args={[props.side, props.side, props.side]} />
-                <meshStandardMaterial color={"#ffffff"} transparent={true} opacity={hovered ? 0.3 : 0.9} />
-            </mesh>
+            <group visible={props.displayCubeBox}>
+                <mesh>
+                    <boxGeometry args={[props.side, props.side, props.side]} />
+                    <meshStandardMaterial color={"#ffffff"} transparent={true} opacity={hovered ? 0.3 : 0.9} />
+                </mesh>
+            </group>
         </group>
     )
 }

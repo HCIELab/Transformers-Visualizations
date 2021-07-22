@@ -17,8 +17,10 @@ const World = (props: {
     setIsCounterclockwise: Function,
     initialCubeConfigs: initialCubeConfigType[],
     instructions: instructionType[],
-    showPath: boolean,
     incrementAmount: number,
+    showPath: boolean,
+    displayEmagIDs: boolean,
+    displayCubeBox: boolean,
 }) => {
     console.log("(World.tsx) Rendering the World component");
     
@@ -97,8 +99,10 @@ const World = (props: {
                             setAxisOfRotationWorld={props.setAxisOfRotationWorld}
                             updatePosition={setPosition(config.id)}
                             explorePathOfRotation={explorePathOfRotation}
-                            showPath={props.showPath}
                             incrementAmount={props.incrementAmount}
+                            showPath={props.showPath}
+                            displayEmagIDs={props.displayEmagIDs}
+                            displayCubeBox={props.displayCubeBox}    
                         />
                     </Suspense>        
                 )

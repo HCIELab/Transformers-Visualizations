@@ -132,8 +132,10 @@ const Demo = () => {
                         setIsCounterclockwise={setIsCounterclockwise}
                         initialCubeConfigs={initialCubeConfigs}
                         instructions={instructions}
-                        showPath={showPath}
                         incrementAmount={incrementAmount}
+                        showPath={showPath}
+                        displayEmagIDs={displayEmagIDs}
+                        displayCubeBox={displayCubeBox}
                     />
                 </div>
             </div>
