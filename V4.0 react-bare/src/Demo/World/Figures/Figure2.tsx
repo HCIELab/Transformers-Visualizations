@@ -1,7 +1,7 @@
 import { Color, useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { Vector3 } from "three";
-import { rotationStep } from "../../Util/Types/types";
+import { animationState, rotationStep } from "../../Util/Types/types";
 import Box from "./Box";
 import { sideLength } from "./helpers/constants";
 import {translateGroup} from "./helpers/translateGroup";
@@ -42,15 +42,27 @@ export const Figure2 = (props: {
     }, [step])
 
     // Execute the rotation animation
+    const [animState, setAnimState] = useState<animationState>("0_FORWARD")
     const INCREMENT = 0.05;
     useFrame(() => {
         if (step === "2_ROTATING") {
-            if (outerRef.current.rotation.z < Math.PI/2) {
-                outerRef.current.rotateOnAxis(new Vector3(0, 0, 1), INCREMENT);
+            if (animState === "0_FORWARD") {
+                if (outerRef.current.rotation.z < Math.PI/2) {
+                    outerRef.current.rotateOnAxis(new Vector3(0, 0, 1), 1*INCREMENT);
+                }
+                else {
+                    outerRef.current.rotation.set(0, 0, Math.PI/2);
+                    setAnimState("1_BACKWARD");
+                }
             }
             else {
-                outerRef.current.rotation.set(0, 0, Math.PI/2);
-                setStep("3_END")
+                if (outerRef.current.rotation.z > 0) {
+                    outerRef.current.rotateOnAxis(new Vector3(0, 0, 1), -1*INCREMENT);
+                }
+                else {
+                    outerRef.current.rotation.set(0, 0, 0);
+                    setStep("3_END")
+                }
             }
         }
     })
