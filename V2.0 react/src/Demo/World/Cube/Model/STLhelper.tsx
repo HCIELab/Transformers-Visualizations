@@ -10,6 +10,8 @@ const STLHelper = (props: {
     side: number,
     color: Color,
     filepath: string,
+    normalOpacity: number,
+    hoverOpacity: number,
 }) => {
     // Load STL File
     const [obj, setObj] = useState<any>(null);
@@ -41,7 +43,7 @@ const STLHelper = (props: {
                 }
                 <meshStandardMaterial 
                     color={props.color} 
-                    opacity={hovered ? 0.3 : 0.7} 
+                    opacity={hovered ? props.hoverOpacity : props.normalOpacity} 
                     transparent={true} 
                     side={DoubleSide}
                 />

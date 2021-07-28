@@ -23,8 +23,12 @@ const Cube = (props: {
 	setAxisOfRotationWorld: Function,
 	updatePosition: Function,
 	explorePathOfRotation: Function,
-	showPath: boolean,
 	incrementAmount: number,
+	showPath: boolean,
+	displayEmagIDs: boolean,
+    displayCubeBox: boolean,
+    displayCoilsAndCorners: boolean,
+    displayBlueCubeBox: boolean,
 }) => {
 	const everything = useRef<THREE.Group>(null!);
 	const forPivot = useRef<THREE.Group>(null!);
@@ -225,19 +229,23 @@ const Cube = (props: {
 				<Model
 					side={side}
 					color={props.color}
+					displayCubeBox={props.displayCubeBox}
+					displayCoilsAndCorners={props.displayCoilsAndCorners}
+					displayBlueCubeBox={props.displayBlueCubeBox}
 				/>
 				<Labeling
 					cubeID={props.id}
 					letterOffset={0.1}
 					side={side}
 					axis={props.axisOfRotationWorld}
+					displayEmagIDs={props.displayEmagIDs}
 				/>
 				<Emags
 					showEmags={showEmags}
 					pointOfRotation={pointOfRotation}
 					axisOfRotationWorld={props.axisOfRotationWorld}
 				/>
-				<axesHelper scale={0.3}/>
+				{/* <axesHelper scale={0.3}/> */}
 			</group>
 		</group>
 	)

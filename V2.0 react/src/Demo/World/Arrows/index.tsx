@@ -36,6 +36,8 @@ const Arrows = (props: {
                     side={1}
                     color={"#2483ff"}
                     filepath={"stl-assets/curved-arrow.stl"}
+                    normalOpacity={0.7}
+                    hoverOpacity={0.3}
                 />
             </group>
             <group onClick={() => arrowClick('z',false)} scale={getScale('z',false)} position={new Vector3(0, -0.222, 0.5)} rotation={new Euler(0, 0, Math.PI)}>
@@ -43,6 +45,8 @@ const Arrows = (props: {
                     side={1}
                     color={"#2483ff"}
                     filepath={"stl-assets/curved-arrow.stl"}
+                    normalOpacity={0.7}
+                    hoverOpacity={0.3}
                 />
             </group>
 
@@ -52,6 +56,8 @@ const Arrows = (props: {
                     side={1}
                     color={"#24ff2f"}
                     filepath={"stl-assets/curved-arrow.stl"}
+                    normalOpacity={0.7}
+                    hoverOpacity={0.3}
                 />
             </group>
             <group onClick={() => arrowClick('y',false)} scale={getScale('y',false)} position={new Vector3(0, 0.5, 0.222)} rotation={new Euler(Math.PI/2, Math.PI, 0)}>
@@ -59,6 +65,8 @@ const Arrows = (props: {
                     side={1}
                     color={"#24ff2f"}
                     filepath={"stl-assets/curved-arrow.stl"}
+                    normalOpacity={0.7}
+                    hoverOpacity={0.3}
                 />
             </group>
 
@@ -68,6 +76,8 @@ const Arrows = (props: {
                     side={1}
                     color={"#ff640a"}
                     filepath={"stl-assets/curved-arrow.stl"}
+                    normalOpacity={0.7}
+                    hoverOpacity={0.3}
                 />
             </group>
             <group onClick={() => arrowClick('x',false)} scale={getScale('x',false)} position={new Vector3(0.5, -0.222, 0)} rotation={new Euler(0, Math.PI/2, Math.PI)}>
@@ -75,6 +85,8 @@ const Arrows = (props: {
                     side={1}
                     color={"#ff640a"}
                     filepath={"stl-assets/curved-arrow.stl"}
+                    normalOpacity={0.7}
+                    hoverOpacity={0.3}
                 />
             </group>
 

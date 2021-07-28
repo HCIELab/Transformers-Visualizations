@@ -27,6 +27,12 @@ const Box = (props: {
                     filepath={"stl-assets/assem-Simul-corners.STL"}
                 />
             </group>
+            <group>
+                <mesh>
+                    <boxGeometry args={[1, 1, 1]} />
+                    <meshStandardMaterial color={"#ffffff"} transparent={true} opacity={0.9} />
+                </mesh>
+            </group>
         </Suspense>
 	)
 }

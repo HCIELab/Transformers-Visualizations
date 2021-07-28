@@ -24,17 +24,27 @@ const DemoContainer = styled.div`
 
         .TopSection {
             margin: 0;
-            height: 20%;
+            height: 200px;
             background-color: #fdfdfd;
-            overflow: auto;
+            /* overflow: auto; */
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+
+            .InstructionsContainer {
+                width: 3100px;
+                height: 100%;
+                overflow: auto;
+            }
+            .TogglesContainer {
+                height: 100%;
+                overflow: auto;
+            }
         }
     
         .BottomSection {
             margin: 0;
-            height: calc(100% - 20%);
+            height: calc(100% - 200px);
             width: 100%;
             background-color: #f0f0f0;
         }
@@ -51,6 +61,10 @@ const Demo = () => {
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
 
     const [showPath, setShowPath] = useState(false);
+    const [displayCubeBox, setDisplayCubeBox] = useState(true);
+    const [displayCoilsAndCorners, setDisplayCoilsAndCorners] = useState(true);
+    const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
+    const [displayBlueCubeBox, setDisplayBlueCubeBox] = useState(false);
 
     return (
         <DemoContainer>
@@ -65,7 +79,7 @@ const Demo = () => {
                     <br/>
                     <br/> */}
                     
-                    <div>
+                    <div className="InstructionsContainer">
                         <Instructions
                             setInstructions={setInstructions}
                             setInitialCubeConfigs={setInitialCubeConfigs}
@@ -74,7 +88,48 @@ const Demo = () => {
                     </div>
 
 
-                    <div>                        
+                    <div className="TogglesContainer">
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={displayCubeBox}
+                                    onChange={() => setDisplayCubeBox(!displayCubeBox)}
+                                    color="primary"
+                                />
+                            }
+                            label={displayCubeBox ? "Displaying White Cube Box" : "Not Displaying White Cube Box"}
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={displayCoilsAndCorners}
+                                    onChange={() => setDisplayCoilsAndCorners(!displayCoilsAndCorners)}
+                                    color="primary"
+                                />
+                            }
+                            label={displayCoilsAndCorners ? "Displaying Coils and Corners" : "Not Displaying Coils and Corners"}
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={displayBlueCubeBox}
+                                    onChange={() => setDisplayBlueCubeBox(!displayBlueCubeBox)}
+                                    color="primary"
+                                />
+                            }
+                            label={displayBlueCubeBox ? "Displaying Blue Cube Box" : "Not Displaying Blue Cube Box"}
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={displayEmagIDs}
+                                    onChange={() => setDisplayEmagIDs(!displayEmagIDs)}
+                                    color="primary"
+                                />
+                            }
+                            label={displayEmagIDs ? "Displaying Emag IDs" : "Not Displaying Emag IDs"}
+                        />
+                        {/*  */}
                         <FormControlLabel
                             control={
                                 <Switch
@@ -104,8 +159,12 @@ const Demo = () => {
                         setIsCounterclockwise={setIsCounterclockwise}
                         initialCubeConfigs={initialCubeConfigs}
                         instructions={instructions}
-                        showPath={showPath}
                         incrementAmount={incrementAmount}
+                        showPath={showPath}
+                        displayEmagIDs={displayEmagIDs}
+                        displayCubeBox={displayCubeBox}
+                        displayCoilsAndCorners={displayCoilsAndCorners}
+                        displayBlueCubeBox={displayBlueCubeBox}
                     />
                 </div>
             </div>
