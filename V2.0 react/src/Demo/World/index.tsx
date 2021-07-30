@@ -8,7 +8,7 @@ import { axisType, collisionType, cornerType, initialCubeConfigType, instruction
 import Cube from './Cube';
 import Arrows from './Arrows';
 import PathBlock from './PathBlock';
-import {generateExplorePathOfRotation} from "./helpersworld/generateExplorePathOfRotation";
+// import {generateExplorePathOfRotation} from "./Cube/helpers/generateExplorePathOfRotation";
 
 const World = (props: {
     axisOfRotationWorld: axisType,
@@ -66,9 +66,9 @@ const World = (props: {
         }
     }, [showPath])
 
-    const explorePathOfRotation = (cubeID: number) : {collisionResult: collisionType, cornerOfRotation: cornerType} => {
-        return generateExplorePathOfRotation(allPositions, visualizePath, props.isCounterclockwise, props.axisOfRotationWorld)(cubeID);
-    }
+    // const explorePathOfRotation = (cubeID: number) : {collisionResult: collisionType, cornerOfRotation: cornerType} => {
+    //     return generateExplorePathOfRotation(allPositions, visualizePath, props.isCounterclockwise, props.axisOfRotationWorld)(cubeID);
+    // }
 
     return (
         <Canvas resize={{ polyfill: ResizeObserver }} >
@@ -100,7 +100,10 @@ const World = (props: {
                             axisOfRotationWorld={props.axisOfRotationWorld}
                             setAxisOfRotationWorld={props.setAxisOfRotationWorld}
                             updatePosition={setPosition(config.id)}
-                            explorePathOfRotation={explorePathOfRotation}
+                            // explorePathOfRotation={explorePathOfRotation}
+                            allPositions={allPositions}
+                            visualizePath={visualizePath}
+
                             incrementAmount={props.incrementAmount}
                             showPath={props.showPath}
                             displayEmagIDs={props.displayEmagIDs}

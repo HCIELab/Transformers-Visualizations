@@ -10,6 +10,7 @@ import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisOfRotationLocal } from "./helpers/getAxisOfRotationLocal";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
 import { translateGroup } from "./helpers/translateGroup";
+import { generateExplorePathOfRotation } from "./helpers/generateExplorePathOfRotation";
 
 
 const Cube = (props: {
@@ -22,7 +23,10 @@ const Cube = (props: {
 	axisOfRotationWorld: axisType,
 	setAxisOfRotationWorld: Function,
 	updatePosition: Function,
-	explorePathOfRotation: Function,
+	// explorePathOfRotation: Function,
+	allPositions: {[cubeID: number]: Vector3},
+	visualizePath: Function,
+
 	incrementAmount: number,
 	showPath: boolean,
 	displayEmagIDs: boolean,
@@ -103,10 +107,10 @@ const Cube = (props: {
 	// 1.1 Local - Subtract the pivot point from the object's original position
 	const [maxIteration, setMaxIteration] = useState(0);
 	const [iteration, setIteration] = useState(1);
-	const {id, explorePathOfRotation, showPath} = props;
+	const {id, showPath, allPositions, visualizePath, isCounterclockwise} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			const {collisionResult, cornerName, displacementMagnitude} = explorePathOfRotation(id);
+			const {collisionResult, cornerName, displacementMagnitude} = generateExplorePathOfRotation(allPositions, visualizePath, isCounterclockwise, props.axisOfRotationWorld)(id);
 			console.log("(Cube.tsx) collisionResult: ", collisionResult);
 			if (showPath) {
 				setStep("0_DEFAULT");
@@ -140,7 +144,7 @@ const Cube = (props: {
 				}
 			}
 		}
-	}, [step, props.axisOfRotationWorld, explorePathOfRotation, id, showPath, initialRotationAmount, props.incrementAmount])
+	}, [step, props.axisOfRotationWorld, id, showPath, initialRotationAmount, props.incrementAmount, allPositions, visualizePath, isCounterclockwise])
 
 	// 2. Apply the rotation
 	useFrame(() => {
