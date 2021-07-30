@@ -10,7 +10,7 @@ import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisOfRotationLocal } from "./helpers/getAxisOfRotationLocal";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
 import { translateGroup } from "./helpers/translateGroup";
-import { generateExplorePathOfRotation } from "./helpers/generateExplorePathOfRotation";
+import { generateExplorePathOfRotation } from "./helpers/collision/generateExplorePathOfRotation";
 
 
 const Cube = (props: {
@@ -23,7 +23,6 @@ const Cube = (props: {
 	axisOfRotationWorld: axisType,
 	setAxisOfRotationWorld: Function,
 	updatePosition: Function,
-	// explorePathOfRotation: Function,
 	allPositions: {[cubeID: number]: Vector3},
 	visualizePath: Function,
 
@@ -110,7 +109,12 @@ const Cube = (props: {
 	const {id, showPath, allPositions, visualizePath, isCounterclockwise} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			const {collisionResult, cornerName, displacementMagnitude} = generateExplorePathOfRotation(allPositions, visualizePath, isCounterclockwise, props.axisOfRotationWorld)(id);
+			// Analyze the collision path and find if it is a 90 or 180 degree rotation
+			const {collisionResult, cornerName, displacementMagnitude} = generateExplorePathOfRotation(
+				allPositions, 
+				visualizePath, 
+				isCounterclockwise, props.axisOfRotationWorld)
+				(id);
 			console.log("(Cube.tsx) collisionResult: ", collisionResult);
 			if (showPath) {
 				setStep("0_DEFAULT");
