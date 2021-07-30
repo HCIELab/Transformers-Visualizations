@@ -5,7 +5,7 @@ import { Euler, Vector3, Quaternion } from 'three';
 import Labeling from "./Labeling/labeling";
 import Emags from "./Emags/index";
 import Model from "./Model/index";
-import { axisType, instructionType, rotationStep } from '../../Util/Types/types';
+import { axisType, cornerType, instructionType, rotationStep } from '../../Util/Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisOfRotationLocal } from "./helpers/getAxisOfRotationLocal";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
@@ -35,6 +35,7 @@ const Cube = (props: {
 	const side = 1;
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
+	const [cornerOfRotation, setCornerOfRotation] = useState<cornerType>("NorthEast");
 	const [pointOfRotation, setPointOfRotation] = useState(new Vector3(0, 0, 0));
 	const [initialRotationAmount, setInitialRotationAmount] = useState(new Quaternion());
 	const [showEmags, setShowEmags] = useState(false);
@@ -122,7 +123,8 @@ const Cube = (props: {
 						break;
 					case "NO_COLLISION":
 						const piv = getPointOfRotation(cornerName, side, props.axisOfRotationWorld, initialRotationAmount);
-						setPointOfRotation(piv);						
+						setCornerOfRotation(cornerName);				
+						setPointOfRotation(piv);		
 						let opp = piv.clone();
 						opp.negate();
 
@@ -132,10 +134,11 @@ const Cube = (props: {
 						setMaxIteration(Math.abs(displacementMagnitude / props.incrementAmount));
 						setIteration(1);
 						setStep("2_ROTATING");
+		
+						setShowEmags(true);
 						break;
 				}
 			}
-			setShowEmags(true);
 		}
 	}, [step, props.axisOfRotationWorld, explorePathOfRotation, id, showPath, initialRotationAmount, props.incrementAmount])
 
@@ -242,7 +245,9 @@ const Cube = (props: {
 				/>
 				<Emags
 					showEmags={showEmags}
-					pointOfRotation={pointOfRotation}
+					side={side}
+					cornerName={cornerOfRotation}
+					initialRotationAmount={initialRotationAmount}
 					axisOfRotationWorld={props.axisOfRotationWorld}
 				/>
 				{/* <axesHelper scale={0.3}/> */}
