@@ -249,6 +249,7 @@ const Cube = (props: {
 					cornerName={cornerOfRotation}
 					initialRotationAmount={initialRotationAmount}
 					axisOfRotationWorld={props.axisOfRotationWorld}
+					isCounterclockwise={props.isCounterclockwise}
 				/>
 				{/* <axesHelper scale={0.3}/> */}
 			</group>

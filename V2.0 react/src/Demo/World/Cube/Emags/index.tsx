@@ -7,6 +7,7 @@ import { getPointOfRotation } from '../helpers/getPointOfRotation';
 
 import { rotateCylinderToAxis } from "./rotateCylinderToAxis";
 import { getNextCornerName } from "./getNextCornerName";
+import { getPreviousCornerName } from "./getPreviousCornerName";
 
 
 const Emags = (props: {
@@ -15,6 +16,7 @@ const Emags = (props: {
     cornerName: cornerType,
     initialRotationAmount: Quaternion;
     axisOfRotationWorld: axisType,
+    isCounterclockwise: boolean,
 }) => {
     
     // console.log("(Emags.tsx) pointOfRotation: ", props.pointOfRotation)
@@ -27,13 +29,31 @@ const Emags = (props: {
 		<>	
             {props.showEmags &&
                 <group>
-                    <mesh position={cylinderPositionForCorner(props.cornerName)} rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}>
+                    {/* Hinge Moving Cylinder */}
+                    <mesh 
+                        position={cylinderPositionForCorner(props.cornerName)} 
+                        rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
+                    >
                         <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
-                        <meshPhongMaterial color={"#1975ee"} transparent={true} opacity={0.5}/>
+                        <meshPhongMaterial color={"#00367e"} transparent={true} opacity={0.5}/>
                     </mesh>
-                    <mesh position={cylinderPositionForCorner(getNextCornerName(props.cornerName))} rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}>
+
+                    {/* Repulsion Moving Cylinder */}
+                    <mesh 
+                        position={cylinderPositionForCorner(getNextCornerName(props.cornerName))} 
+                        rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
+                    >
                         <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
                         <meshPhongMaterial color={"#ff0000"} transparent={true} opacity={0.5}/>
+                    </mesh>
+
+                    {/* Catching Attraction Moving Cylinder */}
+                    <mesh 
+                        position={cylinderPositionForCorner(getPreviousCornerName(props.cornerName))} 
+                        rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
+                    >
+                        <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
+                        <meshPhongMaterial color={"#00367e"} transparent={true} opacity={0.5}/>
                     </mesh>
                 </group>
             }
