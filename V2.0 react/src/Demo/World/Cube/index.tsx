@@ -10,7 +10,9 @@ import { getAxisOfRotationLocal } from "./helpers/getAxisOfRotationLocal";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
 import { translateGroup } from "./helpers/translateGroup";
 import { generateExplorePathOfRotation } from "./helpers/collision/generateExplorePathOfRotation";
-import MovingEmags from './MovingEmags/index';
+
+import MovingEmags from './MovingEmags';
+import StationaryEmags from "./StationaryEmags"
 
 
 const Cube = (props: {
@@ -33,7 +35,6 @@ const Cube = (props: {
     displayCubeBox: boolean,
     displayCoilsAndCorners: boolean,
     displayBlueCubeBox: boolean,
-	setStationaryEmagsPositions: Function,
 }) => {
 	const everything = useRef<THREE.Group>(null!);
 	const forPivot = useRef<THREE.Group>(null!);
@@ -227,6 +228,14 @@ const Cube = (props: {
 	}, [id, instructions, setIsCounterclockwise, setAxisOfRotationWorld])
 
 
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////--- HANDLING Emags ---/////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	const [stationaryEmagsPositions, setStationaryEmagsPositions] = useState(new Vector3(-2, -2, 0));
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////--- RETURN AND RENDER ---/////////////////////////////////////
@@ -234,37 +243,44 @@ const Cube = (props: {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	return (
-		<group
-			ref={everything}	
-			onClick={handleClick}
-		>
-			<group ref={forPivot}>
-				<Model
-					side={side}
-					color={props.color}
-					displayCubeBox={props.displayCubeBox}
-					displayCoilsAndCorners={props.displayCoilsAndCorners}
-					displayBlueCubeBox={props.displayBlueCubeBox}
-				/>
-				<Labeling
-					cubeID={props.id}
-					letterOffset={0.1}
-					side={side}
-					axis={props.axisOfRotationWorld}
-					displayEmagIDs={props.displayEmagIDs}
-				/>
-				<MovingEmags
-					showMovingEmags={showMovingEmags}
-					side={side}
-					cornerName={cornerOfRotation}
-					initialRotationAmount={initialRotationAmount}
-					axisOfRotationWorld={props.axisOfRotationWorld}
-					isCounterclockwise={props.isCounterclockwise}
-					setStationaryEmagsPositions={props.setStationaryEmagsPositions}
-				/>
-				{/* <axesHelper scale={0.3}/> */}
+		<>
+			<group
+				ref={everything}	
+				onClick={handleClick}
+			>
+				<group ref={forPivot}>
+					<Model
+						side={side}
+						color={props.color}
+						displayCubeBox={props.displayCubeBox}
+						displayCoilsAndCorners={props.displayCoilsAndCorners}
+						displayBlueCubeBox={props.displayBlueCubeBox}
+					/>
+					<Labeling
+						cubeID={props.id}
+						letterOffset={0.1}
+						side={side}
+						axis={props.axisOfRotationWorld}
+						displayEmagIDs={props.displayEmagIDs}
+					/>
+					<MovingEmags
+						showMovingEmags={showMovingEmags}
+						side={side}
+						cornerName={cornerOfRotation}
+						initialRotationAmount={initialRotationAmount}
+						axisOfRotationWorld={props.axisOfRotationWorld}
+						isCounterclockwise={props.isCounterclockwise}
+						setStationaryEmagsPositions={setStationaryEmagsPositions}
+					/>
+					{/* <axesHelper scale={0.3}/> */}
+				</group>
 			</group>
-		</group>
+
+			<StationaryEmags
+				stationaryEmagsPositions={stationaryEmagsPositions}
+				showEmags={showMovingEmags} //TODO: update this naming
+			/>
+		</>
 	)
 }
 

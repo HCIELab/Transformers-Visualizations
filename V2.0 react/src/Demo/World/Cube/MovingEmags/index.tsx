@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import "@react-three/fiber";
 import { axisType, cornerType } from '../../../Util/Types/types';
@@ -20,15 +20,15 @@ const MovingEmags = (props: {
     setStationaryEmagsPositions: Function,
 }) => {
     
-    const cylinderPositionForCorner = (cornerName : cornerType) => {
+    const cylinderPositionForCorner = useCallback((cornerName : cornerType) => {
         return getPointOfRotation(cornerName, props.side, props.axisOfRotationWorld, props.initialRotationAmount);
-    }
+    }, [props.axisOfRotationWorld, props.side, props.initialRotationAmount])
 
     const { setStationaryEmagsPositions, cornerName } = props;
     useEffect(() => {
         const {x, y, z} = cylinderPositionForCorner(cornerName);
         setStationaryEmagsPositions(new Vector3(x, y, z+2))
-    }, [setStationaryEmagsPositions, cornerName])
+    }, [setStationaryEmagsPositions, cornerName, cylinderPositionForCorner])
 
 	return (
 		<>	

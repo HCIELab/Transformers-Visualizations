@@ -1,5 +1,5 @@
 import { Euler } from "three";
-import { axisType } from "../../Util/Types/types";
+import { axisType } from "../../../Util/Types/types";
 
 export const rotateCylinderToAxis = (axisOfRotationWorld: axisType) => {
     switch (axisOfRotationWorld) {

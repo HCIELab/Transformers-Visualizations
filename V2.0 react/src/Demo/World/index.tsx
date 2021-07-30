@@ -7,7 +7,6 @@ import { ResizeObserver } from '@juggle/resize-observer';
 import { axisType, initialCubeConfigType, instructionType } from '../Util/Types/types';
 import Cube from './Cube';
 import Arrows from './Arrows';
-import StationaryEmags from './StationaryEmags';
 import PathBlock from './PathBlock';
 
 const World = (props: {
@@ -67,10 +66,6 @@ const World = (props: {
     }, [showPath])
 
 
-    const [stationaryEmagsPositions, setStationaryEmagsPositions] = useState<Vector3>(new Vector3(-2, 2, 0));
-
-
-
 
     return (
         <Canvas resize={{ polyfill: ResizeObserver }} >
@@ -112,17 +107,10 @@ const World = (props: {
                             displayCubeBox={props.displayCubeBox}    
                             displayCoilsAndCorners={props.displayCoilsAndCorners}    
                             displayBlueCubeBox={props.displayBlueCubeBox}    
-
-                            setStationaryEmagsPositions={setStationaryEmagsPositions}
                         />
                     </Suspense>        
                 )
             }
-
-            {/* Stationary Emags */}
-            <StationaryEmags
-                stationaryEmagsPositions={stationaryEmagsPositions}
-            />
 
             {/* Path Blocks */}
             {pathBlocks}
