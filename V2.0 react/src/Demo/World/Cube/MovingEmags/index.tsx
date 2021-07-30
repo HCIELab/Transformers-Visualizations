@@ -19,8 +19,6 @@ const MovingEmags = (props: {
     isCounterclockwise: boolean,
 }) => {
     
-    // console.log("(Emags.tsx) pointOfRotation: ", props.pointOfRotation)
-
     const cylinderPositionForCorner = (cornerName : cornerType) => {
         return getPointOfRotation(cornerName, props.side, props.axisOfRotationWorld, props.initialRotationAmount);
     }
