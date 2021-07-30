@@ -28,14 +28,14 @@ const Emags = (props: {
 	return (
 		<>	
             {props.showEmags &&
-                <group>
+                <group scale={0.75}>
                     {/* Hinge Moving Cylinder */}
                     <mesh 
                         position={cylinderPositionForCorner(props.cornerName)} 
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
                         <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
-                        <meshPhongMaterial color={"#00367e"} transparent={true} opacity={0.5}/>
+                        <meshPhongMaterial color={"#00367e"} opacity={0.5}/>
                     </mesh>
 
                     {/* Repulsion Moving Cylinder */}
@@ -44,7 +44,7 @@ const Emags = (props: {
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
                         <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
-                        <meshPhongMaterial color={"#ff0000"} transparent={true} opacity={0.5}/>
+                        <meshPhongMaterial color={"#ff0000"} opacity={0.5}/>
                     </mesh>
 
                     {/* Catching Attraction Moving Cylinder */}
@@ -53,7 +53,7 @@ const Emags = (props: {
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
                         <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
-                        <meshPhongMaterial color={"#00367e"} transparent={true} opacity={0.5}/>
+                        <meshPhongMaterial color={"#00367e"} opacity={0.5}/>
                     </mesh>
                 </group>
             }
