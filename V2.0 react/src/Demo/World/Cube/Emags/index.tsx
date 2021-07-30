@@ -40,7 +40,7 @@ const Emags = (props: {
 
                     {/* Repulsion Moving Cylinder */}
                     <mesh 
-                        position={cylinderPositionForCorner(getNextCornerName(props.cornerName))} 
+                        position={cylinderPositionForCorner(!props.isCounterclockwise ? getNextCornerName(props.cornerName) : getPreviousCornerName(props.cornerName))} 
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
                         <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
@@ -49,7 +49,7 @@ const Emags = (props: {
 
                     {/* Catching Attraction Moving Cylinder */}
                     <mesh 
-                        position={cylinderPositionForCorner(getPreviousCornerName(props.cornerName))} 
+                        position={cylinderPositionForCorner(!props.isCounterclockwise ? getPreviousCornerName(props.cornerName) : getNextCornerName(props.cornerName))} 
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
                         <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
