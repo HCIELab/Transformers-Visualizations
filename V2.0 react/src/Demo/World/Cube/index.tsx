@@ -28,10 +28,12 @@ const Cube = (props: {
 
 	incrementAmount: number,
 	showPath: boolean,
+
 	displayEmagIDs: boolean,
     displayCubeBox: boolean,
     displayCoilsAndCorners: boolean,
     displayBlueCubeBox: boolean,
+	setStationaryEmagsPositions: Function,
 }) => {
 	const everything = useRef<THREE.Group>(null!);
 	const forPivot = useRef<THREE.Group>(null!);
@@ -258,6 +260,7 @@ const Cube = (props: {
 					initialRotationAmount={initialRotationAmount}
 					axisOfRotationWorld={props.axisOfRotationWorld}
 					isCounterclockwise={props.isCounterclockwise}
+					setStationaryEmagsPositions={props.setStationaryEmagsPositions}
 				/>
 				{/* <axesHelper scale={0.3}/> */}
 			</group>

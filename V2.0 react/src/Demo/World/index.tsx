@@ -67,6 +67,8 @@ const World = (props: {
     }, [showPath])
 
 
+    const [stationaryEmagsPositions, setStationaryEmagsPositions] = useState<Vector3>(new Vector3(-2, 2, 0));
+
 
 
 
@@ -105,10 +107,13 @@ const World = (props: {
 
                             incrementAmount={props.incrementAmount}
                             showPath={props.showPath}
+
                             displayEmagIDs={props.displayEmagIDs}
                             displayCubeBox={props.displayCubeBox}    
                             displayCoilsAndCorners={props.displayCoilsAndCorners}    
                             displayBlueCubeBox={props.displayBlueCubeBox}    
+
+                            setStationaryEmagsPositions={setStationaryEmagsPositions}
                         />
                     </Suspense>        
                 )
@@ -116,6 +121,7 @@ const World = (props: {
 
             {/* Stationary Emags */}
             <StationaryEmags
+                stationaryEmagsPositions={stationaryEmagsPositions}
             />
 
             {/* Path Blocks */}

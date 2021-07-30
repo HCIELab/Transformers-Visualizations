@@ -6,10 +6,10 @@ import { Vector3 } from 'three';
 import { axisType } from '../../Util/Types/types';
 
 const StationaryEmags = (props: {
+    stationaryEmagsPositions: Vector3
 }) => {
 
-    // Replace these
-    const somePosition = new Vector3(-2, 2, 0);
+    // TODO: Replace these
     const someAxis: axisType = "z";
 
 	return (
@@ -17,11 +17,11 @@ const StationaryEmags = (props: {
             <group scale={0.75}>
                 {/* Some Cylinder */}
                 <mesh 
-                    position={somePosition} 
+                    position={props.stationaryEmagsPositions}  //TODO: Edit this
                     rotation={rotateCylinderToAxis(someAxis)}
                 >
                     <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
-                    <meshPhongMaterial color={"#00367e"} opacity={0.5}/>
+                    <meshPhongMaterial color={"#007e06"} opacity={0.5}/>
                 </mesh>
             </group>
 		</>
