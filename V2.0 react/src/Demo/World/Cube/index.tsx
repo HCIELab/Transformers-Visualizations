@@ -44,7 +44,7 @@ const Cube = (props: {
 	const [cornerOfRotation, setCornerOfRotation] = useState<cornerType>("NorthEast");
 	const [pointOfRotation, setPointOfRotation] = useState(new Vector3(0, 0, 0));
 	const [initialRotationAmount, setInitialRotationAmount] = useState(new Quaternion());
-	const [showMovingEmags, setShowEmags] = useState(false);
+	const [showEmags, setShowEmags] = useState(false);
 
 	// Debug
 	useEffect(() => {
@@ -244,6 +244,7 @@ const Cube = (props: {
 
 	return (
 		<>
+			{/* The Cube (everything contained is in Local Space)*/}
 			<group
 				ref={everything}	
 				onClick={handleClick}
@@ -264,7 +265,7 @@ const Cube = (props: {
 						displayEmagIDs={props.displayEmagIDs}
 					/>
 					<MovingEmags
-						showMovingEmags={showMovingEmags}
+						showEmags={showEmags}
 						side={side}
 						cornerName={cornerOfRotation}
 						initialRotationAmount={initialRotationAmount}
@@ -276,9 +277,10 @@ const Cube = (props: {
 				</group>
 			</group>
 
+			{/* Outside the Cube (in World Space) */}
 			<StationaryEmags
 				stationaryEmagsPositions={stationaryEmagsPositions}
-				showEmags={showMovingEmags} //TODO: update this naming
+				showEmags={showEmags} //TODO: update this naming
 			/>
 		</>
 	)

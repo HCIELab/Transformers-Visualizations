@@ -11,7 +11,7 @@ import { getPreviousCornerName } from "./getPreviousCornerName";
 
 
 const MovingEmags = (props: {
-    showMovingEmags: boolean,
+    showEmags: boolean,
     side: number,
     cornerName: cornerType,
     initialRotationAmount: Quaternion;
@@ -27,12 +27,14 @@ const MovingEmags = (props: {
     const { setStationaryEmagsPositions, cornerName } = props;
     useEffect(() => {
         const {x, y, z} = cylinderPositionForCorner(cornerName);
-        setStationaryEmagsPositions(new Vector3(x, y, z+2))
+        const vec = new Vector3(x, y, z+2);
+        setStationaryEmagsPositions(vec)
+        console.log("(Emags.tsx) calling setStationaryEmagsPositions with input", vec)
     }, [setStationaryEmagsPositions, cornerName, cylinderPositionForCorner])
 
 	return (
 		<>	
-            {props.showMovingEmags &&
+            {props.showEmags &&
                 <group scale={0.75}>
                     {/* Hinge Moving Cylinder */}
                     <mesh 

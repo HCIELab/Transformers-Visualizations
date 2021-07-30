@@ -10,6 +10,8 @@ const StationaryEmags = (props: {
     showEmags: boolean,
 }) => {
 
+    // NOTE: The coordinates in this component are rendered in WORLD position
+
     // TODO: Replace these
     const someAxis: axisType = "z";
 
@@ -19,7 +21,7 @@ const StationaryEmags = (props: {
                 <group scale={0.75}>
                     {/* Some Cylinder */}
                     <mesh 
-                        position={props.stationaryEmagsPositions}  //TODO: Edit this
+                        position={props.stationaryEmagsPositions}  //TODO: Edit this, note that this is in world position
                         rotation={rotateCylinderToAxis(someAxis)}
                     >
                         <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
