@@ -10,8 +10,8 @@ import { getNextCornerName } from "./getNextCornerName";
 import { getPreviousCornerName } from "./getPreviousCornerName";
 
 
-const Emags = (props: {
-    showEmags: boolean,
+const MovingEmags = (props: {
+    showMovingEmags: boolean,
     side: number,
     cornerName: cornerType,
     initialRotationAmount: Quaternion;
@@ -27,7 +27,7 @@ const Emags = (props: {
 
 	return (
 		<>	
-            {props.showEmags &&
+            {props.showMovingEmags &&
                 <group scale={0.75}>
                     {/* Hinge Moving Cylinder */}
                     <mesh 
@@ -61,4 +61,4 @@ const Emags = (props: {
     )
 }
 
-export default Emags;
+export default MovingEmags;

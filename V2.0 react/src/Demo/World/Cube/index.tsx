@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Color, useFrame } from "@react-three/fiber";
 import { Euler, Vector3, Quaternion } from 'three';
 import Labeling from "./Labeling/labeling";
-import Emags from "./Emags/index";
 import Model from "./Model/index";
 import { axisType, cornerType, instructionType, rotationStep } from '../../Util/Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
@@ -11,6 +10,7 @@ import { getAxisOfRotationLocal } from "./helpers/getAxisOfRotationLocal";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
 import { translateGroup } from "./helpers/translateGroup";
 import { generateExplorePathOfRotation } from "./helpers/collision/generateExplorePathOfRotation";
+import MovingEmags from './MovingEmags/index';
 
 
 const Cube = (props: {
@@ -41,7 +41,7 @@ const Cube = (props: {
 	const [cornerOfRotation, setCornerOfRotation] = useState<cornerType>("NorthEast");
 	const [pointOfRotation, setPointOfRotation] = useState(new Vector3(0, 0, 0));
 	const [initialRotationAmount, setInitialRotationAmount] = useState(new Quaternion());
-	const [showEmags, setShowEmags] = useState(false);
+	const [showMovingEmags, setShowEmags] = useState(false);
 
 	// Debug
 	useEffect(() => {
@@ -251,8 +251,8 @@ const Cube = (props: {
 					axis={props.axisOfRotationWorld}
 					displayEmagIDs={props.displayEmagIDs}
 				/>
-				<Emags
-					showEmags={showEmags}
+				<MovingEmags
+					showMovingEmags={showMovingEmags}
 					side={side}
 					cornerName={cornerOfRotation}
 					initialRotationAmount={initialRotationAmount}
