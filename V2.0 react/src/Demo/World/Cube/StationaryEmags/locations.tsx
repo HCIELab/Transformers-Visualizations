@@ -43,17 +43,21 @@ export const getLocationsY = (side: number, offset: number, cornerName: cornerTy
     let euler = new Euler(0, 0, 0);
     switch (cornerName) {
         case "NorthEast":
-            euler = isCounterclockwise ? new Euler(0, 0, 3*pi/2) : new Euler(0, pi, 0);
+            // TODO: edit these!!!
+            euler = isCounterclockwise ? new Euler(0, 3*pi/2, 0) : new Euler(pi, pi, 0);
             break;
         case "SouthEast":
-            euler = isCounterclockwise ? new Euler(0, 0, pi) : new Euler(0, pi, pi/2);
+            // TODO: edit these!!!
+            euler = isCounterclockwise ? new Euler(0, pi, 0) : new Euler(pi, 3*pi/2, 0);
             break;
         case "SouthWest":
-            euler = isCounterclockwise ? new Euler(0, 0, pi/2) : new Euler(0, pi, pi);
+            // TODO: edit these!!!
+            euler = isCounterclockwise ? new Euler(0, pi/2, 0) : new Euler(pi, 0, 0);
             break;
         // case "NorthWest":
         default:
-            euler = isCounterclockwise ? new Euler(0, 0, 0) : new Euler(0, pi, 3*pi/2);
+            // TODO: edit these!!!
+            euler = isCounterclockwise ? new Euler(0, 0, 0) : new Euler(pi, pi/2, 0);
     }
     adjustment = {
         repulsionPosition: template.repulsionPosition.applyEuler(euler),
