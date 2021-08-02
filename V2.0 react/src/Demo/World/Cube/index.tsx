@@ -78,7 +78,8 @@ const Cube = (props: {
 	const updatePosition = props.updatePosition;
 	useEffect(() => {
 		if (step === "0_DEFAULT") {
-			updatePosition(everything.current.position);
+			let copy = everything.current.position.clone()
+			updatePosition(copy);
 			setShowEmags(false);
 		}
 	}, [step, updatePosition])

@@ -1,7 +1,7 @@
 import React, { ReactNode, Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from "@react-three/drei";
-import { Vector3 } from 'three';
+import { Euler, Vector3 } from 'three';
 import { ResizeObserver } from '@juggle/resize-observer';
 
 import { axisType, initialCubeConfigType, instructionType } from '../Util/Types/types';
@@ -78,7 +78,7 @@ const World = (props: {
             
             {/* Visual Helpers */}
             {/* <axesHelper position={[-0.5, -0.5, 0]} scale={2}/> */}
-            {/* <gridHelper rotation={new Euler(Math.PI/2, 0, 0)} position={[0.5, 0.5, -0.5]}/> */}
+            <gridHelper rotation={new Euler(Math.PI/2, 0, 0)} /*position={[0.5, 0.5, -0.5]}*//>
             
             {/* Cubes */}
             {

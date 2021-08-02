@@ -16,10 +16,6 @@ const StationaryEmags = (props: {
 }) => {
 
     // NOTE: The coordinates in this component are rendered in WORLD position
-
-    // TODO: Replace these
-    const someAxis: axisType = "z";
-
     const getPosition = () => {
         const {side, axisOfRotationWorld, isCounterclockwise, initialRotationAmount} = props;
         console.log("(StationaryEmags.tsx): cubePosition", props.cubePosition);
@@ -29,11 +25,11 @@ const StationaryEmags = (props: {
 	return (
 		<>	
             {props.showEmags &&
-                <group scale={0.75}>
+                <group>
                     {/* Some Cylinder */}
                     <mesh 
                         position={getPosition()}  //TODO: Edit this, note that this is in world position
-                        rotation={rotateCylinderToAxis(someAxis)}
+                        rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
                         <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
                         <meshPhongMaterial color={"#007e06"} opacity={0.9}/>
