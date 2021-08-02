@@ -18,13 +18,13 @@ const StationaryEmags = (props: {
     // NOTE: The coordinates in this component are rendered in WORLD position
 
     const offset = 0.15;
-    const {repulsionPosition, hingePosition, catchingPosition} = getLocations(props.cubePosition, props.side, offset);
+    const {repulsionPosition, hingePosition, catchingPosition} = getLocations(props.cubePosition, props.side, offset, props.cornerName);
 
 
 	return (
 		<>	
             {props.showEmags &&
-                <group>
+                <group position={props.cubePosition}>
                     {/* Repsulsion Cylinder */}
                     <mesh 
                         position={repulsionPosition}  
