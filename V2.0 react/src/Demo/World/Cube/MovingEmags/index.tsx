@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 
 import "@react-three/fiber";
 import { axisType, cornerType } from '../../../Util/Types/types';
-import { Quaternion, Vector3 } from 'three';
+import { Quaternion } from 'three';
 import { getPointOfRotation } from '../helpers/getPointOfRotation';
 
 import { rotateCylinderToAxis } from "./rotateCylinderToAxis";
