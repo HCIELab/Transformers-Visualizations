@@ -4,6 +4,7 @@ import "@react-three/fiber";
 import { rotateCylinderToAxis } from './rotateCylinderToAxis';
 import { Quaternion, Vector3 } from 'three';
 import { axisType, cornerType } from '../../../Util/Types/types';
+import { getLocations } from "./locations";
 
 const StationaryEmags = (props: {
     cubePosition: Vector3,
@@ -16,27 +17,9 @@ const StationaryEmags = (props: {
 }) => {
     // NOTE: The coordinates in this component are rendered in WORLD position
 
-    // const getPosition = () => {
-    //     // const {side, axisOfRotationWorld, isCounterclockwise, initialRotationAmount} = props;
-    //     console.log("(StationaryEmags.tsx): cubePosition", props.cubePosition);
-    //     return props.cubePosition;
-    // }
-
-    const half = props.side/2;
     const offset = 0.15;
+    const {repulsionPosition, hingePosition, catchingPosition} = getLocations(props.cubePosition, props.side, offset);
 
-    const getRepulsionCylinder = () => {
-        const {x, y, z} = props.cubePosition;
-        return new Vector3(x - half + offset, y - half - offset, z);
-    }
-    const getHingeCylinder = () => {
-        const {x, y, z} = props.cubePosition;
-        return new Vector3(x + half - offset, y - half - offset, z);
-    }
-    const getCatchingCylinder = () => {
-        const {x, y, z} = props.cubePosition;
-        return new Vector3(x + half*3 - offset, y - half - offset, z);
-    }
 
 	return (
 		<>	
@@ -44,7 +27,7 @@ const StationaryEmags = (props: {
                 <group>
                     {/* Repsulsion Cylinder */}
                     <mesh 
-                        position={getRepulsionCylinder()}  
+                        position={repulsionPosition}  
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
                         <cylinderBufferGeometry args={[.15, .15, 0.8, 20]}/>
@@ -52,7 +35,7 @@ const StationaryEmags = (props: {
                     </mesh>
                     {/* Hinge Cylinder */}
                     <mesh 
-                        position={getHingeCylinder()}  
+                        position={hingePosition}  
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
                         <cylinderBufferGeometry args={[.15, .15, 0.8, 20]}/>
@@ -60,7 +43,7 @@ const StationaryEmags = (props: {
                     </mesh>
                     {/* Catching Cylinder */}
                     <mesh 
-                        position={getCatchingCylinder()}  
+                        position={catchingPosition}  
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
                         <cylinderBufferGeometry args={[.15, .15, 0.8, 20]}/>
