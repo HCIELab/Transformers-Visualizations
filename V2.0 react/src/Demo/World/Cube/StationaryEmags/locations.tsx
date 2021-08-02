@@ -9,7 +9,7 @@ export type locationsType = {
 
 const pi = Math.PI;
 
-export const getLocations = (cubePosition: Vector3, side: number, offset: number, cornerName: cornerType) : locationsType => {
+export const getLocations = (side: number, offset: number, cornerName: cornerType, isCounterclockwise: boolean) : locationsType => {
     const half = side/2;
 
     const template : locationsType = {
@@ -28,7 +28,7 @@ export const getLocations = (cubePosition: Vector3, side: number, offset: number
     let euler = new Euler(0, 0, 0);
     switch (cornerName) {
         case "NorthEast":
-            euler = new Euler(0, 0, -pi/2);
+            euler = isCounterclockwise ? new Euler(0, 0, 3*pi/2) : new Euler(0, pi, 0);
             adjustment = {
                 repulsionPosition: template.repulsionPosition.applyEuler(euler),
                 hingePosition: template.hingePosition.applyEuler(euler),
@@ -36,7 +36,7 @@ export const getLocations = (cubePosition: Vector3, side: number, offset: number
             }
             break;
         case "SouthEast":
-            euler = new Euler(0, 0, -pi);
+            euler = isCounterclockwise ? new Euler(0, 0, pi) : new Euler(0, pi, pi/2);
             adjustment = {
                 repulsionPosition: template.repulsionPosition.applyEuler(euler),
                 hingePosition: template.hingePosition.applyEuler(euler),
@@ -44,16 +44,21 @@ export const getLocations = (cubePosition: Vector3, side: number, offset: number
             }
             break;
         case "SouthWest":
-            euler = new Euler(0, 0, -3*pi/2);
+            euler = isCounterclockwise ? new Euler(0, 0, pi/2) : new Euler(0, pi, pi);
             adjustment = {
                 repulsionPosition: template.repulsionPosition.applyEuler(euler),
                 hingePosition: template.hingePosition.applyEuler(euler),
                 catchingPosition: template.catchingPosition.applyEuler(euler),
             }
             break;
-        case "NorthWest":
+        // case "NorthWest":
         default:
-            adjustment = template;
+            euler = isCounterclockwise ? new Euler(0, 0, 0) : new Euler(0, pi, 3*pi/2);
+            adjustment = {
+                repulsionPosition: template.repulsionPosition.applyEuler(euler),
+                hingePosition: template.hingePosition.applyEuler(euler),
+                catchingPosition: template.catchingPosition.applyEuler(euler),
+            }
     }
 
     return adjustment;
