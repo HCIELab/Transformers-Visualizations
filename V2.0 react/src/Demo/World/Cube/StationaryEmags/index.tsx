@@ -2,12 +2,17 @@ import React from 'react';
 
 import "@react-three/fiber";
 import { rotateCylinderToAxis } from './rotateCylinderToAxis';
-import { Vector3 } from 'three';
-import { axisType } from '../../../Util/Types/types';
+import { Quaternion, Vector3 } from 'three';
+import { axisType, cornerType } from '../../../Util/Types/types';
 
 const StationaryEmags = (props: {
-    stationaryEmagsPositions: Vector3
+    cubePosition: Vector3,
     showEmags: boolean,
+    side: number,
+    cornerName: cornerType,
+    initialRotationAmount: Quaternion;
+    axisOfRotationWorld: axisType,
+    isCounterclockwise: boolean,
 }) => {
 
     // NOTE: The coordinates in this component are rendered in WORLD position
@@ -15,13 +20,19 @@ const StationaryEmags = (props: {
     // TODO: Replace these
     const someAxis: axisType = "z";
 
+    const getPosition = () => {
+        const {side, axisOfRotationWorld, isCounterclockwise, initialRotationAmount} = props;
+        console.log("(StationaryEmags.tsx): cubePosition", props.cubePosition);
+        return props.cubePosition;
+    }
+
 	return (
 		<>	
             {props.showEmags &&
                 <group scale={0.75}>
                     {/* Some Cylinder */}
                     <mesh 
-                        position={props.stationaryEmagsPositions}  //TODO: Edit this, note that this is in world position
+                        position={getPosition()}  //TODO: Edit this, note that this is in world position
                         rotation={rotateCylinderToAxis(someAxis)}
                     >
                         <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>

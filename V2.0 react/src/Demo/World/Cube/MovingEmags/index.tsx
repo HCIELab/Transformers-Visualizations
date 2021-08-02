@@ -17,20 +17,20 @@ const MovingEmags = (props: {
     initialRotationAmount: Quaternion;
     axisOfRotationWorld: axisType,
     isCounterclockwise: boolean,
-    setStationaryEmagsPositions: Function,
+    // setStationaryEmagsPositions: Function,
 }) => {
     
     const cylinderPositionForCorner = useCallback((cornerName : cornerType) => {
         return getPointOfRotation(cornerName, props.side, props.axisOfRotationWorld, props.initialRotationAmount);
     }, [props.axisOfRotationWorld, props.side, props.initialRotationAmount])
 
-    const { setStationaryEmagsPositions, cornerName } = props;
-    useEffect(() => {
-        const {x, y, z} = cylinderPositionForCorner(cornerName);
-        const vec = new Vector3(x, y, z+2);
-        setStationaryEmagsPositions(vec)
-        console.log("(Emags.tsx) calling setStationaryEmagsPositions with input", vec)
-    }, [setStationaryEmagsPositions, cornerName, cylinderPositionForCorner])
+    // const { setStationaryEmagsPositions, cornerName } = props;
+    // useEffect(() => {
+    //     const {x, y, z} = cylinderPositionForCorner(cornerName);
+    //     const vec = new Vector3(x, y, z);
+    //     setStationaryEmagsPositions(vec)
+    //     console.log("(Emags.tsx) calling setStationaryEmagsPositions with input", vec)
+    // }, [cornerName, setStationaryEmagsPositions, cylinderPositionForCorner])
 
 	return (
 		<>	

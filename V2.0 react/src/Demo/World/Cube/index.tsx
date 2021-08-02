@@ -234,7 +234,7 @@ const Cube = (props: {
 	///////////////////////////////--- HANDLING Emags ---/////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
-	const [stationaryEmagsPositions, setStationaryEmagsPositions] = useState(new Vector3(-2, -2, 0));
+	// const [stationaryEmagsPositions, setStationaryEmagsPositions] = useState(new Vector3(-2, -2, 0));
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -271,7 +271,7 @@ const Cube = (props: {
 						initialRotationAmount={initialRotationAmount}
 						axisOfRotationWorld={props.axisOfRotationWorld}
 						isCounterclockwise={props.isCounterclockwise}
-						setStationaryEmagsPositions={setStationaryEmagsPositions}
+						// setStationaryEmagsPositions={setStationaryEmagsPositions}
 					/>
 					{/* <axesHelper scale={0.3}/> */}
 				</group>
@@ -279,8 +279,13 @@ const Cube = (props: {
 
 			{/* Outside the Cube (in World Space) */}
 			<StationaryEmags
-				stationaryEmagsPositions={stationaryEmagsPositions}
-				showEmags={showEmags} //TODO: update this naming
+				cubePosition={props.allPositions[props.id]}
+				showEmags={showEmags}
+				side={side}
+				cornerName={cornerOfRotation}
+				initialRotationAmount={initialRotationAmount}
+				axisOfRotationWorld={props.axisOfRotationWorld}
+				isCounterclockwise={props.isCounterclockwise}
 			/>
 		</>
 	)
