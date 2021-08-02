@@ -1,5 +1,5 @@
 import { Euler, Vector3 } from "three"
-import { cornerType } from "../../../Util/Types/types";
+import { axisType, cornerType } from "../../../Util/Types/types";
 
 export type locationsType = {
     repulsionPosition: Vector3,
@@ -9,14 +9,29 @@ export type locationsType = {
 
 const pi = Math.PI;
 
-export const getLocations = (side: number, offset: number, cornerName: cornerType, isCounterclockwise: boolean) : locationsType => {
+export const getLocations = (side: number, offset: number, cornerName: cornerType, isCounterclockwise: boolean, axisOfRotation: axisType) : locationsType => {
+    switch (axisOfRotation) {
+        // case "x":
+        //     return;
+        // TODO: write getLocationsX
+        case "y":
+            return getLocationsY(side, offset, cornerName, isCounterclockwise);
+        // case "z":
+        default:
+            return getLocationsZ(side, offset, cornerName, isCounterclockwise);
+    }
+}
+
+
+
+export const getLocationsY = (side: number, offset: number, cornerName: cornerType, isCounterclockwise: boolean) : locationsType => {
     const half = side/2;
 
     const template : locationsType = {
         // This template works for 180 deg, counterclockwise, northwest corner
-        repulsionPosition:  new Vector3(-half + -offset     , -half + offset    ,               ),
-        hingePosition:      new Vector3(-half + -offset     , half + -offset    ,               ),
-        catchingPosition:   new Vector3(-half*3 + offset    , half + -offset    ,               ),
+        repulsionPosition:  new Vector3(-half - offset, 0, half - offset),
+        hingePosition:      new Vector3(-half + -offset, 0, -half + offset),
+        catchingPosition:   new Vector3(-half*3 + offset, 0, -half + offset),
     }
 
     let adjustment = {
@@ -29,36 +44,62 @@ export const getLocations = (side: number, offset: number, cornerName: cornerTyp
     switch (cornerName) {
         case "NorthEast":
             euler = isCounterclockwise ? new Euler(0, 0, 3*pi/2) : new Euler(0, pi, 0);
-            adjustment = {
-                repulsionPosition: template.repulsionPosition.applyEuler(euler),
-                hingePosition: template.hingePosition.applyEuler(euler),
-                catchingPosition: template.catchingPosition.applyEuler(euler),
-            }
             break;
         case "SouthEast":
             euler = isCounterclockwise ? new Euler(0, 0, pi) : new Euler(0, pi, pi/2);
-            adjustment = {
-                repulsionPosition: template.repulsionPosition.applyEuler(euler),
-                hingePosition: template.hingePosition.applyEuler(euler),
-                catchingPosition: template.catchingPosition.applyEuler(euler),
-            }
             break;
         case "SouthWest":
             euler = isCounterclockwise ? new Euler(0, 0, pi/2) : new Euler(0, pi, pi);
-            adjustment = {
-                repulsionPosition: template.repulsionPosition.applyEuler(euler),
-                hingePosition: template.hingePosition.applyEuler(euler),
-                catchingPosition: template.catchingPosition.applyEuler(euler),
-            }
             break;
         // case "NorthWest":
         default:
             euler = isCounterclockwise ? new Euler(0, 0, 0) : new Euler(0, pi, 3*pi/2);
-            adjustment = {
-                repulsionPosition: template.repulsionPosition.applyEuler(euler),
-                hingePosition: template.hingePosition.applyEuler(euler),
-                catchingPosition: template.catchingPosition.applyEuler(euler),
-            }
+    }
+    adjustment = {
+        repulsionPosition: template.repulsionPosition.applyEuler(euler),
+        hingePosition: template.hingePosition.applyEuler(euler),
+        catchingPosition: template.catchingPosition.applyEuler(euler),
+    }
+
+    return adjustment;
+}
+
+
+export const getLocationsZ = (side: number, offset: number, cornerName: cornerType, isCounterclockwise: boolean) : locationsType => {
+    const half = side/2;
+
+    const template : locationsType = {
+        // This template works for 180 deg, counterclockwise, northwest corner
+        repulsionPosition:  new Vector3(-half + -offset     , -half + offset    , 0     ),
+        hingePosition:      new Vector3(-half + -offset     , half + -offset    , 0     ),
+        catchingPosition:   new Vector3(-half*3 + offset    , half + -offset    , 0     ),
+    }
+
+    let adjustment = {
+        repulsionPosition: new Vector3(0, 0, 0),
+        hingePosition: new Vector3(0, 0, 0),
+        catchingPosition: new Vector3(0, 0, 0),
+    };
+
+    let euler = new Euler(0, 0, 0);
+    switch (cornerName) {
+        case "NorthEast":
+            euler = isCounterclockwise ? new Euler(0, 0, 3*pi/2) : new Euler(0, pi, 0);
+            break;
+        case "SouthEast":
+            euler = isCounterclockwise ? new Euler(0, 0, pi) : new Euler(0, pi, pi/2);
+            break;
+        case "SouthWest":
+            euler = isCounterclockwise ? new Euler(0, 0, pi/2) : new Euler(0, pi, pi);
+            break;
+        // case "NorthWest":
+        default:
+            euler = isCounterclockwise ? new Euler(0, 0, 0) : new Euler(0, pi, 3*pi/2);
+        }
+    adjustment = {
+        repulsionPosition: template.repulsionPosition.applyEuler(euler),
+        hingePosition: template.hingePosition.applyEuler(euler),
+        catchingPosition: template.catchingPosition.applyEuler(euler),
     }
 
     return adjustment;

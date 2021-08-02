@@ -18,7 +18,7 @@ const StationaryEmags = (props: {
     // NOTE: The coordinates in this component are rendered in WORLD position
 
     const offset = 0.15;
-    const {repulsionPosition, hingePosition, catchingPosition} = getLocations(props.side, offset, props.cornerName, props.isCounterclockwise);
+    const {repulsionPosition, hingePosition, catchingPosition} = getLocations(props.side, offset, props.cornerName, props.isCounterclockwise, props.axisOfRotationWorld);
 
 
 	return (
