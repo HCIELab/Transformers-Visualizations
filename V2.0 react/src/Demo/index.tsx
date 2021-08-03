@@ -143,9 +143,9 @@ const Demo = () => {
                         />
                         <br/><br/>
 
-                        <p> 💡 Please do not move the camera while a rotation is in motion</p>
+                        {/* <p> 💡 Please do not move the camera while a rotation is in motion</p>
                         <p> 💡 Please do not change to a different browser tab while a rotation is in motion</p>
-                        <p> 💡 Refresh the page if an instruction script encounters an error</p>
+                        <p> 💡 Refresh the page if an instruction script encounters an error</p> */}
                     </div>
                 </div>
 
