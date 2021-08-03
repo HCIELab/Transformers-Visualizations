@@ -259,30 +259,34 @@ const Cube = (props: {
 						axis={props.axisOfRotationWorld}
 						displayEmagIDs={props.displayEmagIDs}
 					/>
-					<MovingEmags
-						showEmags={showEmags}
-						side={side}
-						cornerName={cornerOfRotation}
-						initialRotationAmount={initialRotationAmount}
-						axisOfRotationWorld={props.axisOfRotationWorld}
-						isCounterclockwise={props.isCounterclockwise}
-						// setStationaryEmagsPositions={setStationaryEmagsPositions}
-					/>
+					{showEmags &&
+						<MovingEmags
+							showEmags={showEmags}
+							side={side}
+							cornerName={cornerOfRotation}
+							initialRotationAmount={initialRotationAmount}
+							axisOfRotationWorld={props.axisOfRotationWorld}
+							isCounterclockwise={props.isCounterclockwise}
+							// setStationaryEmagsPositions={setStationaryEmagsPositions}
+						/>
+					}
 					{/* <axesHelper scale={0.3}/> */}
 				</group>
 			</group>
 
 			{/* Outside the Cube (in World Space) */}
-			<StationaryEmags
-				cubePosition={props.allPositions[props.id]}
-				showEmags={showEmags}
-				side={side}
-				cornerName={cornerOfRotation}
-				// initialRotationAmount={initialRotationAmount}
-				axisOfRotationWorld={props.axisOfRotationWorld}
-				isCounterclockwise={props.isCounterclockwise}
-				rotationMagnitude={rotationMagnitude}
-			/>
+			{showEmags &&
+				<StationaryEmags
+					cubePosition={props.allPositions[props.id]}
+					showEmags={showEmags}
+					side={side}
+					cornerName={cornerOfRotation}
+					// initialRotationAmount={initialRotationAmount}
+					axisOfRotationWorld={props.axisOfRotationWorld}
+					isCounterclockwise={props.isCounterclockwise}
+					rotationMagnitude={rotationMagnitude}
+				/>
+			}
 		</>
 	)
 }
