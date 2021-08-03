@@ -9,6 +9,7 @@ import { axisType, initialCubeConfigType, instructionType } from './Util/Types/t
 import World from "./World";
 import { Vector3 } from 'three';
 import { FormControlLabel, Switch } from '@material-ui/core';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
 const DemoContainer = styled.div`
     width: 100%;
@@ -33,15 +34,15 @@ const DemoContainer = styled.div`
             justify-content: space-between;
 
             .InstructionsContainer {
-                width: 3100px;
+                width: 3500px;
                 height: 100%;
                 overflow: auto;
             }
 
             .TogglesContainer {
-                width: 1000px;
+                /* width: 1000px;
                 display: flex;
-                flex-direction: column;
+                flex-direction: column; */
                 height: 100%;
                 overflow: auto;
             }
@@ -53,6 +54,17 @@ const DemoContainer = styled.div`
             width: 100%;
             background-color: #f0f0f0;
         }
+    }
+`;
+
+const HelpButtonStyler = styled.button`
+    background-color: white;
+    border-radius: 100%;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.6;
     }
 `;
 
@@ -159,11 +171,10 @@ const Demo = () => {
                             }
                             label={showPath ? "Showing Path of Rotation without Movement" : "Simulating and Animating Cube Movement"}
                         />
-                        <br/><br/>
-
-                        <p> 💡 Please do not move the camera while a rotation is in motion</p>
-                        <p> 💡 Please do not change to a different browser tab while a rotation is in motion</p>
-                        <p> 💡 Refresh the page if an instruction script encounters an error</p>
+                        <br/>
+                        <HelpButtonStyler onClick={() => setModalOpenStatus(true)}>
+                            <HelpOutlineIcon/>
+                        </HelpButtonStyler>
                     </div>
                 </div>
 
