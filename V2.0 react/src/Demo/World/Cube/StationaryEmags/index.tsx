@@ -1,11 +1,16 @@
 import React from 'react';
 
 import "@react-three/fiber";
+import { Text } from "@react-three/drei";
+
 import { rotateCylinderToAxis } from './rotateCylinderToAxis';
 import { Vector3 } from 'three';
 import { axisType, cornerType } from '../../../Util/Types/types';
 import { getLocations180 } from "./locations180";
 import { getLocations90 } from "./locations90";
+import STLHelper from '../Model/STLhelper';
+
+
 
 const StationaryEmags = (props: {
     cubePosition: Vector3,
@@ -43,13 +48,18 @@ const StationaryEmags = (props: {
                         <meshPhongMaterial color={"#ff0000"} opacity={0.9}/>
                     </mesh>
                     {/* Hinge Cylinder */}
-                    <mesh 
+                    <group 
                         position={hingePosition}  
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
-                        <cylinderBufferGeometry args={[.15, .15, 0.8, 20]}/>
-                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
-                    </mesh>
+                        <STLHelper
+                            side={1}
+                            color={"#00177e"}
+                            filepath={"stl-assets/EmagArrow.stl"}
+                            normalOpacity={0.7}
+                            hoverOpacity={0.3}
+                        />
+                    </group>
                     {/* Catching Cylinder */}
                     <mesh 
                         position={catchingPosition}  
