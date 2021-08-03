@@ -3,13 +3,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Color, useFrame } from "@react-three/fiber";
 import { Euler, Vector3, Quaternion } from 'three';
 import Labeling from "./Labeling/labeling";
-import Emags from "./Emags/index";
 import Model from "./Model/index";
-import { axisType, instructionType, rotationStep } from '../../Util/Types/types';
+import { axisType, cornerType, instructionType, rotationStep } from '../../Util/Types/types';
 import { getPointOfRotation } from "./helpers/getPointOfRotation";
 import { getAxisOfRotationLocal } from "./helpers/getAxisOfRotationLocal";
 import { roundToRightAngle } from "./helpers/roundToRightAngle";
 import { translateGroup } from "./helpers/translateGroup";
+import { generateExplorePathOfRotation } from "./helpers/collision/generateExplorePathOfRotation";
+
+import MovingEmags from './MovingEmags';
+import StationaryEmags from "./StationaryEmags"
 
 
 const Cube = (props: {
@@ -22,9 +25,12 @@ const Cube = (props: {
 	axisOfRotationWorld: axisType,
 	setAxisOfRotationWorld: Function,
 	updatePosition: Function,
-	explorePathOfRotation: Function,
+	allPositions: {[cubeID: number]: Vector3},
+	visualizePath: Function,
+
 	incrementAmount: number,
 	showPath: boolean,
+
 	displayEmagIDs: boolean,
     displayCubeBox: boolean,
     displayCoilsAndCorners: boolean,
@@ -35,9 +41,11 @@ const Cube = (props: {
 	const side = 1;
 
 	const [step, setStep] = useState<rotationStep>("0_DEFAULT");
+	const [cornerOfRotation, setCornerOfRotation] = useState<cornerType>("NorthEast");
 	const [pointOfRotation, setPointOfRotation] = useState(new Vector3(0, 0, 0));
 	const [initialRotationAmount, setInitialRotationAmount] = useState(new Quaternion());
 	const [showEmags, setShowEmags] = useState(false);
+	const [rotationMagnitude, setRotationMagnitude] = useState(Math.PI);
 
 	// Debug
 	useEffect(() => {
@@ -71,7 +79,8 @@ const Cube = (props: {
 	const updatePosition = props.updatePosition;
 	useEffect(() => {
 		if (step === "0_DEFAULT") {
-			updatePosition(everything.current.position);
+			let copy = everything.current.position.clone()
+			updatePosition(copy);
 			setShowEmags(false);
 		}
 	}, [step, updatePosition])
@@ -102,10 +111,15 @@ const Cube = (props: {
 	// 1.1 Local - Subtract the pivot point from the object's original position
 	const [maxIteration, setMaxIteration] = useState(0);
 	const [iteration, setIteration] = useState(1);
-	const {id, explorePathOfRotation, showPath} = props;
+	const {id, showPath, allPositions, visualizePath, isCounterclockwise} = props;
 	useEffect(() => {
 		if (step === "1_CLICKED") {
-			const {collisionResult, cornerName, displacementMagnitude} = explorePathOfRotation(id);
+			// Analyze the collision path and find if it is a 90 or 180 degree rotation
+			const {collisionResult, cornerName, displacementMagnitude} = generateExplorePathOfRotation(
+				allPositions, 
+				visualizePath, 
+				isCounterclockwise, props.axisOfRotationWorld)
+				(id);
 			console.log("(Cube.tsx) collisionResult: ", collisionResult);
 			if (showPath) {
 				setStep("0_DEFAULT");
@@ -121,8 +135,10 @@ const Cube = (props: {
 						setStep("0_DEFAULT");
 						break;
 					case "NO_COLLISION":
+						setRotationMagnitude(displacementMagnitude);
 						const piv = getPointOfRotation(cornerName, side, props.axisOfRotationWorld, initialRotationAmount);
-						setPointOfRotation(piv);						
+						setCornerOfRotation(cornerName);				
+						setPointOfRotation(piv);		
 						let opp = piv.clone();
 						opp.negate();
 
@@ -132,12 +148,13 @@ const Cube = (props: {
 						setMaxIteration(Math.abs(displacementMagnitude / props.incrementAmount));
 						setIteration(1);
 						setStep("2_ROTATING");
+		
+						setShowEmags(true);
 						break;
 				}
 			}
-			setShowEmags(true);
 		}
-	}, [step, props.axisOfRotationWorld, explorePathOfRotation, id, showPath, initialRotationAmount, props.incrementAmount])
+	}, [step, props.axisOfRotationWorld, id, showPath, initialRotationAmount, props.incrementAmount, allPositions, visualizePath, isCounterclockwise])
 
 	// 2. Apply the rotation
 	useFrame(() => {
@@ -221,33 +238,56 @@ const Cube = (props: {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	return (
-		<group
-			ref={everything}	
-			onClick={handleClick}
-		>
-			<group ref={forPivot}>
-				<Model
-					side={side}
-					color={props.color}
-					displayCubeBox={props.displayCubeBox}
-					displayCoilsAndCorners={props.displayCoilsAndCorners}
-					displayBlueCubeBox={props.displayBlueCubeBox}
-				/>
-				<Labeling
-					cubeID={props.id}
-					letterOffset={0.1}
-					side={side}
-					axis={props.axisOfRotationWorld}
-					displayEmagIDs={props.displayEmagIDs}
-				/>
-				<Emags
-					showEmags={showEmags}
-					pointOfRotation={pointOfRotation}
-					axisOfRotationWorld={props.axisOfRotationWorld}
-				/>
-				{/* <axesHelper scale={0.3}/> */}
+		<>
+			{/* The Cube (everything contained is in Local Space)*/}
+			<group
+				ref={everything}	
+				onClick={handleClick}
+			>
+				<group ref={forPivot}>
+					<Model
+						side={side}
+						color={props.color}
+						displayCubeBox={props.displayCubeBox}
+						displayCoilsAndCorners={props.displayCoilsAndCorners}
+						displayBlueCubeBox={props.displayBlueCubeBox}
+					/>
+					<Labeling
+						cubeID={props.id}
+						letterOffset={0.1}
+						side={side}
+						axis={props.axisOfRotationWorld}
+						displayEmagIDs={props.displayEmagIDs}
+					/>
+					{showEmags &&
+						<MovingEmags
+							showEmags={showEmags}
+							side={side}
+							cornerName={cornerOfRotation}
+							initialRotationAmount={initialRotationAmount}
+							axisOfRotationWorld={props.axisOfRotationWorld}
+							isCounterclockwise={props.isCounterclockwise}
+							// setStationaryEmagsPositions={setStationaryEmagsPositions}
+						/>
+					}
+					{/* <axesHelper scale={0.3}/> */}
+				</group>
 			</group>
-		</group>
+
+			{/* Outside the Cube (in World Space) */}
+			{showEmags &&
+				<StationaryEmags
+					cubePosition={props.allPositions[props.id]}
+					showEmags={showEmags}
+					side={side}
+					cornerName={cornerOfRotation}
+					// initialRotationAmount={initialRotationAmount}
+					axisOfRotationWorld={props.axisOfRotationWorld}
+					isCounterclockwise={props.isCounterclockwise}
+					rotationMagnitude={rotationMagnitude}
+				/>
+			}
+		</>
 	)
 }
 

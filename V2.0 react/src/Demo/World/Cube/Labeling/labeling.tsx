@@ -6,6 +6,9 @@ import Roboto from "./Roboto_Regular.json";
 import { axisType } from '../../../Util/Types/types';
 import { numbers } from '../../../Util/Numbering/numbers';
 
+
+const font = new FontLoader().parse(Roboto);
+
 const Labeling = (props: {
 	cubeID: number,
     side: number,
@@ -15,7 +18,6 @@ const Labeling = (props: {
 }) => {
 	
     // Deal with the edge Labeling (using fonts)
-	const font = new FontLoader().parse(Roboto);
 	const textOptions = {
 		font,
 		size: 0.1,

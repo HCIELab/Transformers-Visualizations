@@ -1,8 +1,8 @@
-import { axisType, collisionType, cornerType } from '../../Util/Types/types';
-import { pathOfRotation } from '../Cube/helpers/collision/pathOfRotation';
-import { deviseCornerName } from '../Cube/helpers/collision/deviseCornerName';
-import { getListOfNeighborSpots } from '../Cube/helpers/collision/getListOfNeighborSpots';
-import { getNeighborOfRotation } from '../Cube/helpers/collision/getNeighborOfRotation';
+import { axisType, collisionType, cornerType } from '../../../../Util/Types/types';
+import { pathOfRotation } from './pathOfRotation';
+import { deviseCornerName } from './deviseCornerName';
+import { getListOfNeighborSpots } from './getListOfNeighborSpots';
+import { getNeighborOfRotation } from './getNeighborOfRotation';
 import { Vector3 } from 'three';
 
 

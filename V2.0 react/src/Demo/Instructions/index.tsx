@@ -12,6 +12,9 @@ import {Button8} from "./button8";
 // import {Button9} from "./button9";
 import {Button10} from "./button10/button10";
 import {Button11} from "./button11/button11";
+import {Button12} from "./button12";
+import {Button13} from "./button13";
+import {Button14} from "./button14";
 
 const Container = styled.div`
     padding: 5px 0;
@@ -53,6 +56,9 @@ const Instructions = (props: {
                 <Button4 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button10 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button11 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
+                <Button12 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
+                <Button13 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
+                <Button14 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <p className={"Label"} style={{color: "rgb(63, 81, 181)"}}>
                     Scripts with Instructions
                 </p>
