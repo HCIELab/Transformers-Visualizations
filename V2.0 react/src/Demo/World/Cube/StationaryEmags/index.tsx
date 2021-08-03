@@ -35,13 +35,15 @@ const StationaryEmags = (props: {
             {props.showEmags &&
                 <group position={props.cubePosition}>
                     {/* Repsulsion Cylinder */}
-                    <mesh 
+                    <group 
                         position={repulsionPosition}  
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
-                        <cylinderBufferGeometry args={[.15, .15, 0.8, 20]}/>
-                        <meshPhongMaterial color={"#ff0000"} opacity={0.9}/>
-                    </mesh>
+                        <mesh>
+                            <cylinderBufferGeometry args={[.15, .15, 0.8, 20]}/>
+                            <meshPhongMaterial color={"#ff0000"} opacity={0.9}/>
+                        </mesh>
+                    </group>
                     {/* Hinge Cylinder */}
                     <group 
                         position={hingePosition}  
@@ -49,23 +51,31 @@ const StationaryEmags = (props: {
                     >
                         <group rotation={new Euler(0, Math.PI/4, 0)}>
                             <mesh>
-                                <boxGeometry args={[0.2, 0.8, 0.05]}/>
+                                <boxGeometry args={[0.28, 0.8, 0.1]}/>
                                 <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
                             </mesh>
                             <mesh>
-                                <boxGeometry args={[0.05, 0.8, 0.2]}/>
+                                <boxGeometry args={[0.1, 0.8, 0.28]}/>
                                 <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
                             </mesh>
                         </group>
                     </group>
                     {/* Catching Cylinder */}
-                    <mesh 
+                    <group 
                         position={catchingPosition}  
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
-                        <cylinderBufferGeometry args={[.15, .15, 0.8, 20]}/>
-                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
-                    </mesh>
+                        <group rotation={new Euler(0, Math.PI/4, 0)}>
+                            <mesh>
+                                <boxGeometry args={[0.28, 0.8, 0.1]}/>
+                                <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                            </mesh>
+                            <mesh>
+                                <boxGeometry args={[0.1, 0.8, 0.28]}/>
+                                <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                            </mesh>
+                        </group>
+                    </group>
                 </group>
             }
 		</>
