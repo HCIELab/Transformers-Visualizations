@@ -11,9 +11,8 @@ const pi = Math.PI;
 
 export const getLocations = (side: number, offset: number, cornerName: cornerType, isCounterclockwise: boolean, axisOfRotation: axisType) : locationsType => {
     switch (axisOfRotation) {
-        // case "x":
-        //     return;
-        // TODO: write getLocationsX
+        case "x":
+            return getLocationsX(side, offset, cornerName, isCounterclockwise);
         case "y":
             return getLocationsY(side, offset, cornerName, isCounterclockwise);
         // case "z":
@@ -21,6 +20,48 @@ export const getLocations = (side: number, offset: number, cornerName: cornerTyp
             return getLocationsZ(side, offset, cornerName, isCounterclockwise);
     }
 }
+
+
+export const getLocationsX = (side: number, offset: number, cornerName: cornerType, isCounterclockwise: boolean) : locationsType => {
+    const half = side/2;
+
+    const template : locationsType = {
+        // This template works for 180 deg, counterclockwise, northwest corner
+        repulsionPosition:  new Vector3(0, 0, 0),
+        hingePosition:      new Vector3(0, 0, 0),
+        catchingPosition:   new Vector3(0, 0, 0),
+    }
+
+    let adjustment = {
+        repulsionPosition: new Vector3(0, 0, 0),
+        hingePosition: new Vector3(0, 0, 0),
+        catchingPosition: new Vector3(0, 0, 0),
+    };
+
+    let euler = new Euler(0, 0, 0);
+    switch (cornerName) {
+        case "NorthEast":
+            euler = isCounterclockwise ? new Euler(0, 3*pi/2, 0) : new Euler(pi, pi, 0);
+            break;
+        case "SouthEast":
+            euler = isCounterclockwise ? new Euler(0, pi, 0) : new Euler(pi, 3*pi/2, 0);
+            break;
+        case "SouthWest":
+            euler = isCounterclockwise ? new Euler(0, pi/2, 0) : new Euler(pi, 0, 0);
+            break;
+        // case "NorthWest":
+        default:
+            euler = isCounterclockwise ? new Euler(0, 0, 0) : new Euler(pi, pi/2, 0);
+    }
+    adjustment = {
+        repulsionPosition: template.repulsionPosition.applyEuler(euler),
+        hingePosition: template.hingePosition.applyEuler(euler),
+        catchingPosition: template.catchingPosition.applyEuler(euler),
+    }
+
+    return adjustment;
+}
+
 
 
 
@@ -43,20 +84,16 @@ export const getLocationsY = (side: number, offset: number, cornerName: cornerTy
     let euler = new Euler(0, 0, 0);
     switch (cornerName) {
         case "NorthEast":
-            // TODO: edit these!!!
             euler = isCounterclockwise ? new Euler(0, 3*pi/2, 0) : new Euler(pi, pi, 0);
             break;
         case "SouthEast":
-            // TODO: edit these!!!
             euler = isCounterclockwise ? new Euler(0, pi, 0) : new Euler(pi, 3*pi/2, 0);
             break;
         case "SouthWest":
-            // TODO: edit these!!!
             euler = isCounterclockwise ? new Euler(0, pi/2, 0) : new Euler(pi, 0, 0);
             break;
         // case "NorthWest":
         default:
-            // TODO: edit these!!!
             euler = isCounterclockwise ? new Euler(0, 0, 0) : new Euler(pi, pi/2, 0);
     }
     adjustment = {
