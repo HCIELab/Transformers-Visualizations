@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 import "@react-three/fiber";
-import { FontLoader, Vector3 } from 'three';
+import { FontLoader } from 'three';
 import Roboto from "./Roboto_Regular.json";
 import { axisType } from '../../../Util/Types/types';
 import { numbers } from '../../../Util/Numbering/numbers';
@@ -52,15 +52,6 @@ const Labeling = (props: {
 
 	const IDLabel = useRef<THREE.Mesh>(null!)
 
-	useEffect(() => {
-		IDLabel.current.rotation.z = Math.PI;
-	})
-
-	const fooRef = useRef<THREE.Mesh>(null!);
-	useEffect(() => {
-		console.log(`(labeling.tsx) (for cube ${props.cubeID}) Location of the Z NorthEast labeltext: `, numbers.z.NorthEast, fooRef.current.getWorldPosition(new Vector3(0, 0, 0)));	
-	})
-
 	const letterOffset = props.letterOffset;
 	const letterHeight = 0.01;
 	const half = props.side/2;
@@ -68,7 +59,7 @@ const Labeling = (props: {
 		<>	
 			{/* ID */}
 			<group>
-				<mesh position={[letterOffset, letterOffset*2, half]}  ref={IDLabel}>
+				<mesh position={[-letterOffset, -letterOffset, half]}  ref={IDLabel}>
 					<textGeometry args={[`${props.cubeID}`, {font, size: 0.3, height: 0.05}]} />
 					<meshPhongMaterial color={"#000000"}/>
 				</mesh>
@@ -77,7 +68,7 @@ const Labeling = (props: {
 			{/* Edges parallel to the "z" axis */}
 			<group visible={props.displayEmagIDs}>
 				<group visible={props.axis === "z"}>
-					<mesh ref={fooRef} position={[half-letterOffset*2, half-letterOffset, 0+half-letterHeight]}>
+					<mesh position={[half-letterOffset*2, half-letterOffset, 0+half-letterHeight]}>
 						<textGeometry args={[`${numbers.z.NorthEast}`, textOptions]} />
 						<meshPhongMaterial color={"#000000"}/>
 					</mesh>
@@ -94,8 +85,9 @@ const Labeling = (props: {
 						<meshPhongMaterial color={"#000000"}/>
 					</mesh>
 				</group>
+
+				{/* Edges parallel to the "x" axis */}
 				<group visible={props.axis === "x"}>
-					{/* Edges parallel to the "x" axis */}
 					<mesh position={[0+half-letterHeight, half-letterOffset, -half+letterOffset]} ref={xEdges.NorthWest}>
 						<textGeometry args={[`${numbers.x.NorthEast}`, textOptions]}/>
 						<meshPhongMaterial color={"#000000"}/>
@@ -113,8 +105,9 @@ const Labeling = (props: {
 						<meshPhongMaterial color={"#000000"}/>
 					</mesh>
 				</group>
+
+				{/* Edges parallel to the "y" axis */}
 				<group visible={props.axis === "y"}>
-					{/* Edges parallel to the "y" axis */}
 					<mesh position={[half-letterOffset, 0+half-letterHeight, -half+letterOffset]} ref={yEdges.NorthEast}>
 						<textGeometry args={[`${numbers.y.NorthEast}`, textOptions]} />
 						<meshPhongMaterial color={"#000000"}/>
