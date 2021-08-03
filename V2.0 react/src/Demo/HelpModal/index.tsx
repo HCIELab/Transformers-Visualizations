@@ -28,8 +28,8 @@ const HelpModal = (props: {
             open={props.modalOpenStatus}
             onClose={() => props.setModalOpenStatus(false)}
         >
-            <Container>
-                <div className={"Inner"}>
+            <Container onClick={() => props.setModalOpenStatus(false)}>
+                <div className={"Inner"} onClick={(e) => e.preventDefault()}>
                     <h1>Web Simulation for Electromagnetically Actuated Reconfigurable Robots</h1>
                     <hr/>
                 
