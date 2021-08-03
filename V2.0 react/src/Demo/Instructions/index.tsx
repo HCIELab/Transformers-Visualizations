@@ -12,9 +12,9 @@ import {Button8} from "./button8";
 // import {Button9} from "./button9";
 import {Button10} from "./button10/button10";
 import {Button11} from "./button11/button11";
-import {Button12} from "./button12";
-import {Button13} from "./button13";
-import {Button14} from "./button14";
+// import {Button12} from "./button12";
+// import {Button13} from "./button13";
+// import {Button14} from "./button14";
 
 const Container = styled.div`
     padding: 5px 0;

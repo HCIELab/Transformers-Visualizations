@@ -19,6 +19,7 @@ const World = (props: {
     incrementAmount: number,
     showPath: boolean,
     displayEmagIDs: boolean,
+    displayEmags: boolean,
     displayCubeBox: boolean,
     displayCoilsAndCorners: boolean,
     displayBlueCubeBox: boolean,
@@ -104,6 +105,7 @@ const World = (props: {
                             showPath={props.showPath}
 
                             displayEmagIDs={props.displayEmagIDs}
+                            displayEmags={props.displayEmags}
                             displayCubeBox={props.displayCubeBox}    
                             displayCoilsAndCorners={props.displayCoilsAndCorners}    
                             displayBlueCubeBox={props.displayBlueCubeBox}    

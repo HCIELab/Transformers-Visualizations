@@ -37,6 +37,9 @@ const DemoContainer = styled.div`
                 overflow: auto;
             }
             .TogglesContainer {
+                padding: 10px 30px;
+                display: flex;
+                flex-direction: column;
                 height: 100%;
                 overflow: auto;
             }
@@ -65,6 +68,7 @@ const Demo = () => {
     const [displayCoilsAndCorners, setDisplayCoilsAndCorners] = useState(true);
     const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
     const [displayBlueCubeBox, setDisplayBlueCubeBox] = useState(false);
+    const [displayEmags, setDisplayEmags] = useState(false);
 
     return (
         <DemoContainer>
@@ -129,6 +133,16 @@ const Demo = () => {
                             }
                             label={displayEmagIDs ? "Displaying Emag IDs" : "Not Displaying Emag IDs"}
                         />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={displayEmags}
+                                    onChange={() => setDisplayEmags(!displayEmags)}
+                                    color="primary"
+                                />
+                            }
+                            label={displayEmags ? "Displaying Emags" : "Not Displaying Emags"}
+                        />
                         {/*  */}
                         <FormControlLabel
                             control={
@@ -143,9 +157,9 @@ const Demo = () => {
                         />
                         <br/><br/>
 
-                        {/* <p> 💡 Please do not move the camera while a rotation is in motion</p>
+                        <p> 💡 Please do not move the camera while a rotation is in motion</p>
                         <p> 💡 Please do not change to a different browser tab while a rotation is in motion</p>
-                        <p> 💡 Refresh the page if an instruction script encounters an error</p> */}
+                        <p> 💡 Refresh the page if an instruction script encounters an error</p>
                     </div>
                 </div>
 
@@ -162,6 +176,7 @@ const Demo = () => {
                         incrementAmount={incrementAmount}
                         showPath={showPath}
                         displayEmagIDs={displayEmagIDs}
+                        displayEmags={displayEmags}
                         displayCubeBox={displayCubeBox}
                         displayCoilsAndCorners={displayCoilsAndCorners}
                         displayBlueCubeBox={displayBlueCubeBox}
