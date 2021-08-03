@@ -45,6 +45,7 @@ const Cube = (props: {
 	const [pointOfRotation, setPointOfRotation] = useState(new Vector3(0, 0, 0));
 	const [initialRotationAmount, setInitialRotationAmount] = useState(new Quaternion());
 	const [showEmags, setShowEmags] = useState(false);
+	const [rotationMagnitude, setRotationMagnitude] = useState(Math.PI);
 
 	// Debug
 	useEffect(() => {
@@ -134,6 +135,7 @@ const Cube = (props: {
 						setStep("0_DEFAULT");
 						break;
 					case "NO_COLLISION":
+						setRotationMagnitude(displacementMagnitude);
 						const piv = getPointOfRotation(cornerName, side, props.axisOfRotationWorld, initialRotationAmount);
 						setCornerOfRotation(cornerName);				
 						setPointOfRotation(piv);		
@@ -229,14 +231,6 @@ const Cube = (props: {
 	}, [id, instructions, setIsCounterclockwise, setAxisOfRotationWorld])
 
 
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////--- HANDLING Emags ---/////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////////////////
-	// const [stationaryEmagsPositions, setStationaryEmagsPositions] = useState(new Vector3(-2, -2, 0));
-
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////--- RETURN AND RENDER ---/////////////////////////////////////
@@ -284,9 +278,10 @@ const Cube = (props: {
 				showEmags={showEmags}
 				side={side}
 				cornerName={cornerOfRotation}
-				initialRotationAmount={initialRotationAmount}
+				// initialRotationAmount={initialRotationAmount}
 				axisOfRotationWorld={props.axisOfRotationWorld}
 				isCounterclockwise={props.isCounterclockwise}
+				rotationMagnitude={rotationMagnitude}
 			/>
 		</>
 	)

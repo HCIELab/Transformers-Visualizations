@@ -2,24 +2,33 @@ import React from 'react';
 
 import "@react-three/fiber";
 import { rotateCylinderToAxis } from './rotateCylinderToAxis';
-import { Quaternion, Vector3 } from 'three';
+import { Vector3 } from 'three';
 import { axisType, cornerType } from '../../../Util/Types/types';
-import { getLocations } from "./locations";
+import { getLocations180 } from "./locations180";
+import { getLocations90 } from "./locations90";
 
 const StationaryEmags = (props: {
     cubePosition: Vector3,
     showEmags: boolean,
     side: number,
     cornerName: cornerType,
-    initialRotationAmount: Quaternion;
+    // initialRotationAmount: Quaternion;
     axisOfRotationWorld: axisType,
     isCounterclockwise: boolean,
+    rotationMagnitude: number,
 }) => {
     // NOTE: The coordinates in this component are rendered in WORLD position
 
     const offset = 0.15;
-    const {repulsionPosition, hingePosition, catchingPosition} = getLocations(props.side, offset, props.cornerName, props.isCounterclockwise, props.axisOfRotationWorld);
 
+    // console.log("(StationaryEmags.tsx) rotationMagnitude", props.rotationMagnitude)
+
+    const getLocationsFunc = props.rotationMagnitude >= Math.PI ? getLocations180 : getLocations90;
+    const {repulsionPosition, hingePosition, catchingPosition} = getLocationsFunc(props.side, offset, props.cornerName, props.isCounterclockwise, props.axisOfRotationWorld);
+
+    // useEffect(() => {
+    //     console.log("(StationaryEmags.tsx) something has changed *****")
+    // }, [props.showEmags])
 
 	return (
 		<>	
