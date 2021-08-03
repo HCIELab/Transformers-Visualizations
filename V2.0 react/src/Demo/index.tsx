@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 // import Panel from "./Panel";
 import Instructions from "./Instructions";
+import HelpModal from "./HelpModal";
 import { axisType, initialCubeConfigType, instructionType } from './Util/Types/types';
 import World from "./World";
 import { Vector3 } from 'three';
@@ -36,8 +37,9 @@ const DemoContainer = styled.div`
                 height: 100%;
                 overflow: auto;
             }
+
             .TogglesContainer {
-                padding: 10px 30px;
+                width: 1000px;
                 display: flex;
                 flex-direction: column;
                 height: 100%;
@@ -69,6 +71,8 @@ const Demo = () => {
     const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
     const [displayBlueCubeBox, setDisplayBlueCubeBox] = useState(false);
     const [displayEmags, setDisplayEmags] = useState(false);
+
+    const [modalOpenStatus, setModalOpenStatus] = useState(true);
 
     return (
         <DemoContainer>
@@ -183,6 +187,13 @@ const Demo = () => {
                     />
                 </div>
             </div>
+
+
+            <HelpModal
+                modalOpenStatus={modalOpenStatus}
+                setModalOpenStatus={setModalOpenStatus}
+            />
+
         </DemoContainer>
     )
 }
