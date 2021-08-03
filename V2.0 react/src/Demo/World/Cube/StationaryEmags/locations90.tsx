@@ -29,7 +29,7 @@ const getLocationsX = (side: number, offset: number, cornerName: cornerType, isC
         // This template works for 180 deg, counterclockwise, northwest corner
         repulsionPosition:  new Vector3(0, -half+offset, half+offset),
         hingePosition:      new Vector3(0, half-offset, half+offset),
-        catchingPosition:   new Vector3(0, half-offset, 3*half-offset),
+        catchingPosition:   new Vector3(0, 3*half-offset, half+offset),
     }
 
     let euler = new Euler(0, 0, 0);
@@ -62,9 +62,9 @@ const getLocationsY = (side: number, offset: number, cornerName: cornerType, isC
 
     const template : locationsType = {
         // This template works for 180 deg, counterclockwise, northwest corner
-        repulsionPosition:  new Vector3(-half - offset, 0, half - offset),
-        hingePosition:      new Vector3(-half + -offset, 0, -half + offset),
-        catchingPosition:   new Vector3(-half*3 + offset, 0, -half + offset),
+        repulsionPosition:  new Vector3(-half-offset, 0, half-offset),
+        hingePosition:      new Vector3(-half-offset, 0, -half+offset),
+        catchingPosition:   new Vector3(-half-offset, 0, -3*half+offset),
     }
 
     let euler = new Euler(0, 0, 0);
