@@ -34,7 +34,7 @@ const DemoContainer = styled.div`
             justify-content: space-between;
 
             .InstructionsContainer {
-                width: 3500px;
+                width: 3200px;
                 height: 100%;
                 overflow: auto;
             }
@@ -147,7 +147,7 @@ const Demo = () => {
                                     color="primary"
                                 />
                             }
-                            label={displayEmagIDs ? "Displaying Emag IDs" : "Not Displaying Emag IDs"}
+                            label={displayEmagIDs ? "Displaying Electromagnet IDs" : "Not Displaying Electromagnet IDs"}
                         />
                         <FormControlLabel
                             control={
@@ -157,7 +157,7 @@ const Demo = () => {
                                     color="primary"
                                 />
                             }
-                            label={displayEmags ? "Displaying Emags" : "Not Displaying Emags"}
+                            label={displayEmags ? "Displaying Electromagnets" : "Not Displaying Electromagnets"}
                         />
                         {/*  */}
                         <FormControlLabel
