@@ -95,9 +95,9 @@ const getLocationsZ = (side: number, offset: number, cornerName: cornerType, isC
 
     const template : locationsType = {
         // This template works for 180 deg, counterclockwise, northwest corner
-        repulsionPosition:  new Vector3(0, 0, 0),
-        hingePosition:      new Vector3(0, 0, 0),
-        catchingPosition:   new Vector3(0, 0, 0),
+        repulsionPosition:  new Vector3(-half-offset, -half+offset, 0),
+        hingePosition:      new Vector3(-half-offset, half+offset, 0),
+        catchingPosition:   new Vector3(-half-offset, 3*half-offset, 0),
     }
 
     let euler = new Euler(0, 0, 0);
