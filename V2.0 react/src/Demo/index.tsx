@@ -4,10 +4,12 @@ import styled from 'styled-components';
 
 // import Panel from "./Panel";
 import Instructions from "./Instructions";
+import HelpModal from "./HelpModal";
 import { axisType, initialCubeConfigType, instructionType } from './Util/Types/types';
 import World from "./World";
 import { Vector3 } from 'three';
 import { FormControlLabel, Switch } from '@material-ui/core';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
 const DemoContainer = styled.div`
     width: 100%;
@@ -32,11 +34,15 @@ const DemoContainer = styled.div`
             justify-content: space-between;
 
             .InstructionsContainer {
-                width: 3100px;
+                width: 3200px;
                 height: 100%;
                 overflow: auto;
             }
+
             .TogglesContainer {
+                /* width: 1000px;
+                display: flex;
+                flex-direction: column; */
                 height: 100%;
                 overflow: auto;
             }
@@ -48,6 +54,17 @@ const DemoContainer = styled.div`
             width: 100%;
             background-color: #f0f0f0;
         }
+    }
+`;
+
+const HelpButtonStyler = styled.button`
+    background-color: white;
+    border-radius: 100%;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.6;
     }
 `;
 
@@ -65,6 +82,9 @@ const Demo = () => {
     const [displayCoilsAndCorners, setDisplayCoilsAndCorners] = useState(true);
     const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
     const [displayBlueCubeBox, setDisplayBlueCubeBox] = useState(false);
+    const [displayEmags, setDisplayEmags] = useState(false);
+
+    const [modalOpenStatus, setModalOpenStatus] = useState(true);
 
     return (
         <DemoContainer>
@@ -127,7 +147,17 @@ const Demo = () => {
                                     color="primary"
                                 />
                             }
-                            label={displayEmagIDs ? "Displaying Emag IDs" : "Not Displaying Emag IDs"}
+                            label={displayEmagIDs ? "Displaying Electromagnet IDs" : "Not Displaying Electromagnet IDs"}
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={displayEmags}
+                                    onChange={() => setDisplayEmags(!displayEmags)}
+                                    color="primary"
+                                />
+                            }
+                            label={displayEmags ? "Displaying Electromagnets" : "Not Displaying Electromagnets"}
                         />
                         {/*  */}
                         <FormControlLabel
@@ -141,11 +171,10 @@ const Demo = () => {
                             }
                             label={showPath ? "Showing Path of Rotation without Movement" : "Simulating and Animating Cube Movement"}
                         />
-                        <br/><br/>
-
-                        <p> 💡 Please do not move the camera while a rotation is in motion</p>
-                        <p> 💡 Please do not change to a different browser tab while a rotation is in motion</p>
-                        <p> 💡 Refresh the page if an instruction script encounters an error</p>
+                        <br/>
+                        <HelpButtonStyler onClick={() => setModalOpenStatus(true)}>
+                            <HelpOutlineIcon/>
+                        </HelpButtonStyler>
                     </div>
                 </div>
 
@@ -162,12 +191,20 @@ const Demo = () => {
                         incrementAmount={incrementAmount}
                         showPath={showPath}
                         displayEmagIDs={displayEmagIDs}
+                        displayEmags={displayEmags}
                         displayCubeBox={displayCubeBox}
                         displayCoilsAndCorners={displayCoilsAndCorners}
                         displayBlueCubeBox={displayBlueCubeBox}
                     />
                 </div>
             </div>
+
+
+            <HelpModal
+                modalOpenStatus={modalOpenStatus}
+                setModalOpenStatus={setModalOpenStatus}
+            />
+
         </DemoContainer>
     )
 }

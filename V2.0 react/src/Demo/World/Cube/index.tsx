@@ -32,6 +32,7 @@ const Cube = (props: {
 	showPath: boolean,
 
 	displayEmagIDs: boolean,
+	displayEmags: boolean,
     displayCubeBox: boolean,
     displayCoilsAndCorners: boolean,
     displayBlueCubeBox: boolean,
@@ -259,7 +260,7 @@ const Cube = (props: {
 						axis={props.axisOfRotationWorld}
 						displayEmagIDs={props.displayEmagIDs}
 					/>
-					{showEmags &&
+					{showEmags && props.displayEmags &&
 						<MovingEmags
 							showEmags={showEmags}
 							side={side}
@@ -275,7 +276,7 @@ const Cube = (props: {
 			</group>
 
 			{/* Outside the Cube (in World Space) */}
-			{showEmags &&
+			{showEmags && props.displayEmags &&
 				<StationaryEmags
 					cubePosition={props.allPositions[props.id]}
 					showEmags={showEmags}
