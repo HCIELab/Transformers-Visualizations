@@ -161,7 +161,7 @@ const Demo = () => {
                             label={displayEmags ? "Displaying Electromagnets" : "Not Displaying Electromagnets"}
                         />
                         {/*  */}
-                        {/* <FormControlLabel
+                        <FormControlLabel
                             control={
                                 <Switch
                                     checked={showPath}
@@ -171,7 +171,7 @@ const Demo = () => {
                                 />
                             }
                             label={showPath ? "Showing Path of Rotation without Movement" : "Simulating and Animating Cube Movement"}
-                        /> */}
+                        />
                         <br/> 
                         <HelpButtonStyler onClick={() => setModalOpenStatus(true)}>
                             <HelpOutlineIcon/>

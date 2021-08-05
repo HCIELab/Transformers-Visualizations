@@ -8,13 +8,13 @@ import {Button4} from "./button4";
 import {Button5} from "./button5";
 import {Button6} from "./button6";
 import {Button7} from "./button7";
-import {Button8} from "./button8";
+// import {Button8} from "./button8";
 // import {Button9} from "./button9";
-import {Button10} from "./button10/button10";
-import {Button11} from "./button11/button11";
-import {Button12} from "./button12";
-import {Button13} from "./button13";
-import {Button14} from "./button14";
+// import {Button10} from "./button10/button10";
+// import {Button11} from "./button11/button11";
+// import {Button12} from "./button12";
+// import {Button13} from "./button13";
+// import {Button14} from "./button14";
 
 const Container = styled.div`
     padding: 0 5px;
