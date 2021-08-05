@@ -22,7 +22,7 @@ const World = (props: {
     displayEmags: boolean,
     displayCubeBox: boolean,
     displayCoilsAndCorners: boolean,
-    displayBlueCubeBox: boolean,
+    displayGrayCubeBox: boolean,
 }) => {
     console.log("(World.tsx) Rendering the World component");
     
@@ -108,7 +108,7 @@ const World = (props: {
                             displayEmags={props.displayEmags}
                             displayCubeBox={props.displayCubeBox}    
                             displayCoilsAndCorners={props.displayCoilsAndCorners}    
-                            displayBlueCubeBox={props.displayBlueCubeBox}    
+                            displayGrayCubeBox={props.displayGrayCubeBox}    
                         />
                     </Suspense>        
                 )
