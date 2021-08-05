@@ -40,7 +40,7 @@ const StationaryEmags = (props: {
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
                         <mesh>
-                            <cylinderBufferGeometry args={[.09, .09, 0.8, 20]}/>
+                            <cylinderBufferGeometry args={[.09, .09, 0.9, 20]}/>
                             <meshPhongMaterial color={"#ff0000"} opacity={0.9}/>
                         </mesh>
                     </group>
@@ -51,11 +51,11 @@ const StationaryEmags = (props: {
                     >
                         <group rotation={new Euler(0, Math.PI/4, 0)}>
                             <mesh>
-                                <boxGeometry args={[0.2, 0.5, 0.05]}/>
+                                <boxGeometry args={[0.2, 0.9, 0.05]}/>
                                 <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
                             </mesh>
                             <mesh>
-                                <boxGeometry args={[0.05, 0.5, 0.2]}/>
+                                <boxGeometry args={[0.05, 0.9, 0.2]}/>
                                 <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
                             </mesh>
                         </group>
@@ -67,11 +67,11 @@ const StationaryEmags = (props: {
                     >
                         <group rotation={new Euler(0, Math.PI/4, 0)}>
                             <mesh>
-                                <boxGeometry args={[0.2, 0.5, 0.05]}/>
+                                <boxGeometry args={[0.2, 0.9, 0.05]}/>
                                 <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
                             </mesh>
                             <mesh>
-                                <boxGeometry args={[0.05, 0.5, 0.2]}/>
+                                <boxGeometry args={[0.05, 0.9, 0.2]}/>
                                 <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
                             </mesh>
                         </group>
