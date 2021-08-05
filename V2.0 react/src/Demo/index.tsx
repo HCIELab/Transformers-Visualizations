@@ -109,6 +109,7 @@ const Demo = () => {
 
 
                     <div className="TogglesContainer">
+                        <h2>Toggle Features Shown </h2>
                         <FormControlLabel
                             control={
                                 <Switch
@@ -160,7 +161,7 @@ const Demo = () => {
                             label={displayEmags ? "Displaying Electromagnets" : "Not Displaying Electromagnets"}
                         />
                         {/*  */}
-                        <FormControlLabel
+                        {/* <FormControlLabel
                             control={
                                 <Switch
                                     checked={showPath}
@@ -170,8 +171,8 @@ const Demo = () => {
                                 />
                             }
                             label={showPath ? "Showing Path of Rotation without Movement" : "Simulating and Animating Cube Movement"}
-                        />
-                        <br/>
+                        /> */}
+                        <br/> 
                         <HelpButtonStyler onClick={() => setModalOpenStatus(true)}>
                             <HelpOutlineIcon/>
                         </HelpButtonStyler>
