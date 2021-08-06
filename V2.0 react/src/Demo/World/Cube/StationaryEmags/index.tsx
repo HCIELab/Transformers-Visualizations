@@ -31,6 +31,10 @@ const StationaryEmags = (props: {
     // }, [props.showEmags])
 
     const fooCondition = props.cornerName === "NorthEast" || props.cornerName === "SouthWest";
+    const rotationAdjustmentForPWMCylinders = props.isCounterclockwise ?
+        new Euler(Math.PI/2, 0, !fooCondition ? Math.PI/2 : 0)
+        :
+        new Euler(0, 0, 0);
 
 	return (
 		<>	
@@ -87,7 +91,7 @@ const StationaryEmags = (props: {
                                 position={pwmOne}  
                                 rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                             >
-                                <group rotation={new Euler(0, fooCondition ? Math.PI/2 : 0, Math.PI/2)}>
+                                <group rotation={rotationAdjustmentForPWMCylinders}>
                                     <mesh>
                                         <cylinderBufferGeometry args={[.09, .09, 0.9, 20]}/>
                                         <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
@@ -98,7 +102,7 @@ const StationaryEmags = (props: {
                                 position={pwmTwo}  
                                 rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                             >
-                                <group rotation={new Euler(0, fooCondition ? Math.PI/2 : 0, Math.PI/2)}>
+                                <group rotation={rotationAdjustmentForPWMCylinders}>
                                     <mesh>
                                         <cylinderBufferGeometry args={[.09, .09, 0.9, 20]}/>
                                         <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
@@ -109,7 +113,7 @@ const StationaryEmags = (props: {
                                 position={pwmThree}  
                                 rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                             >
-                                <group rotation={new Euler(0, fooCondition ? Math.PI/2 : 0, Math.PI/2)}>
+                                <group rotation={rotationAdjustmentForPWMCylinders}>
                                     <mesh>
                                         <cylinderBufferGeometry args={[.09, .09, 0.9, 20]}/>
                                         <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
@@ -120,7 +124,7 @@ const StationaryEmags = (props: {
                                 position={pwmFour}  
                                 rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                             >
-                                <group rotation={new Euler(0, fooCondition ? Math.PI/2 : 0, Math.PI/2)}>
+                                <group rotation={rotationAdjustmentForPWMCylinders}>
                                     <mesh>
                                         <cylinderBufferGeometry args={[.09, .09, 0.9, 20]}/>
                                         <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>

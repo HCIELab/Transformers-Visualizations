@@ -118,10 +118,10 @@ const getLocationsZ = (side: number, offset: number, cornerName: cornerType, isC
         repulsionPosition:  new Vector3(-half-offset, -half+offset, 0),
         hingePosition:      new Vector3(-half-offset, half+offset, 0),
         catchingPosition:   new Vector3(-half-offset, 3*half-offset, 0),
-        pwmOne:             new Vector3(-2*half, -half, half),
-        pwmTwo:             new Vector3(-2*half, -half, -half),
-        pwmThree:           new Vector3(-2*half, half, half),
-        pwmFour:            new Vector3(-2*half, half, -half),
+        pwmOne:             new Vector3(-2*half, half+offset, half-offset),
+        pwmTwo:             new Vector3(-2*half, half+offset, -half+offset),
+        pwmThree:           new Vector3(-2*half, half-offset, half-offset),
+        pwmFour:            new Vector3(-2*half, half-offset, -half+offset),
     }
 
     let euler = new Euler(0, 0, 0);
