@@ -49,7 +49,7 @@ const DemoContainer = styled.div`
             margin: 0;
             height: calc(100% - 200px);
             width: 100%;
-            background-color: #f0f0f0;
+            background-color: #ffffff;
         }
     }
 `;
