@@ -34,7 +34,8 @@ const StationaryEmags = (props: {
     const rotationAdjustmentForPWMCylinders = props.isCounterclockwise ?
         new Euler(Math.PI/2, 0, !fooCondition ? Math.PI/2 : 0)
         :
-        new Euler(0, 0, 0);
+        new Euler(-Math.PI/2, 0, fooCondition ? -Math.PI/2 : 0)
+        ;
 
 	return (
 		<>	
