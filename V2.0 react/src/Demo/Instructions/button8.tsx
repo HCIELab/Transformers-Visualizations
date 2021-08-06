@@ -20,7 +20,6 @@ export const Button8 = (props: {
             }
         }
 
-        props.setIncrementAmount(0.1);
         props.setInitialCubeConfigs(foo)
         props.setInstructions([])
     }}>

@@ -6,7 +6,7 @@ import Input from '@material-ui/core/Input';
 const Container = styled.div`
     margin: 5px;
     padding: 10px;
-    border: 1px dotted gray;
+    /* border: 1px dotted gray; */
 
     .incrementAmountSlider {
         display: flex;
@@ -23,6 +23,8 @@ const Container = styled.div`
 const SpeedControl = (props: {
     incrementAmount: number,
     setIncrementAmount: Function,
+    intervalAmount: number,
+    setIntervalAmount: Function,
 }) => {
     const MIN_VALUE = 0.05;
     const MAX_VALUE = 0.6;

@@ -37,6 +37,8 @@ const Toggles = (props: {
 
     incrementAmount: number,
     setIncrementAmount: Function,
+    intervalAmount: number,
+    setIntervalAmount: Function,
 }) => {
     const {
         showPath,
@@ -161,9 +163,13 @@ const Toggles = (props: {
                 />
             </div>
 
+            <hr/> 
+            
             <SpeedControl
                 incrementAmount={props.incrementAmount}
                 setIncrementAmount={props.setIncrementAmount}
+                intervalAmount={props.intervalAmount}
+                setIntervalAmount={props.setIntervalAmount}
             />
 
         </Container>

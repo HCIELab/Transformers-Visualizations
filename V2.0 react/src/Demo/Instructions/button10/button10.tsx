@@ -45,8 +45,6 @@ export const Button10 = (props: {
 
         ])
 
-        props.setIncrementAmount(0.6);
-
         let instructions : instructionType[] = [];
         const interval = 1000;
         instructions = instructions.concat(chairToTableLeft(1500 + interval*instructions.length, interval));

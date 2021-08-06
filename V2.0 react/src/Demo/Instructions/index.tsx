@@ -50,36 +50,37 @@ const Instructions = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
     setIncrementAmount: Function,
+    setIntervalAmount: Function,
 }) => {
 
     return (
         <Container>
             <h2>Pre-defined Scripts </h2>
             <div className="Section">
-                <Button1 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button2 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button3 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button4 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button10 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button11 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                {/* <Button12 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button13 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button14 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} /> */}
-                <WalkInAllAxesButton setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
+                <Button1 {...props} />
+                <Button2 {...props} />
+                <Button3 {...props} />
+                <Button4 {...props} />
+                <Button10 {...props} />
+                <Button11 {...props} />
+                {/* <Button12 {...props} />
+                <Button13 {...props} />
+                <Button14 {...props}*/}
+                <WalkInAllAxesButton {...props} />
                 <p className={"Label"} style={{color: "rgb(63, 81, 181)"}}>
                     Scripts with Instructions
                 </p>
             </div>
             <div className="Section">
-                <Button5 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button6 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button7 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button8 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
+                <Button5 {...props} />
+                <Button6 {...props} />
+                <Button7 {...props} />
+                <Button8 {...props} />
                 <p className={"Label"}>
                     Scripts with no Instructions
                 </p>
             </div>
-            {/* <Button9 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} /> */}
+            {/* <Button9 {...props}*/}
         </Container>
     )
 }

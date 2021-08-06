@@ -70,6 +70,7 @@ const Demo = () => {
     const [axisOfRotationWorld, setAxisOfRotationWorld] = useState<axisType>("z");
 
     const [incrementAmount, setIncrementAmount] = useState(0.1);
+    const [intervalAmount, setIntervalAmount] = useState(0.1);
 
     const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([{id: 1, initialPosition: new Vector3(0, 0, 0), color: "#77410e"}]);
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
@@ -103,6 +104,7 @@ const Demo = () => {
                             setInstructions={setInstructions}
                             setInitialCubeConfigs={setInitialCubeConfigs}
                             setIncrementAmount={setIncrementAmount}
+                            setIntervalAmount={setIntervalAmount}
                         />
                     </div>
 
@@ -127,6 +129,8 @@ const Demo = () => {
 
                             incrementAmount={incrementAmount}
                             setIncrementAmount={setIncrementAmount}
+                            intervalAmount={intervalAmount}
+                            setIntervalAmount={setIntervalAmount}
                         />
                     </div>
 
