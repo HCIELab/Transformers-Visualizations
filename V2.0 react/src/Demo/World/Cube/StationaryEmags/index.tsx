@@ -31,11 +31,18 @@ const StationaryEmags = (props: {
     // }, [props.showEmags])
 
     const fooCondition = props.cornerName === "NorthEast" || props.cornerName === "SouthWest";
-    const rotationAdjustmentForPWMCylinders = props.isCounterclockwise ?
-        new Euler(Math.PI/2, 0, !fooCondition ? Math.PI/2 : 0)
+    const rotationAdjustmentForPWMCylinders = 
+    props.axisOfRotationWorld === "x" ?
+        !props.isCounterclockwise ?
+            new Euler(Math.PI/2, 0, !fooCondition ? Math.PI/2 : 0)
+            :
+            new Euler(-Math.PI/2, 0, fooCondition ? -Math.PI/2 : 0)
         :
-        new Euler(-Math.PI/2, 0, fooCondition ? -Math.PI/2 : 0)
-        ;
+        props.isCounterclockwise ?
+            new Euler(Math.PI/2, 0, !fooCondition ? Math.PI/2 : 0)
+            :
+            new Euler(-Math.PI/2, 0, fooCondition ? -Math.PI/2 : 0)
+            ;
 
 	return (
 		<>	
