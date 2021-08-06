@@ -13,7 +13,7 @@ export const Button8 = (props: {
             for (let b = 0; b < 5; b++) {
                 for (let c = 0; c < 5; c++) {
                     foo.push(
-                        {id: a*100+b*10+c, initialPosition: new Vector3(a, b, c), color: "#77410e"}
+                        {id: a*100+b*10+c, initialPosition: new Vector3(a, b, c),  }
                     )
                 }
             }

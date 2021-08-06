@@ -94,7 +94,6 @@ const World = (props: {
                             instructions={props.instructions}
                             id={config.id} 
                             initialPosition={config.initialPosition} 
-                            color={config.color} 
                             isCounterclockwise={props.isCounterclockwise}
                             setIsCounterclockwise={props.setIsCounterclockwise}                        
                             axisOfRotationWorld={props.axisOfRotationWorld}

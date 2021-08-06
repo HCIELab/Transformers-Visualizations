@@ -10,19 +10,19 @@ export const Button13 = (props: {
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {
         props.setInitialCubeConfigs([
-            {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#77410e"},
-            {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#77410e"},            
-            {id: 3, initialPosition: new Vector3(0, 0, -1), color: "#77410e"},         
-            {id: 4, initialPosition: new Vector3(-1, 0, 0), color: "#77410e"},         
-            {id: 5, initialPosition: new Vector3(-1, 0, -1), color: "#77410e"},         
-            {id: 6, initialPosition: new Vector3(-1, 0, -2), color: "#77410e"},         
-            {id: 7, initialPosition: new Vector3(-1, 0, -3), color: "#77410e"},         
-            {id: 8, initialPosition: new Vector3(0, 0, -3), color: "#77410e"},         
-            {id: 9, initialPosition: new Vector3(1, 0, -3), color: "#77410e"},         
-            {id: 10, initialPosition: new Vector3(2, 0, -3), color: "#77410e"},         
-            {id: 11, initialPosition: new Vector3(2, 0, -2), color: "#77410e"},         
-            {id: 12, initialPosition: new Vector3(2, 0, -1), color: "#77410e"},         
-            {id: 13, initialPosition: new Vector3(2, 0, 0), color: "#77410e"},         
+            {id: 1, initialPosition: new Vector3(1, 0, 0),  },
+            {id: 2, initialPosition: new Vector3(0, 0, 0),  },            
+            {id: 3, initialPosition: new Vector3(0, 0, -1),  },         
+            {id: 4, initialPosition: new Vector3(-1, 0, 0),  },         
+            {id: 5, initialPosition: new Vector3(-1, 0, -1),  },         
+            {id: 6, initialPosition: new Vector3(-1, 0, -2),  },         
+            {id: 7, initialPosition: new Vector3(-1, 0, -3),  },         
+            {id: 8, initialPosition: new Vector3(0, 0, -3),  },         
+            {id: 9, initialPosition: new Vector3(1, 0, -3),  },         
+            {id: 10, initialPosition: new Vector3(2, 0, -3),  },         
+            {id: 11, initialPosition: new Vector3(2, 0, -2),  },         
+            {id: 12, initialPosition: new Vector3(2, 0, -1),  },         
+            {id: 13, initialPosition: new Vector3(2, 0, 0),  },         
                
         ])
         props.setInstructions([

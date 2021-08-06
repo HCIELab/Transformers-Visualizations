@@ -69,7 +69,7 @@ const Demo = () => {
     const [isCounterclockwise, setIsCounterclockwise] = useState(true);
     const [axisOfRotationWorld, setAxisOfRotationWorld] = useState<axisType>("z");
 
-    const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([{id: 1, initialPosition: new Vector3(0, 0, 0), color: "#77410e"}]);
+    const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([{id: 1, initialPosition: new Vector3(0, 0, 0),  }]);
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
 
     const [incrementAmount, setIncrementAmount] = useState(0.2);

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Color, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { Euler, Vector3, Quaternion } from 'three';
 import Labeling from "./Labeling/labeling";
 import Model from "./Model/index";
@@ -19,7 +19,6 @@ const Cube = (props: {
 	instructions: instructionType[],
 	id: number,
 	initialPosition: Vector3,
-	color: Color,
 	isCounterclockwise: boolean,
 	setIsCounterclockwise: Function,
 	axisOfRotationWorld: axisType,
@@ -250,7 +249,6 @@ const Cube = (props: {
 				<group ref={forPivot}>
 					<Model
 						side={side}
-						color={props.color}
 						displayCubeBox={props.displayCubeBox}
 						displayCoilsAndCorners={props.displayCoilsAndCorners}
 						displayGrayCubeBox={props.displayGrayCubeBox}

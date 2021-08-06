@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 
 import "@react-three/fiber";
-import { Color } from "@react-three/fiber";
 import STLHelper from "./STLhelper";
 
 const Model = (props: {
     side: number,
-    color: Color,
     displayCubeBox: boolean,
     displayCoilsAndCorners: boolean,
     displayGrayCubeBox: boolean,
@@ -22,7 +20,7 @@ const Model = (props: {
                 {/* Hollow with Coils */}
                 <STLHelper
                     side={props.side}
-                    color={props.color}
+                    color={"#77410e"}
                     filepath={"stl-assets/assem-Simul-coils.STL"}
                     normalOpacity={0.7}
                     hoverOpacity={0.3}

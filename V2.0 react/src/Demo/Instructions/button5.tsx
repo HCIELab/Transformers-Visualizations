@@ -9,7 +9,7 @@ export const Button5 = (props: {
 }) => (
     <Button variant="outlined" color="default" onClick={() => {
         props.setInitialCubeConfigs([
-            {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#77410e"},
+            {id: 1, initialPosition: new Vector3(0, 0, 0),  },
         ])
         props.setInstructions([
         ])
