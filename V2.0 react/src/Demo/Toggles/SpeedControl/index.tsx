@@ -21,8 +21,15 @@ const Container = styled.div`
     }
 `;
 
-const SpeedControl = () => {
-    const [value, setValue] = useState<number | string | Array<number | string>>(30);
+const SpeedControl = (props: {
+    incrementAmount: number,
+    setIncrementAmount: Function,
+}) => {
+    const [value, setValue] = useState<number>(0.1);
+
+    const MIN_VALUE = 0.05;
+    const MAX_VALUE = 0.6;
+    const STEP_AMOUNT = 0.025;
 
 	return (
 		<Container>
@@ -30,9 +37,18 @@ const SpeedControl = () => {
 
             <div className="incrementAmountSlider">
                 <Slider
-                    value={typeof value === 'number' ? value : 0}
-                    onChange={(event, newValue) => setValue(newValue)}
+                    value={typeof value === 'number' ? value : MIN_VALUE}
+                    onChange={(event, newValue) => {
+                        if (typeof newValue === 'number') {
+                            const foo : number = newValue;
+                            setValue(foo)
+                        }
+                    }}
                     aria-labelledby="input-slider"
+                    step={STEP_AMOUNT}
+                    marks
+                    min={MIN_VALUE}
+                    max={MAX_VALUE}
                 />
 
                 <div className="spacer"></div>
@@ -40,20 +56,19 @@ const SpeedControl = () => {
                 <Input
                     value={value}
                     margin="dense"
-                    onChange={(event) => setValue(event.target.value === '' ? '' : Number(event.target.value))}
+                    onChange={(event) => setValue(event.target.value === '' ? MIN_VALUE : Number(event.target.value))}
                     onBlur={ () => {
-                        if (value < 0) {
-                            setValue(0);
-                        } else if (value > 100) {
-                            setValue(100);
+                        if (value < MIN_VALUE) {
+                            setValue(MIN_VALUE);
+                        } else if (value > MAX_VALUE) {
+                            setValue(MAX_VALUE);
                         }
                     }}
                     inputProps={{
-                        step: 10,
-                        min: 0,
-                        max: 100,
+                        step: STEP_AMOUNT,
+                        min: MIN_VALUE,
+                        max: MAX_VALUE,
                         type: 'number',
-                        'aria-labelledby': 'input-slider',
                     }}
                 />
             </div>
