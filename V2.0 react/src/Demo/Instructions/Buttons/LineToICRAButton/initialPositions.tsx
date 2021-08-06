@@ -4,8 +4,8 @@ import { initialCubeConfigType } from "../../../Util/Types/types";
 export const initialPositions = () : initialCubeConfigType[] => {
     const result : initialCubeConfigType[] = [];
 
-    const NUM_CUBES = 37;
-    const width = 10;
+    const NUM_CUBES = 54;
+    const width = 14;
     const height = 4;
     for (let r = 0; r < height; r += 1) {
         for (let c = 0; c < width; c += 1) {
