@@ -19,8 +19,8 @@ export const LineToICRAButton = (props: {
         props.setInitialCubeConfigs(initialPositions())
 
         let instructions : instructionType[] = [];
-        instructions = instructions.concat(letterR(1000 + props.intervalAmount*instructions.length, props.intervalAmount));
-        instructions = instructions.concat(letterA(1000 + props.intervalAmount*instructions.length, props.intervalAmount));
+        instructions = instructions.concat(letterR(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
+        // instructions = instructions.concat(letterA(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
 
         props.setInstructions(instructions);
     }}>
