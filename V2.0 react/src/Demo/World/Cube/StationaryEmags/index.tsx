@@ -101,7 +101,11 @@ const StationaryEmags = (props: {
                             >
                                 <group rotation={rotationAdjustmentForPWMCylinders}>
                                     <mesh>
-                                        <cylinderBufferGeometry args={[.09, .09, 0.9, 20]}/>
+                                        <boxGeometry args={[0.2, 0.9, 0.05]}/>
+                                        <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
+                                    </mesh>
+                                    <mesh>
+                                        <boxGeometry args={[0.05, 0.9, 0.2]}/>
                                         <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
                                     </mesh>
                                 </group>
@@ -112,7 +116,11 @@ const StationaryEmags = (props: {
                             >
                                 <group rotation={rotationAdjustmentForPWMCylinders}>
                                     <mesh>
-                                        <cylinderBufferGeometry args={[.09, .09, 0.9, 20]}/>
+                                        <boxGeometry args={[0.2, 0.9, 0.05]}/>
+                                        <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
+                                    </mesh>
+                                    <mesh>
+                                        <boxGeometry args={[0.05, 0.9, 0.2]}/>
                                         <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
                                     </mesh>
                                 </group>
