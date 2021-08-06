@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { FormControlLabel, Switch } from '@material-ui/core';
+import SpeedControl from "./SpeedControl";
 
 const Container = styled.div`
     width: 100%;
@@ -33,6 +34,9 @@ const Toggles = (props: {
     setDisplayCubeIDs: Function,
     display3DArrows: boolean,
     setDisplay3DArrows: Function,
+
+    incrementAmount: number,
+    setIncrementAmount: Function,
 }) => {
     const {
         showPath,
@@ -156,6 +160,12 @@ const Toggles = (props: {
                     label={"Showing Path of Rotation (No pivots movements)"}
                 />
             </div>
+
+            <SpeedControl
+                incrementAmount={props.incrementAmount}
+                setIncrementAmount={props.setIncrementAmount}
+            />
+
         </Container>
 	);
 }

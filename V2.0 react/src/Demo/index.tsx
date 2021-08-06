@@ -124,6 +124,9 @@ const Demo = () => {
                             setDisplayCubeIDs={setDisplayCubeIDs}
                             display3DArrows={display3DArrows}
                             setDisplay3DArrows={setDisplay3DArrows}
+
+                            incrementAmount={incrementAmount}
+                            setIncrementAmount={setIncrementAmount}
                         />
                     </div>
 
