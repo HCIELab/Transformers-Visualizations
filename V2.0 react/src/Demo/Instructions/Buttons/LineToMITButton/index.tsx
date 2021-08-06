@@ -29,13 +29,16 @@ export const LineToMITButton = (props: {
 const generateInitialCubeConfigs = () : initialCubeConfigType[] => {
     const result : initialCubeConfigType[] = [];
 
+    const NUM_CUBES = 37;
     const width = 10;
-    const height = 2;
+    const height = 4;
     for (let r = 0; r < height; r += 1) {
         for (let c = 0; c < width; c += 1) {
-            result.push(
-                {id: r*width + c, initialPosition: new Vector3(c, r, 0)}
-            )
+            if (r*width + c < NUM_CUBES) {
+                result.push(
+                    {id: r*width + c, initialPosition: new Vector3(c - Math.round(width/2), -1*r, 0)}
+                )
+            }
         }        
     }
     return result;
