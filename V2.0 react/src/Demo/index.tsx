@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 // import Panel from "./Panel";
 import Instructions from "./Instructions";
+import Toggles from "./Toggles";
 import HelpModal from "./HelpModal";
 import { axisType, initialCubeConfigType, instructionType } from './Util/Types/types';
 import World from "./World";
 import { Vector3 } from 'three';
-import { FormControlLabel, Switch } from '@material-ui/core';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
 const DemoContainer = styled.div`
@@ -28,7 +28,6 @@ const DemoContainer = styled.div`
             margin: 0;
             height: 200px;
             background-color: #fdfdfd;
-            /* overflow: auto; */
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -40,9 +39,6 @@ const DemoContainer = styled.div`
             }
 
             .TogglesContainer {
-                /* width: 1000px;
-                display: flex;
-                flex-direction: column; */
                 height: 100%;
                 overflow: auto;
             }
@@ -109,96 +105,31 @@ const Demo = () => {
                         />
                     </div>
 
-
                     <div className="TogglesContainer">
-                        <h2>Toggle Features Shown </h2>
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={displayCubeBox}
-                                    onChange={() => setDisplayCubeBox(!displayCubeBox)}
-                                    color="primary"
-                                />
-                            }
-                            label={displayCubeBox ? "Displaying White Cube Box" : "Not Displaying White Cube Box"}
+                        <Toggles
+                            showPath={showPath}
+                            setShowPath={setShowPath}
+                            displayCubeBox={displayCubeBox}
+                            setDisplayCubeBox={setDisplayCubeBox}
+                            displayCoilsAndCorners={displayCoilsAndCorners}
+                            setDisplayCoilsAndCorners={setDisplayCoilsAndCorners}
+                            displayEmagIDs={displayEmagIDs}
+                            setDisplayEmagIDs={setDisplayEmagIDs}
+                            displayGrayCubeBox={displayGrayCubeBox}
+                            setDisplayGrayCubeBox={setDisplayGrayCubeBox}
+                            displayEmags={displayEmags}
+                            setDisplayEmags={setDisplayEmags}
+                            displayCubeIDs={displayCubeIDs}
+                            setDisplayCubeIDs={setDisplayCubeIDs}
+                            display3DArrows={display3DArrows}
+                            setDisplay3DArrows={setDisplay3DArrows}
                         />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={displayCoilsAndCorners}
-                                    onChange={() => setDisplayCoilsAndCorners(!displayCoilsAndCorners)}
-                                    color="primary"
-                                />
-                            }
-                            label={displayCoilsAndCorners ? "Displaying Coils and Corners" : "Not Displaying Coils and Corners"}
-                        />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={displayGrayCubeBox}
-                                    onChange={() => setDisplayGrayCubeBox(!displayGrayCubeBox)}
-                                    color="primary"
-                                />
-                            }
-                            label={displayGrayCubeBox ? "Displaying Gray Cube Box" : "Not Displaying Gray Cube Box"}
-                        />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={displayEmagIDs}
-                                    onChange={() => setDisplayEmagIDs(!displayEmagIDs)}
-                                    color="primary"
-                                />
-                            }
-                            label={displayEmagIDs ? "Displaying Electromagnet IDs" : "Not Displaying Electromagnet IDs"}
-                        />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={displayEmags}
-                                    onChange={() => setDisplayEmags(!displayEmags)}
-                                    color="primary"
-                                />
-                            }
-                            label={displayEmags ? "Displaying Electromagnets" : "Not Displaying Electromagnets"}
-                        />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={displayCubeIDs}
-                                    onChange={() => setDisplayCubeIDs(!displayCubeIDs)}
-                                    color="primary"
-                                />
-                            }
-                            label={displayCubeIDs ? "Displaying Cube IDs" : "Not Displaying Cube IDs"}
-                        />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={display3DArrows}
-                                    onChange={() => setDisplay3DArrows(!display3DArrows)}
-                                    color="primary"
-                                />
-                            }
-                            label={display3DArrows ? "Displaying 3d Arrows" : "Not Displaying 3d Arrows"}
-                        />
-                        {/*  */}
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={showPath}
-                                    onChange={() => setShowPath(!showPath)}
-                                    name="showPathToggle"
-                                    color="primary"
-                                />
-                            }
-                            label={showPath ? "Showing Path of Rotation without Movement" : "Simulating and Animating Cube Movement"}
-                        />
-                        <br/> 
-                        <HelpButtonStyler onClick={() => setModalOpenStatus(true)}>
-                            <HelpOutlineIcon/>
-                        </HelpButtonStyler>
                     </div>
+
+                    <br/> 
+                    <HelpButtonStyler onClick={() => setModalOpenStatus(true)}>
+                        <HelpOutlineIcon/>
+                    </HelpButtonStyler>
                 </div>
 
 
@@ -211,7 +142,7 @@ const Demo = () => {
                         setIsCounterclockwise={setIsCounterclockwise}
                         initialCubeConfigs={initialCubeConfigs}
                         instructions={instructions}
-                        
+
                         incrementAmount={incrementAmount}
                         showPath={showPath}
 
