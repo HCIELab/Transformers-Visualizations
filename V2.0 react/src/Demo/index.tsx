@@ -33,12 +33,13 @@ const DemoContainer = styled.div`
             justify-content: space-between;
 
             .InstructionsContainer {
-                width: 3200px;
+                width: 65%;
                 height: 100%;
                 overflow: auto;
             }
 
             .TogglesContainer {
+                width: 32%;
                 height: 100%;
                 overflow: auto;
             }
@@ -78,7 +79,7 @@ const Demo = () => {
     const [displayCoilsAndCorners, setDisplayCoilsAndCorners] = useState(true);
     const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
     const [displayGrayCubeBox, setDisplayGrayCubeBox] = useState(false);
-    const [displayEmags, setDisplayEmags] = useState(false);
+    const [displayEmags, setDisplayEmags] = useState(true);
     const [displayCubeIDs, setDisplayCubeIDs] = useState(true);
     const [display3DArrows, setDisplay3DArrows] = useState(true);
 
