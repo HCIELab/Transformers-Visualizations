@@ -24,11 +24,25 @@ const StationaryEmags = (props: {
     // console.log("(StationaryEmags.tsx) rotationMagnitude", props.rotationMagnitude)
 
     const getLocationsFunc = props.rotationMagnitude >= Math.PI ? getLocations180 : getLocations90;
-    const {repulsionPosition, hingePosition, catchingPosition} = getLocationsFunc(props.side, offset, props.cornerName, props.isCounterclockwise, props.axisOfRotationWorld);
+    const {repulsionPosition, hingePosition, catchingPosition, pwmOne, pwmTwo, pwmThree, pwmFour} = getLocationsFunc(props.side, offset, props.cornerName, props.isCounterclockwise, props.axisOfRotationWorld);
 
     // useEffect(() => {
     //     console.log("(StationaryEmags.tsx) something has changed *****")
     // }, [props.showEmags])
+
+    const fooCondition = props.cornerName === "NorthEast" || props.cornerName === "SouthWest";
+    const rotationAdjustmentForPWMCylinders = 
+    props.axisOfRotationWorld === "x" ?
+        !props.isCounterclockwise ?
+            new Euler(Math.PI/2, 0, !fooCondition ? Math.PI/2 : 0)
+            :
+            new Euler(-Math.PI/2, 0, fooCondition ? -Math.PI/2 : 0)
+        :
+        props.isCounterclockwise ?
+            new Euler(Math.PI/2, 0, !fooCondition ? Math.PI/2 : 0)
+            :
+            new Euler(-Math.PI/2, 0, fooCondition ? -Math.PI/2 : 0)
+            ;
 
 	return (
 		<>	
@@ -76,6 +90,65 @@ const StationaryEmags = (props: {
                             </mesh>
                         </group>
                     </group>
+
+
+                    {/* PWM Attraction Cylinders */}
+                    {props.rotationMagnitude < Math.PI &&
+                        <group>
+                            <group 
+                                position={pwmOne}  
+                                rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
+                            >
+                                <group rotation={rotationAdjustmentForPWMCylinders}>
+                                    <mesh>
+                                        <boxGeometry args={[0.2, 0.9, 0.05]}/>
+                                        <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
+                                    </mesh>
+                                    <mesh>
+                                        <boxGeometry args={[0.05, 0.9, 0.2]}/>
+                                        <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
+                                    </mesh>
+                                </group>
+                            </group>
+                            <group 
+                                position={pwmTwo}  
+                                rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
+                            >
+                                <group rotation={rotationAdjustmentForPWMCylinders}>
+                                    <mesh>
+                                        <boxGeometry args={[0.2, 0.9, 0.05]}/>
+                                        <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
+                                    </mesh>
+                                    <mesh>
+                                        <boxGeometry args={[0.05, 0.9, 0.2]}/>
+                                        <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
+                                    </mesh>
+                                </group>
+                            </group>
+                            <group 
+                                position={pwmThree}  
+                                rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
+                            >
+                                <group rotation={rotationAdjustmentForPWMCylinders}>
+                                    <mesh>
+                                        <cylinderBufferGeometry args={[.09, .09, 0.9, 20]}/>
+                                        <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
+                                    </mesh>
+                                </group>
+                            </group>
+                            <group 
+                                position={pwmFour}  
+                                rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
+                            >
+                                <group rotation={rotationAdjustmentForPWMCylinders}>
+                                    <mesh>
+                                        <cylinderBufferGeometry args={[.09, .09, 0.9, 20]}/>
+                                        <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
+                                    </mesh>
+                                </group>
+                            </group>
+                        </group>        
+                    }
                 </group>
             }
 		</>
