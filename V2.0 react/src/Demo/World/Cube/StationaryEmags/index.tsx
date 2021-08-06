@@ -10,6 +10,7 @@ import { getLocations90 } from "./locations90";
 const StationaryEmags = (props: {
     cubePosition: Vector3,
     showEmags: boolean,
+    displayPWMEmags: boolean,
     side: number,
     cornerName: cornerType,
     // initialRotationAmount: Quaternion;
@@ -93,7 +94,7 @@ const StationaryEmags = (props: {
 
 
                     {/* PWM Attraction Cylinders */}
-                    {props.rotationMagnitude < Math.PI &&
+                    {props.rotationMagnitude < Math.PI && props.displayPWMEmags &&
                         <group>
                             <group 
                                 position={pwmOne}  

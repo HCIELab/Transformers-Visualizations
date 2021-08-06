@@ -84,6 +84,7 @@ const Demo = () => {
     const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
     const [displayGrayCubeBox, setDisplayGrayCubeBox] = useState(false);
     const [displayEmags, setDisplayEmags] = useState(true);
+    const [displayPWMEmags, setDisplayPWMEmags] = useState(true);
     const [displayCubeIDs, setDisplayCubeIDs] = useState(true);
     const [display3DArrows, setDisplay3DArrows] = useState(true);
 
@@ -139,6 +140,8 @@ const Demo = () => {
                             setDisplayGrayCubeBox={setDisplayGrayCubeBox}
                             displayEmags={displayEmags}
                             setDisplayEmags={setDisplayEmags}
+                            displayPWMEmags={displayPWMEmags}
+                            setDisplayPWMEmags={setDisplayPWMEmags}
                             displayCubeIDs={displayCubeIDs}
                             setDisplayCubeIDs={setDisplayCubeIDs}
                             display3DArrows={display3DArrows}
@@ -173,6 +176,7 @@ const Demo = () => {
 
                         displayEmagIDs={displayEmagIDs}
                         displayEmags={displayEmags}
+                        displayPWMEmags={displayPWMEmags}
                         displayCubeIDs={displayCubeIDs}
                         display3DArrows={display3DArrows}
                         displayCubeBox={displayCubeBox}
