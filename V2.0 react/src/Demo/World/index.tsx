@@ -20,6 +20,8 @@ const World = (props: {
     showPath: boolean,
     displayEmagIDs: boolean,
     displayEmags: boolean,
+    displayCubeIDs: boolean,
+    display3DArrows: boolean,
     displayCubeBox: boolean,
     displayCoilsAndCorners: boolean,
     displayGrayCubeBox: boolean,
@@ -106,6 +108,8 @@ const World = (props: {
 
                             displayEmagIDs={props.displayEmagIDs}
                             displayEmags={props.displayEmags}
+                            displayCubeIDs={props.displayCubeIDs}
+                            display3DArrows={props.display3DArrows}    
                             displayCubeBox={props.displayCubeBox}    
                             displayCoilsAndCorners={props.displayCoilsAndCorners}    
                             displayGrayCubeBox={props.displayGrayCubeBox}    
@@ -123,6 +127,7 @@ const World = (props: {
                 setAxisOfRotationWorld={props.setAxisOfRotationWorld}
                 isCounterclockwise={props.isCounterclockwise}
                 setIsCounterclockwise={props.setIsCounterclockwise}
+                display3DArrows={props.display3DArrows}
             />
         </Canvas>
     )

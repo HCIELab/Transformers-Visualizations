@@ -33,6 +33,8 @@ const Cube = (props: {
 
 	displayEmagIDs: boolean,
 	displayEmags: boolean,
+	displayCubeIDs: boolean,
+    display3DArrows: boolean,
     displayCubeBox: boolean,
     displayCoilsAndCorners: boolean,
     displayGrayCubeBox: boolean,
@@ -259,6 +261,7 @@ const Cube = (props: {
 						side={side}
 						axis={props.axisOfRotationWorld}
 						displayEmagIDs={props.displayEmagIDs}
+						displayCubeIDs={props.displayCubeIDs}
 					/>
 					{showEmags && props.displayEmags &&
 						<MovingEmags
@@ -268,7 +271,6 @@ const Cube = (props: {
 							initialRotationAmount={initialRotationAmount}
 							axisOfRotationWorld={props.axisOfRotationWorld}
 							isCounterclockwise={props.isCounterclockwise}
-							// setStationaryEmagsPositions={setStationaryEmagsPositions}
 						/>
 					}
 					{/* <axesHelper scale={0.3}/> */}

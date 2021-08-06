@@ -83,6 +83,8 @@ const Demo = () => {
     const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
     const [displayGrayCubeBox, setDisplayGrayCubeBox] = useState(false);
     const [displayEmags, setDisplayEmags] = useState(false);
+    const [displayCubeIDs, setDisplayCubeIDs] = useState(true);
+    const [display3DArrows, setDisplay3DArrows] = useState(true);
 
     const [modalOpenStatus, setModalOpenStatus] = useState(true);
 
@@ -160,6 +162,26 @@ const Demo = () => {
                             }
                             label={displayEmags ? "Displaying Electromagnets" : "Not Displaying Electromagnets"}
                         />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={displayCubeIDs}
+                                    onChange={() => setDisplayCubeIDs(!displayCubeIDs)}
+                                    color="primary"
+                                />
+                            }
+                            label={displayCubeIDs ? "Displaying Cube IDs" : "Not Displaying Cube IDs"}
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={display3DArrows}
+                                    onChange={() => setDisplay3DArrows(!display3DArrows)}
+                                    color="primary"
+                                />
+                            }
+                            label={display3DArrows ? "Displaying 3d Arrows" : "Not Displaying 3d Arrows"}
+                        />
                         {/*  */}
                         <FormControlLabel
                             control={
@@ -189,10 +211,14 @@ const Demo = () => {
                         setIsCounterclockwise={setIsCounterclockwise}
                         initialCubeConfigs={initialCubeConfigs}
                         instructions={instructions}
+                        
                         incrementAmount={incrementAmount}
                         showPath={showPath}
+
                         displayEmagIDs={displayEmagIDs}
                         displayEmags={displayEmags}
+                        displayCubeIDs={displayCubeIDs}
+                        display3DArrows={display3DArrows}
                         displayCubeBox={displayCubeBox}
                         displayCoilsAndCorners={displayCoilsAndCorners}
                         displayGrayCubeBox={displayGrayCubeBox}
