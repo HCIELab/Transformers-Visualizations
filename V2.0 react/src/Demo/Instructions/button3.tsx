@@ -1,6 +1,8 @@
 import { Vector3 } from "three"
 import Button from '@material-ui/core/Button';
 
+const BUTTON_TITLE = "Pivot Multi-Axis";
+
 export const Button3 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
@@ -33,6 +35,6 @@ export const Button3 = (props: {
             },
         ])
     }}>
-        Pivot Multi-Axis
+        {BUTTON_TITLE}
     </Button>
 )

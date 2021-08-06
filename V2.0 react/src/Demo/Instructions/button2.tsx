@@ -1,6 +1,8 @@
 import { Vector3 } from "three"
 import Button from '@material-ui/core/Button';
 
+const BUTTON_TITLE = "Pivot Back and Forth"
+
 export const Button2 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
@@ -27,6 +29,6 @@ export const Button2 = (props: {
             },
         ])
     }}>
-        Pivot Back and Forth
+        {BUTTON_TITLE}
     </Button>
 )

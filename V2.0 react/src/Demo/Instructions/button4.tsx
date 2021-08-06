@@ -1,6 +1,8 @@
 import { Vector3 } from "three"
 import Button from '@material-ui/core/Button';
 
+const BUTTON_TITLE = "Traversal";
+
 export const Button4 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
@@ -40,6 +42,6 @@ export const Button4 = (props: {
             },
         ])
     }}>
-        Traversal
+        {BUTTON_TITLE}
     </Button>
 )

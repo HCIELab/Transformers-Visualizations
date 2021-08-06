@@ -7,6 +7,9 @@ import {letterS} from "./letterS";
 import {letterU} from "./letterU";
 import {letterT} from "./letterT";
 
+
+const BUTTON_TITLE = "Line to UIST Letters";
+
 export const Button11 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
@@ -70,7 +73,7 @@ export const Button11 = (props: {
 
         props.setInstructions(instructions);
     }}>
-        Line to UIST Letters
+        {BUTTON_TITLE}
     </Button>
 )
 

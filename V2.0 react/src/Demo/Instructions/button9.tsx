@@ -1,5 +1,7 @@
 import { Vector3 } from "three"
 
+const BUTTON_TITLE = "10x10x10 Cubes (may crash)"
+
 export const Button9 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
@@ -21,6 +23,6 @@ export const Button9 = (props: {
         props.setInitialCubeConfigs(foo)
         props.setInstructions([])
     }}>
-        10x10x10 cubes (may crash)
+        {BUTTON_TITLE}
     </button>
 )

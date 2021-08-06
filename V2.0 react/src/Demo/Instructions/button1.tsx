@@ -2,7 +2,7 @@ import { Vector3 } from "three"
 
 import Button from '@material-ui/core/Button';
 
-
+const BUTTON_TITLE = "Walking";
 const interval = 1000;
 
 export const Button1 = (props: {
@@ -176,6 +176,6 @@ export const Button1 = (props: {
 
         ])
     }}>
-        Walking
+        {BUTTON_TITLE}
     </Button>
 )

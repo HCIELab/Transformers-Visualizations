@@ -1,6 +1,8 @@
 import { Vector3 } from "three"
 import Button from '@material-ui/core/Button';
 
+const BUTTON_TITLE = "5x5x5 Cubes"
+
 export const Button8 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
@@ -22,6 +24,6 @@ export const Button8 = (props: {
         props.setInitialCubeConfigs(foo)
         props.setInstructions([])
     }}>
-        5x5x5 cubes
+        {BUTTON_TITLE}
     </Button>
 )

@@ -1,6 +1,8 @@
 import { Vector3 } from "three"
 import Button from '@material-ui/core/Button';
 
+const BUTTON_TITLE = "Traversal Y axis test";
+
 export const Button13 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
@@ -77,6 +79,6 @@ export const Button13 = (props: {
             },
         ])
     }}>
-        Traversal Y axis test
+        {BUTTON_TITLE}
     </Button>
 )
