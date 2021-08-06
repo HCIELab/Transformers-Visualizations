@@ -5,6 +5,10 @@ export type locationsType = {
     repulsionPosition: Vector3,
     hingePosition: Vector3,
     catchingPosition: Vector3,
+    pwmOne: Vector3,
+    pwmTwo: Vector3,
+    pwmThree: Vector3,
+    pwmFour: Vector3,
 }
 
 const pi = Math.PI;
@@ -30,6 +34,10 @@ const getLocationsX = (side: number, offset: number, cornerName: cornerType, isC
         repulsionPosition:  new Vector3(0, -half+offset, half+offset),
         hingePosition:      new Vector3(0, half-offset, half+offset),
         catchingPosition:   new Vector3(0, 3*half-offset, half+offset),
+        pwmOne:             new Vector3(-3, -3, -3),
+        pwmTwo:             new Vector3(-3, -3, -3),
+        pwmThree:             new Vector3(-3, -3, -3),
+        pwmFour:             new Vector3(-3, -3, -3),
     }
 
     let euler = new Euler(0, 0, 0);
@@ -51,6 +59,10 @@ const getLocationsX = (side: number, offset: number, cornerName: cornerType, isC
         repulsionPosition: template.repulsionPosition.applyEuler(euler),
         hingePosition: template.hingePosition.applyEuler(euler),
         catchingPosition: template.catchingPosition.applyEuler(euler),
+        pwmOne: template.pwmOne,
+        pwmTwo: template.pwmOne,
+        pwmThree: template.pwmOne,
+        pwmFour: template.pwmOne,
     }
 }
 
@@ -65,6 +77,10 @@ const getLocationsY = (side: number, offset: number, cornerName: cornerType, isC
         repulsionPosition:  new Vector3(-half-offset, 0, half-offset),
         hingePosition:      new Vector3(-half-offset, 0, -half+offset),
         catchingPosition:   new Vector3(-half-offset, 0, -3*half+offset),
+        pwmOne:             new Vector3(-3, -3, -3),
+        pwmTwo:             new Vector3(-3, -3, -3),
+        pwmThree:             new Vector3(-3, -3, -3),
+        pwmFour:             new Vector3(-3, -3, -3),
     }
 
     let euler = new Euler(0, 0, 0);
@@ -86,6 +102,10 @@ const getLocationsY = (side: number, offset: number, cornerName: cornerType, isC
         repulsionPosition: template.repulsionPosition.applyEuler(euler),
         hingePosition: template.hingePosition.applyEuler(euler),
         catchingPosition: template.catchingPosition.applyEuler(euler),
+        pwmOne: template.pwmOne,
+        pwmTwo: template.pwmOne,
+        pwmThree: template.pwmOne,
+        pwmFour: template.pwmOne,
     }
 }
 
@@ -98,6 +118,10 @@ const getLocationsZ = (side: number, offset: number, cornerName: cornerType, isC
         repulsionPosition:  new Vector3(-half-offset, -half+offset, 0),
         hingePosition:      new Vector3(-half-offset, half+offset, 0),
         catchingPosition:   new Vector3(-half-offset, 3*half-offset, 0),
+        pwmOne:             new Vector3(-3, -3, -3),
+        pwmTwo:             new Vector3(-3, -3, -3),
+        pwmThree:             new Vector3(-3, -3, -3),
+        pwmFour:             new Vector3(-3, -3, -3),
     }
 
     let euler = new Euler(0, 0, 0);
@@ -119,5 +143,9 @@ const getLocationsZ = (side: number, offset: number, cornerName: cornerType, isC
         repulsionPosition: template.repulsionPosition.applyEuler(euler),
         hingePosition: template.hingePosition.applyEuler(euler),
         catchingPosition: template.catchingPosition.applyEuler(euler),
+        pwmOne: template.pwmOne,
+        pwmTwo: template.pwmOne,
+        pwmThree: template.pwmOne,
+        pwmFour: template.pwmOne,
     }
 }

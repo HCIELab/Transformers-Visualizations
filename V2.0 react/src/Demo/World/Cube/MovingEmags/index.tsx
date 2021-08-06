@@ -42,7 +42,7 @@ const MovingEmags = (props: {
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
                         <cylinderBufferGeometry args={[.12, .12, 1.1, 20]}/>
-                        <meshPhongMaterial color={"#00367e"} opacity={0.5}/>
+                        <meshPhongMaterial color={"#00177e"} opacity={0.5}/>
                     </mesh>
 
                     {/* Repulsion Moving Cylinder */}
@@ -60,7 +60,7 @@ const MovingEmags = (props: {
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
                         <cylinderBufferGeometry args={[.12, .12, 1.1, 20]}/>
-                        <meshPhongMaterial color={"#00367e"} opacity={0.5}/>
+                        <meshPhongMaterial color={"#00177e"} opacity={0.5}/>
                     </mesh>
                 </group>
             }

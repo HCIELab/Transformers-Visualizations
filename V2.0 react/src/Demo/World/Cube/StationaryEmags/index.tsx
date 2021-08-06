@@ -24,7 +24,7 @@ const StationaryEmags = (props: {
     // console.log("(StationaryEmags.tsx) rotationMagnitude", props.rotationMagnitude)
 
     const getLocationsFunc = props.rotationMagnitude >= Math.PI ? getLocations180 : getLocations90;
-    const {repulsionPosition, hingePosition, catchingPosition} = getLocationsFunc(props.side, offset, props.cornerName, props.isCounterclockwise, props.axisOfRotationWorld);
+    const {repulsionPosition, hingePosition, catchingPosition, pwmOne, pwmTwo, pwmThree, pwmFour} = getLocationsFunc(props.side, offset, props.cornerName, props.isCounterclockwise, props.axisOfRotationWorld);
 
     // useEffect(() => {
     //     console.log("(StationaryEmags.tsx) something has changed *****")
@@ -76,6 +76,73 @@ const StationaryEmags = (props: {
                             </mesh>
                         </group>
                     </group>
+
+
+                    {/* PWM Attraction Cylinders */}
+                    {props.rotationMagnitude < Math.PI &&
+                        <group>
+                            <group 
+                                position={pwmOne}  
+                                rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
+                            >
+                                <group rotation={new Euler(0, Math.PI/4, 0)}>
+                                    <mesh>
+                                        <boxGeometry args={[0.2, 0.9, 0.05]}/>
+                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                                    </mesh>
+                                    <mesh>
+                                        <boxGeometry args={[0.05, 0.9, 0.2]}/>
+                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                                    </mesh>
+                                </group>
+                            </group>
+                            <group 
+                                position={pwmTwo}  
+                                rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
+                            >
+                                <group rotation={new Euler(0, Math.PI/4, 0)}>
+                                    <mesh>
+                                        <boxGeometry args={[0.2, 0.9, 0.05]}/>
+                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                                    </mesh>
+                                    <mesh>
+                                        <boxGeometry args={[0.05, 0.9, 0.2]}/>
+                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                                    </mesh>
+                                </group>
+                            </group>
+                            <group 
+                                position={pwmThree}  
+                                rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
+                            >
+                                <group rotation={new Euler(0, Math.PI/4, 0)}>
+                                    <mesh>
+                                        <boxGeometry args={[0.2, 0.9, 0.05]}/>
+                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                                    </mesh>
+                                    <mesh>
+                                        <boxGeometry args={[0.05, 0.9, 0.2]}/>
+                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                                    </mesh>
+                                </group>
+                            </group>
+                            <group 
+                                position={pwmFour}  
+                                rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
+                            >
+                                <group rotation={new Euler(0, Math.PI/4, 0)}>
+                                    <mesh>
+                                        <boxGeometry args={[0.2, 0.9, 0.05]}/>
+                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                                    </mesh>
+                                    <mesh>
+                                        <boxGeometry args={[0.05, 0.9, 0.2]}/>
+                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                                    </mesh>
+                                </group>
+                            </group>
+                        </group>        
+                    }
                 </group>
             }
 		</>
