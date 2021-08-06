@@ -12,9 +12,9 @@ import {Button8} from "./button8";
 // import {Button9} from "./button9";
 import {Button10} from "./button10/button10";
 import {Button11} from "./button11/button11";
-// import {Button12} from "./button12";
-// import {Button13} from "./button13";
-// import {Button14} from "./button14";
+import {Button12} from "./button12";
+import {Button13} from "./button13";
+import {Button14} from "./button14";
 import {WalkInAllAxesButton} from "./WalkInAllAxesButton";
 
 const Container = styled.div`
@@ -64,9 +64,9 @@ const Instructions = (props: {
                 <Button4 {...props} />
                 <Button10 {...props} />
                 <Button11 {...props} />
-                {/* <Button12 {...props} />
+                <Button12 {...props} />
                 <Button13 {...props} />
-                <Button14 {...props}*/}
+                <Button14 {...props} />
                 <WalkInAllAxesButton {...props} />
                 <p className={"Label"} style={{color: "rgb(63, 81, 181)"}}>
                     Scripts with Instructions

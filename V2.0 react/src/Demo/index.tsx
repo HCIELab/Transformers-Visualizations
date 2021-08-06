@@ -72,8 +72,8 @@ const Demo = () => {
     const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([{id: 1, initialPosition: new Vector3(0, 0, 0), color: "#77410e"}]);
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
 
-    const [incrementAmount, setIncrementAmount] = useState(0.1);
-    const [intervalAmount, setIntervalAmount] = useState(50);
+    const [incrementAmount, setIncrementAmount] = useState(0.2);
+    const [intervalAmount, setIntervalAmount] = useState(1000);
 
     const [showPath, setShowPath] = useState(false);
     const [displayCubeBox, setDisplayCubeBox] = useState(true);
