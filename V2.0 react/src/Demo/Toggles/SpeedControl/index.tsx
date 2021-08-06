@@ -23,7 +23,7 @@ const SpeedControl = (props: {
             <p>Increment (in radians): </p>
             <IncrementSlider incrementAmount={props.incrementAmount} setIncrementAmount={props.setIncrementAmount} />
 
-            <p>Interval (in ms): </p>
+            <p>Interval (in milliseconds): </p>
             <IntervalSlider intervalAmount={props.intervalAmount} setIntervalAmount={props.setIntervalAmount} />
 
 		</Container>

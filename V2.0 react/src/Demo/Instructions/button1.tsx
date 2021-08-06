@@ -3,12 +3,12 @@ import { Vector3 } from "three"
 import Button from '@material-ui/core/Button';
 
 const BUTTON_TITLE = "Walking";
-const interval = 2000;
 
 export const Button1 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
     setIncrementAmount: Function,
+    intervalAmount: number,
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {
         props.setInitialCubeConfigs([
@@ -21,25 +21,25 @@ export const Button1 = (props: {
                 cubeID: 1,
                 axis: "z",
                 isCounterclockwise: true,
-                timeToStart: interval*1,
+                timeToStart: props.intervalAmount*1,
             },
             {
                 cubeID: 1,
                 axis: "z",
                 isCounterclockwise: true,
-                timeToStart: interval*2,
+                timeToStart: props.intervalAmount*2,
             },
             {
                 cubeID: 1,
                 axis: "z",
                 isCounterclockwise: true,
-                timeToStart: interval*3,
+                timeToStart: props.intervalAmount*3,
             },
             {
                 cubeID: 1,
                 axis: "z",
                 isCounterclockwise: true,
-                timeToStart: interval*4,
+                timeToStart: props.intervalAmount*4,
             },
         ])
     }}>

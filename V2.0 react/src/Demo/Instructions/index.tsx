@@ -50,7 +50,7 @@ const Instructions = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
     setIncrementAmount: Function,
-    setIntervalAmount: Function,
+    intervalAmount: number,
 }) => {
 
     return (
