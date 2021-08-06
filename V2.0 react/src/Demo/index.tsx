@@ -22,15 +22,18 @@ const DemoContainer = styled.div`
         width: 100%;
         height: 100%;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-        padding: 20px;
+        padding: 10px;
 
         .TopSection {
-            margin: 0;
+            margin: 5px 0;
             height: 200px;
-            background-color: #fdfdfd;
+            background-color: #ffffff;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
+            /* border: 1px solid gray; */
+            border-bottom: 3px solid #f0f0f0;
 
             .InstructionsContainer {
                 width: 65%;
