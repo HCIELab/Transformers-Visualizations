@@ -75,30 +75,31 @@ const Demo = () => {
     const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([{id: 1, initialPosition: new Vector3(0, 0, 0),  }]);
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
 
-    const [incrementAmount, setIncrementAmount] = useState(0.2);
-    const [intervalAmount, setIntervalAmount] = useState(1000);
+    // const [incrementAmount, setIncrementAmount] = useState(0.2);
+    // const [intervalAmount, setIntervalAmount] = useState(1000);
 
-    const [showPath, setShowPath] = useState(false);
-    const [displayCubeBox, setDisplayCubeBox] = useState(true);
-    const [displayCoilsAndCorners, setDisplayCoilsAndCorners] = useState(true);
-    const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
-    const [displayGrayCubeBox, setDisplayGrayCubeBox] = useState(false);
-    const [displayEmags, setDisplayEmags] = useState(true);
-    const [displayPWMEmags, setDisplayPWMEmags] = useState(true);
-    const [displayCubeIDs, setDisplayCubeIDs] = useState(true);
-    const [display3DArrows, setDisplay3DArrows] = useState(true);
+    // const [showPath, setShowPath] = useState(false);
+    // const [displayCubeBox, setDisplayCubeBox] = useState(true);
+    // const [displayCoilsAndCorners, setDisplayCoilsAndCorners] = useState(true);
+    // const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
+    // const [displayGrayCubeBox, setDisplayGrayCubeBox] = useState(false);
+    // const [displayEmags, setDisplayEmags] = useState(true);
+    // const [displayPWMEmags, setDisplayPWMEmags] = useState(true);
+    // const [displayCubeIDs, setDisplayCubeIDs] = useState(true);
+    // const [display3DArrows, setDisplay3DArrows] = useState(true);
 
     // ********************Max Speed (dev use only)
-    // const [incrementAmount, setIncrementAmount] = useState(1.5);
-    // const [intervalAmount, setIntervalAmount] = useState(200);
-    // const [showPath, setShowPath] = useState(false);
-    // const [displayCubeBox, setDisplayCubeBox] = useState(false);
-    // const [displayCoilsAndCorners, setDisplayCoilsAndCorners] = useState(false);
-    // const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
-    // const [displayGrayCubeBox, setDisplayGrayCubeBox] = useState(true);
-    // const [displayEmags, setDisplayEmags] = useState(false);
-    // const [displayCubeIDs, setDisplayCubeIDs] = useState(false);
-    // const [display3DArrows, setDisplay3DArrows] = useState(false);
+    const [incrementAmount, setIncrementAmount] = useState(1.5);
+    const [intervalAmount, setIntervalAmount] = useState(250);
+    const [showPath, setShowPath] = useState(false);
+    const [displayCubeBox, setDisplayCubeBox] = useState(false);
+    const [displayCoilsAndCorners, setDisplayCoilsAndCorners] = useState(false);
+    const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
+    const [displayGrayCubeBox, setDisplayGrayCubeBox] = useState(true);
+    const [displayEmags, setDisplayEmags] = useState(false);
+    const [displayPWMEmags, setDisplayPWMEmags] = useState(false);
+    const [displayCubeIDs, setDisplayCubeIDs] = useState(true);
+    const [display3DArrows, setDisplay3DArrows] = useState(false);
     // *********************
 
     const [modalOpenStatus, setModalOpenStatus] = useState(true);
