@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Color, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { Euler, Vector3, Quaternion } from 'three';
 import Labeling from "./Labeling/labeling";
 import Model from "./Model/index";
@@ -19,7 +19,6 @@ const Cube = (props: {
 	instructions: instructionType[],
 	id: number,
 	initialPosition: Vector3,
-	color: Color,
 	isCounterclockwise: boolean,
 	setIsCounterclockwise: Function,
 	axisOfRotationWorld: axisType,
@@ -33,6 +32,8 @@ const Cube = (props: {
 
 	displayEmagIDs: boolean,
 	displayEmags: boolean,
+	displayCubeIDs: boolean,
+    display3DArrows: boolean,
     displayCubeBox: boolean,
     displayCoilsAndCorners: boolean,
     displayGrayCubeBox: boolean,
@@ -248,7 +249,6 @@ const Cube = (props: {
 				<group ref={forPivot}>
 					<Model
 						side={side}
-						color={props.color}
 						displayCubeBox={props.displayCubeBox}
 						displayCoilsAndCorners={props.displayCoilsAndCorners}
 						displayGrayCubeBox={props.displayGrayCubeBox}
@@ -259,6 +259,7 @@ const Cube = (props: {
 						side={side}
 						axis={props.axisOfRotationWorld}
 						displayEmagIDs={props.displayEmagIDs}
+						displayCubeIDs={props.displayCubeIDs}
 					/>
 					{showEmags && props.displayEmags &&
 						<MovingEmags
@@ -268,7 +269,6 @@ const Cube = (props: {
 							initialRotationAmount={initialRotationAmount}
 							axisOfRotationWorld={props.axisOfRotationWorld}
 							isCounterclockwise={props.isCounterclockwise}
-							// setStationaryEmagsPositions={setStationaryEmagsPositions}
 						/>
 					}
 					{/* <axesHelper scale={0.3}/> */}

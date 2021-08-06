@@ -8,6 +8,7 @@ const Arrows = (props: {
     setAxisOfRotationWorld: Function,
     isCounterclockwise: boolean,
     setIsCounterclockwise: Function,
+    display3DArrows: boolean,
 }) => {
     console.log("(Arrow.tsx) Rendering component");
     
@@ -27,7 +28,7 @@ const Arrows = (props: {
     }
 
     return (
-        <group position={new Vector3(-2, -1, 0)}>
+        <group position={new Vector3(-2, -1, 0)} visible={props.display3DArrows}>
             <axesHelper/>
 
             {/* Z axis Arrows */}

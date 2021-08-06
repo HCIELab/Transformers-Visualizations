@@ -1,20 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {Button1} from "./button1";
-import {Button2} from "./button2";
-import {Button3} from "./button3";
-import {Button4} from "./button4";
-import {Button5} from "./button5";
-import {Button6} from "./button6";
-import {Button7} from "./button7";
-// import {Button8} from "./button8";
-// import {Button9} from "./button9";
-// import {Button10} from "./button10/button10";
-// import {Button11} from "./button11/button11";
-// import {Button12} from "./button12";
-// import {Button13} from "./button13";
-// import {Button14} from "./button14";
+import {WalkingButton} from "./Buttons/WalkingButton";
+import {PivotBackForthButton} from "./Buttons/PivotBackForthButton";
+import {PivotMultiAxisButton} from "./Buttons/PivotMultiAxisButton";
+import {TraversalButton} from "./Buttons/TraversalButton";
+import {OneCubeButton} from "./Buttons/OneCubeButton";
+import {TwoCubesButton} from "./Buttons/TwoCubesButton";
+import {FourCubesButton} from "./Buttons/FourCubesButton";
+import {FiveByFiveByFiveButton} from "./Buttons/FiveByFiveByFiveButton";
+import {TenByTenByTenButton} from "./Buttons/TenByTenByTenButton";
+import {ChairTableCouchButton} from "./Buttons/ChairTableCouchButton/";
+import {LineToUISTButton} from "./Buttons/LineToUISTButton";
+import {TraversalTestZButton} from "./Buttons/TraversalTestZButton";
+import {TraversalTestYButton} from "./Buttons/TraversalTestYButton";
+import {TraversalTestXButton} from "./Buttons/TraversalTestXButton";
+import {WalkInAllAxesButton} from "./Buttons/WalkInAllAxesButton";
 
 const Container = styled.div`
     padding: 0 5px;
@@ -49,35 +50,38 @@ const Instructions = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
     setIncrementAmount: Function,
+    setIntervalAmount: Function,
+    intervalAmount: number,
 }) => {
 
     return (
         <Container>
             <h2>Pre-defined Scripts </h2>
             <div className="Section">
-                <Button1 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button2 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button3 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button4 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                {/* <Button10 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} /> */}
-                {/* <Button11 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} /> */}
-                {/* <Button12 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button13 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button14 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} /> */}
+                <WalkingButton {...props} />
+                <PivotBackForthButton {...props} />
+                <PivotMultiAxisButton {...props} />
+                <TraversalButton {...props} />
+                <ChairTableCouchButton {...props} />
+                <LineToUISTButton {...props} />
+                <TraversalTestZButton {...props} />
+                <TraversalTestYButton {...props} />
+                <TraversalTestXButton {...props} />
+                <WalkInAllAxesButton {...props} />
                 <p className={"Label"} style={{color: "rgb(63, 81, 181)"}}>
                     Scripts with Instructions
                 </p>
             </div>
             <div className="Section">
-                <Button5 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button6 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                <Button7 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
-                {/* <Button8 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} /> */}
+                <OneCubeButton {...props} />
+                <TwoCubesButton {...props} />
+                <FourCubesButton {...props} />
+                <FiveByFiveByFiveButton {...props} />
+                <TenByTenByTenButton {...props} />
                 <p className={"Label"}>
                     Scripts with no Instructions
                 </p>
             </div>
-            {/* <Button9 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} /> */}
         </Container>
     )
 }

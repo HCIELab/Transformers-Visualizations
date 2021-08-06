@@ -1,19 +1,19 @@
 import { Vector3 } from "three"
 import Button from '@material-ui/core/Button';
 
-export const Button5 = (props: {
+const BUTTON_TITLE = "1 cube";
+
+export const OneCubeButton = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
-    setIncrementAmount: Function,
 }) => (
     <Button variant="outlined" color="default" onClick={() => {
-        props.setIncrementAmount(0.1);
         props.setInitialCubeConfigs([
-            {id: 1, initialPosition: new Vector3(0, 0, 0), color: "#77410e"},
+            {id: 1, initialPosition: new Vector3(0, 0, 0),  },
         ])
         props.setInstructions([
         ])
     }}>
-        Just 1 cube
+        {BUTTON_TITLE}
     </Button>
 )

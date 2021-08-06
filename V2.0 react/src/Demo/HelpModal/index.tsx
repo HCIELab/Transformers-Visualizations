@@ -11,8 +11,12 @@ const Container = styled.div`
     top: calc((100vh - 800px)/2);
 
     border: 1px solid black;
-    padding: 100px;
+    padding: 70px 100px;
     background-color: white;
+
+    h1 {
+        text-align: center;
+    }
 `;
 
 const HelpModal = (props: {

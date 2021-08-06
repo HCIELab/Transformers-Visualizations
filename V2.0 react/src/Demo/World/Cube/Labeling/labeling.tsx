@@ -15,6 +15,7 @@ const Labeling = (props: {
     letterOffset: number,
 	axis: axisType,
 	displayEmagIDs: boolean,
+	displayCubeIDs: boolean,
 }) => {
 	
     // Deal with the edge Labeling (using fonts)
@@ -58,7 +59,7 @@ const Labeling = (props: {
 	return (
 		<>	
 			{/* ID */}
-			<group>
+			<group visible={props.displayCubeIDs}>
 				<mesh position={[-letterOffset, -letterOffset, half]}  ref={IDLabel}>
 					<textGeometry args={[`${props.cubeID}`, {font, size: 0.3, height: 0.05}]} />
 					<meshPhongMaterial color={"#000000"}/>
