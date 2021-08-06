@@ -3,7 +3,8 @@ import Button from '@material-ui/core/Button';
 import { instructionType } from "../../../Util/Types/types";
 
 import {initialPositions} from "./initialPositions";
-import {letters} from "./letters";
+import {letterR} from "./letterR";
+import {letterA} from "./letterA";
 
 const BUTTON_TITLE = "Line to ICRA";
 
@@ -18,7 +19,8 @@ export const LineToICRAButton = (props: {
         props.setInitialCubeConfigs(initialPositions())
 
         let instructions : instructionType[] = [];
-        instructions = instructions.concat(letters(1000 + props.intervalAmount*instructions.length, props.intervalAmount));
+        instructions = instructions.concat(letterR(1000 + props.intervalAmount*instructions.length, props.intervalAmount));
+        instructions = instructions.concat(letterA(1000 + props.intervalAmount*instructions.length, props.intervalAmount));
 
         props.setInstructions(instructions);
     }}>

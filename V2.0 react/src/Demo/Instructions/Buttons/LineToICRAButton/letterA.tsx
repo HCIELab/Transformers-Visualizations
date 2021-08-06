@@ -1,6 +1,6 @@
 import { instructionType } from "../../../Util/Types/types";
 
-export const letters = (startTime: number, interval: number) => {
+export const letterA = (startTime: number, interval: number) => {
     let count = 0;
     const instructions : instructionType[] = [];
 
@@ -55,15 +55,6 @@ export const letters = (startTime: number, interval: number) => {
         instructions.push({cubeID: 37, axis: "z", isCounterclockwise: true, timeToStart: startTime + interval*count})
         count += 1;
     }
-
-
-
-    // letter R
-    for (let i = 0; i < 18; i+= 1) {
-        instructions.push({cubeID: 23, axis: "z", isCounterclockwise: true, timeToStart: startTime + interval*count})
-        count += 1;
-    }
-
 
     return instructions;
 }
