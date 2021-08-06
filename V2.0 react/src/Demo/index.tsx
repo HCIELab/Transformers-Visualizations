@@ -70,7 +70,7 @@ const Demo = () => {
     const [axisOfRotationWorld, setAxisOfRotationWorld] = useState<axisType>("z");
 
     const [incrementAmount, setIncrementAmount] = useState(0.1);
-    const [intervalAmount, setIntervalAmount] = useState(0.1);
+    const [intervalAmount, setIntervalAmount] = useState(1000);
 
     const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([{id: 1, initialPosition: new Vector3(0, 0, 0), color: "#77410e"}]);
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
