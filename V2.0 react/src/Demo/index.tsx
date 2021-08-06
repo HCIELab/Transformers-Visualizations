@@ -81,7 +81,7 @@ const Demo = () => {
     const [displayCubeBox, setDisplayCubeBox] = useState(true);
     const [displayCoilsAndCorners, setDisplayCoilsAndCorners] = useState(true);
     const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
-    const [displayBlueCubeBox, setDisplayBlueCubeBox] = useState(false);
+    const [displayGrayCubeBox, setDisplayGrayCubeBox] = useState(false);
     const [displayEmags, setDisplayEmags] = useState(false);
 
     const [modalOpenStatus, setModalOpenStatus] = useState(true);
@@ -109,6 +109,7 @@ const Demo = () => {
 
 
                     <div className="TogglesContainer">
+                        <h2>Toggle Features Shown </h2>
                         <FormControlLabel
                             control={
                                 <Switch
@@ -132,12 +133,12 @@ const Demo = () => {
                         <FormControlLabel
                             control={
                                 <Switch
-                                    checked={displayBlueCubeBox}
-                                    onChange={() => setDisplayBlueCubeBox(!displayBlueCubeBox)}
+                                    checked={displayGrayCubeBox}
+                                    onChange={() => setDisplayGrayCubeBox(!displayGrayCubeBox)}
                                     color="primary"
                                 />
                             }
-                            label={displayBlueCubeBox ? "Displaying Blue Cube Box" : "Not Displaying Blue Cube Box"}
+                            label={displayGrayCubeBox ? "Displaying Gray Cube Box" : "Not Displaying Gray Cube Box"}
                         />
                         <FormControlLabel
                             control={
@@ -171,7 +172,7 @@ const Demo = () => {
                             }
                             label={showPath ? "Showing Path of Rotation without Movement" : "Simulating and Animating Cube Movement"}
                         />
-                        <br/>
+                        <br/> 
                         <HelpButtonStyler onClick={() => setModalOpenStatus(true)}>
                             <HelpOutlineIcon/>
                         </HelpButtonStyler>
@@ -194,7 +195,7 @@ const Demo = () => {
                         displayEmags={displayEmags}
                         displayCubeBox={displayCubeBox}
                         displayCoilsAndCorners={displayCoilsAndCorners}
-                        displayBlueCubeBox={displayBlueCubeBox}
+                        displayGrayCubeBox={displayGrayCubeBox}
                     />
                 </div>
             </div>

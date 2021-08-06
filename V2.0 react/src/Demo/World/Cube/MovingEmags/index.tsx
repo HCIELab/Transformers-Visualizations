@@ -35,13 +35,13 @@ const MovingEmags = (props: {
 	return (
 		<>	
             {props.showEmags &&
-                <group scale={0.75}>
+                <group scale={0.84}>
                     {/* Hinge Moving Cylinder */}
                     <mesh 
                         position={cylinderPositionForCorner(props.cornerName)} 
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
-                        <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
+                        <cylinderBufferGeometry args={[.12, .12, 1.1, 20]}/>
                         <meshPhongMaterial color={"#00367e"} opacity={0.5}/>
                     </mesh>
 
@@ -50,7 +50,7 @@ const MovingEmags = (props: {
                         position={cylinderPositionForCorner(!props.isCounterclockwise ? getNextCornerName(props.cornerName) : getPreviousCornerName(props.cornerName))} 
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
-                        <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
+                        <cylinderBufferGeometry args={[.12, .12, 1.1, 20]}/>
                         <meshPhongMaterial color={"#ff0000"} opacity={0.5}/>
                     </mesh>
 
@@ -59,7 +59,7 @@ const MovingEmags = (props: {
                         position={cylinderPositionForCorner(!props.isCounterclockwise ? getPreviousCornerName(props.cornerName) : getNextCornerName(props.cornerName))} 
                         rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                     >
-                        <cylinderBufferGeometry args={[.19, .19, 1.1, 20]}/>
+                        <cylinderBufferGeometry args={[.12, .12, 1.1, 20]}/>
                         <meshPhongMaterial color={"#00367e"} opacity={0.5}/>
                     </mesh>
                 </group>
