@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 
 const BUTTON_TITLE = "2 Cubes";
 
-export const Button6 = (props: {
+export const TwoCubesButton = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
 }) => (

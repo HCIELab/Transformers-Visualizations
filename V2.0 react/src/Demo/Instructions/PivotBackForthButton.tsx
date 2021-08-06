@@ -1,9 +1,9 @@
 import { Vector3 } from "three"
 import Button from '@material-ui/core/Button';
 
-const BUTTON_TITLE = "Traversal";
+const BUTTON_TITLE = "Pivot Back and Forth"
 
-export const Button4 = (props: {
+export const PivotBackForthButton = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
     intervalAmount: number,
@@ -12,32 +12,19 @@ export const Button4 = (props: {
         props.setInitialCubeConfigs([
             {id: 1, initialPosition: new Vector3(1, 0, 0),  },
             {id: 2, initialPosition: new Vector3(0, 0, 0),  },            
-            {id: 3, initialPosition: new Vector3(0, 1, 0),  },            
         ])
         props.setInstructions([
             {
-                cubeID: 3,
+                cubeID: 1,
                 axis: "z",
-                isCounterclockwise: false,
+                isCounterclockwise: true,
                 timeToStart: props.intervalAmount*1,
             },
             {
-                cubeID: 3,
-                axis: "z",
-                isCounterclockwise: true,
-                timeToStart: props.intervalAmount*2,
-            },
-            {
-                cubeID: 3,
+                cubeID: 1,
                 axis: "z",
                 isCounterclockwise: false,
-                timeToStart: props.intervalAmount*3,
-            },
-            {
-                cubeID: 3,
-                axis: "z",
-                isCounterclockwise: true,
-                timeToStart: props.intervalAmount*4,
+                timeToStart: props.intervalAmount*2,
             },
         ])
     }}>

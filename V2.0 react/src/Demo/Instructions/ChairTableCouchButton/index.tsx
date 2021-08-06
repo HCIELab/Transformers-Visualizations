@@ -7,7 +7,7 @@ import {chairToTableRight} from "./chairToTableRight";
 import {chairToTableMiddle} from "./chairToTableMiddle";
 import {tableToCouch} from "./tableToCouch";
 
-export const Button10 = (props: {
+export const ChairTableCouchButton = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
     intervalAmount: number,

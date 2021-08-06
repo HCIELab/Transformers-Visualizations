@@ -2,7 +2,7 @@ import { Vector3 } from "three"
 
 const BUTTON_TITLE = "10x10x10 Cubes (may crash)"
 
-export const Button9 = (props: {
+export const TenByTenByTenButton = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
 }) => (

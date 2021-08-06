@@ -1,20 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {Button1} from "./button1";
-import {Button2} from "./button2";
-import {Button3} from "./button3";
-import {Button4} from "./button4";
-import {Button5} from "./button5";
-import {Button6} from "./button6";
-import {Button7} from "./button7";
-import {Button8} from "./button8";
-// import {Button9} from "./button9";
-import {Button10} from "./button10/button10";
-import {Button11} from "./button11/button11";
-import {Button12} from "./button12";
-import {Button13} from "./button13";
-import {Button14} from "./button14";
+import {WalkingButton} from "./WalkingButton";
+import {PivotBackForthButton} from "./PivotBackForthButton";
+import {PivotMultiAxisButton} from "./PivotMultiAxisButton";
+import {TraversalButton} from "./TraversalButton";
+import {OneCubeButton} from "./OneCubeButton";
+import {TwoCubesButton} from "./TwoCubesButton";
+import {FourCubesButton} from "./FourCubesButton";
+import {FiveByFiveByFiveButton} from "./FiveByFiveByFiveButton";
+import {TenByTenByTenButton} from "./TenByTenByTenButton";
+import {ChairTableCouchButton} from "./ChairTableCouchButton/";
+import {LineToUISTButton} from "./LineToUISTButton";
+import {TraversalTestZButton} from "./TraversalTestZButton";
+import {TraversalTestYButton} from "./TraversalTestYButton";
+import {TraversalTestXButton} from "./TraversalTestXButton";
 import {WalkInAllAxesButton} from "./WalkInAllAxesButton";
 
 const Container = styled.div`
@@ -58,30 +58,30 @@ const Instructions = (props: {
         <Container>
             <h2>Pre-defined Scripts </h2>
             <div className="Section">
-                <Button1 {...props} />
-                <Button2 {...props} />
-                <Button3 {...props} />
-                <Button4 {...props} />
-                <Button10 {...props} />
-                <Button11 {...props} />
-                <Button12 {...props} />
-                <Button13 {...props} />
-                <Button14 {...props} />
+                <WalkingButton {...props} />
+                <PivotBackForthButton {...props} />
+                <PivotMultiAxisButton {...props} />
+                <TraversalButton {...props} />
+                <ChairTableCouchButton {...props} />
+                <LineToUISTButton {...props} />
+                <TraversalTestZButton {...props} />
+                <TraversalTestYButton {...props} />
+                <TraversalTestXButton {...props} />
                 <WalkInAllAxesButton {...props} />
                 <p className={"Label"} style={{color: "rgb(63, 81, 181)"}}>
                     Scripts with Instructions
                 </p>
             </div>
             <div className="Section">
-                <Button5 {...props} />
-                <Button6 {...props} />
-                <Button7 {...props} />
-                <Button8 {...props} />
+                <OneCubeButton {...props} />
+                <TwoCubesButton {...props} />
+                <FourCubesButton {...props} />
+                <FiveByFiveByFiveButton {...props} />
+                <TenByTenByTenButton {...props} />
                 <p className={"Label"}>
                     Scripts with no Instructions
                 </p>
             </div>
-            {/* <Button9 {...props}*/}
         </Container>
     )
 }
