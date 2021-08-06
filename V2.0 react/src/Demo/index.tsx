@@ -69,11 +69,11 @@ const Demo = () => {
     const [isCounterclockwise, setIsCounterclockwise] = useState(true);
     const [axisOfRotationWorld, setAxisOfRotationWorld] = useState<axisType>("z");
 
-    const [incrementAmount, setIncrementAmount] = useState(0.1);
-    const [intervalAmount, setIntervalAmount] = useState(1000);
-
     const [initialCubeConfigs, setInitialCubeConfigs] = useState<initialCubeConfigType[]>([{id: 1, initialPosition: new Vector3(0, 0, 0), color: "#77410e"}]);
 	const [instructions, setInstructions] = useState<instructionType[]>([]);
+
+    const [incrementAmount, setIncrementAmount] = useState(0.1);
+    const [intervalAmount, setIntervalAmount] = useState(50);
 
     const [showPath, setShowPath] = useState(false);
     const [displayCubeBox, setDisplayCubeBox] = useState(true);
@@ -83,6 +83,19 @@ const Demo = () => {
     const [displayEmags, setDisplayEmags] = useState(true);
     const [displayCubeIDs, setDisplayCubeIDs] = useState(true);
     const [display3DArrows, setDisplay3DArrows] = useState(true);
+
+    // ********************Max Speed (dev use only)
+    // const [incrementAmount, setIncrementAmount] = useState(1.5);
+    // const [intervalAmount, setIntervalAmount] = useState(200);
+    // const [showPath, setShowPath] = useState(false);
+    // const [displayCubeBox, setDisplayCubeBox] = useState(false);
+    // const [displayCoilsAndCorners, setDisplayCoilsAndCorners] = useState(false);
+    // const [displayEmagIDs, setDisplayEmagIDs] = useState(false);
+    // const [displayGrayCubeBox, setDisplayGrayCubeBox] = useState(true);
+    // const [displayEmags, setDisplayEmags] = useState(false);
+    // const [displayCubeIDs, setDisplayCubeIDs] = useState(false);
+    // const [display3DArrows, setDisplay3DArrows] = useState(false);
+    // *********************
 
     const [modalOpenStatus, setModalOpenStatus] = useState(true);
 

@@ -18,9 +18,6 @@ export const Button11 = (props: {
     intervalAmount: number,
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {
-        props.setIncrementAmount(1.5);
-        props.setIntervalAmount(200);
-        
         props.setInitialCubeConfigs([
             {id: 1, initialPosition: new Vector3(1-7, -2, 0), color: "#77410e"},
             {id: 2, initialPosition: new Vector3(2-7, -2, 0), color: "#77410e"},
