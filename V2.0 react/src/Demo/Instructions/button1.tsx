@@ -3,7 +3,7 @@ import { Vector3 } from "three"
 import Button from '@material-ui/core/Button';
 
 const BUTTON_TITLE = "Walking";
-const interval = 1000;
+const interval = 2000;
 
 export const Button1 = (props: {
     setInstructions: Function,
@@ -11,7 +11,7 @@ export const Button1 = (props: {
     setIncrementAmount: Function,
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {
-        props.setIncrementAmount(0.15);
+        // props.setIncrementAmount(0.15);
         props.setInitialCubeConfigs([
             {id: 1, initialPosition: new Vector3(1, 0, 0), color: "#77410e"},
             {id: 2, initialPosition: new Vector3(0, 0, 0), color: "#77410e"},            
