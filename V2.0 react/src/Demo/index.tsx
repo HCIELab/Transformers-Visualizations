@@ -55,7 +55,7 @@ const DemoContainer = styled.div`
 `;
 
 const HelpButtonStyler = styled.button`
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 100%;
     border: none;
     cursor: pointer;

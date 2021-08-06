@@ -6,7 +6,7 @@ import SpeedControl from "./SpeedControl";
 
 const Container = styled.div`
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
 
     .activeText {
         color: "#000000"
