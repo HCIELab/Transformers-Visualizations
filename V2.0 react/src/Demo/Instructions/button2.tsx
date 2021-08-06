@@ -6,7 +6,7 @@ const BUTTON_TITLE = "Pivot Back and Forth"
 export const Button2 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
-    setIncrementAmount: Function,
+    intervalAmount: number,
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {
         props.setInitialCubeConfigs([
@@ -18,13 +18,13 @@ export const Button2 = (props: {
                 cubeID: 1,
                 axis: "z",
                 isCounterclockwise: true,
-                timeToStart: 1000,
+                timeToStart: props.intervalAmount*1,
             },
             {
                 cubeID: 1,
                 axis: "z",
                 isCounterclockwise: false,
-                timeToStart: 3000,
+                timeToStart: props.intervalAmount*2,
             },
         ])
     }}>

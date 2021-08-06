@@ -6,7 +6,6 @@ const BUTTON_TITLE = "2 Cubes";
 export const Button6 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
-    setIncrementAmount: Function,
 }) => (
     <Button variant="outlined" color="default" onClick={() => {
         props.setInitialCubeConfigs([

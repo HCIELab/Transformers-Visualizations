@@ -6,7 +6,7 @@ const BUTTON_TITLE = "Pivot Multi-Axis";
 export const Button3 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
-    setIncrementAmount: Function,
+    intervalAmount: number,
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {
         props.setInitialCubeConfigs([
@@ -18,19 +18,19 @@ export const Button3 = (props: {
                 cubeID: 1,
                 axis: "z",
                 isCounterclockwise: false,
-                timeToStart: 1000,
+                timeToStart: props.intervalAmount*1,
             },
             {
                 cubeID: 1,
                 axis: "x",
                 isCounterclockwise: false,
-                timeToStart: 3000,
+                timeToStart: props.intervalAmount*2,
             },
             {
                 cubeID: 1,
                 axis: "y",
                 isCounterclockwise: false,
-                timeToStart: 5000,
+                timeToStart: props.intervalAmount*3,
             },
         ])
     }}>

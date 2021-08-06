@@ -5,7 +5,6 @@ const BUTTON_TITLE = "10x10x10 Cubes (may crash)"
 export const Button9 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
-    setIncrementAmount: Function,
 }) => (
     <button onClick={() => {
         let foo = [];

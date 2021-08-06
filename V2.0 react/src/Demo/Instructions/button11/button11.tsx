@@ -14,10 +14,12 @@ export const Button11 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
     setIncrementAmount: Function,
+    setIntervalAmount: Function,
+    intervalAmount: number,
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {
-        // props.setIncrementAmount(0.6);
-        // props.setIncrementAmount(1.5);
+        props.setIncrementAmount(1.5);
+        props.setIntervalAmount(200);
         
         props.setInitialCubeConfigs([
             {id: 1, initialPosition: new Vector3(1-7, -2, 0), color: "#77410e"},
@@ -65,12 +67,10 @@ export const Button11 = (props: {
 
 
         let instructions : instructionType[] = [];
-        // const interval = 200;
-        const interval = 1000;
-        instructions = instructions.concat(letterI(1500 + interval*instructions.length, interval));
-        instructions = instructions.concat(letterS(1500 + interval*instructions.length, interval));
-        instructions = instructions.concat(letterU(1500 + interval*instructions.length, interval));
-        instructions = instructions.concat(letterT(1500 + interval*instructions.length, interval));
+        instructions = instructions.concat(letterI(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
+        instructions = instructions.concat(letterS(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
+        instructions = instructions.concat(letterU(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
+        instructions = instructions.concat(letterT(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
 
         props.setInstructions(instructions);
     }}>

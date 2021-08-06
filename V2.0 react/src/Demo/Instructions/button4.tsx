@@ -6,7 +6,7 @@ const BUTTON_TITLE = "Traversal";
 export const Button4 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
-    setIncrementAmount: Function,
+    intervalAmount: number,
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {
         props.setInitialCubeConfigs([
@@ -19,25 +19,25 @@ export const Button4 = (props: {
                 cubeID: 3,
                 axis: "z",
                 isCounterclockwise: false,
-                timeToStart: 1000,
+                timeToStart: props.intervalAmount*1,
             },
             {
                 cubeID: 3,
                 axis: "z",
                 isCounterclockwise: true,
-                timeToStart: 3000,
+                timeToStart: props.intervalAmount*2,
             },
             {
                 cubeID: 3,
                 axis: "z",
                 isCounterclockwise: false,
-                timeToStart: 5000,
+                timeToStart: props.intervalAmount*3,
             },
             {
                 cubeID: 3,
                 axis: "z",
                 isCounterclockwise: true,
-                timeToStart: 7000,
+                timeToStart: props.intervalAmount*4,
             },
         ])
     }}>

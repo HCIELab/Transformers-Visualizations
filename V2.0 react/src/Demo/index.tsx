@@ -104,6 +104,7 @@ const Demo = () => {
                             setInstructions={setInstructions}
                             setInitialCubeConfigs={setInitialCubeConfigs}
                             setIncrementAmount={setIncrementAmount}
+                            setIntervalAmount={setIntervalAmount}
                             intervalAmount={intervalAmount}
                         />
                     </div>

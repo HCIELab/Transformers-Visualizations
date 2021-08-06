@@ -6,7 +6,7 @@ const BUTTON_TITLE = "Traversal Z axis test";
 export const Button12 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
-    setIncrementAmount: Function,
+    intervalAmount: number,
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {
         props.setInitialCubeConfigs([
@@ -30,25 +30,25 @@ export const Button12 = (props: {
                 cubeID: 3,
                 axis: "z",
                 isCounterclockwise: true,
-                timeToStart: 1000,
+                timeToStart: props.intervalAmount*1,
             },
             {
                 cubeID: 3,
                 axis: "z",
                 isCounterclockwise: true,
-                timeToStart: 2000,
+                timeToStart: props.intervalAmount*2,
             },
             {
                 cubeID: 3,
                 axis: "z",
                 isCounterclockwise: true,
-                timeToStart: 3000,
+                timeToStart: props.intervalAmount*3,
             },
             {
                 cubeID: 3,
                 axis: "z",
                 isCounterclockwise: true,
-                timeToStart: 4000,
+                timeToStart: props.intervalAmount*4,
             },
 
 
@@ -56,25 +56,25 @@ export const Button12 = (props: {
                 cubeID: 3,
                 axis: "z",
                 isCounterclockwise: false,
-                timeToStart: 5000,
+                timeToStart: props.intervalAmount*5,
             },
             {
                 cubeID: 3,
                 axis: "z",
                 isCounterclockwise: false,
-                timeToStart: 6000,
+                timeToStart: props.intervalAmount*6,
             },
             {
                 cubeID: 3,
                 axis: "z",
                 isCounterclockwise: false,
-                timeToStart: 7000,
+                timeToStart: props.intervalAmount*7,
             },
             {
                 cubeID: 3,
                 axis: "z",
                 isCounterclockwise: false,
-                timeToStart: 8000,
+                timeToStart: props.intervalAmount*8,
             },
         ])
     }}>

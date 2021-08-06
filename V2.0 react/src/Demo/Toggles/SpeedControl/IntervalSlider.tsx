@@ -18,7 +18,7 @@ export const IntervalSlider = (props: {
     intervalAmount: number,
     setIntervalAmount: Function,
 }) => {
-    const MIN_VALUE = 500;
+    const MIN_VALUE = 300;
     const MAX_VALUE = 5000;
     const STEP_AMOUNT = 100;
 

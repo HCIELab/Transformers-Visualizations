@@ -10,7 +10,7 @@ import {tableToCouch} from "./tableToCouch";
 export const Button10 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
-    setIncrementAmount: Function,
+    intervalAmount: number,
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {
         props.setInitialCubeConfigs([
@@ -46,11 +46,10 @@ export const Button10 = (props: {
         ])
 
         let instructions : instructionType[] = [];
-        const interval = 1000;
-        instructions = instructions.concat(chairToTableLeft(1500 + interval*instructions.length, interval));
-        instructions = instructions.concat(chairToTableMiddle(1500 + interval*instructions.length, interval));
-        instructions = instructions.concat(chairToTableRight(1500 + interval*instructions.length, interval));
-        instructions = instructions.concat(tableToCouch(3000 + interval*instructions.length, interval));
+        instructions = instructions.concat(chairToTableLeft(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
+        instructions = instructions.concat(chairToTableMiddle(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
+        instructions = instructions.concat(chairToTableRight(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
+        instructions = instructions.concat(tableToCouch(3000 + props.intervalAmount*instructions.length, props.intervalAmount));
 
         props.setInstructions(instructions);
     }}>

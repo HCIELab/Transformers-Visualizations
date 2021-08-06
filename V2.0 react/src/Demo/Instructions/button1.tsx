@@ -7,7 +7,6 @@ const BUTTON_TITLE = "Walking";
 export const Button1 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
-    setIncrementAmount: Function,
     intervalAmount: number,
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {

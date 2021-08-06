@@ -6,7 +6,6 @@ const BUTTON_TITLE = "Traversal Y axis test";
 export const Button13 = (props: {
     setInstructions: Function,
     setInitialCubeConfigs: Function,
-    setIncrementAmount: Function,
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {
         props.setInitialCubeConfigs([
