@@ -9,7 +9,7 @@ import {OneCubeButton} from "./Buttons/OneCubeButton";
 import {TwoCubesButton} from "./Buttons/TwoCubesButton";
 import {FourCubesButton} from "./Buttons/FourCubesButton";
 import {FiveByFiveByFiveButton} from "./Buttons/FiveByFiveByFiveButton";
-import {TenByTenByTenButton} from "./Buttons/TenByTenByTenButton";
+// import {TenByTenByTenButton} from "./Buttons/TenByTenByTenButton";
 import {ChairTableCouchButton} from "./Buttons/ChairTableCouchButton/";
 import {LineToUISTButton} from "./Buttons/LineToUISTButton";
 import {TraversalTestZButton} from "./Buttons/TraversalTestZButton";
@@ -77,7 +77,7 @@ const Instructions = (props: {
                 <TwoCubesButton {...props} />
                 <FourCubesButton {...props} />
                 <FiveByFiveByFiveButton {...props} />
-                <TenByTenByTenButton {...props} />
+                {/* <TenByTenByTenButton {...props} /> */}
                 <p className={"Label"}>
                     Scripts with no Instructions
                 </p>
