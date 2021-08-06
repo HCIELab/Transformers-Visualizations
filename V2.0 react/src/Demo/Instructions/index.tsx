@@ -15,6 +15,7 @@ import {Button11} from "./button11/button11";
 // import {Button12} from "./button12";
 // import {Button13} from "./button13";
 // import {Button14} from "./button14";
+import {WalkInAllAxesButton} from "./WalkInAllAxesButton";
 
 const Container = styled.div`
     padding: 0 5px;
@@ -64,6 +65,7 @@ const Instructions = (props: {
                 {/* <Button12 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button13 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <Button14 setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} /> */}
+                <WalkInAllAxesButton setInstructions={props.setInstructions} setInitialCubeConfigs={props.setInitialCubeConfigs} setIncrementAmount={props.setIncrementAmount} />
                 <p className={"Label"} style={{color: "rgb(63, 81, 181)"}}>
                     Scripts with Instructions
                 </p>
