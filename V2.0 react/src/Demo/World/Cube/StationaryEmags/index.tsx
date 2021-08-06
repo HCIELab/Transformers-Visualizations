@@ -30,6 +30,8 @@ const StationaryEmags = (props: {
     //     console.log("(StationaryEmags.tsx) something has changed *****")
     // }, [props.showEmags])
 
+    const fooCondition = props.cornerName === "NorthEast" || props.cornerName === "SouthWest";
+
 	return (
 		<>	
             {props.showEmags &&
@@ -85,14 +87,10 @@ const StationaryEmags = (props: {
                                 position={pwmOne}  
                                 rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                             >
-                                <group rotation={new Euler(0, Math.PI/4, 0)}>
+                                <group rotation={new Euler(0, fooCondition ? Math.PI/2 : 0, Math.PI/2)}>
                                     <mesh>
-                                        <boxGeometry args={[0.2, 0.9, 0.05]}/>
-                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
-                                    </mesh>
-                                    <mesh>
-                                        <boxGeometry args={[0.05, 0.9, 0.2]}/>
-                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                                        <cylinderBufferGeometry args={[.09, .09, 0.9, 20]}/>
+                                        <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
                                     </mesh>
                                 </group>
                             </group>
@@ -100,14 +98,10 @@ const StationaryEmags = (props: {
                                 position={pwmTwo}  
                                 rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                             >
-                                <group rotation={new Euler(0, Math.PI/4, 0)}>
+                                <group rotation={new Euler(0, fooCondition ? Math.PI/2 : 0, Math.PI/2)}>
                                     <mesh>
-                                        <boxGeometry args={[0.2, 0.9, 0.05]}/>
-                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
-                                    </mesh>
-                                    <mesh>
-                                        <boxGeometry args={[0.05, 0.9, 0.2]}/>
-                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                                        <cylinderBufferGeometry args={[.09, .09, 0.9, 20]}/>
+                                        <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
                                     </mesh>
                                 </group>
                             </group>
@@ -115,14 +109,10 @@ const StationaryEmags = (props: {
                                 position={pwmThree}  
                                 rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                             >
-                                <group rotation={new Euler(0, Math.PI/4, 0)}>
+                                <group rotation={new Euler(0, fooCondition ? Math.PI/2 : 0, Math.PI/2)}>
                                     <mesh>
-                                        <boxGeometry args={[0.2, 0.9, 0.05]}/>
-                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
-                                    </mesh>
-                                    <mesh>
-                                        <boxGeometry args={[0.05, 0.9, 0.2]}/>
-                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                                        <cylinderBufferGeometry args={[.09, .09, 0.9, 20]}/>
+                                        <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
                                     </mesh>
                                 </group>
                             </group>
@@ -130,14 +120,10 @@ const StationaryEmags = (props: {
                                 position={pwmFour}  
                                 rotation={rotateCylinderToAxis(props.axisOfRotationWorld)}
                             >
-                                <group rotation={new Euler(0, Math.PI/4, 0)}>
+                                <group rotation={new Euler(0, fooCondition ? Math.PI/2 : 0, Math.PI/2)}>
                                     <mesh>
-                                        <boxGeometry args={[0.2, 0.9, 0.05]}/>
-                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
-                                    </mesh>
-                                    <mesh>
-                                        <boxGeometry args={[0.05, 0.9, 0.2]}/>
-                                        <meshPhongMaterial color={"#00177e"} opacity={0.9}/>
+                                        <cylinderBufferGeometry args={[.09, .09, 0.9, 20]}/>
+                                        <meshPhongMaterial color={"#00ffff"} opacity={0.9}/>
                                     </mesh>
                                 </group>
                             </group>
