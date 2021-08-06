@@ -1,7 +1,7 @@
 import { Vector3 } from "three"
 import Button from '@material-ui/core/Button';
 
-import { instructionType } from "../../Util/Types/types";
+import { instructionType } from "../../../Util/Types/types";
 import {chairToTableLeft} from "./chairToTableLeft";
 import {chairToTableRight} from "./chairToTableRight";
 import {chairToTableMiddle} from "./chairToTableMiddle";

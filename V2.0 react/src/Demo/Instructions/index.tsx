@@ -1,21 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {WalkingButton} from "./WalkingButton";
-import {PivotBackForthButton} from "./PivotBackForthButton";
-import {PivotMultiAxisButton} from "./PivotMultiAxisButton";
-import {TraversalButton} from "./TraversalButton";
-import {OneCubeButton} from "./OneCubeButton";
-import {TwoCubesButton} from "./TwoCubesButton";
-import {FourCubesButton} from "./FourCubesButton";
-import {FiveByFiveByFiveButton} from "./FiveByFiveByFiveButton";
-import {TenByTenByTenButton} from "./TenByTenByTenButton";
-import {ChairTableCouchButton} from "./ChairTableCouchButton/";
-import {LineToUISTButton} from "./LineToUISTButton";
-import {TraversalTestZButton} from "./TraversalTestZButton";
-import {TraversalTestYButton} from "./TraversalTestYButton";
-import {TraversalTestXButton} from "./TraversalTestXButton";
-import {WalkInAllAxesButton} from "./WalkInAllAxesButton";
+import {WalkingButton} from "./Buttons/WalkingButton";
+import {PivotBackForthButton} from "./Buttons/PivotBackForthButton";
+import {PivotMultiAxisButton} from "./Buttons/PivotMultiAxisButton";
+import {TraversalButton} from "./Buttons/TraversalButton";
+import {OneCubeButton} from "./Buttons/OneCubeButton";
+import {TwoCubesButton} from "./Buttons/TwoCubesButton";
+import {FourCubesButton} from "./Buttons/FourCubesButton";
+import {FiveByFiveByFiveButton} from "./Buttons/FiveByFiveByFiveButton";
+import {TenByTenByTenButton} from "./Buttons/TenByTenByTenButton";
+import {ChairTableCouchButton} from "./Buttons/ChairTableCouchButton/";
+import {LineToUISTButton} from "./Buttons/LineToUISTButton";
+import {TraversalTestZButton} from "./Buttons/TraversalTestZButton";
+import {TraversalTestYButton} from "./Buttons/TraversalTestYButton";
+import {TraversalTestXButton} from "./Buttons/TraversalTestXButton";
+import {WalkInAllAxesButton} from "./Buttons/WalkInAllAxesButton";
 
 const Container = styled.div`
     padding: 0 5px;

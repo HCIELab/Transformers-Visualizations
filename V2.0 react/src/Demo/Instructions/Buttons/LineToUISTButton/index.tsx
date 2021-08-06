@@ -1,7 +1,7 @@
 import { Vector3 } from "three"
 import Button from '@material-ui/core/Button';
 
-import { instructionType } from "../../Util/Types/types";
+import { instructionType } from "../../../Util/Types/types";
 import {letterI} from "./letterI";
 import {letterS} from "./letterS";
 import {letterU} from "./letterU";

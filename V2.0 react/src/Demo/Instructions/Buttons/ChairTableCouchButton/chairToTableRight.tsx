@@ -1,4 +1,4 @@
-import { instructionType } from "../../Util/Types/types";
+import { instructionType } from "../../../Util/Types/types";
 
 export const chairToTableRight = (startTime: number, interval: number) => {
     let count = 0;
