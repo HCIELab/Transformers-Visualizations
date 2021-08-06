@@ -46,5 +46,23 @@ export const letterR = (startTime: number, interval: number) => {
         count += 1;
     }
 
+    for (let i = 0; i < 19; i+= 1) {
+        instructions.push({cubeID: 31, axis: "z", isCounterclockwise: false, timeToStart: startTime + interval*count})
+        count += 1;
+    }
+    for (let i = 0; i < 16; i+= 1) {
+        instructions.push({cubeID: 17, axis: "z", isCounterclockwise: false, timeToStart: startTime + interval*count})
+        count += 1;
+    }
+    for (let i = 0; i < 19; i+= 1) {
+        instructions.push({cubeID: 46, axis: "z", isCounterclockwise: false, timeToStart: startTime + interval*count})
+        count += 1;
+    }
+    for (let i = 0; i < 19; i+= 1) {
+        instructions.push({cubeID: 32, axis: "z", isCounterclockwise: false, timeToStart: startTime + interval*count})
+        count += 1;
+    }
+
+
     return instructions;
 }
