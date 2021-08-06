@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
-import { useState } from 'react';
 
 const Container = styled.div`
     margin: 5px;
@@ -25,8 +24,6 @@ const SpeedControl = (props: {
     incrementAmount: number,
     setIncrementAmount: Function,
 }) => {
-    const [value, setValue] = useState<number>(0.1);
-
     const MIN_VALUE = 0.05;
     const MAX_VALUE = 0.6;
     const STEP_AMOUNT = 0.025;
@@ -37,11 +34,11 @@ const SpeedControl = (props: {
 
             <div className="incrementAmountSlider">
                 <Slider
-                    value={typeof value === 'number' ? value : MIN_VALUE}
+                    value={typeof props.incrementAmount === 'number' ? props.incrementAmount : MIN_VALUE}
                     onChange={(event, newValue) => {
                         if (typeof newValue === 'number') {
                             const foo : number = newValue;
-                            setValue(foo)
+                            props.setIncrementAmount(foo)
                         }
                     }}
                     aria-labelledby="input-slider"
@@ -54,14 +51,14 @@ const SpeedControl = (props: {
                 <div className="spacer"></div>
 
                 <Input
-                    value={value}
+                    value={props.incrementAmount}
                     margin="dense"
-                    onChange={(event) => setValue(event.target.value === '' ? MIN_VALUE : Number(event.target.value))}
+                    onChange={(event) => props.setIncrementAmount(event.target.value === '' ? MIN_VALUE : Number(event.target.value))}
                     onBlur={ () => {
-                        if (value < MIN_VALUE) {
-                            setValue(MIN_VALUE);
-                        } else if (value > MAX_VALUE) {
-                            setValue(MAX_VALUE);
+                        if (props.incrementAmount < MIN_VALUE) {
+                            props.setIncrementAmount(MIN_VALUE);
+                        } else if (props.incrementAmount > MAX_VALUE) {
+                            props.setIncrementAmount(MAX_VALUE);
                         }
                     }}
                     inputProps={{

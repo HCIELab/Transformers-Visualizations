@@ -16,6 +16,9 @@ export const Button11 = (props: {
     setIncrementAmount: Function,
 }) => (
     <Button variant="outlined" color="primary" onClick={() => {
+        // props.setIncrementAmount(0.6);
+        // props.setIncrementAmount(1.5);
+        
         props.setInitialCubeConfigs([
             {id: 1, initialPosition: new Vector3(1-7, -2, 0), color: "#77410e"},
             {id: 2, initialPosition: new Vector3(2-7, -2, 0), color: "#77410e"},
@@ -60,8 +63,6 @@ export const Button11 = (props: {
             // {id: 13*2+13, initialPosition: new Vector3(13-7, 0, 0), color: "#77410e"},
         ])
 
-        props.setIncrementAmount(0.6);
-        // props.setIncrementAmount(1.5);
 
         let instructions : instructionType[] = [];
         // const interval = 200;
