@@ -24,7 +24,7 @@ export const LineToICRAButton = (props: {
         // instructions = instructions.concat(letterR(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
         // instructions = instructions.concat(letterA(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
         instructions = instructions.concat(letterC(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
-        // instructions = instructions.concat(letterI(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
+        instructions = instructions.concat(letterI(1500 + props.intervalAmount*instructions.length, props.intervalAmount));
 
         props.setInstructions(instructions);
     }}>
