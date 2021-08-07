@@ -30,6 +30,8 @@ const Toggles = (props: {
     setDisplayGrayCubeBox: Function,
     displayEmags: boolean,
     setDisplayEmags: Function,
+    displayPWMEmags: boolean,
+    setDisplayPWMEmags: Function,
     displayCubeIDs: boolean,
     setDisplayCubeIDs: Function,
     display3DArrows: boolean,
@@ -53,6 +55,8 @@ const Toggles = (props: {
         setDisplayGrayCubeBox,
         displayEmags,
         setDisplayEmags,
+        displayPWMEmags,
+        setDisplayPWMEmags,
         displayCubeIDs,
         setDisplayCubeIDs,
         display3DArrows,
@@ -107,6 +111,18 @@ const Toggles = (props: {
                         />
                     }
                     label={"Displaying Electromagnets"}
+                />
+            </div>
+            <div className={displayPWMEmags ? "activeText" : "inactiveText"}>
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={displayPWMEmags}
+                            onChange={() => setDisplayPWMEmags(!displayPWMEmags)}
+                            color="primary"
+                        />
+                    }
+                    label={"Displaying PWM Electromagnets (if Electromagnets toggle enabled)"}
                 />
             </div>
             <div className={displayEmagIDs ? "activeText" : "inactiveText"}>

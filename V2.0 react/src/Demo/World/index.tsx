@@ -20,6 +20,7 @@ const World = (props: {
     showPath: boolean,
     displayEmagIDs: boolean,
     displayEmags: boolean,
+    displayPWMEmags: boolean,
     displayCubeIDs: boolean,
     display3DArrows: boolean,
     displayCubeBox: boolean,
@@ -107,6 +108,7 @@ const World = (props: {
 
                             displayEmagIDs={props.displayEmagIDs}
                             displayEmags={props.displayEmags}
+                            displayPWMEmags={props.displayPWMEmags}
                             displayCubeIDs={props.displayCubeIDs}
                             display3DArrows={props.display3DArrows}    
                             displayCubeBox={props.displayCubeBox}    

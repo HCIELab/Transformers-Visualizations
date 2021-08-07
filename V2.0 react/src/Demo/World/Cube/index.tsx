@@ -32,6 +32,7 @@ const Cube = (props: {
 
 	displayEmagIDs: boolean,
 	displayEmags: boolean,
+	displayPWMEmags: boolean,
 	displayCubeIDs: boolean,
     display3DArrows: boolean,
     displayCubeBox: boolean,
@@ -280,6 +281,7 @@ const Cube = (props: {
 				<StationaryEmags
 					cubePosition={props.allPositions[props.id]}
 					showEmags={showEmags}
+					displayPWMEmags={props.displayPWMEmags}
 					side={side}
 					cornerName={cornerOfRotation}
 					// initialRotationAmount={initialRotationAmount}

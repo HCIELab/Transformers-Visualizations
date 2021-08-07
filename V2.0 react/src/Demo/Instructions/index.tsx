@@ -17,6 +17,9 @@ import {TraversalTestYButton} from "./Buttons/TraversalTestYButton";
 import {TraversalTestXButton} from "./Buttons/TraversalTestXButton";
 import {WalkInAllAxesButton} from "./Buttons/WalkInAllAxesButton";
 
+import {LineToMITButton} from "./Buttons/LineToMITButton";
+import {LineToICRAButton} from "./Buttons/LineToICRAButton";
+
 const Container = styled.div`
     padding: 0 5px;
 
@@ -64,6 +67,8 @@ const Instructions = (props: {
                 <TraversalButton {...props} />
                 <ChairTableCouchButton {...props} />
                 <LineToUISTButton {...props} />
+                <LineToMITButton {...props} />
+                <LineToICRAButton {...props} />
                 <TraversalTestZButton {...props} />
                 <TraversalTestYButton {...props} />
                 <TraversalTestXButton {...props} />
