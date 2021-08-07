@@ -9,12 +9,46 @@ export const initialPositions = () : initialCubeConfigType[] => {
     const height = 4;
     for (let r = 0; r < height; r += 1) {
         for (let c = 0; c < width; c += 1) {
-            if (r*width + c < NUM_CUBES) {
+            const cubeID = r*width+c;
+            if (cubeID < NUM_CUBES) {
+                if (!letterRCubes.includes(cubeID) && !letterACubes.includes(cubeID) )
                 result.push(
-                    {id: r*width + c, initialPosition: new Vector3(c - Math.round(width/2), -1*r, 0)}
+                    {id: cubeID, initialPosition: new Vector3(c - Math.round(width/2), -1*r, 0)}
                 )
             }
         }        
     }
     return result;
 }
+
+
+const letterRCubes : number[] = [
+    42,
+    28,
+    14,
+    43,
+    29,
+    15,
+    44,
+    30,
+    16,
+    45,
+    31,
+    17,
+    46,
+    32,]
+
+const letterACubes : number[] = [
+        41,
+        27,
+        40,
+        26,
+        53,
+        39,
+        25,
+        52,
+        38,
+        24,
+        51,
+        37,
+    ]
